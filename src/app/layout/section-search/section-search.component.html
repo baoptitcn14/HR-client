@@ -1,0 +1,79 @@
+<section id="search-section">
+  <div class="search-section-content d-flex flex-column gap-3">
+    <div class="d-flex flex-column gap-2 search-box">
+      <p-autoComplete
+        [inputStyleClass]="'w-100 shadow'"
+        [styleClass]="'w-100'"
+        [appendTo]="'body'"
+        [(ngModel)]="filter.searchText"
+        [suggestions]="suggestions"
+        [placeholder]="'Nhập tên công việc cần tìm kiếm'"
+        optionValue="id"
+        optionLabel="name"
+        (completeMethod)="searchPost($event)"
+      />
+
+      <!-- button tim kiem -->
+      <p-button
+        label="Tìm kiếm"
+        icon="pi pi-search"
+        [classList]="'button-search'"
+        [size]="'large'"
+        severity="primary"
+        (onClick)="onSearch()"
+      ></p-button>
+    </div>
+
+    <div class="row row-gap-2 align-items-center">
+      <div class="col-6 col-md-4">
+        <p-dropdown
+          [virtualScroll]="true"
+          [virtualScrollItemSize]="5"
+          [appendTo]="'body'"
+          [styleClass]="'w-100 shadow'"
+          [options]="khuVucs"
+          [filter]="true"
+          [(ngModel)]="filter.khuVuc"
+          optionValue="id"
+          optionLabel="name"
+          placeholder="Khu vực"
+        />
+      </div>
+
+      <div class="col-6 col-md-3">
+        <p-multiSelect
+          [appendTo]="'body'"
+          [styleClass]="'w-100 shadow'"
+          [options]="kyNangs"
+          [(ngModel)]="filter.kyNang"
+          optionValue="id"
+          optionLabel="name"
+          placeholder="Kỹ năng"
+        />
+      </div>
+
+      <div class="col-6 col-md-3">
+        <p-multiSelect
+          [appendTo]="'body'"
+          [styleClass]="'w-100 shadow'"
+          [options]="hinhThucLamViecs"
+          [(ngModel)]="filter.hinhThucLamViec"
+          optionValue="id"
+          optionLabel="name"
+          placeholder="Hình thức làm việc"
+        />
+      </div>
+
+      <!-- button xóa filter -->
+      <div class="col-6 col-md-2">
+        <p-button
+          class="shadow"
+          label="Xóa bộ lọc"
+          icon="pi pi-filter-slash"
+          severity="secondary"
+          (onClick)="clearFilter()"
+        ></p-button>
+      </div>
+    </div>
+  </div>
+</section>

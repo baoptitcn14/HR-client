@@ -1,0 +1,135 @@
+[
+    {
+        "label": "Text",
+        "placeholder": "",
+        "inputType": "text",
+        "defaultValue": "",
+        "isRequired": true,
+        "fomular": "",
+        "listRelation": [],
+        "css": "{\"responsive\":{\"desktop\":12,\"tablet\":12,\"mobile\":12},\"label\":{\"fontSize\":\"16\",\"color\":\"#000000\",\"icon\":\"\"},\"content\":{\"fontSize\":\"14\",\"color\":\"#000000\",\"icon\":\"\"},\"flex\":\"flex-column\",\"align\":\"align-items-start\"}"
+    },
+    {
+        "label": "Number",
+        "placeholder": "",
+        "inputType": "number",
+        "defaultValue": "",
+        "isRequired": true,
+        "fomular": "",
+        "listRelation": [],
+        "min": null,
+        "max": null,
+        "css": "{\"responsive\":{\"desktop\":12,\"tablet\":12,\"mobile\":12},\"label\":{\"fontSize\":\"16\",\"color\":\"#000000\",\"icon\":\"\"},\"content\":{\"fontSize\":\"14\",\"color\":\"#000000\",\"icon\":\"\"},\"flex\":\"flex-column\",\"align\":\"align-items-start\"}"
+    },
+    {
+        "label": "Email",
+        "placeholder": "",
+        "inputType": "email",
+        "defaultValue": "",
+        "isRequired": true,
+        "fomular": "",
+        "listRelation": [],
+        "css": "{\"responsive\":{\"desktop\":12,\"tablet\":12,\"mobile\":12},\"label\":{\"fontSize\":\"16\",\"color\":\"#000000\",\"icon\":\"\"},\"content\":{\"fontSize\":\"14\",\"color\":\"#000000\",\"icon\":\"\"},\"flex\":\"flex-column\",\"align\":\"align-items-start\"}"
+    },
+    {
+        "inputType": "calendar",
+        "label": "Calendar",
+        "placeholder": "",
+        "defaultValue": "",
+        "isRequired": true,
+        "fomular": "",
+        "listRelation": [],
+        "types": {
+            "default": "date",
+            "options": [
+                {
+                    "key": "date",
+                    "name": "Ngày"
+                },
+                {
+                    "key": "date-range",
+                    "name": "Từ -> đến ngày"
+                },
+                {
+                    "key": "time",
+                    "name": "Giờ"
+                },
+                {
+                    "key": "datetime",
+                    "name": "Ngày giờ"
+                },
+                {
+                    "key": "month",
+                    "name": "Tháng"
+                },
+                {
+                    "key": "year",
+                    "name": "Năm"
+                }
+            ]
+        },
+        "css": "{\"responsive\":{\"desktop\":12,\"tablet\":12,\"mobile\":12},\"label\":{\"fontSize\":\"16\",\"color\":\"#000000\",\"icon\":\"\"},\"content\":{\"fontSize\":\"14\",\"color\":\"#000000\",\"icon\":\"\"},\"flex\":\"flex-column\",\"align\":\"align-items-start\"}"
+    },
+    {
+        "label": "Checkbox",
+        "placeholder": "",
+        "inputType": "checkbox",
+        "defaultValue": "",
+        "isRequired": true,
+        "fomular": "",
+        "listRelation": [],
+        "css": "{\"responsive\":{\"desktop\":12,\"tablet\":12,\"mobile\":12},\"label\":{\"fontSize\":\"14\",\"color\":\"#000000\",\"icon\":\"\"},\"flex\":\"flex-row\",\"align\":\"align-items-center\"}"
+    },
+    {
+        "label": "Radio",
+        "placeholder": "",
+        "inputType": "radio",
+        "defaultValue": "",
+        "isRequired": true,
+        "fomular": "",
+        "listRelation": [],
+        "listValueOption": [],
+        "css": "{\"responsive\":{\"desktop\":12,\"tablet\":12,\"mobile\":12},\"label\":{\"fontSize\":\"14\",\"color\":\"#000000\",\"icon\":\"\"},\"flex\":\"flex-row\",\"align\":\"align-items-center\"}"
+    },
+    {
+        "label": "Lựa chọn",
+        "placeholder": "",
+        "inputType": "select",
+        "defaultValue": "",
+        "isRequired": true,
+        "fomular": "",
+        "listRelation": [],
+        "listValueOption": [],
+        "isSearch": false,
+        "css": "{\"responsive\":{\"desktop\":12,\"tablet\":12,\"mobile\":12},\"label\":{\"fontSize\":\"16\",\"color\":\"#000000\",\"icon\":\"\"},\"content\":{\"fontSize\":\"14\",\"color\":\"#000000\",\"icon\":\"\"},\"flex\":\"flex-column\",\"align\":\"align-items-start\"}"
+    },
+    {
+        "inputType": "file",
+        "label": "Tập tin",
+        "multiple": true,
+        "maxFileSize": 10240000,
+        "acceptFileExtensions": ".jpg, .png, .jpeg, .pdf, .doc, .docx, .xls, .xlsx",
+        "css": "{\"responsive\":{\"desktop\":12,\"tablet\":12,\"mobile\":12},\"label\":{\"fontSize\":\"16\",\"color\":\"#000000\",\"icon\":\"\"},\"content\":{\"fontSize\":\"14\",\"color\":\"#000000\",\"icon\":\"\"},\"flex\":\"flex-column\",\"align\":\"align-items-start\"}"
+    },
+    {
+        "label": "Tags",
+        "placeholder": "",
+        "inputType": "tags",
+        "defaultValue": [],
+        "isRequired": true,
+        "fomular": "",
+        "listRelation": [],
+        "isAllowDuplicate": false,
+        "css": "{\"responsive\":{\"desktop\":12,\"tablet\":12,\"mobile\":12},\"label\":{\"fontSize\":\"16\",\"color\":\"#000000\",\"icon\":\"\"},\"content\":{\"fontSize\":\"14\",\"color\":\"#000000\",\"icon\":\"\"},\"flex\":\"flex-column\",\"align\":\"align-items-start\"}"
+    },
+    {
+        "inputType": "editor",
+        "label": "Editor",
+        "placeholder": "",
+        "defaultValue": [],
+        "isRequired": true,
+        "fomular": "",
+        "listRelation": [],
+        "css": "{\"responsive\":{\"desktop\":12,\"tablet\":12,\"mobile\":12},\"label\":{\"fontSize\":\"16\",\"color\":\"#000000\",\"icon\":\"\"},\"content\":{\"fontSize\":\"14\",\"color\":\"#000000\",\"icon\":\"\"},\"flex\":\"flex-column\",\"align\":\"align-items-start\", \"height\": 230}"
+    }
+]

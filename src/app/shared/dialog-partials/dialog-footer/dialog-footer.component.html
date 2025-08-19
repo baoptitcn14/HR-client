@@ -1,0 +1,16 @@
+<div class="m_component">
+  <!--  -->
+  <p-button *ngIf="!isDelete" type="button" [label]="textButtonSave" icon="pi pi-save" [disabled]="!isValid" [size]="'small'"
+    severity="primary" (onClick)="onSave()" />
+  <p-button *ngIf="!isDelete && !isNew" type="button" label="Xóa" [size]="'small'" severity="danger" icon="pi pi-save"
+    (onClick)="onDelete()" />
+  <ng-container *ngIf="isDelete">
+    <p-button type="button" label="Xác nhận" [size]="'small'" icon="pi pi-check" severity="danger"
+      (onClick)="onConfirmDelete()" />
+
+    <p-button type="button" label="Quay lại" [size]="'small'" severity="secondary" icon="pi pi-undo"
+      (onClick)="onCancelDelete()" />
+  </ng-container>
+  <p-button *ngIf="!isDelete" type="button" severity="secondary" [size]="'small'" label="Hủy" icon="pi pi-times"
+    (onClick)="closeDialog()" />
+</div>

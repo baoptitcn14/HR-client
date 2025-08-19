@@ -1,0 +1,25 @@
+@import "bootstrap/scss/utilities";
+
+// override width, enable responsive
+
+$width-values: ();
+
+@for $i from 10 through 100 {
+  $width-values: map-merge(
+    $width-values,
+    (
+      #{$i}: #{$i} + '%'
+    )
+  );
+}
+
+$width-values: map-merge($width-values, (auto: auto));
+
+$utilities: (
+  "width": (
+    responsive: true, 
+    property: width,
+    class: w,
+    values: $width-values
+  )
+);

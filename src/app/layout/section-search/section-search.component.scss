@@ -1,0 +1,57 @@
+#search-section {
+    background: linear-gradient(135deg, #c5d5f9 0%, #4786c3 50% 50%, #c5d5f9 100%);
+    padding: 3rem;
+    .search-section-content {
+        width: 100%;
+        margin: auto;
+
+        .search-box {
+            position: relative;
+
+            .button-search {
+                position: absolute;
+                top: 50%;
+                right: 7px;
+                margin-top: -25px;
+            }
+        }
+    }
+
+    ::ng-deep {
+        // .p-component {
+        //     height: 4rem;
+        //     font-size: 1.2rem !important;
+        // }
+        .p-autocomplete-input.p-inputtext {
+            height: 5rem;
+            padding-right: 160px;
+        }
+
+        .p-inputtext,
+        .p-multiselect {
+            height: 3.5rem;
+            font-size: 1.2rem;
+            line-height: 2rem;
+        }
+
+        .p-placeholder {
+            color: #333;
+        }
+    }
+}
+
+@media screen and (min-width: 768px) {
+    #search-section {
+        .search-section-content {
+            width: 70%;
+        }
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    #search-section {
+        .search-section-content {
+            width: 60%;
+        }
+    }
+}

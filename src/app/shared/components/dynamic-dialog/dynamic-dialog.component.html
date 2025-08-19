@@ -1,0 +1,7 @@
+<div class="p-dialog-_content">
+    <dynamic-form [controls]="controls" [form]="form"></dynamic-form>
+</div>
+
+<!-- truyền tên class dialog đã đặt "demo-test-2-dialog" -->
+<dialog-footer dialogFooter (onSaveEvent)="onSave()" (onDeleteEvent)="onDelete()" (onCloseEvent)="onClose()"
+    [classDialog]="'dynamic-dialog'" [isNew]="isNew" [isValid]="form.valid"></dialog-footer>

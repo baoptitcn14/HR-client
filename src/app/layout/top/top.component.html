@@ -1,0 +1,62 @@
+<p-toolbar [style]="{
+    'border-radius': '0',
+    padding: '0.75rem 1.25rem',
+    border: 'none',
+    'background-color': '#fff'
+  }">
+  <ng-template pTemplate="start">
+    <img [src]="logoQlcv" width="40" />
+  </ng-template>
+
+  <ng-template pTemplate="end">
+    <div class="d-flex align-items-center gap-2">
+      @if(appSessionService.userId) {
+      <ng-container *ngTemplateOutlet="hasLogin"></ng-container>
+      }@else {
+      <ng-container *ngTemplateOutlet="notLogin"></ng-container>
+      }
+    </div>
+  </ng-template>
+</p-toolbar>
+
+<ng-template #hasLogin>
+  <!-- begin button tenant -->
+  <p-splitButton label="{{ appTenantService.currentTenant?.name }}" icon="pi pi-building" size="small"
+    [model]="listTenant" [styleClass]="'tenant'" outlined="true" raised />
+  <!-- end button tenant -->
+
+  <!-- begin button trò chuyện -->
+  <p-button label="Trò chuyện" icon="pi pi-comments" badge="2" badgeClass="p-badge-contrast" outlined="true"
+    size="small" raised />
+  <!-- end button trò chuyện -->
+
+  <!-- begin button thông báo -->
+  <p-button label="Thông báo" icon="pi pi-bell" badge="2" badgeClass="p-badge-contrast" outlined="true" size="small"
+    raised />
+  <!-- end button thông báo -->
+
+  <!-- begin button user -->
+  <p-splitButton label="{{  appSessionService.user?.surname + ' ' + appSessionService.user?.name }}" icon="pi pi-user"
+    size="small" [model]="listRoute" [styleClass]="'user'" outlined="true" raised />
+  <!-- end button user -->
+</ng-template>
+
+<ng-template #notLogin>
+  {{ appSessionService.userId }}
+  <!-- begin button đăng ký tài khoản -->
+  <p-button label="Đăng ký tài khoản" icon="pi pi-user-plus" size="small" severity="success" raised />
+  <!-- end button đăng ký tài khoản -->
+  <!-- begin button đăng nhập -->
+  <p-button label="Đăng nhập" icon="pi pi-sign-in" size="small" raised (onClick)="onLogin()" />
+  <!-- <a
+    pButton
+    pRipple
+    label="Đăng nhập"
+    icon="pi pi-sign-in"
+    size="small"
+    raised
+    [style]="{ 'text-decoration': 'none' }"
+    [attr.href]="urlLogin"
+  ></a> -->
+  <!-- end button đăng nhập -->
+</ng-template>

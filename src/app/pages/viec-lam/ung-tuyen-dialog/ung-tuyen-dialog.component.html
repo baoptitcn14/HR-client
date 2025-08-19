@@ -1,0 +1,212 @@
+<div class="p-dialog-_content mx-auto row row-gap-3 g-0 flex-wrap">
+  <form [formGroup]="form">
+    @for (item of dsThanhPhanDangCo; track item._key; let i = $index) {
+
+    <!-- GROUP -->
+    <ng-container *ngIf="item.inputType === 'group'">
+      <section
+        class="section-group d-flex flex-column gap-3 _component 
+      col-{{ item._css.responsive[thietBiHienThi.MOBILE] }}
+      col-md-{{ item._css.responsive[thietBiHienThi.TABLET] }}
+      col-lg-{{ item._css.responsive[thietBiHienThi.DESKTOP] }}
+      "
+      >
+        <!-- label group -->
+        <div
+          *ngIf="item.label"
+          class="section-group__header d-flex align-items-start gap-3"
+        >
+          <i
+            class="pi pi-{{ item._css.label.icon }}"
+            [style.color]="item._css.label.iconColor"
+            *ngIf="item._css.label.icon"
+          ></i>
+
+          <h3
+            class="section-group__title m-0"
+            [style.color]="item._css.label.color"
+            [style.font-size.px]="item._css.label.fontSize"
+          >
+            {{ item.label }}
+            <code class="fw-bold fs-6 text-primary user-select-all">{{
+              item._key
+            }}</code>
+          </h3>
+        </div>
+
+        <div
+          id="{{ item._key }}"
+          class="section-group__content container-fluid"
+        >
+          <div class="row row-gap-3">
+            @for (groupItem of item._listChild; track groupItem._key; let i =
+            $index) {
+
+            <div
+              class="d-flex gap-2 _component 
+                                        {{ groupItem._css.flex }}
+                                        {{ groupItem._css.align }}
+                                       col-{{
+                groupItem._css.responsive[thietBiHienThi.MOBILE]
+              }}
+      col-md-{{ groupItem._css.responsive[thietBiHienThi.TABLET] }}
+      col-lg-{{ groupItem._css.responsive[thietBiHienThi.DESKTOP] }}
+                                        "
+            >
+              <!-- label -->
+              @if (groupItem.inputType != 'checkbox') {
+              <label
+                [style.color]="groupItem._css.label.color"
+                [style.font-size.px]="groupItem._css.label.fontSize"
+                for="{{ groupItem._key }}"
+              >
+                <i
+                  class="pi pi-{{ groupItem._css.label.icon }}"
+                  [style.color]="groupItem._css.label.iconColor"
+                  *ngIf="groupItem._css.label.icon"
+                ></i>
+
+                {{ groupItem.label }}
+                <span class="text-danger" *ngIf="groupItem.isRequired">*</span>
+                <code class="fw-bold text-primary fs-6 user-select-all">{{
+                  groupItem._key
+                }}</code>
+              </label>
+              } @if (groupItem.inputType == 'text') {
+              <input
+                pInputText
+                [placeholder]="groupItem.placeholder"
+                [style.color]="groupItem._css.content.color"
+                [style.font-size.px]="groupItem._css.content.fontSize"
+                id="{{ groupItem._key }}"
+                attr.aria-describedby="{{ groupItem._key }}-help"
+                formControlName="{{ groupItem.id }}"
+                class="w-100"
+              />
+              }@else if (groupItem.inputType == 'number') {
+              <p-inputNumber
+                class="w-100"
+                [styleClass]="'w-100'"
+                [placeholder]="groupItem.placeholder"
+                [inputStyleClass]="'w-100'"
+                inputId="{{ groupItem._key }}"
+                [style.color]="groupItem._css.content.color"
+                [style.font-size.px]="groupItem._css.content.fontSize"
+                attr.aria-describedby="{{ groupItem._key }}-help"
+                formControlName="{{ groupItem.id }}"
+              />
+              }@else if (groupItem.inputType == 'checkbox') {
+              <div class="d-flex {{ groupItem._css.flex }} gap-4">
+                <p-checkbox
+                  id="{{ groupItem._key }}"
+                  [binary]="true"
+                  label="{{ groupItem.label }}"
+                  name="{{ groupItem._key }}"
+                  [value]="groupItem.label"
+                  formControlName="{{ groupItem.id }}"
+                />
+              </div>
+
+              }@else if (groupItem.inputType == 'email') {
+              <input
+                [placeholder]="groupItem.placeholder"
+                type="text"
+                pInputText
+                [pattern]="emailPattern"
+                [style.color]="groupItem._css.content.color"
+                [style.font-size.px]="groupItem._css.content.fontSize"
+                id="{{ groupItem._key }}"
+                attr.aria-describedby="{{ groupItem._key }}-help"
+                formControlName="{{ groupItem.id }}"
+                class="w-100"
+              />
+              }@else if (groupItem.inputType == 'radio') {
+              <div class="d-flex {{ groupItem._css.flex }} gap-2">
+                <div
+                  *ngFor="let value of groupItem._listValueOptionOpenJSON"
+                  class="d-flex {{ groupItem._css.align }} gap-2"
+                >
+                  <p-radioButton
+                    [inputId]="groupItem._key"
+                    [(ngModel)]="groupItem._value"
+                    name="{{ groupItem._key }}"
+                    [value]="value"
+                    formControlName="{{ groupItem.id }}"
+                  />
+                  <label [for]="groupItem._key">
+                    {{ value }}
+                  </label>
+                </div>
+              </div>
+              }@else if (groupItem.inputType == 'select') {
+              <p-dropdown
+                class="w-100"
+                [id]="groupItem._key"
+                [filter]="groupItem.isSearch"
+                [placeholder]="groupItem.placeholder"
+                [options]="groupItem._listValueOptionOpenJSON"
+                [styleClass]="'w-100'"
+                formControlName="{{ groupItem.id }}"
+              />
+              }@else if (groupItem.inputType == 'tags') {
+              <p-chips
+                class="w-100"
+                [placeholder]="groupItem.placeholder"
+                [inputId]="groupItem._key"
+                [allowDuplicate]="groupItem.isAllowDuplicate"
+                formControlName="{{ groupItem.id }}"
+              />
+              }@else if (groupItem.inputType == 'editor') {
+
+              <p-editor
+                formControlName="{{ groupItem.id }}"
+                [placeholder]="groupItem.placeholder"
+                [style]="{ height: groupItem._css.height + 'px' }"
+                [style.color]="groupItem._css.content.color"
+                [style.width.%]="'100'"
+                [style.font-size.px]="groupItem._css.content.fontSize"
+                id="{{ groupItem._key }}"
+              />
+
+              }@else if(groupItem.inputType == 'file'){
+
+              <p-fileUpload
+                class="w-100"
+                [multiple]="groupItem.multiple"
+                accept="{{ groupItem.acceptFileExtensions }}"
+                maxFileSize="{{ groupItem.maxFileSize }}"
+                formControlName="{{ groupItem.id }}"
+              >
+              </p-fileUpload>
+              }@else if(groupItem.inputType == 'textarea'){
+
+              <textarea
+                rows="5"
+                cols="30"
+                formControlName="{{ groupItem.id }}"
+                pInputTextarea
+              >
+              </textarea>
+
+              }
+            </div>
+
+            }
+          </div>
+        </div>
+      </section>
+    </ng-container>
+    }
+    <!-- end @for -->
+  </form>
+</div>
+
+<dialog-footer
+  (onSaveEvent)="onSave()"
+  (onCloseEvent)="onClose()"
+  dialogFooter
+  [textButtonSave]="'Nộp'"
+  [classDialog]="'ung-tuyen-dialog'"
+  [isNew]="true"
+  [isValid]="form.valid"
+></dialog-footer>

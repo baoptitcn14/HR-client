@@ -1,0 +1,11 @@
+<!-- dialog prime icon -->
+<div class="list-prime-icon d-flex py-3 flex-wrap gap-5 align-items-center">
+    @for(icon of listPrimeIcon; track icon.name) {
+    <i class="{{ icon.code }}" (click)="onSelectIcon(icon.code)"></i>
+    }
+</div>
+
+<!-- <div class="p-dialog-footer">
+    <p-button label="Cancel" [raised]="true" severity="secondary" />
+    <p-button label="Save" [raised]="true" severity="primary" />
+</div> -->

@@ -1,0 +1,24 @@
+<div [class.hide]="!show" class="pick-lish-components bg-light shadow-sm rounded border"
+  [ngClass]="{ 'hide-title': isHideTitle }">
+  <!-- title -->
+  <div class="d-flex gap-3 justify-content-center align-items-center pick-lish-components-header mt-4" (click)="show = !show">
+    <i class="pi pi-{{ show ? 'minus' : 'plus' }}"></i>
+    <h3 class="title" *ngIf="!isHideTitle">{{ title }}</h3>
+  </div>
+  <!-- search -->
+  <p-iconField iconPosition="left">
+    <p-inputIcon styleClass="pi pi-search" />
+    <input type="text" class="w-100 form-control-sm" pInputText placeholder="Tìm kiếm" (keyup)="search($event)" />
+  </p-iconField>
+
+  <!-- list -->
+  <div class="list-component" [cdkDropListConnectedTo]="cdkDropListConnectedTo" cdkDropList cdkDropListSortingDisabled
+    [cdkDropListData]="dsThanhPhan">
+    @for (item of dsThanhPhan; track item.key) {
+    <div class="p-2 rounded shadow-sm bg-white component" cdkDrag (cdkDragStarted)="dragStart(item)"
+      (cdkDragEnded)="dragEnd()">
+      {{ item.label }}
+    </div>
+    } @empty { There are no items. }
+  </div>
+</div>

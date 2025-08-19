@@ -1,0 +1,14 @@
+.p-dialog-custom, .dynamic-dialog {
+    .p-dialog-content {
+        padding-top: 2rem;
+        &:last-of-type {
+            border-radius: 0;
+        }
+    }
+}
+
+.p-dialog-footer,
+.p-dialog-header {
+    background-color: var(--primary-50, #dee1e6);
+    padding: 1rem 1.5rem;
+}

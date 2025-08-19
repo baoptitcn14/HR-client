@@ -1,0 +1,73 @@
+* {
+    font-size: 0.8rem !important;
+}
+
+.properties {
+    p-inputGroupAddon {
+        // padding: 0;
+        max-height: 28px;
+    }
+
+    .title {
+        &-propertie {
+            width: 48%;
+        }
+    }
+
+    .flex,
+    .align {
+        width: 48%;
+    }
+
+    .align {
+        i {
+            font-size: 1.2rem !important;
+            cursor: pointer;
+            opacity: 0.5;
+
+            &.active {
+                color: #3b82f6;
+                font-weight: bold;
+                opacity: 1;
+            }
+        }
+    }
+
+    .p-chips-multiple-container {
+        width: 100%;
+    }
+}
+
+:host ::ng-deep {
+    .properties {
+        .width {
+            .p-dropdown {
+                width: 100%;
+                border-radius: 0;
+
+                & > span[role="combobox"] {
+                    padding: 0.25rem 0.5rem;
+                    font-size: 0.875rem;
+                    min-height: 26px;
+                    line-height: 19px;
+                }
+            }
+        }
+
+        .p-chips-multiple-container {
+            width: 100%;
+
+            .p-chips-token {
+                font-size: 0.8rem;
+            }
+        }
+
+        .p-dropdown {
+            width: 100%;
+        }
+
+        .p-inputtext {
+            font-size: 0.8rem;
+        }
+    }
+}

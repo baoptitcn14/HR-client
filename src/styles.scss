@@ -1,0 +1,29 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "bootstrap/scss/bootstrap-grid";
+@import "scss/custom-utilities";
+@import "bootstrap/scss/bootstrap-utilities";
+@import "bootstrap/scss/forms";
+
+// qill css for editors
+
+@import "quill/dist/quill.core.css";
+@import "quill/dist/quill.snow.css";
+
+// prime css
+@import "primeicons/primeicons.css";
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+
+// dialog custom
+@import "scss/dialog";
+@import "scss/color";
+@import "scss/color-picker";
+
+html {
+    font-size: 14px;
+}
+
+body {
+    margin: 0;
+}

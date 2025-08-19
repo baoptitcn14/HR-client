@@ -1,0 +1,86 @@
+<section class="ds-viec-lam d-flex flex-column gap-3">
+  <!-- @for (viecLam of viecLams; track viecLam.id) { -->
+
+  <div
+    class="viec-lam d-flex gap-2 rounded shadow-sm"
+    [routerLink]="['/viec-lam', viecLam.id]"
+    *ngFor="let viecLam of viecLams"
+  >
+    <!-- logo company -->
+    <div class="viec-lam-logo-cty">
+      <img src="https://placehold.co/150" alt="Logo" />
+    </div>
+
+    <!-- info job -->
+
+    <div class="viec-lam-thong-tin d-flex flex-column gap-2 p-3">
+      <h3 class="fw-bold text-primary text-uppercase m-0">
+        {{ viecLam.title }}
+      </h3>
+      <div class="text-muted text-uppercase">{{ viecLam.companyName }}</div>
+
+      <!-- mức lương | khu vực -->
+      <div class="d-flex gap-2 align-items-center">
+        <span class="fw-bold"
+          >{{ viecLam.salaryMin | number }} - {{ viecLam.salaryMax | number }} đ
+        </span>
+        <span class="text-muted d-flex gap-2 align-items-center">
+          | {{ viecLam._khuVucName }}
+
+          <ng-container *ngIf="isLoading && viecLam.location">
+            <p-skeleton width="10rem" *ngIf="isLoading" borderRadius="16px" />
+          </ng-container>
+        </span>
+      </div>
+
+      <!-- thời gian cập nhật | kỹ năng-->
+      <div class="d-flex gap-2 align-items-center">
+        <span class="text-muted align-items-center d-flex gap-2">
+          Cập nhật:
+          {{
+            viecLam.lastModificationDateTime
+              ? viecLam.lastModificationDateTime
+              : (viecLam.creationTime | date : "dd/MM/yyyy")
+          }}
+          <span>|</span>
+        </span>
+
+        @for (kyNang of viecLam._kyNangsOpenJson; track kyNang.id) {
+        <p-tag severity="info" value="{{ kyNang.name }}" [rounded]="true" />
+        }
+
+        <ng-container *ngIf="isLoading && viecLam.jobLevel">
+          <p-skeleton
+            width="10rem"
+            *ngIf="isLoading"
+            styleClass="mr-2"
+            borderRadius="16px"
+          />
+          <p-skeleton width="10rem" *ngIf="isLoading" borderRadius="16px" />
+        </ng-container>
+      </div>
+
+      <!-- divider -->
+      <p-divider type="solid" />
+
+      <!-- tags -->
+      <div class="d-flex gap-2 align-items-center">
+        @for (tag of viecLam._tagsOpenJSON; track tag) {
+        <p-tag severity="secondary" value="{{ tag }}" [rounded]="true" />
+        }
+
+        <ng-container *ngIf="isLoading && viecLam.tags">
+          <p-skeleton
+            width="10rem"
+            *ngIf="isLoading"
+            styleClass="mr-2"
+            borderRadius="16px"
+          />
+          <p-skeleton width="10rem" *ngIf="isLoading" borderRadius="16px" />
+        </ng-container>
+      </div>
+    </div>
+  </div>
+
+  <!-- } -->
+</section>

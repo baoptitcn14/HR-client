@@ -1,0 +1,3 @@
+<p-treeSelect [loading]="loading" class="w-100" containerStyleClass="w-100" [(ngModel)]="danhSachNganhNgheDaChon"
+    [options]="danhSachNganhNgheHienThi" display="chip" [metaKeySelection]="false" selectionMode="checkbox"
+    placeholder="Chọn ngành nghề" [filter]="true" (onNodeExpand)="onNodeExpand($event)" />
