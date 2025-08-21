@@ -38,8 +38,8 @@
         <span class="text-muted align-items-center d-flex gap-2">
           Cập nhật:
           {{
-            viecLam.lastModificationDateTime
-              ? viecLam.lastModificationDateTime
+            viecLam.lastModificationTime
+              ? (viecLam.lastModificationTime | date : "dd/MM/yyyy")
               : (viecLam.creationTime | date : "dd/MM/yyyy")
           }}
           <span>|</span>
@@ -65,7 +65,7 @@
 
       <!-- tags -->
       <div class="d-flex gap-2 align-items-center">
-        @for (tag of viecLam._tagsOpenJSON; track tag) {
+        @for (tag of viecLam._tagsOpenJson; track tag) {
         <p-tag severity="secondary" value="{{ tag }}" [rounded]="true" />
         }
 

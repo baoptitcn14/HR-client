@@ -82,7 +82,8 @@ export class UngTuyenDialogComponent implements OnInit {
     const data = this.form.value;
 
     const input = new JobApplicationInputDto();
-
+    input.tenantId = AppConst.tenantDefaultId;
+    
     input.jobPostId = this.config.data.jobPostId;
     input.status = STATUS_UNGTUYEN.PENDING;
     input.jobApplicationFields = Array.from(
@@ -95,26 +96,26 @@ export class UngTuyenDialogComponent implements OnInit {
       )
     );
 
-    console.log(input);
+    // console.log(input);
 
-    // this.jobApplicationServiceProxy.create(input).subscribe(
-    //   (data) => {
-    //     this.messageService.add({
-    //       severity: 'success',
-    //       summary: 'Thành công',
-    //       detail: 'Ứng tuyển thành công',
-    //     });
+    this.jobApplicationServiceProxy.create(input).subscribe(
+      (data) => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Thành công',
+          detail: 'Ứng tuyển thành công',
+        });
 
-    //     this.ref.close(true);
-    //   },
-    //   (e) => {
-    //     this.messageService.add({
-    //       severity: 'error',
-    //       summary: 'Thất bại',
-    //       detail: 'Ứng tuyển thất bại',
-    //     });
-    //   }
-    // );
+        this.ref.close(true);
+      },
+      (e) => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Thất bại',
+          detail: 'Ứng tuyển thất bại',
+        });
+      }
+    );
   }
 
   onClose() {
@@ -151,14 +152,16 @@ export class UngTuyenDialogComponent implements OnInit {
               _listRelationOpenJSON: item.listRelation
                 ? JSON.parse(item.listRelation)
                 : [],
-              // _key: item.key,
-              // _groupId: item.groupId,
             } as IThanhPhan)
-        );
+        )
+        .sort((a, b) => parseInt(a.fieldIndex!) - parseInt(b.fieldIndex!));
 
       this.dsThanhPhanDangCo.forEach((thanhPhan) => {
         thanhPhan._listChild = this.dsThanhPhan
-          .filter((item) => item._groupId == thanhPhan._key)
+          .filter(
+            (item) =>
+              item.groupId == thanhPhan.htmlKey && item.inputType != 'group'
+          )
           .map(
             (item) =>
               ({
@@ -170,10 +173,9 @@ export class UngTuyenDialogComponent implements OnInit {
                 _listRelationOpenJSON: item.listRelation
                   ? JSON.parse(item.listRelation)
                   : [],
-                // _key: item.key,
-                // _groupId: item.groupId,
               } as IThanhPhan)
-          );
+          )
+          .sort((a, b) => parseInt(a.fieldIndex!) - parseInt(b.fieldIndex!));
       });
     }
   }

@@ -53,7 +53,7 @@ export class DsViecLamComponent implements OnInit {
           viecLam._khuVucName =
             khuVucs.find((khuVuc) => khuVuc.id == viecLam.location)?.name || '';
 
-          viecLam._tagsOpenJSON = viecLam.tags ? JSON.parse(viecLam.tags) : [];
+          viecLam._tagsOpenJson = viecLam.tags ? JSON.parse(viecLam.tags) : [];
 
           this.isLoading = false;
         });
@@ -96,5 +96,7 @@ export class DsViecLamComponent implements OnInit {
 export interface IDsViecLam extends JobPostOutputDto {
   _kyNangsOpenJson: CategoryOutputDto[];
   _khuVucName: string;
-  _tagsOpenJSON: string[];
+  _tagsOpenJson: string[];
+  _benefitsOpenJson: CategoryOutputDto[];
+  _quyenLoisOpenJson: CategoryOutputDto[];
 }

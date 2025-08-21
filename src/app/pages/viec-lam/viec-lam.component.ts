@@ -5,15 +5,23 @@ import {
   CategoryOutputDto,
   CategoryQueryDto,
   ICriteriaRequestDto,
+  JobPostFieldQueryDto,
+  JobPostFieldServiceProxy,
   JobPostInfoServiceProxy,
+  JobPostQueryDto,
 } from '../../shared/service-proxies/sys-service-proxies';
 import { CommonModule, DatePipe } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { forkJoin } from 'rxjs';
 import { TagModule } from 'primeng/tag';
-import { UngTuyenDialogComponent } from './ung-tuyen-dialog/ung-tuyen-dialog.component';
+import {
+  IThanhPhan,
+  UngTuyenDialogComponent,
+} from './ung-tuyen-dialog/ung-tuyen-dialog.component';
 import { DialogService } from 'primeng/dynamicdialog';
+import { IDsViecLam } from '../../shared/components/ds-viec-lam/ds-viec-lam.component';
+import { AppConst } from '../../shared/app-const';
 
 @Component({
   selector: 'app-viec-lam',
@@ -28,182 +36,22 @@ export class ViecLamComponent implements OnInit {
   private jobPostInfoService = inject(JobPostInfoServiceProxy);
   private categoryInfoService = inject(CategoryInfoServiceProxy);
   private dialogService = inject(DialogService);
+  private jobPostFieldService = inject(JobPostFieldServiceProxy);
 
   //declare region
-  viecLam?: any = {
-    id: '6ba7b813-9dad-11d1-80b4-00c04fd430c2',
-    tags: '["IT","Phần mềm","Angular","CSharp"]',
-    title: 'Lập trình viên',
-    companyName: 'TRENET',
-    creationTime: '2022-11-01T00:00:00',
-    industryId: 'ef7a452e-3df9-4bcd-a01b-bd42243f23d2',
-    jobLevel:
-      '["2a3eebbe-61d2-4f88-9e4b-2bff8b2b7e1e","9cdb1b0f-3e89-4cce-bf43-dfa346c7d51a","b5ef0458-9789-48c1-95d9-15e2f7e4c2aa"]',
-    minimumAge: '>=22',
-    gender: 'ALL',
-    workingHours: '8 tiếng / ngày',
-    jobDescription:
-      '<ul><li><span style="background-color: rgb(255, 255, 255); color: rgb(55, 65, 81);">Xây dựng &amp; dẫn dắt lộ trình tự động hóa toàn doanh nghiệp | </span><em style="background-color: rgb(255, 255, 255); color: rgb(55, 65, 81);">Define and lead enterprise-wide automation roadmap with a clear distinction between agentic and non-agentic automation use cases. </em></li><li><span style="background-color: rgb(255, 255, 255); color: rgb(55, 65, 81);">Xác định các cơ hội tự động hóa có tác động cao ở nhiều bộ phận như vận hành, hỗ trợ khách hàng, marketing, logistics | </span><em style="background-color: rgb(255, 255, 255); color: rgb(55, 65, 81);">Identify high-impact opportunities to implement automation across departments (e.g. operations, customer support, marketing, logistics). </em></li><li><span style="background-color: rgb(255, 255, 255); color: rgb(55, 65, 81);">Tư vấn, đào tạo nội bộ về các hướng tích hợp AI và tự động hóa | </span><em style="background-color: rgb(255, 255, 255); color: rgb(55, 65, 81);">Educate and consult with internal teams on automation potential and AI integration paths. </em></li><li><span style="background-color: rgb(255, 255, 255); color: rgb(55, 65, 81);">Tạo khung đánh giá để lựa chọn mô hình tự động hóa phù hợp | </span><em style="background-color: rgb(255, 255, 255); color: rgb(55, 65, 81);">Create clear frameworks for automation decision-making (e.g. when to use agentic reasoning versus structured workflows). </em></li><li><span style="background-color: rgb(255, 255, 255); color: rgb(55, 65, 81);">Trực tiếp xây dựng, thử nghiệm và triển khai các quy trình tự động hóa bằng n8n hoặc Make.com, bao gồm các tính năng nâng cao như điều kiện logic; webhooks, API calls; xử lý lỗi; node tùy chỉnh bằng JavaScript hoặc Python | </span><em style="background-color: rgb(255, 255, 255); color: rgb(55, 65, 81);">Develop and deploy robust automations using n8n or Make.com, including advanced workflows requiring conditional logic; webhooks, API calls; error handling and retry logic; node-based customs functions using JavaScript or Python. </em></li><li><span style="background-color: rgb(255, 255, 255); color: rgb(55, 65, 81);">Xây dựng các hệ thống AI agentic kết hợp lập kế hoạch, sử dụng công cụ và ra quyết định bằng LLM (trợ lý OpenAI, đại lý nguồn mở, LangChain hoặc AutoGen) | </span><em style="background-color: rgb(255, 255, 255); color: rgb(55, 65, 81);">Build agentic AI workflows that combine planning, tool use and decision-making using LLMs (e.g. OpenAI Assistants, open-source agents, LangChain or AutoGen). </em></li><li><span style="background-color: rgb(255, 255, 255); color: rgb(55, 65, 81);">Tích hợp LLM vào hệ thống Zeder để xử lý các tác vụ như tóm tắt, định tuyến tài liệu, ra quyết định dựa trên câu lệnh và quy trình làm việc tự động | </span><em style="background-color: rgb(255, 255, 255); color: rgb(55, 65, 81);">Integrate LLMs into Zeder systems to handle tasks such as summarization, document routing, prompt-based decisions and autonomous workflows. </em></li><li><span style="background-color: rgb(255, 255, 255); color: rgb(55, 65, 81);">Giám sát bảo mật và bảo trì tự động hóa để đảm bảo độ tin cậy lâu dài | </span><em style="background-color: rgb(255, 255, 255); color: rgb(55, 65, 81);">Oversee automation security and maintenance to ensure long-term reliability. </em></li><li><span style="background-color: rgb(255, 255, 255); color: rgb(55, 65, 81);">Dẫn dắt và đào tạo đội ngũ kỹ sư tự động hóa và phát triển AI | </span><em style="background-color: rgb(255, 255, 255); color: rgb(55, 65, 81);">Lead and mentor a team of AI developers and automation engineers. </em></li><li><span style="background-color: rgb(255, 255, 255); color: rgb(55, 65, 81);">Phối hợp với các trưởng bộ phận để xác định nhu cầu, xây dựng tài liệu và triển khai các giải pháp tự động hóa giúp tinh gọn quy trình làm việc | </span><em style="background-color: rgb(255, 255, 255); color: rgb(55, 65, 81);">Collaborate with HoDs to scope, document and deliver automations that streamline workflows. </em></li><li><span style="background-color: rgb(255, 255, 255); color: rgb(55, 65, 81);">Quản lý tài liệu nội bộ và tài liệu đào tạo để hỗ trợ mở rộng và chuyển giao | </span><em style="background-color: rgb(255, 255, 255); color: rgb(55, 65, 81);">Maintain internal documentation and training materials to support scale and handover.</em></li><li><span style="background-color: rgb(255, 255, 255); color: rgb(55, 65, 81);">Bên cạnh các nhiệm vụ được nêu trên, người phụ trách vị trí này phải thực hiện các công việc có liên quan đến trách nhiệm được phân công bởi cấp quản lý | </span><em style="background-color: rgb(255, 255, 255); color: rgb(55, 65, 81);">In addition to the duties listed above, the position holder must carry out tasks assigned by the supervisor that are essentially related to duties.</em></li></ul><p></p>',
-    jobRequirements:
-      '<ul><li><span style="background-color: rgb(255, 255, 255); color: rgb(33, 37, 41);">Tốt nghiệp đại học chuyên ngành Kỹ thuật, Cơ khí, Tự động hóa… | </span><em style="background-color: rgb(255, 255, 255); color: rgb(33, 37, 41);">Graduated the university with major in Engineering, Mechanical Engineering, Automation… </em></li><li><span style="background-color: rgb(255, 255, 255); color: rgb(33, 37, 41);">Sử dụng thành thạo tiếng Anh | </span><em style="background-color: rgb(255, 255, 255); color: rgb(33, 37, 41);">Be good command at English. </em></li><li><span style="background-color: rgb(255, 255, 255); color: rgb(33, 37, 41);">Có tối thiểu 3 năm kinh nghiệm với n8n, Make.com hoặc các nền tảng tự động hóa tương đương | </span><em style="background-color: rgb(255, 255, 255); color: rgb(33, 37, 41);">Have at least 3-year experience in n8n, Make.com or equivalent low-code automation platforms. </em></li><li><span style="background-color: rgb(255, 255, 255); color: rgb(33, 37, 41);">Có kiến thức vững chắc về tập lệnh và lập trình (JavaScript là bắt buộc; Python là lợi thế) | </span><em style="background-color: rgb(255, 255, 255); color: rgb(33, 37, 41);">Possess strong programming &amp; scripting knowledge (JavaScript required; Python is a bonus). </em></li><li><span style="background-color: rgb(255, 255, 255); color: rgb(33, 37, 41);">Có kinh nghiệm xây dựng quy trình tự động hóa phức tạp từ lên kế hoạch đến triển khai | </span><em style="background-color: rgb(255, 255, 255); color: rgb(33, 37, 41);">Have proven experience in setting up complex automation systems – from planning through deployment &amp; iteration. </em></li><li><span style="background-color: rgb(255, 255, 255); color: rgb(33, 37, 41);">Hiểu biết chuyên sâu về APIs, webhooks và tích hợp hệ thống | </span><em style="background-color: rgb(255, 255, 255); color: rgb(33, 37, 41);">Demonstrated understanding of APIs, webhooks and integration protocols. </em></li><li><span style="background-color: rgb(255, 255, 255); color: rgb(33, 37, 41);">Am hiểu LLM và các tác nhân AI, bao gồm triển khai thực tế với các công cụ như OpenAI, Claude, cơ sở dữ liệu vector… | </span><em style="background-color: rgb(255, 255, 255); color: rgb(33, 37, 41);">Show deep familiarity with LLMs and AI agents, including their deployment in practical automation scenarios (OpenAI, Claude, local LLMs, vector database…). </em></li><li><span style="background-color: rgb(255, 255, 255); color: rgb(33, 37, 41);">Có kinh nghiệm với kỹ thuật tạo lệnh, quản lý trạng thái/ghi nhớ qua nhiều hành động | </span><em style="background-color: rgb(255, 255, 255); color: rgb(33, 37, 41);">Have experience in deploying prompt engineering strategies and managing agent memory/state across actions. </em></li><li><span style="background-color: rgb(255, 255, 255); color: rgb(33, 37, 41);">Có kiến thức về hệ thống thương mại điện tử (Magento 2, Stripe, nền tảng CMS) và biết cách phân tích quy trình (process mapping, SOP) là một lợi thế | </span><em style="background-color: rgb(255, 255, 255); color: rgb(33, 37, 41);">Having familiarity with eCommerce systems (Magento 2, Stripe, CMS platforms) and understanding of process mapping (VSM, SOP analysis) is a plus. </em></li><li><span style="background-color: rgb(255, 255, 255); color: rgb(33, 37, 41);">Có kinh nghiệm với giám sát hệ thống và hiểu biết về DevOps, CI/CD, container deployment (cho các trường hợp dùng LLM nâng cao) là một điểm cộng | </span><em style="background-color: rgb(255, 255, 255); color: rgb(33, 37, 41);">Have experience with automation observability and exposure to DepOps, CI/CD pipelines or container-based deployment (for more advanced LLM use cases).</em></li></ul><p></p>',
-    benefits:
-      '["ef7a452e-3df9-4bcd-a01b-bd42243f23d2","e11f65fc-925e-40dc-97c2-1a4090c0b6de","9cfe3628-6d18-4f95-89e4-378e18de2b8b"]',
-    fromDateTime: 0,
-    toDateTime: 99999999,
-    applicationDeadlineTime: 99999999,
-    location: '71c95be1-3f0b-4ddd-a1ce-c8ac4b42aa5b',
-    quantity: 5,
-    salaryMin: 10000000,
-    salaryMax: 15000000,
-    contactEmail: 'trenet@gmail.com',
-    contactPhone: '0938515184',
-    jobStatus: 'DEAFULT',
-    postFileds: [
-      {
-        id: '6ba7b813-9dad-11d1-80b4-00c04fd430c3',
-        code: 'business_card',
-        typeCode: 'BusinessCard',
-        label: 'Danh thiếp',
-        inputType: 'group',
-        defaultValue: '',
-        listValueOption: '[]',
-        css: '{"responsive":{"desktop":12,"tablet":12,"mobile":12},"label":{"fontSize":"16px","color":"#000000","icon":""},"content":{"fontSize":"16px","color":"#000000","icon":""},"flex":"flex-column"}',
-        fomular: '',
-        listRelation: '',
-        industryId: 'ef7a452e-3df9-4bcd-a01b-bd42243f23d2',
-        placeholder: '',
-      },
-      {
-        id: 'b1a964f4-7e89-48b6-8e32-13c8349fa3a1',
-        code: 'card_fullname',
-        typeCode: 'BusinessCard',
-        label: 'Họ và tên',
-        inputType: 'text',
-        defaultValue: '',
-        listValueOption: '[]',
-        css: '{"responsive":{"desktop":6,"tablet":12,"mobile":12},"label":{"fontSize":"16px","color":"#000000","icon":""},"content":{"fontSize":"16px","color":"#000000","icon":""},"flex":"flex-column"}',
-        fomular: '',
-        listRelation: '',
-        isRequired: true,
-        industryId: 'ef7a452e-3df9-4bcd-a01b-bd42243f23d2',
-        placeholder: '',
-      },
-      {
-        id: '0dca785a-1bf7-4c91-93b9-fd2f0f2a3ea4',
-        code: 'card_position',
-        typeCode: 'BusinessCard',
-        label: 'Chức vụ',
-        inputType: 'number',
-        defaultValue: '',
-        listValueOption: '[]',
-        css: '{"responsive":{"desktop":6,"tablet":12,"mobile":12},"label":{"fontSize":"16px","color":"#000000","icon":""},"content":{"fontSize":"16px","color":"#000000","icon":""},"flex":"flex-column"}',
-        fomular: '',
-        listRelation: '',
-        isRequired: false,
-        industryId: 'ef7a452e-3df9-4bcd-a01b-bd42243f23d2',
-        placeholder: '',
-      },
-      {
-        id: '25f395be-2830-4d20-8d10-3d3623f9a152',
-        code: 'card_company',
-        typeCode: 'BusinessCard',
-        label: 'Tên công ty',
-        inputType: 'text',
-        defaultValue: '',
-        listValueOption: '[]',
-        css: '{"responsive":{"desktop":12,"tablet":12,"mobile":12},"label":{"fontSize":"16px","color":"#000000","icon":""},"content":{"fontSize":"16px","color":"#000000","icon":""},"flex":"flex-column"}',
-        fomular: '',
-        listRelation: '',
-        isRequired: false,
-        industryId: 'ef7a452e-3df9-4bcd-a01b-bd42243f23d2',
-        placeholder: '',
-      },
-      {
-        id: '63e09e89-758c-4a26-9e8a-04b8ae1c2a6d',
-        code: 'card_phone',
-        typeCode: 'BusinessCard',
-        label: 'Số điện thoại',
-        inputType: 'text',
-        defaultValue: '',
-        listValueOption: '[]',
-        css: '{"responsive":{"desktop":12,"tablet":12,"mobile":12},"label":{"fontSize":"16px","color":"#000000","icon":""},"content":{"fontSize":"16px","color":"#000000","icon":""},"flex":"flex-column"}',
-        fomular: '',
-        listRelation: '',
-        isRequired: true,
-        industryId: 'ef7a452e-3df9-4bcd-a01b-bd42243f23d2',
-        placeholder: '',
-      },
-      {
-        id: '4a4e6f4f-1b3a-4a3e-bf4d-2e0c1d2c1b7f',
-        code: 'card_email',
-        typeCode: 'BusinessCard',
-        label: 'Email',
-        inputType: 'text',
-        defaultValue: '',
-        listValueOption: '[]',
-        css: '{"responsive":{"desktop":12,"tablet":12,"mobile":12},"label":{"fontSize":"16px","color":"#000000","icon":""},"content":{"fontSize":"16px","color":"#000000","icon":""},"flex":"flex-column"}',
-        fomular: '',
-        listRelation: '',
-        isRequired: false,
-        industryId: 'ef7a452e-3df9-4bcd-a01b-bd42243f23d2',
-        placeholder: '',
-      },
-      {
-        id: '3db67f7a-2f35-4f15-8c4c-e87b68a67de7',
-        code: 'card_address',
-        typeCode: 'BusinessCard',
-        label: 'Địa chỉ',
-        inputType: 'textarea',
-        defaultValue: '',
-        listValueOption: '[]',
-        css: '{"responsive":{"desktop":12,"tablet":12,"mobile":12},"label":{"fontSize":"16px","color":"#000000","icon":""},"content":{"fontSize":"16px","color":"#000000","icon":""},"flex":"flex-column"}',
-        fomular: '',
-        listRelation: '',
-        isRequired: false,
-        industryId: 'ef7a452e-3df9-4bcd-a01b-bd42243f23d2',
-        placeholder: '',
-      },
-      {
-        id: 'b3b7b45f-099e-4e3a-8ca3-7c06e4980a7a',
-        code: 'card_website',
-        typeCode: 'BusinessCard',
-        label: 'Website',
-        inputType: 'text',
-        defaultValue: '',
-        listValueOption: '[]',
-        css: '{"responsive":{"desktop":12,"tablet":12,"mobile":12},"label":{"fontSize":"16px","color":"#000000","icon":""},"content":{"fontSize":"16px","color":"#000000","icon":""},"flex":"flex-column"}',
-        fomular: '',
-        listRelation: '',
-        isRequired: false,
-        industryId: 'ef7a452e-3df9-4bcd-a01b-bd42243f23d2',
-        placeholder: '',
-      },
-      {
-        id: 'd9b3a3f3-6e23-4d26-8ec5-97f4b2532c31',
-        code: 'card_linkedin',
-        typeCode: 'BusinessCard',
-        label: 'LinkedIn',
-        inputType: 'text',
-        defaultValue: '',
-        listValueOption: '[]',
-        css: '{"responsive":{"desktop":12,"tablet":12,"mobile":12},"label":{"fontSize":"16px","color":"#000000","icon":""},"content":{"fontSize":"16px","color":"#000000","icon":""},"flex":"flex-column"}',
-        fomular: '',
-        listRelation: '',
-        isRequired: false,
-        industryId: 'ef7a452e-3df9-4bcd-a01b-bd42243f23d2',
-        placeholder: 'test',
-      },
-    ],
-  };
+  tinTuyenDung?: IDsViecLam;
 
   private destroyRef = inject(DestroyRef);
 
   ngOnInit(): void {
-    forkJoin([this.getLocations(), this.getTrinhDos()])
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(([khuVucs, trinhDos]) => {
-        this.xuLyDuLieuViecLam(trinhDos, khuVucs);
-      });
+    if (this.activatedRoute.snapshot.params['id']) {
+      forkJoin([this.getViecLam(), this.getLocations(), this.getTrinhDos()])
+        .pipe(takeUntilDestroyed(this.destroyRef))
+        .subscribe(([viecLam, khuVucs, trinhDos]) => {
+          this.tinTuyenDung = viecLam as IDsViecLam;
+          this.xuLyDuLieuViecLam(trinhDos, khuVucs);
+        });
+    }
   }
 
   private getLocations() {
@@ -239,53 +87,76 @@ export class ViecLamComponent implements OnInit {
   }
 
   onApply() {
-    if (!this.viecLam) return;
+    if (this.tinTuyenDung != undefined) {
+      this.getJobPostFields().subscribe((res) => {
 
-    this.dialogService.open(UngTuyenDialogComponent, {
-      header: 'Ứng tuyển ' + this.viecLam.title,
-      width: '70%',
-      breakpoints: {
-        '960px': '75vw',
-        '640px': '100vw',
-      },
-      styleClass: 'ung-tuyen-dialog p-dialog-custom',
-      data: {
-        dsThanhPhan: this.viecLam.postFileds,
-        jobPostId: this.viecLam.id,
-      },
-    });
+        console.log(res.items?.sort((a, b) => parseInt(a.groupId!) - parseInt(b.groupId!)));
+
+        this.dialogService.open(UngTuyenDialogComponent, {
+          header: 'Ứng tuyển ' + this.tinTuyenDung!.title,
+          width: '70%',
+          breakpoints: {
+            '960px': '75vw',
+            '640px': '100vw',
+          },
+          styleClass: 'ung-tuyen-dialog p-dialog-custom',
+          data: {
+            dsThanhPhan: res.items as IThanhPhan[],
+            jobPostId: this.tinTuyenDung!.id,
+          },
+        });
+      });
+    }
+  }
+
+  // lấy các field của tin này
+  private getJobPostFields() {
+    const input = new JobPostFieldQueryDto();
+
+    input.tenantId = AppConst.tenantDefaultId;
+
+    input.criterias = [
+      new ICriteriaRequestDto({
+        propertyName: 'jobPostId',
+        operation: 0,
+        value: this.tinTuyenDung!.id + '',
+      }),
+    ];
+
+    input.skipCount = 0;
+    input.maxResultCount = 1000;
+
+    return this.jobPostFieldService.getAll(input);
   }
 
   private xuLyDuLieuViecLam(
     trinhDos: CategoryOutputDto[],
     khuVucs: CategoryOutputDto[]
   ) {
-    if (!this.viecLam) return;
+    if (!this.tinTuyenDung) return;
 
-    this.viecLam = {
-      ...this.viecLam,
+    this.tinTuyenDung = {
+      ...this.tinTuyenDung,
       _kyNangsOpenJson: trinhDos.filter((trinhDo) =>
-        this.viecLam!.jobLevel!.includes(trinhDo.id!)
+        this.tinTuyenDung!.jobLevel!.includes(trinhDo.id!)
       ),
       _khuVucName:
-        khuVucs.find((khuVuc) => khuVuc.id == this.viecLam!.location)?.name ||
-        '',
-      _tagsOpenJson: this.viecLam.tags ? JSON.parse(this.viecLam.tags) : [],
-
+        khuVucs.find((khuVuc) => khuVuc.id == this.tinTuyenDung!.location)
+          ?.name || '',
+      _tagsOpenJson: this.tinTuyenDung.tags
+        ? JSON.parse(this.tinTuyenDung.tags)
+        : [],
       _benefitsOpenJson: trinhDos.filter((trinhDo) =>
-        this.viecLam!.benefits!.includes(trinhDo.id!)
+        this.tinTuyenDung!.benefits!.includes(trinhDo.id!)
       ),
-    };
+    } as IDsViecLam;
   }
 
-  // private getViecLam() {
-  //   if (!this.activatedRoute.snapshot.params['id']) return;
+  private getViecLam() {
+    const input = new JobPostQueryDto();
+    input.id = this.activatedRoute.snapshot.params['id'];
+    input.tenantId = AppConst.tenantDefaultId;
 
-  //   const input = new JobPostQueryDto();
-  //   input.id = this.activatedRoute.snapshot.params['id'];
-
-  //   this.jobPostInfoService
-  //     .get(input)
-  //     .subscribe((res) => (this.viecLam = res as IDsViecLam));
-  // }
+    return this.jobPostInfoService.get(input);
+  }
 }

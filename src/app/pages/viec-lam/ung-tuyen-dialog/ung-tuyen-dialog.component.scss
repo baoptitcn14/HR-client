@@ -1,0 +1,16 @@
+.section-group {
+    &__header {
+        position: relative;
+        padding-left: 10px;
+        &:before {
+            position: absolute;
+            content: "";
+            height: 100%;
+            top: 0;
+            left: 0;
+            width: 5px;
+            border-radius: 4px;
+            background-color: var(--primary-400);
+        }
+    }
+}
