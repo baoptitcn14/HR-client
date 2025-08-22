@@ -29,6 +29,9 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { DialogFooterDirective } from '../../../shared/directives/dialog-footer.directive';
 import { DialogFooterComponent } from '../../../shared/dialog-partials/dialog-footer/dialog-footer.component';
 import { MessageService } from 'primeng/api';
+import { AppSessionService } from '../../../shared/session/app-session.service';
+import { UtilitiesService } from '../../../shared/services/utilities.service';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-ung-tuyen-dialog',
@@ -55,12 +58,11 @@ import { MessageService } from 'primeng/api';
 })
 export class UngTuyenDialogComponent implements OnInit {
   // inject region
-  private jobApplicationInfoServiceProxy = inject(
-    JobApplicationInfoServiceProxy
-  );
+  private session = inject(AppSessionService);
   private jobApplicationServiceProxy = inject(JobApplicationServiceProxy);
   private ref: DynamicDialogRef = inject(DynamicDialogRef);
   private messageService = inject(MessageService);
+  private utilitiesService = inject(UtilitiesService);
 
   // declare region
   emailPattern = AppConst.emailPattern;
@@ -83,7 +85,8 @@ export class UngTuyenDialogComponent implements OnInit {
 
     const input = new JobApplicationInputDto();
     input.tenantId = AppConst.tenantDefaultId;
-    
+
+    input.candidateUserId = this.session.userId ?? uuidv4();
     input.jobPostId = this.config.data.jobPostId;
     input.status = STATUS_UNGTUYEN.PENDING;
     input.jobApplicationFields = Array.from(
@@ -143,16 +146,16 @@ export class UngTuyenDialogComponent implements OnInit {
         .filter((thanhPhan) => thanhPhan.inputType == 'group')
         .map(
           (item) =>
-            ({
-              ...item,
-              _css: JSON.parse(item.css ?? '{}'),
-              _listValueOptionOpenJSON: item.listValueOption
-                ? JSON.parse(item.listValueOption)
-                : [],
-              _listRelationOpenJSON: item.listRelation
-                ? JSON.parse(item.listRelation)
-                : [],
-            } as IThanhPhan)
+          ({
+            ...item,
+            _css: JSON.parse(item.css ?? '{}'),
+            _listValueOptionOpenJSON: item.listValueOption
+              ? JSON.parse(item.listValueOption)
+              : [],
+            _listRelationOpenJSON: item.listRelation
+              ? JSON.parse(item.listRelation)
+              : [],
+          } as IThanhPhan)
         )
         .sort((a, b) => parseInt(a.fieldIndex!) - parseInt(b.fieldIndex!));
 
@@ -164,16 +167,16 @@ export class UngTuyenDialogComponent implements OnInit {
           )
           .map(
             (item) =>
-              ({
-                ...item,
-                _css: JSON.parse(item.css ?? '{}'),
-                _listValueOptionOpenJSON: item.listValueOption
-                  ? JSON.parse(item.listValueOption)
-                  : [],
-                _listRelationOpenJSON: item.listRelation
-                  ? JSON.parse(item.listRelation)
-                  : [],
-              } as IThanhPhan)
+            ({
+              ...item,
+              _css: JSON.parse(item.css ?? '{}'),
+              _listValueOptionOpenJSON: item.listValueOption
+                ? JSON.parse(item.listValueOption)
+                : [],
+              _listRelationOpenJSON: item.listRelation
+                ? JSON.parse(item.listRelation)
+                : [],
+            } as IThanhPhan)
           )
           .sort((a, b) => parseInt(a.fieldIndex!) - parseInt(b.fieldIndex!));
       });

@@ -6,6 +6,7 @@ import {
   JobApplicationInfoServiceProxy,
   JobApplicationServiceProxy,
   JobFieldServiceProxy,
+  JobPostFieldInfoServiceProxy,
   JobPostFieldServiceProxy,
   JobPostInfoServiceProxy,
   JobPostServiceProxy,
@@ -35,6 +36,7 @@ import {
     JobPostInfoServiceProxy,
     JobApplicationInfoServiceProxy,
     JobApplicationServiceProxy,
+    JobPostFieldInfoServiceProxy
   ],
 })
 export class ServiceProxiesModule {}

@@ -5,6 +5,7 @@ import {
   CategoryOutputDto,
   CategoryQueryDto,
   ICriteriaRequestDto,
+  JobPostFieldInfoServiceProxy,
   JobPostFieldQueryDto,
   JobPostFieldServiceProxy,
   JobPostInfoServiceProxy,
@@ -36,7 +37,7 @@ export class ViecLamComponent implements OnInit {
   private jobPostInfoService = inject(JobPostInfoServiceProxy);
   private categoryInfoService = inject(CategoryInfoServiceProxy);
   private dialogService = inject(DialogService);
-  private jobPostFieldService = inject(JobPostFieldServiceProxy);
+  private jobPostFieldService = inject(JobPostFieldInfoServiceProxy);
 
   //declare region
   tinTuyenDung?: IDsViecLam;
@@ -90,7 +91,7 @@ export class ViecLamComponent implements OnInit {
     if (this.tinTuyenDung != undefined) {
       this.getJobPostFields().subscribe((res) => {
 
-        console.log(res.items?.sort((a, b) => parseInt(a.groupId!) - parseInt(b.groupId!)));
+        // console.log(res.items?.sort((a, b) => parseInt(a.groupId!) - parseInt(b.groupId!)));
 
         this.dialogService.open(UngTuyenDialogComponent, {
           header: 'Ứng tuyển ' + this.tinTuyenDung!.title,
@@ -101,7 +102,7 @@ export class ViecLamComponent implements OnInit {
           },
           styleClass: 'ung-tuyen-dialog p-dialog-custom',
           data: {
-            dsThanhPhan: res.items as IThanhPhan[],
+            dsThanhPhan: res as IThanhPhan[],
             jobPostId: this.tinTuyenDung!.id,
           },
         });
@@ -126,7 +127,7 @@ export class ViecLamComponent implements OnInit {
     input.skipCount = 0;
     input.maxResultCount = 1000;
 
-    return this.jobPostFieldService.getAll(input);
+    return this.jobPostFieldService.getList(input);
   }
 
   private xuLyDuLieuViecLam(
