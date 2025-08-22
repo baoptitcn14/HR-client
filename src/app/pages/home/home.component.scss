@@ -1,0 +1,158 @@
+.page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 12px 8px 24px;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
+  color: #111827;
+}
+
+/* 3-column layout with screenshot spacing */
+.job-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+
+  @media (max-width: 1199.98px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  @media (max-width: 767.98px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.job-card {
+  position: relative;
+  display: flex;
+  gap: 12px;
+  background: #fff;
+  border: 1px solid #e5e7eb; /* #e0e0e0 looked too dark; this matches TopCV */
+  border-radius: 12px;
+  padding: 12px;
+  min-height: 96px;
+  transition: box-shadow .18s ease, transform .18s ease;
+
+  &:hover {
+    box-shadow: 0 4px 18px rgba(17, 24, 39, 0.08);
+    transform: translateY(-1px);
+  }
+
+  &.highlighted {
+    background-color: #f4fff7;
+    border-color: #00c853;
+  }
+}
+
+.logo {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  border-radius: 8px;
+  background: #fff;
+  border: 1px solid #eeeeee;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.details {
+  flex: 1 1 auto;
+  min-width: 0; /* allow ellipsis */
+
+  .title {
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 1.35;
+    margin: 2px 24px 4px 0; /* keep room for the heart */
+    color: #111827;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .company {
+    font-size: 13px;
+    color: #6b7280;
+    line-height: 1.25;
+    margin-bottom: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+
+    .chip {
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1;
+      padding: 6px 8px;
+      border-radius: 8px;
+      letter-spacing: .2px;
+      border: 1px solid transparent;
+      user-select: none;
+
+      &.chip-success {
+        background: #e8f5ee;
+        color: #00a65a;
+        border-color: #bfead4;
+      }
+      &.chip-warning {
+        background: #fff7e6;
+        color: #b35c00;
+        border-color: #ffe0b2;
+      }
+      &.chip-danger {
+        background: #ffebee;
+        color: #c62828;
+        border-color: #ffcdd2;
+      }
+    }
+  }
+
+  .meta {
+    display: flex;
+    gap: 14px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #374151;
+
+    .pill {
+      background: #f3f4f6;
+      border: 1px solid #e5e7eb;
+      padding: 6px 10px;
+      border-radius: 999px;
+      white-space: nowrap;
+      line-height: 1;
+    }
+  }
+}
+
+/* Heart save button (bottom-right like screenshot) */
+.heart {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  border: 1px solid #b7e8c9;
+  background: #f4fff7;
+  color: #22c55e;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: background .15s ease, color .15s ease, border-color .15s ease;
+
+  i { font-size: 14px; }
+
+  &:hover {
+    background: #eafff1;
+    color: #16a34a;
+    border-color: #78d7a3;
+  }
+}
+

@@ -1,6 +1,47 @@
 <app-section-search></app-section-search>
 <div [style]="{ background: 'var(--bluegray-50)' }">
-  <div class="container py-5">
+  <!-- <div class="container py-5">
     <app-ds-viec-lam [viecLams]="jobPosts"></app-ds-viec-lam>
+  </div> -->
+
+
+  
+</div>
+<div class="page">
+  <div class="job-grid">
+<div
+  class="job-card"
+  *ngFor="let j of jobPosts; let i = index"
+  [class.highlighted]="isHighlighted(j.tags)"
+>
+      <img class="logo" [src]="j.logo" alt="" />
+
+      <div class="details">
+        <div class="title" title="{{ j.title }}">{{ j.title }}</div>
+        <div class="company" title="{{ j.company }}">{{ j.company }}</div>
+
+        <div class="tags" *ngIf="j.tags?.length">
+          <span
+            class="chip"
+            *ngFor="let t of j.tags"
+            [class.chip-success]="t.label==='TOP'"
+            [class.chip-warning]="t.label==='NỔI BẬT'"
+            [class.chip-danger]="t.label==='HOT'"
+          >
+            {{ t.label }}
+          </span>
+        </div>
+
+        <div class="meta">
+          <span class="pill salary">{{ j.salary }}</span>
+          <span class="pill location">{{ j.location }}</span>
+        </div>
+      </div>
+
+      <button class="heart" type="button" aria-label="save">
+        <i class="pi pi-heart"></i>
+      </button>
+    </div>
   </div>
 </div>
+
