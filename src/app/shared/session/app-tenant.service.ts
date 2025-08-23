@@ -2,7 +2,6 @@ import { inject, Injectable } from '@angular/core';
 import { TenantDto, TenantServiceProxy, ViewDto } from '../service-proxies/sys-service-proxies';
 import { CookieService } from 'ngx-cookie-service';
 import { AppConst } from '../app-const';
-import { environment } from '../../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
@@ -31,8 +30,8 @@ export class AppTenantService {
         this.listTeantUser = res;
         resolve();
       }, (error) => {
-        this.cookieService.deleteAll('/', environment.domain);
-        location.href = environment.loginUrl;
+        this.cookieService.deleteAll('/', AppConst.domain);
+        location.href = AppConst.loginUrl;
         reject(error);
       }, () => { })
     })

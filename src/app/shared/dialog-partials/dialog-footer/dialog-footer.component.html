@@ -2,20 +2,28 @@
   <div class="d-flex gap-2 align-items-center">
     <!-- save -->
     <p-button *ngIf="!isDelete" type="button" [label]="textButtonSave" icon="pi pi-save" [disabled]="!isValid"
-      [size]="'small'" severity="primary" (onClick)="onSave()" />
+      [size]="'small'" severity="primary" (click)="onSave()" />
     <!-- delete -->
-    <p-button *ngIf="!isDelete && !isNew" type="button" label="Xóa" [size]="'small'" severity="danger" icon="pi pi-trash"
-      (onClick)="onDelete()" />
+    <p-button *ngIf="!isDelete && !isNew" type="button" label="Xóa" [size]="'small'" severity="danger"
+      icon="pi pi-trash" (click)="onDelete()" />
     <!-- delete confirm -->
     <ng-container *ngIf="isDelete">
       <p-button type="button" label="Xác nhận" [size]="'small'" icon="pi pi-check" severity="danger"
-        (onClick)="onConfirmDelete()" />
+        (click)="onConfirmDelete()" />
 
       <p-button type="button" label="Quay lại" [size]="'small'" severity="secondary" icon="pi pi-undo"
-        (onClick)="onCancelDelete()" />
+        (click)="onCancelDelete()" />
     </ng-container>
   </div>
-  <!-- cancle -->
-  <p-button *ngIf="!isDelete" type="button" severity="secondary" [size]="'small'" label="Hủy" icon="pi pi-times"
-    (onClick)="closeDialog()" />
+
+  <div class="d-flex gap-2 align-items-center">
+    <!-- copy -->
+    <p-button *ngIf="!isNew && !isDelete" type="button" [label]="'Tạo bản sao'" icon="pi pi-plus" [disabled]="!isValid"
+      [size]="'small'" severity="info" (click)="onCopy()" />
+    <!-- cancle -->
+    <p-button *ngIf="!isDelete" type="button" severity="secondary" [size]="'small'" label="Hủy" icon="pi pi-times"
+      (click)="closeDialog()" />
+  </div>
+
+
 </div>

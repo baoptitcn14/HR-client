@@ -3,7 +3,7 @@
     <p-accordion [activeIndex]="0">
 
         <p-button size="small" [styleClass]="'w-100 mb-3'" label="Xóa ' {{ field.label }} '" icon="pi pi-times" [raised]="true"
-            [severity]="'danger'" [loading]="loadingButtonRemove" (onClick)="deleteThanhPhan()" />
+            [severity]="'danger'" [loading]="loadingButtonRemove" (click)="deleteThanhPhan()" />
 
         <!-- style -->
         <p-accordionTab header="Giao diện">

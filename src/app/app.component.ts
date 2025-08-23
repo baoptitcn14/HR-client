@@ -5,6 +5,7 @@ import { ToastModule } from 'primeng/toast';
 import { TopComponent } from './layout/top/top.component';
 import { LoadingComponent } from './layout/loading/loading.component';
 import { PrimeNGConfig } from 'primeng/api';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
@@ -20,9 +21,10 @@ import { PrimeNGConfig } from 'primeng/api';
   styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit {
-  title = 'spa';
 
-  constructor(private primengConfig: PrimeNGConfig) {}
+  constructor(private primengConfig: PrimeNGConfig, private title: Title) {
+    title.setTitle('Việc làm');
+  }
   ngOnInit(): void {
     this.primengConfig.setTranslation({
       cancel: 'Hủy',

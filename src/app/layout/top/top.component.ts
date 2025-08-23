@@ -15,12 +15,9 @@ import {
   Validators,
 } from '@angular/forms';
 
-import { map, Observable } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
-import { environment } from '../../../environments/environment.development';
 import { AppConst } from '../../shared/app-const';
 import { AppSessionService } from '../../shared/session/app-session.service';
-import { TenantServiceProxy, ViewDto } from '../../shared/service-proxies/sys-service-proxies';
 import { MenuItem } from 'primeng/api';
 import { AppTenantService } from '../../shared/session/app-tenant.service';
 
@@ -73,7 +70,7 @@ export class TopComponent implements OnInit {
 
   formUyQuyen!: FormGroup;
   logoQlcv = AppConst.logoQlcvUrl;
-  urlLogin = environment.loginUrl;
+  urlLogin = AppConst.loginUrl;
 
   appTenantService = inject(AppTenantService);
   cookieSerivce = inject(CookieService);
@@ -97,7 +94,11 @@ export class TopComponent implements OnInit {
   }
 
   onLogin() {
-    window.location.href = environment.loginUrl;
+    window.location.href = AppConst.loginUrl;
+  }
+
+  onRegister() {
+    window.location.href = AppConst.registerAccount;
   }
 
 }

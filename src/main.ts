@@ -1,6 +1,21 @@
 import { bootstrapApplication } from '@angular/platform-browser';
 import { appConfig } from './app/app.config';
 import { AppComponent } from './app/app.component';
+import { AppConst } from './app/shared/app-const';
 
-bootstrapApplication(AppComponent, appConfig)
-  .catch((err) => console.error(err));
+fetch('assets/appsettings.json')
+  .then((response) => response.json())
+  .then((config) => {
+
+    AppConst.domain = config.domain;
+    AppConst.sysAPI = config.sysAPI;
+    AppConst.baseUrl = config.baseUrl;
+    AppConst.loginUrl = config.loginUrl;
+    AppConst.homeUrl = config.homeUrl;
+    AppConst.appTitle = config.appTitle;
+    AppConst.registerAccount = config.registerAccount;
+
+    bootstrapApplication(AppComponent, appConfig)
+      .catch((err) => console.error(err));
+
+  });

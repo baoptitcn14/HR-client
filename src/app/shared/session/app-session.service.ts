@@ -1,7 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { AppConst } from '../app-const';
-import { environment } from '../../../environments/environment.development';
 import {
   CurrentUserServiceProxy,
   LogoutDto,
@@ -38,15 +37,15 @@ export class AppSessionService {
             resolve(true);
           },
           (error) => {
-            this.cookieService.deleteAll('/', environment.domain);
-            location.href = environment.loginUrl;
+            this.cookieService.deleteAll('/', AppConst.domain);
+            location.href = AppConst.loginUrl;
 
             reject(error);
           }
         );
       } else {
-        // window.location.href = environment.loginUrl;
-        this.cookieService.deleteAll('/', environment.domain);
+        // window.location.href = AppConst.loginUrl;
+        this.cookieService.deleteAll('/', AppConst.domain);
         resolve(false);
       }
     });
@@ -59,8 +58,8 @@ export class AppSessionService {
     input.connectionId = undefined;
 
     this.currentUserService.logout(input).subscribe(r => {
-      this.cookieService.deleteAll('/', environment.domain);
-      location.href = environment.loginUrl;
+      this.cookieService.deleteAll('/', AppConst.domain);
+      location.href = AppConst.loginUrl;
     });
 
   }

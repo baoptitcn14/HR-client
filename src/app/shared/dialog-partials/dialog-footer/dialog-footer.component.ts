@@ -16,6 +16,7 @@ export class DialogFooterComponent {
 
   @Output() onSaveEvent = new EventEmitter();
   @Output() onDeleteEvent = new EventEmitter();
+  @Output() onCopyEvent = new EventEmitter();
   @Output() onCloseEvent = new EventEmitter();
 
   isDelete = false;
@@ -40,5 +41,9 @@ export class DialogFooterComponent {
 
   closeDialog() {
     this.onCloseEvent.emit();
+  }
+
+  onCopy() {
+    this.onCopyEvent.emit();
   }
 }

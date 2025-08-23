@@ -91,8 +91,6 @@ export class ViecLamComponent implements OnInit {
     if (this.tinTuyenDung != undefined) {
       this.getJobPostFields().subscribe((res) => {
 
-        // console.log(res.items?.sort((a, b) => parseInt(a.groupId!) - parseInt(b.groupId!)));
-
         this.dialogService.open(UngTuyenDialogComponent, {
           header: 'Ứng tuyển ' + this.tinTuyenDung!.title,
           width: '70%',

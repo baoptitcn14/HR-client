@@ -99,8 +99,6 @@ export class UngTuyenDialogComponent implements OnInit {
       )
     );
 
-    // console.log(input);
-
     this.jobApplicationServiceProxy.create(input).subscribe(
       (data) => {
         this.messageService.add({

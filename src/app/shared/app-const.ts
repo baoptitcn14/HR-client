@@ -1,6 +1,18 @@
 // import * as ClassicEditor from 'src/assets/js/ckeditorV31/ckeditor.js';
 
 export class AppConst {
+
+  //#region ENVIRONMENT
+  static domain: string;
+  static sysAPI: string;
+  static baseUrl: string;
+  static loginUrl: string;
+  static homeUrl: string;
+  static appTitle: string;
+  static registerAccount: string;
+  //#endregion
+
+
   static readonly authorization = {
     encrptedAuthTokenName: 'enc_auth_token',
     authToken: 'AuthToken',

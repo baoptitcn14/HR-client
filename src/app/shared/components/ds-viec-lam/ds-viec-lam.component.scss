@@ -2,21 +2,30 @@
     background-color: #fff;
     transition: all 0.3s ease-in-out;
     border: 1px solid #fff;
+    font-size: 0.8rem;
+    text-decoration: none;
+
     &-logo-cty {
         padding: 5px;
         display: flex;
         justify-content: center;
         align-items: center;
+
+        img {
+            max-width: 80px;
+        }
     }
 
-    &-thong-tin {
-        font-size: 1.2rem;
-        width: 100%;
-    }
 
     &:hover {
         border-color: var(--primary-400);
         background-color: var(--primary-50);
         cursor: pointer;
+    }
+}
+
+::ng-deep {
+    .p-tag {
+        font-size: 0.65rem !important;
     }
 }
