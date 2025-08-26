@@ -32,6 +32,7 @@ import { MessageService } from 'primeng/api';
 import { AppSessionService } from '../../../shared/session/app-session.service';
 import { UtilitiesService } from '../../../shared/services/utilities.service';
 import { v4 as uuidv4 } from 'uuid';
+import { CalendarModule } from 'primeng/calendar';
 
 @Component({
   selector: 'app-ung-tuyen-dialog',
@@ -52,6 +53,7 @@ import { v4 as uuidv4 } from 'uuid';
     DialogFooterDirective,
     DialogFooterComponent,
     ReactiveFormsModule,
+    CalendarModule
   ],
   templateUrl: './ung-tuyen-dialog.component.html',
   styleUrl: './ung-tuyen-dialog.component.scss',

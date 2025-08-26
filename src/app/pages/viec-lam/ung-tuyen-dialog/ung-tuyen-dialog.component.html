@@ -72,7 +72,9 @@
                   groupItem._key
                 }}</code>
               </label>
-              } @if (groupItem.inputType == 'text') {
+              }
+              <!-- TEXT -->
+              @if (groupItem.inputType == 'text') {
               <input
                 pInputText
                 [placeholder]="groupItem.placeholder"
@@ -83,7 +85,9 @@
                 formControlName="{{ groupItem.id }}"
                 class="w-100"
               />
-              }@else if (groupItem.inputType == 'number') {
+              }
+              <!-- NUMBER -->
+              @else if (groupItem.inputType == 'number') {
               <p-inputNumber
                 class="w-100"
                 [styleClass]="'w-100'"
@@ -95,7 +99,9 @@
                 attr.aria-describedby="{{ groupItem._key }}-help"
                 formControlName="{{ groupItem.id }}"
               />
-              }@else if (groupItem.inputType == 'checkbox') {
+              }
+              <!-- CHECKBOX -->
+              @else if (groupItem.inputType == 'checkbox') {
               <div class="d-flex {{ groupItem._css.flex }} gap-4">
                 <p-checkbox
                   id="{{ groupItem._key }}"
@@ -107,7 +113,9 @@
                 />
               </div>
 
-              }@else if (groupItem.inputType == 'email') {
+              }
+              <!-- EMAIL -->
+              @else if (groupItem.inputType == 'email') {
               <input
                 [placeholder]="groupItem.placeholder"
                 type="text"
@@ -120,7 +128,9 @@
                 formControlName="{{ groupItem.id }}"
                 class="w-100"
               />
-              }@else if (groupItem.inputType == 'radio') {
+              }
+              <!-- RADIO -->
+              @else if (groupItem.inputType == 'radio') {
               <div class="d-flex {{ groupItem._css.flex }} gap-2">
                 <div
                   *ngFor="let value of groupItem._listValueOptionOpenJSON"
@@ -138,7 +148,9 @@
                   </label>
                 </div>
               </div>
-              }@else if (groupItem.inputType == 'select') {
+              }
+              <!-- SELECT -->
+              @else if (groupItem.inputType == 'select') {
               <p-dropdown
                 class="w-100"
                 [id]="groupItem._key"
@@ -148,7 +160,9 @@
                 [styleClass]="'w-100'"
                 formControlName="{{ groupItem.id }}"
               />
-              }@else if (groupItem.inputType == 'tags') {
+              }
+              <!-- TAG -->
+              @else if (groupItem.inputType == 'tags') {
               <p-chips
                 class="w-100"
                 [placeholder]="groupItem.placeholder"
@@ -156,7 +170,9 @@
                 [allowDuplicate]="groupItem.isAllowDuplicate"
                 formControlName="{{ groupItem.id }}"
               />
-              }@else if (groupItem.inputType == 'editor') {
+              }
+              <!-- EDITOR -->
+              @else if (groupItem.inputType == 'editor') {
 
               <p-editor
                 formControlName="{{ groupItem.id }}"
@@ -168,7 +184,9 @@
                 id="{{ groupItem._key }}"
               />
 
-              }@else if(groupItem.inputType == 'file'){
+              }
+              <!-- FILE -->
+              @else if(groupItem.inputType == 'file'){
 
               <p-fileUpload
                 class="w-100"
@@ -178,9 +196,12 @@
                 formControlName="{{ groupItem.id }}"
               >
               </p-fileUpload>
-              }@else if(groupItem.inputType == 'textarea'){
+              }
+              <!-- TEXTAREA -->
+              @else if(groupItem.inputType == 'textarea'){
 
               <textarea
+                autoResize="true"
                 rows="5"
                 cols="30"
                 formControlName="{{ groupItem.id }}"
@@ -188,6 +209,110 @@
               >
               </textarea>
 
+              }
+              <!-- DATE SINGLE -->
+              @else if(groupItem.inputType == 'date' && !groupItem.multiple){
+              <p-calendar
+                inputId="{{ groupItem._key }}"
+                [selectionMode]="'single'"
+                [showIcon]="true"
+                [iconDisplay]="'input'"
+                [readonlyInput]="true"
+                [showButtonBar]="true"
+                class="w-100"
+                [styleClass]="'w-100'"
+                formControlName="{{ groupItem.id }}"
+              />
+
+              }
+              <!-- DATE MULTIPLE -->
+              @else if(groupItem.inputType == 'date' && groupItem.multiple){
+              <p-calendar
+                inputId="{{ groupItem._key }}"
+                [selectionMode]="'multiple'"
+                [showIcon]="true"
+                [iconDisplay]="'input'"
+                [readonlyInput]="true"
+                [showButtonBar]="true"
+                class="w-100"
+                [styleClass]="'w-100'"
+                formControlName="{{ groupItem.id }}"
+              />
+
+              }
+              <!-- DATE RANGE -->
+              @else if(groupItem.inputType == 'date-range'){
+              <p-calendar
+                inputId="{{ groupItem._key }}"
+                selectionMode="range"
+                [showIcon]="true"
+                [iconDisplay]="'input'"
+                [readonlyInput]="true"
+                formControlName="{{ groupItem.id }}"
+              />
+              }
+              <!-- DATE TIME -->
+              @else if(groupItem.inputType == 'date-time'){
+              <p-calendar
+                inputId="{{ groupItem._key }}"
+                [showTime]="true"
+                [showIcon]="true"
+                [iconDisplay]="'input'"
+                [hourFormat]="'24'"
+              >
+                <ng-template pTemplate="inputicon">
+                  <i class="pi pi-calendar-clock pointer-events-none"></i>
+                </ng-template>
+              </p-calendar>
+              }
+              <!-- TIME -->
+              @else if(groupItem.inputType == 'time'){
+              <p-calendar
+                inputId="{{ groupItem._key }}"
+                [showIcon]="true"
+                [iconDisplay]="'input'"
+                [timeOnly]="true"
+                formControlName="{{ groupItem.id }}"
+              >
+                <ng-template pTemplate="inputicon">
+                  <i class="pi pi-clock pointer-events-none"></i>
+                </ng-template>
+              </p-calendar>
+              }
+              <!-- MONTH -->
+              @else if(groupItem.inputType == 'month'){
+              <p-calendar
+                inputId="{{ groupItem._key }}"
+                view="month"
+                dateFormat="mm/yy"
+                [iconDisplay]="'input'"
+                [showIcon]="true"
+                [readonlyInput]="true"
+                formControlName="{{ groupItem.id }}"
+              />
+              }
+              <!-- YEAR -->
+              @else if(groupItem.inputType == 'year'){
+              <p-calendar
+                inputId="{{ groupItem._key }}"
+                view="year"
+                dateFormat="yy"
+                [showIcon]="true"
+                [iconDisplay]="'input'"
+                formControlName="{{ groupItem.id }}"
+              />
+              }
+              <!-- IMAGE -->
+              @else if(groupItem.inputType == 'image'){
+
+              <p-fileUpload
+                class="w-100"
+                [showUploadButton]="false"
+                accept="{{ groupItem.acceptFileExtensions }}"
+                maxFileSize="{{ groupItem.maxFileSize }}"
+                formControlName="{{ groupItem.id }}"
+              >
+              </p-fileUpload>
               }
             </div>
 
