@@ -55,8 +55,9 @@ export class DsViecLamComponent implements OnInit {
 
           viecLam._tagsOpenJson = viecLam.tags ? JSON.parse(viecLam.tags) : [];
 
-          this.isLoading = false;
         });
+
+        this.isLoading = false;
       });
   }
 

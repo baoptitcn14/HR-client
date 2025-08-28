@@ -10,4 +10,29 @@
             width: 13.5rem;
         }
     }
+
+
+    @media screen and (max-width: 767px) {
+        .button-responsive {
+            .p-button-text {
+                padding: 2px;
+            }
+
+            .p-button-label {
+                width: 60px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            .p-button.p-button-icon-only {
+                width: auto;
+            }
+        }
+
+        .p-tieredmenu-overlay {
+            right: 0;
+            left: auto;
+        }
+    }
 }

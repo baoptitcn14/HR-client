@@ -20,25 +20,55 @@
 </p-toolbar>
 
 <ng-template #hasLogin>
+  <!-- DESKTOP -->
   <!-- begin button tenant -->
-  <p-splitButton label="{{ appTenantService.currentTenant?.name }}" icon="pi pi-building" size="small"
-    [model]="listTenant" [styleClass]="'tenant'" outlined="true" raised />
+  <p-splitButton class="d-none d-md-block" label="{{ appTenantService.currentTenant?.name }}" icon="pi pi-building"
+    size="small" [model]="listTenant" [styleClass]="'tenant'" outlined="true" raised />
   <!-- end button tenant -->
 
   <!-- begin button trò chuyện -->
-  <p-button label="Trò chuyện" icon="pi pi-comments" badge="2" badgeClass="p-badge-contrast" outlined="true"
-    size="small" raised />
+  <p-button class="d-none d-md-block" label="Trò chuyện" icon="pi pi-comments" badge="2" badgeClass="p-badge-contrast"
+    outlined="true" size="small" raised />
   <!-- end button trò chuyện -->
 
   <!-- begin button thông báo -->
-  <p-button label="Thông báo" icon="pi pi-bell" badge="2" badgeClass="p-badge-contrast" outlined="true" size="small"
-    raised />
+  <p-button class="d-none d-md-block" label="Thông báo" icon="pi pi-bell" badge="2" badgeClass="p-badge-contrast"
+    outlined="true" size="small" raised />
+
   <!-- end button thông báo -->
 
   <!-- begin button user -->
-  <p-splitButton label="{{  appSessionService.user?.surname + ' ' + appSessionService.user?.name }}" icon="pi pi-user"
-    size="small" [model]="listRoute" [styleClass]="'user'" outlined="true" raised />
+  <p-splitButton class="d-none d-md-block"
+    label="{{  appSessionService.user?.surname + ' ' + appSessionService.user?.name }}" icon="pi pi-user" size="small"
+    [model]="listRoute" [styleClass]="'user'" outlined="true" raised />
   <!-- end button user -->
+
+
+
+  <!-- MOBILE -->
+
+  <!-- begin button trò chuyện -->
+  <i class="pi pi-comments fs-3 d-block d-md-none" pBadge value="2"></i>
+
+
+  <!-- end button trò chuyện -->
+
+  <!-- begin button thông báo -->
+  <i class="pi pi-bell fs-3 d-block d-md-none" pBadge value="2"></i>
+
+  <!-- end button thông báo -->
+
+  <!-- begin button tenant -->
+  <p-splitButton class="button-responsive d-block d-md-none" label="{{ appTenantService.currentTenant?.name }}"
+    size="small" [model]="listTenant" [styleClass]="'tenant'" raised outlined="true" text />
+
+  <!-- end button tenant -->
+
+  <!-- begin button user -->
+
+  <p-splitButton class="button-responsive d-block d-md-none" size="small" [model]="listRoute" [styleClass]="'user'"
+    outlined="true" label="{{  appSessionService.user?.surname + ' ' + appSessionService.user?.name }}" raised text />
+
 </ng-template>
 
 <ng-template #notLogin>

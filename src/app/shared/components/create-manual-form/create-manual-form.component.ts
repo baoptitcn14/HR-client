@@ -37,12 +37,6 @@ import { TabViewModule } from 'primeng/tabview';
 import { ToastModule } from 'primeng/toast';
 import { ToolbarModule } from 'primeng/toolbar';
 import { TreeSelectModule } from 'primeng/treeselect';
-import { DynamicDialogSerivce } from '../../../core/services/dynamic-dialog.service';
-import {
-  IThanhPhan,
-  DEVICES,
-  LIST_DEVICE,
-} from '../../../pages/mau-tieu-chi/mau-tieu-chi';
 import { AppConst } from '../../app-const';
 import {
   CategoryInfoServiceProxy,
@@ -51,6 +45,7 @@ import {
   ICriteriaRequestDto,
   JobFieldInputDto,
   CategoryOutputDto,
+  JobFieldOutputDto,
 } from '../../service-proxies/sys-service-proxies';
 import { UtilitiesService } from '../../services/utilities.service';
 import { ChonNganhNgheComponent } from '../chon-nganh-nghe/chon-nganh-nghe.component';
@@ -157,6 +152,25 @@ export class CreateManualFormComponent {
         .filter((thanhPhan) => thanhPhan.inputType == 'group')
         .map(
           (item) =>
+          ({
+            ...item,
+            _css: JSON.parse(item.css ?? '{}'),
+            _listValueOptionOpenJSON: item.listValueOption
+              ? JSON.parse(item.listValueOption)
+              : [],
+            _listRelationOpenJSON: item.listRelation
+              ? JSON.parse(item.listRelation)
+              : [],
+            // _key: item.key,
+            // _groupId: item.groupId,
+          } as IThanhPhan)
+        );
+
+      this.dsThanhPhanDangCo.forEach((thanhPhan) => {
+        thanhPhan._listChild = this.dsThanhPhanInput
+          .filter((item) => item._groupId == thanhPhan._key)
+          .map(
+            (item) =>
             ({
               ...item,
               _css: JSON.parse(item.css ?? '{}'),
@@ -169,25 +183,6 @@ export class CreateManualFormComponent {
               // _key: item.key,
               // _groupId: item.groupId,
             } as IThanhPhan)
-        );
-
-      this.dsThanhPhanDangCo.forEach((thanhPhan) => {
-        thanhPhan._listChild = this.dsThanhPhanInput
-          .filter((item) => item._groupId == thanhPhan._key)
-          .map(
-            (item) =>
-              ({
-                ...item,
-                _css: JSON.parse(item.css ?? '{}'),
-                _listValueOptionOpenJSON: item.listValueOption
-                  ? JSON.parse(item.listValueOption)
-                  : [],
-                _listRelationOpenJSON: item.listRelation
-                  ? JSON.parse(item.listRelation)
-                  : [],
-                // _key: item.key,
-                // _groupId: item.groupId,
-              } as IThanhPhan)
           );
       });
     }
@@ -277,9 +272,9 @@ export class CreateManualFormComponent {
         leaf: children.filter((x) => x.parentId == object.id).length == 0,
         parent: parent
           ? {
-              key: parent.id,
-              label: parent.name,
-            }
+            key: parent.id,
+            label: parent.name,
+          }
           : undefined,
       };
     }
@@ -463,3 +458,68 @@ export interface IEventSaveCreateManualForm {
   dsThanhPhan: IThanhPhan[];
   jobFieldFromDsThanhPhan: IThanhPhan[];
 }
+
+
+export interface IThanhPhan extends JobFieldOutputDto {
+  _index?: number;
+  _listChild?: IThanhPhan[];
+  _key?: string;
+  _isSelected?: boolean;
+  _css: ICss;
+  _groupId?: string;
+  _cssClass?: string;
+  _listValueOptionOpenJSON?: string[];
+  _listRelationOpenJSON?: string[];
+  _value: any;
+  // isAllowDuplicate?: boolean;
+  // placeholder?: string;
+  // isSearch?: boolean; // dropdown
+  // acceptFileExtensions?: string; // .jpg,.png,.pdf,.doc,.xlsx
+  maxFileSize?: number;
+  // multiple?: boolean;
+}
+
+export interface ICss {
+  responsive: {
+    desktop: number;
+    tablet: number;
+    mobile: number;
+    [key: string]: number; // key => mobile, tablet, desktop
+  };
+  label: {
+    fontSize: number;
+    color: string;
+    icon: string;
+    iconColor: string;
+  };
+  content: {
+    fontSize: number;
+    color: string;
+    icon: string;
+  };
+  flex: 'flex-column' | 'flex-row';
+  align: 'align-items-start' | 'align-items-center' | 'align-items-end';
+  height: number;
+  [key: string]: any;
+}
+
+export const DEVICES = {
+  DESKTOP: 'desktop',
+  TABLET: 'tablet',
+  MOBILE: 'mobile',
+};
+
+export const LIST_DEVICE = [
+  {
+    value: DEVICES.DESKTOP,
+    icon: 'pi pi-desktop',
+  },
+  {
+    value: DEVICES.TABLET,
+    icon: 'pi pi-tablet',
+  },
+  {
+    value: DEVICES.MOBILE,
+    icon: 'pi pi-mobile',
+  },
+];

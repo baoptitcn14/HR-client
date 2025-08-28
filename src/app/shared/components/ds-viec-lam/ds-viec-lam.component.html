@@ -3,7 +3,7 @@
     <a class="viec-lam d-flex  gap-1 rounded shadow-sm" [routerLink]="['/viec-lam', viecLam.id]">
       <!-- logo company -->
       <div class="viec-lam-logo-cty">
-        <img src="https://placehold.co/150" alt="Logo" />
+        <img src="https://placehold.co/80" alt="Logo" />
       </div>
 
       <!-- info job -->
@@ -15,14 +15,14 @@
         <div class="text-muted text-uppercase">{{ viecLam.companyName }}</div>
 
         <!-- mức lương | khu vực -->
-        <div class="d-flex gap-2 align-items-center">
+        <div class="d-flex gap-2 align-items-md-center flex-column flex-md-row">
           <span class="fw-bold">{{ viecLam.salaryMin | number }} - {{ viecLam.salaryMax | number }} đ
           </span>
           <span class="text-muted d-flex gap-2 align-items-center">
             | {{ viecLam._khuVucName }}
 
             <ng-container *ngIf="isLoading && viecLam.location">
-              <p-skeleton width="10rem" *ngIf="isLoading" borderRadius="16px" />
+              <p-skeleton width="10rem" borderRadius="16px" />
             </ng-container>
           </span>
         </div>
@@ -40,8 +40,8 @@
           </span>
 
           <ng-container *ngIf="isLoading && viecLam.jobLevel">
-            <p-skeleton width="10rem" *ngIf="isLoading" styleClass="mr-2" borderRadius="16px" />
-            <p-skeleton width="10rem" *ngIf="isLoading" borderRadius="16px" />
+            <p-skeleton width="10rem" styleClass="mr-2" borderRadius="16px" />
+            <p-skeleton width="10rem" borderRadius="16px" />
           </ng-container>
         </div>
 
@@ -58,8 +58,8 @@
           }
 
           <ng-container *ngIf="isLoading && viecLam.tags">
-            <p-skeleton width="10rem" *ngIf="isLoading" styleClass="mr-2" borderRadius="16px" />
-            <p-skeleton width="10rem" *ngIf="isLoading" borderRadius="16px" />
+            <p-skeleton width="10rem" styleClass="mr-2" borderRadius="16px" />
+            <p-skeleton width="10rem" borderRadius="16px" />
           </ng-container>
         </div>
       </div>
