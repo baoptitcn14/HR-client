@@ -23,11 +23,12 @@ import {
 import { DialogService } from 'primeng/dynamicdialog';
 import { IDsViecLam } from '../../shared/components/ds-viec-lam/ds-viec-lam.component';
 import { AppConst } from '../../shared/app-const';
+import { TrackElementInViewportDirective } from '../../core/directives/track-element-in-viewport.directive';
 
 @Component({
   selector: 'app-viec-lam',
   standalone: true,
-  imports: [CommonModule, ButtonModule, DatePipe, TagModule],
+  imports: [CommonModule, ButtonModule, DatePipe, TagModule, TrackElementInViewportDirective],
   templateUrl: './viec-lam.component.html',
   styleUrl: './viec-lam.component.scss',
 })
@@ -41,6 +42,7 @@ export class ViecLamComponent implements OnInit {
 
   //declare region
   tinTuyenDung?: IDsViecLam;
+  isButtonApplyOutOfViewport = false; // biến này theo dõi nút Ứng tuyển có ngoài viewport hay không
 
   private destroyRef = inject(DestroyRef);
 
@@ -85,6 +87,11 @@ export class ViecLamComponent implements OnInit {
     input.sorting = 'hashCode asc';
 
     return this.categoryInfoService.getList(input);
+  }
+
+
+  onInViewportChange(event: boolean) {
+    this.isButtonApplyOutOfViewport = !event;
   }
 
   onApply() {

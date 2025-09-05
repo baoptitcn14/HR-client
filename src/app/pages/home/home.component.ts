@@ -22,7 +22,6 @@ export class HomeComponent implements OnInit {
     this.getJobPosts();
   }
 
-
   //get data
   private getJobPosts() {
 

@@ -1,13 +1,12 @@
-<section class="section-viec-lam p-4">
-  <div class="container d-flex flex-column gap-4 align-items-center">
+<section class="section-viec-lam p-1 p-md-4">
+  <div class="container d-flex flex-column gap-4 align-items-center" [class.show-footer]="isButtonApplyOutOfViewport">
     @if(tinTuyenDung) {
     <!-- block header -->
     <div
-      class="section-viec-lam-header w-100 p-4 d-flex gap-3 row-gap-2 align-items-start justify-content-between"
-    >
+      class="section-viec-lam-header w-100 p-4 d-flex flex-column flex-md-row align-items-center gap-3 row-gap-3 align-items-start justify-content-between">
       <div class="info d-flex flex-column flex-md-row gap-4">
         <!-- logo -->
-        <div class="logo">
+        <div class="logo text-center">
           <img src="https://placehold.co/150" alt="logo" />
         </div>
 
@@ -26,30 +25,19 @@
       </div>
 
       <!-- button Ứng tuyển -->
-      <div class="d-flex flex-column justify-content-center gap-2">
-        <p-button
-          label="Ứng tuyển"
-          severity="primary"
-          raised="true"
-          [size]="'large'"
-          [styleClass]="'w-100'"
-          (click)="onApply()"
-        ></p-button>
+      <div class="d-flex flex-row flex-md-column justify-content-center gap-2" trackElementInViewport
+        (inViewportChange)="onInViewportChange($event)" [rootMargin]="'-100px 0px'">
+        <p-button label="Ứng tuyển ngay" severity="primary" raised="true" [size]="'large'" [styleClass]="'w-100'"
+          (click)="onApply()"></p-button>
 
-        <p-button
-          label="Tạo CV để ứng tuyển"
-          severity="primary"
-          [outlined]="true"
-          raised="true"
-        ></p-button>
+        <p-button label="Tạo CV để ứng tuyển" severity="primary" [size]="'large'" [outlined]="true"
+          raised="true"></p-button>
       </div>
     </div>
 
     <!-- block salary -->
 
-    <div
-      class="section-viec-lam-salary justify-content-between d-flex flex-column flex-md-row gap-3"
-    >
+    <div class="section-viec-lam-salary justify-content-between d-flex flex-column flex-md-row row-gap-0 gap-3">
       <div class="d-flex flex-column gap-3 p-4 justify-content-center">
         <!-- salary -->
         <div class="d-flex gap-3 align-items-center">
@@ -122,25 +110,12 @@
     </div>
 
     <!-- footer -->
-    <div
-      class="section-viec-lam-footer d-flex gap-3 justify-content-center align-items-center p-4"
-    >
-      <p-button
-        label="Ứng tuyển ngay"
-        severity="primary"
-        raised="true"
-        [size]="'large'"
-        [styleClass]="'w-100'"
-        (click)="onApply()"
-      ></p-button>
+    <div class="section-viec-lam-footer d-none gap-3 justify-content-center align-items-center p-4">
+      <p-button label="Ứng tuyển ngay" severity="primary" raised="true" [size]="'large'" [styleClass]="'w-100'"
+        (click)="onApply()"></p-button>
 
-      <p-button
-        label="Tạo CV để ứng tuyển"
-        severity="primary"
-        [size]="'large'"
-        [outlined]="true"
-        raised="true"
-      ></p-button>
+      <p-button label="Tạo CV để ứng tuyển" severity="primary" [size]="'large'" [outlined]="true"
+        raised="true"></p-button>
     </div>
     }
   </div>
