@@ -180,6 +180,8 @@ export class UngTuyenDialogComponent implements OnInit {
           )
           .sort((a, b) => parseInt(a.fieldIndex!) - parseInt(b.fieldIndex!));
       });
+
+      console.log(this.dsThanhPhanDangCo)
     }
   }
 }
