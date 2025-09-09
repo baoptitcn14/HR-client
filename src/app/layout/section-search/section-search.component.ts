@@ -23,6 +23,7 @@ import {
 } from 'primeng/autocomplete';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { AppConst } from '../../shared/app-const';
+import { CategoriesService } from '../../core/services/categories.service';
 
 @Component({
   selector: 'app-section-search',
@@ -45,6 +46,7 @@ export class SectionSearchComponent implements OnInit {
   // inject region
   private categoryInfoService = inject(CategoryInfoServiceProxy);
   private jobPostInfoServiceProxy = inject(JobPostInfoServiceProxy);
+  private categoriesService = inject(CategoriesService);
 
   // output region
   @Output() onSearchEvent = new EventEmitter();
@@ -66,62 +68,23 @@ export class SectionSearchComponent implements OnInit {
 
   ngOnInit(): void {
     this.getLocations();
-    // this.getLinhVucs();
+    this.getHinhThucLamViecs();
     this.getTrinhDos();
   }
 
-  private getLocations() {
-    const input = new CategoryQueryDto();
+  private async getLocations() {
 
-    input.criterias = [
-      new ICriteriaRequestDto({
-        propertyName: 'groupCode',
-        operation: 0,
-        value: 'ADDRESS',
-      }),
-    ];
+    this.khuVucs = await this.categoriesService.getDataCategory('ADDRESS', 1);
 
-    input.sorting = 'hashCode asc';
-
-    this.categoryInfoService.getList(input).subscribe((data) => {
-      this.khuVucs = data;
-    });
   }
 
-  // private getLinhVucs() {
-  //   const input = new CategoryQueryDto();
+  private async getHinhThucLamViecs() {
+    this.hinhThucLamViecs = await this.categoriesService.getDataCategory('WORKING-TYPE', 1);
+  }
 
-  //   input.criterias = [
-  //     new ICriteriaRequestDto({
-  //       propertyName: 'groupCode',
-  //       operation: 0,
-  //       value: 'INDUSTRY',
-  //     }),
-  //   ];
 
-  //   input.sorting = 'hashCode asc';
-
-  //   this.categoryInfoService.getList(input).subscribe((data) => {
-  //     this.linhVucs = data;
-  //   });
-  // }
-
-  private getTrinhDos() {
-    const input = new CategoryQueryDto();
-
-    input.criterias = [
-      new ICriteriaRequestDto({
-        propertyName: 'groupCode',
-        operation: 0,
-        value: 'SKILL-LEVEL',
-      }),
-    ];
-
-    input.sorting = 'hashCode asc';
-
-    this.categoryInfoService.getList(input).subscribe((data) => {
-      this.kyNangs = data;
-    });
+  private async getTrinhDos() {
+    this.kyNangs = await this.categoriesService.getDataCategory('SKILL-LEVEL', 1);
   }
 
   onSearch() {
@@ -129,9 +92,9 @@ export class SectionSearchComponent implements OnInit {
   }
 
   searchPost(event: AutoCompleteCompleteEvent) {
+
     const input = new PostQueryDto();
 
-    input.search = event.query;
     input.tenantId = AppConst.tenantDefaultId;
 
     input.criterias = [
@@ -139,37 +102,17 @@ export class SectionSearchComponent implements OnInit {
         propertyName: 'jobStatus',
         operation: 0,
         value: 'DEFAULT',
-      }),
+      })
     ];
 
-    if (this.filter.khuVuc) {
+    if (event.query) {
       input.criterias.push(
         new ICriteriaRequestDto({
-          propertyName: 'location',
-          operation: 0,
-          value: this.filter.khuVuc,
-        })
-      );
-    }
-
-    if (this.filter.kyNang) {
-      input.criterias.push(
-        new ICriteriaRequestDto({
-          propertyName: 'jobLevel',
+          propertyName: 'title',
           operation: 6,
-          value: JSON.stringify(this.filter.kyNang),
+          value: event.query,
         })
-      );
-    }
-
-    if (this.filter.hinhThucLamViec) {
-      input.criterias.push(
-        new ICriteriaRequestDto({
-          propertyName: 'typeJobPost',
-          operation: 6,
-          value: JSON.stringify(this.filter.hinhThucLamViec),
-        })
-      );
+      )
     }
 
     this.jobPostInfoServiceProxy.getAll(input).subscribe((data) => {

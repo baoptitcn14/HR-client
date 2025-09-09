@@ -1,18 +1,15 @@
 import { Component, DestroyRef, inject, Input, OnInit } from '@angular/core';
 import {
-  CategoryInfoServiceProxy,
   CategoryOutputDto,
-  CategoryQueryDto,
-  ICriteriaRequestDto,
   JobPostOutputDto,
 } from '../../service-proxies/sys-service-proxies';
 import { CommonModule, DatePipe } from '@angular/common';
 import { TagModule } from 'primeng/tag';
-import { forkJoin } from 'rxjs';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DividerModule } from 'primeng/divider';
 import { SkeletonModule } from 'primeng/skeleton';
 import { RouterModule } from '@angular/router';
+import { CategoriesService } from '../../../core/services/categories.service';
+import { NumberSuffixCurrencyPipe } from '../../../core/pipes/number-suffix-currency.pipe';
 
 @Component({
   selector: 'app-ds-viec-lam',
@@ -24,13 +21,14 @@ import { RouterModule } from '@angular/router';
     DividerModule,
     SkeletonModule,
     RouterModule,
+    NumberSuffixCurrencyPipe
   ],
   templateUrl: './ds-viec-lam.component.html',
   styleUrl: './ds-viec-lam.component.scss',
 })
 export class DsViecLamComponent implements OnInit {
   // inject region
-  private categoryInfoService = inject(CategoryInfoServiceProxy);
+  private categoriesService = inject(CategoriesService);
 
   //state loading
   isLoading = true;
@@ -38,59 +36,29 @@ export class DsViecLamComponent implements OnInit {
   // declare region
   @Input() viecLams: IDsViecLam[] = [];
 
-  private destroyRef = inject(DestroyRef);
-
   ngOnInit(): void {
-    forkJoin([this.getLocations(), this.getTrinhDos()])
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(([khuVucs, trinhDos]) => {
-        this.viecLams.forEach((viecLam) => {
-          if (viecLam.jobLevel)
-            viecLam._kyNangsOpenJson = trinhDos.filter((trinhDo) =>
-              viecLam.jobLevel!.includes(trinhDo.id!)
-            );
-
-          viecLam._khuVucName =
-            khuVucs.find((khuVuc) => khuVuc.id == viecLam.location)?.name || '';
-
-          viecLam._tagsOpenJson = viecLam.tags ? JSON.parse(viecLam.tags) : [];
-
-        });
-
-        this.isLoading = false;
-      });
+    this.loadData();
   }
 
-  private getLocations() {
-    const input = new CategoryQueryDto();
+  async loadData() {
 
-    input.criterias = [
-      new ICriteriaRequestDto({
-        propertyName: 'groupCode',
-        operation: 0,
-        value: 'ADDRESS',
-      }),
-    ];
+    const khuVucs = await this.categoriesService.getDataCategory('ADDRESS', 1);
+    const trinhDos = await this.categoriesService.getDataCategory('SKILL-LEVEL', 1);
 
-    input.sorting = 'hashCode asc';
+    this.viecLams.forEach((viecLam) => {
+      if (viecLam.jobLevel)
+        viecLam._kyNangsOpenJson = trinhDos.filter((trinhDo) =>
+          viecLam.jobLevel!.includes(trinhDo.id!)
+        );
 
-    return this.categoryInfoService.getList(input);
-  }
+      viecLam._khuVucName =
+        khuVucs.find((khuVuc) => khuVuc.id == viecLam.location)?.name || '';
 
-  private getTrinhDos() {
-    const input = new CategoryQueryDto();
+      viecLam._tagsOpenJson = viecLam.tags ? JSON.parse(viecLam.tags) : [];
 
-    input.criterias = [
-      new ICriteriaRequestDto({
-        propertyName: 'groupCode',
-        operation: 0,
-        value: 'SKILL-LEVEL',
-      }),
-    ];
+    });
 
-    input.sorting = 'hashCode asc';
-
-    return this.categoryInfoService.getList(input);
+    this.isLoading = false;
   }
 }
 

@@ -1,60 +1,82 @@
 <section class="ds-viec-lam row row-gap-2">
   <div class="col-12 col-md-6 col-xl-4 " *ngFor="let viecLam of viecLams">
-    <a class="viec-lam d-flex  gap-1 rounded shadow-sm" [routerLink]="['/viec-lam', viecLam.id]">
-      <!-- logo company -->
-      <div class="viec-lam-logo-cty">
-        <img src="https://placehold.co/80" alt="Logo" />
-      </div>
+    <div class="viec-lam d-flex flex-column gap-1 rounded shadow-sm p-3">
+      <div class="viec-lam-thong-tin d-flex gap-2">
+        <!-- logo company -->
+        <div class="viec-lam-logo-cty">
+          <img src="https://placehold.co/60" alt="Logo" />
+        </div>
 
-      <!-- info job -->
+        <div class="d-flex flex-column gap-2">
 
-      <div class="viec-lam-thong-tin d-flex flex-column gap-2 p-3">
-        <h3 class="fw-bold text-primary text-uppercase m-0">
-          {{ viecLam.title }}
-        </h3>
-        <div class="text-muted text-uppercase">{{ viecLam.companyName }}</div>
+          <!-- title -->
+          <a class="text-decoration-none" [routerLink]="['/job', viecLam.id]">
+            <h3 class="fw-bold title text-primary text-uppercase m-0">
+              {{ viecLam.title }}
+            </h3>
+          </a>
 
-        <!-- mức lương | khu vực -->
-        <div class="d-flex gap-2 align-items-md-center flex-column flex-md-row">
-          <span class="fw-bold">{{ viecLam.salaryMin | number }} - {{ viecLam.salaryMax | number }} đ
-          </span>
-          <span class="text-muted d-flex gap-2 align-items-center">
-            | {{ viecLam._khuVucName }}
+          <!-- company -->
+          <a [routerLink]="['/job', viecLam.id]" class="company text-decoration-none text-uppercase" 
+          title="{{ viecLam.companyName }}"
+          >
+            <h3 class="company m-0">
+              {{ viecLam.companyName }}
+            </h3>
+          </a>
 
-            <ng-container *ngIf="isLoading && viecLam.location">
+          <!-- mức lương | khu vực -->
+          <div class="d-flex gap-2 align-items-md-center flex-column flex-md-row">
+            <span class="fw-bold fs-6" >{{ viecLam.salaryMin | numberSuffixCurrency }} - {{ viecLam.salaryMax |
+              numberSuffixCurrency }}
+            </span>
+            <span class="text-muted d-flex gap-2 align-items-center">
+              | {{ viecLam._khuVucName }}
+
+              <ng-container *ngIf="isLoading && viecLam.location">
+                <p-skeleton width="10rem" borderRadius="16px" />
+              </ng-container>
+            </span>
+          </div>
+
+          <!-- thời gian cập nhật | kỹ năng-->
+          <div class="d-flex gap-2 align-items-center">
+            <span class="text-muted align-items-center d-flex gap-2 date">
+              Cập nhật:
+              {{
+              viecLam.lastModificationTime
+              ? (viecLam.lastModificationTime | date : "dd/MM/yyyy")
+              : (viecLam.creationTime | date : "dd/MM/yyyy")
+              }}
+
+            </span>
+
+            <ng-container *ngIf="isLoading && viecLam.jobLevel">
+              <p-skeleton width="10rem" styleClass="mr-2" borderRadius="16px" />
               <p-skeleton width="10rem" borderRadius="16px" />
             </ng-container>
-          </span>
+          </div>
         </div>
+      </div>
+      <!-- info job -->
 
-        <!-- thời gian cập nhật | kỹ năng-->
-        <div class="d-flex gap-2 align-items-center">
-          <span class="text-muted align-items-center d-flex gap-2">
-            Cập nhật:
-            {{
-            viecLam.lastModificationTime
-            ? (viecLam.lastModificationTime | date : "dd/MM/yyyy")
-            : (viecLam.creationTime | date : "dd/MM/yyyy")
-            }}
+      <div class="viec-lam-thong-tin d-flex flex-column gap-2">
 
-          </span>
-
-          <ng-container *ngIf="isLoading && viecLam.jobLevel">
-            <p-skeleton width="10rem" styleClass="mr-2" borderRadius="16px" />
-            <p-skeleton width="10rem" borderRadius="16px" />
-          </ng-container>
-        </div>
 
         <!-- divider -->
         <p-divider type="solid" [styleClass]="'m-1'" />
 
         <!-- tags -->
-        <div class="d-flex flex-wrap gap-2 align-items-center">
+        <div class="d-flex gap-2 align-items-center" style="width: 100%; white-space: nowrap; overflow: auto;">
           @for (tag of viecLam._tagsOpenJson; track tag) {
-          <p-tag severity="secondary" value="{{ tag }}" [rounded]="true" />
+          <a href="http://">
+            <p-tag severity="secondary" value="{{ tag }}" [rounded]="true" />
+          </a>
           }
           @for (kyNang of viecLam._kyNangsOpenJson; track kyNang.id) {
-          <p-tag severity="info" value="{{ kyNang.name }}" [rounded]="true" />
+          <a href="http://">
+            <p-tag severity="info" value="{{ kyNang.name }}" [rounded]="true" />
+          </a>
           }
 
           <ng-container *ngIf="isLoading && viecLam.tags">
@@ -63,6 +85,6 @@
           </ng-container>
         </div>
       </div>
-    </a>
+    </div>
   </div>
 </section>

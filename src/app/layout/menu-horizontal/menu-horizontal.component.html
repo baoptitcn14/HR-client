@@ -1,12 +1,6 @@
-<p-menubar
-  [model]="menus"
-  [id]="'menu-horizontal'"
-  [classList]="'shadow'"
-  [style]="{ borderRadius: '0',  backgroundColor: 'var(--surface-700)',
-    color: 'var(--surface-700-text)', }"
->
+<p-menubar [model]="menus" [id]="'menu-horizontal'" trackElementInViewport (inViewportChange)="inViewportChange($event)"
+  [classList]="menuClass" [style]="{ color: 'var(--surface-700-text)'}">
   <!-- <ng-template pTemplate="item" let-item>
     <li class="p-menuitem"><i class="{{ item.icon }}"></i> {{ item.label }}</li>
   </ng-template> -->
 </p-menubar>
-<!-- #2f445b -->

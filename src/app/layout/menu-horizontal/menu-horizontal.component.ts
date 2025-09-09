@@ -8,18 +8,17 @@ import {
   ICriteriaRequestDto,
   MenuQueryDto,
 } from '../../shared/service-proxies/sys-service-proxies';
+import { TrackElementInViewportDirective } from '../../core/directives/track-element-in-viewport.directive';
 
 @Component({
   selector: 'app-menu-horizontal',
   standalone: true,
-  imports: [MenubarModule, CommonModule],
+  imports: [MenubarModule, CommonModule, TrackElementInViewportDirective],
   templateUrl: './menu-horizontal.component.html',
   styleUrl: './menu-horizontal.component.scss',
 })
 export class MenuHorizontalComponent implements OnInit {
-  ngOnInit(): void {
-    // this.gets();
-  }
+
   apiDataService = inject(MenuInfoServiceProxy);
   cookieService = inject(CookieService);
 
@@ -28,14 +27,30 @@ export class MenuHorizontalComponent implements OnInit {
       label: 'Trang chủ',
       icon: 'pi pi-home',
       routerLink: '/home',
+    },
+    {
+      label: 'Việc làm',
+      icon: 'pi pi-briefcase',
+      routerLink: '/jobs',
     }
   ];
+
+  menuClass = 'shadow';
+
+  ngOnInit(): void {
+    // this.gets();
+  }
 
   gets() {
     this.loadMenuHr().subscribe((data) => {
       this.menus = this.init(data);
     });
   }
+
+  inViewportChange(isInViewport: any) {
+    this.menuClass = isInViewport ? ' shadow' : 'shadow fixed';
+  }
+
   private loadMenuHr() {
     return this.apiDataService.getList(
       MenuQueryDto.fromJS({

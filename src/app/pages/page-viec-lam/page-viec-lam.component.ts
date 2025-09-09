@@ -24,21 +24,23 @@ import { DialogService } from 'primeng/dynamicdialog';
 import { IDsViecLam } from '../../shared/components/ds-viec-lam/ds-viec-lam.component';
 import { AppConst } from '../../shared/app-const';
 import { TrackElementInViewportDirective } from '../../core/directives/track-element-in-viewport.directive';
+import { CategoriesService } from '../../core/services/categories.service';
 
 @Component({
-  selector: 'app-viec-lam',
+  selector: 'app-page-viec-lam',
   standalone: true,
   imports: [CommonModule, ButtonModule, DatePipe, TagModule, TrackElementInViewportDirective],
-  templateUrl: './viec-lam.component.html',
-  styleUrl: './viec-lam.component.scss',
+  templateUrl: './page-viec-lam.component.html',
+  styleUrl: './page-viec-lam.component.scss',
 })
-export class ViecLamComponent implements OnInit {
+export class PageViecLamComponent implements OnInit {
   //inject region
   private activatedRoute = inject(ActivatedRoute);
   private jobPostInfoService = inject(JobPostInfoServiceProxy);
   private categoryInfoService = inject(CategoryInfoServiceProxy);
   private dialogService = inject(DialogService);
   private jobPostFieldService = inject(JobPostFieldInfoServiceProxy);
+  private categoriesService = inject(CategoriesService);
 
   //declare region
   tinTuyenDung?: IDsViecLam;
@@ -48,11 +50,11 @@ export class ViecLamComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.activatedRoute.snapshot.params['id']) {
-      forkJoin([this.getViecLam(), this.getLocations(), this.getTrinhDos()])
+      forkJoin([this.getViecLam()])
         .pipe(takeUntilDestroyed(this.destroyRef))
-        .subscribe(([viecLam, khuVucs, trinhDos]) => {
+        .subscribe(([viecLam]) => {
           this.tinTuyenDung = viecLam as IDsViecLam;
-          this.xuLyDuLieuViecLam(trinhDos, khuVucs);
+          this.xuLyDuLieuViecLam();
         });
     }
   }
@@ -72,23 +74,6 @@ export class ViecLamComponent implements OnInit {
 
     return this.categoryInfoService.getList(input);
   }
-
-  private getTrinhDos() {
-    const input = new CategoryQueryDto();
-
-    input.criterias = [
-      new ICriteriaRequestDto({
-        propertyName: 'groupCode',
-        operation: 0,
-        value: 'SKILL-LEVEL',
-      }),
-    ];
-
-    input.sorting = 'hashCode asc';
-
-    return this.categoryInfoService.getList(input);
-  }
-
 
   onInViewportChange(event: boolean) {
     this.isButtonApplyOutOfViewport = !event;
@@ -135,11 +120,11 @@ export class ViecLamComponent implements OnInit {
     return this.jobPostFieldService.getList(input);
   }
 
-  private xuLyDuLieuViecLam(
-    trinhDos: CategoryOutputDto[],
-    khuVucs: CategoryOutputDto[]
-  ) {
+  private async xuLyDuLieuViecLam() {
     if (!this.tinTuyenDung) return;
+
+    const khuVucs = await this.categoriesService.getDataCategory('ADDRESS', 1);
+    const trinhDos = await this.categoriesService.getDataCategory('SKILL-LEVEL', 1);
 
     this.tinTuyenDung = {
       ...this.tinTuyenDung,

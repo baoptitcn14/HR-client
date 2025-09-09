@@ -9,7 +9,7 @@
   </ng-template>
 
   <ng-template pTemplate="end">
-    <div class="d-flex align-items-center gap-2">
+    <div class="d-flex align-items-center gap-3 gap-md-2">
       @if(appSessionService.userId) {
       <ng-container *ngTemplateOutlet="hasLogin"></ng-container>
       }@else {

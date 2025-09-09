@@ -51,7 +51,7 @@
         }
     }
 
-    @media screen and (min-width: 1024px) {
+    @media screen and (min-width: 992px) {
         #search-section {
             padding: 2.5rem;
 
@@ -61,7 +61,23 @@
             }
 
             .search-section-content {
-                width: 60%;
+                width: 80%;
+            }
+        }
+
+    }
+
+    @media screen and (min-width: 1200px) {
+        #search-section {
+            padding: 2.5rem;
+
+            .p-autocomplete-input.p-inputtext {
+                height: 4rem;
+                padding-right: 120px;
+            }
+
+            .search-section-content {
+                width: 70%;
             }
         }
 

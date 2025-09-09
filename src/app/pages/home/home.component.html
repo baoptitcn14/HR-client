@@ -1,4 +1,4 @@
-<app-section-search></app-section-search>
+<app-section-search (onSearchEvent)="onSearch($event)"></app-section-search>
 <div [style]="{ background: 'var(--bluegray-50)' }">
   <div class="container py-5">
     <app-ds-viec-lam [viecLams]="jobPosts"></app-ds-viec-lam>

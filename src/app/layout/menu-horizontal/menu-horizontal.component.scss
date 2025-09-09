@@ -1,26 +1,100 @@
 ::ng-deep {
     app-menu-horizontal {
 
-        position: sticky;
-        top: 0;
+        // position: sticky;
+        // top: 0;
         z-index: 1000;
+
+        .fixed {
+            .p-menubar {
+                position: fixed;
+            }
+        }
+
 
         .p-menubar {
             border: none;
+            border-radius: 0px;
+            background: rgba(255, 255, 255, 1);
+            // backdrop-filter: blur(6px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            top: 0;
+            left: 0;
+            width: 100%;
+            transition: all 0.3s ease-in-out;
+
         }
 
         p-menubarsub {
             width: 100%;
-            #menu-horizontal {
-                justify-content: center;
 
-                .p-menuitem-link {
-                    &.p-menuitem-link-active {
-                        color: #4b5563;
-                        background: #e9f0fd;
-                        border-radius: 6px;
+            #menu-horizontal {
+                justify-content: start;
+                max-width: 960px;
+                margin: auto;
+                
+                .p-menuitem-content {
+
+                    &:hover {
+                        background-color: transparent;
+                        background: none;
                     }
                 }
+
+                .p-menuitem-link {
+
+                    position: relative;
+
+
+                    &:before {
+
+                        position: absolute;
+                        content: "";
+                        height: 2px;
+                        right: 50%;
+                        width: 0%;
+                        transition: all 0.3s ease-in-out;
+                        background: #053285;
+                        bottom: 0;
+                        border-radius: 4px 0 0 4px;
+                        opacity: 0;
+
+                    }
+
+                    &:after {
+
+                        position: absolute;
+                        content: "";
+                        height: 2px;
+                        left: 50%;
+                        width: 0%;
+                        transition: all 0.3s ease-in-out;
+                        background: #053285;
+                        bottom: 0;
+                        border-radius: 0 4px 4px 0;
+                        opacity: 0;
+                    }
+
+
+                    &:hover {
+
+                        &:before,
+                        &:after {
+                            width: 48%;
+                            opacity: 1;
+                        }
+                    }
+
+                    &.p-menuitem-link-active {
+
+                        &:before,
+                        &:after {
+                            width: 48%;
+                            opacity: 1;
+                        }
+                    }
+                }
+
                 .p-menuitem-icon {
                     font-weight: bold;
                 }
