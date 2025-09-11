@@ -49,17 +49,9 @@ export class TopComponent implements OnInit {
       routerLink: '/user-profile',
     },
     {
-      label: 'Danh sách ứng dụng',
-      icon: 'pi pi-fw pi-list',
-      routerLink: '/join-application',
-    },
-    {
-      label: 'Danh sách công ty',
-      icon: 'pi pi-fw pi-building',
-      routerLink: '/join-tenant',
-    },
-    {
-      separator: true,
+      label: 'Tạo mới CV',
+      icon: 'pi pi-fw pi-info',
+      routerLink: '/create-cv',
     },
     {
       label: 'Thoát',
@@ -82,7 +74,7 @@ export class TopComponent implements OnInit {
 
   private mapDataListTenant() {
 
-    this.listTenant = this.appTenantService.listTeantUser ?this.appTenantService.listTeantUser.map((x) => ({
+    this.listTenant = this.appTenantService.listTeantUser ? this.appTenantService.listTeantUser.map((x) => ({
       label: x.name,
       icon: 'pi pi-building',
       command: () => this.appTenantService.onChangeTenant(x),

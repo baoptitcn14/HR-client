@@ -33,6 +33,7 @@ import { AppSessionService } from '../../../shared/session/app-session.service';
 import { UtilitiesService } from '../../../shared/services/utilities.service';
 import { v4 as uuidv4 } from 'uuid';
 import { CalendarModule } from 'primeng/calendar';
+import { DEVICES, IThanhPhan } from '../../../shared/components/create-manual-form/create-manual-form.component';
 
 @Component({
   selector: 'app-ung-tuyen-dialog',
@@ -64,7 +65,6 @@ export class UngTuyenDialogComponent implements OnInit {
   private jobApplicationServiceProxy = inject(JobApplicationServiceProxy);
   private ref: DynamicDialogRef = inject(DynamicDialogRef);
   private messageService = inject(MessageService);
-  private utilitiesService = inject(UtilitiesService);
 
   // declare region
   emailPattern = AppConst.emailPattern;
@@ -186,25 +186,6 @@ export class UngTuyenDialogComponent implements OnInit {
   }
 }
 
-export interface IThanhPhan extends JobFieldOutputDto {
-  _index?: number;
-  _listChild?: IThanhPhan[];
-  _key?: string;
-  _isSelected?: boolean;
-  _css: ICss;
-  _groupId?: string;
-  _cssClass?: string;
-  _listValueOptionOpenJSON?: string[];
-  _listRelationOpenJSON?: string[];
-  _value: any;
-  // isAllowDuplicate?: boolean;
-  // placeholder?: string;
-  // isSearch?: boolean; // dropdown
-  // acceptFileExtensions?: string; // .jpg,.png,.pdf,.doc,.xlsx
-  maxFileSize?: number;
-  // multiple?: boolean;
-}
-
 export interface ICss {
   responsive: {
     desktop: number;
@@ -228,27 +209,6 @@ export interface ICss {
   height: number;
   [key: string]: any;
 }
-
-export const DEVICES = {
-  DESKTOP: 'desktop',
-  TABLET: 'tablet',
-  MOBILE: 'mobile',
-};
-
-export const LIST_DEVICE = [
-  {
-    value: DEVICES.DESKTOP,
-    icon: 'pi pi-desktop',
-  },
-  {
-    value: DEVICES.TABLET,
-    icon: 'pi pi-tablet',
-  },
-  {
-    value: DEVICES.MOBILE,
-    icon: 'pi pi-mobile',
-  },
-];
 
 export const STATUS_UNGTUYEN = {
   PENDING: 'pending',

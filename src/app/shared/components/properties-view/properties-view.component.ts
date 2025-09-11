@@ -11,7 +11,6 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 import { ButtonModule } from 'primeng/button';
 import { ColorPickerModule } from 'primeng/colorpicker';
 import { DropdownModule } from 'primeng/dropdown';
-import { DEVICES, IThanhPhan } from '../../../pages/mau-tieu-chi/mau-tieu-chi';
 import { ChipsModule } from 'primeng/chips';
 import { DialogModule } from 'primeng/dialog';
 import { PrimeIconsComponent } from '../prime-icons/prime-icons.component';
@@ -20,6 +19,7 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { FileUploadModule } from 'primeng/fileupload';
+import { DEVICES, IThanhPhan } from '../create-manual-form/create-manual-form.component';
 
 @Component({
   selector: 'app-properties-view',

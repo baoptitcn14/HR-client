@@ -3770,6 +3770,294 @@ export class IdsServiceProxy {
 }
 
 @Injectable()
+export class InterestServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_SYS_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl ?? "";
+    }
+
+    /**
+     * @param body (optional) 
+     * @return OK
+     */
+    create(body: InterestInputDto | undefined): Observable<InterestOutputDto> {
+        let url_ = this.baseUrl + "/api/services/sys/Interest/Create";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json-patch+json",
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processCreate(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processCreate(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<InterestOutputDto>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<InterestOutputDto>;
+        }));
+    }
+
+    protected processCreate(response: HttpResponseBase): Observable<InterestOutputDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = InterestOutputDto.fromJS(resultData200.result);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @param body (optional) 
+     * @return OK
+     */
+    update(body: InterestInputDto | undefined): Observable<InterestOutputDto> {
+        let url_ = this.baseUrl + "/api/services/sys/Interest/Update";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json-patch+json",
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processUpdate(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processUpdate(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<InterestOutputDto>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<InterestOutputDto>;
+        }));
+    }
+
+    protected processUpdate(response: HttpResponseBase): Observable<InterestOutputDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = InterestOutputDto.fromJS(resultData200.result);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @param body (optional) 
+     * @return OK
+     */
+    delete(body: ViewDto | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/sys/Interest/Delete";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json-patch+json",
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processDelete(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processDelete(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processDelete(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return _observableOf(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @param body (optional) 
+     * @return OK
+     */
+    get(body: ViewDto | undefined): Observable<InterestOutputDto> {
+        let url_ = this.baseUrl + "/api/services/sys/Interest/Get";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json-patch+json",
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGet(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGet(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<InterestOutputDto>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<InterestOutputDto>;
+        }));
+    }
+
+    protected processGet(response: HttpResponseBase): Observable<InterestOutputDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = InterestOutputDto.fromJS(resultData200.result);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @param body (optional) 
+     * @return OK
+     */
+    getAll(body: InterestQueryDto | undefined): Observable<InterestOutputDtoPagedResultDto> {
+        let url_ = this.baseUrl + "/api/services/sys/Interest/GetAll";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json-patch+json",
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetAll(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetAll(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<InterestOutputDtoPagedResultDto>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<InterestOutputDtoPagedResultDto>;
+        }));
+    }
+
+    protected processGetAll(response: HttpResponseBase): Observable<InterestOutputDtoPagedResultDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = InterestOutputDtoPagedResultDto.fromJS(resultData200.result);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+}
+
+@Injectable()
 export class InterviewScheduleServiceProxy {
     private http: HttpClient;
     private baseUrl: string;
@@ -5682,7 +5970,7 @@ export class JobPostInfoServiceProxy {
      * @param body (optional) 
      * @return OK
      */
-    get(body: JobPostQueryDto | undefined): Observable<JobPostOutputDto> {
+    get(body: ViewDto | undefined): Observable<JobPostOutputDto> {
         let url_ = this.baseUrl + "/api/services/sys/JobPostInfo/Get";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -17396,6 +17684,7 @@ export class HrCompanyOutputDto implements IHrCompanyOutputDto {
     website?: string | undefined;
     logoUrl?: string | undefined;
     description?: string | undefined;
+    numberInterest?: number;
 
     constructor(data?: IHrCompanyOutputDto) {
         if (data) {
@@ -17454,6 +17743,7 @@ export class HrCompanyOutputDto implements IHrCompanyOutputDto {
             this.website = _data["website"];
             this.logoUrl = _data["logoUrl"];
             this.description = _data["description"];
+            this.numberInterest = _data["numberInterest"];
         }
     }
 
@@ -17512,6 +17802,7 @@ export class HrCompanyOutputDto implements IHrCompanyOutputDto {
         data["website"] = this.website;
         data["logoUrl"] = this.logoUrl;
         data["description"] = this.description;
+        data["numberInterest"] = this.numberInterest;
         return data;
     }
 }
@@ -17551,6 +17842,7 @@ export interface IHrCompanyOutputDto {
     website?: string | undefined;
     logoUrl?: string | undefined;
     description?: string | undefined;
+    numberInterest?: number;
 }
 
 export class HrCompanyOutputDtoPagedResultDto implements IHrCompanyOutputDtoPagedResultDto {
@@ -17955,6 +18247,510 @@ export interface IIReferenceDto {
     tenantId?: number | undefined;
     entityId?: string | undefined;
     keyId?: string | undefined;
+}
+
+export class InterestInputDto implements IInterestInputDto {
+    id?: string | undefined;
+    tenantId?: number | undefined;
+    code?: string | undefined;
+    name?: string | undefined;
+    status?: string | undefined;
+    statusName?: string | undefined;
+    keyData?: string | undefined;
+    tags?: string | undefined;
+    clientFiles?: string | undefined;
+    files?: string | undefined;
+    attributes?: string | undefined;
+    extension?: string | undefined;
+    creatorUserId?: string | undefined;
+    creationTime?: Date;
+    creationDateTime?: number;
+    references?: IReferenceDto[] | undefined;
+    keyValues?: IKeyValueDto[] | undefined;
+    languageValues?: ILanguageValueDto[] | undefined;
+    option?: string | undefined;
+    extValue?: string | undefined;
+    lastModifierUserId?: string | undefined;
+    lastModificationTime?: Date;
+    lastModificationDateTime?: number;
+    fromUserId?: string | undefined;
+    typeFromUser?: string | undefined;
+    entityId?: string | undefined;
+    typeEntity?: string | undefined;
+    typeInterest?: string | undefined;
+
+    constructor(data?: IInterestInputDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (this as any)[property] = (data as any)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.tenantId = _data["tenantId"];
+            this.code = _data["code"];
+            this.name = _data["name"];
+            this.status = _data["status"];
+            this.statusName = _data["statusName"];
+            this.keyData = _data["keyData"];
+            this.tags = _data["tags"];
+            this.clientFiles = _data["clientFiles"];
+            this.files = _data["files"];
+            this.attributes = _data["attributes"];
+            this.extension = _data["extension"];
+            this.creatorUserId = _data["creatorUserId"];
+            this.creationTime = _data["creationTime"] ? new Date(_data["creationTime"].toString()) : undefined as any;
+            this.creationDateTime = _data["creationDateTime"];
+            if (Array.isArray(_data["references"])) {
+                this.references = [] as any;
+                for (let item of _data["references"])
+                    this.references!.push(IReferenceDto.fromJS(item));
+            }
+            if (Array.isArray(_data["keyValues"])) {
+                this.keyValues = [] as any;
+                for (let item of _data["keyValues"])
+                    this.keyValues!.push(IKeyValueDto.fromJS(item));
+            }
+            if (Array.isArray(_data["languageValues"])) {
+                this.languageValues = [] as any;
+                for (let item of _data["languageValues"])
+                    this.languageValues!.push(ILanguageValueDto.fromJS(item));
+            }
+            this.option = _data["option"];
+            this.extValue = _data["extValue"];
+            this.lastModifierUserId = _data["lastModifierUserId"];
+            this.lastModificationTime = _data["lastModificationTime"] ? new Date(_data["lastModificationTime"].toString()) : undefined as any;
+            this.lastModificationDateTime = _data["lastModificationDateTime"];
+            this.fromUserId = _data["fromUserId"];
+            this.typeFromUser = _data["typeFromUser"];
+            this.entityId = _data["entityId"];
+            this.typeEntity = _data["typeEntity"];
+            this.typeInterest = _data["typeInterest"];
+        }
+    }
+
+    static fromJS(data: any): InterestInputDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new InterestInputDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["tenantId"] = this.tenantId;
+        data["code"] = this.code;
+        data["name"] = this.name;
+        data["status"] = this.status;
+        data["statusName"] = this.statusName;
+        data["keyData"] = this.keyData;
+        data["tags"] = this.tags;
+        data["clientFiles"] = this.clientFiles;
+        data["files"] = this.files;
+        data["attributes"] = this.attributes;
+        data["extension"] = this.extension;
+        data["creatorUserId"] = this.creatorUserId;
+        data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : undefined as any;
+        data["creationDateTime"] = this.creationDateTime;
+        if (Array.isArray(this.references)) {
+            data["references"] = [];
+            for (let item of this.references)
+                data["references"].push(item ? item.toJSON() : undefined as any);
+        }
+        if (Array.isArray(this.keyValues)) {
+            data["keyValues"] = [];
+            for (let item of this.keyValues)
+                data["keyValues"].push(item ? item.toJSON() : undefined as any);
+        }
+        if (Array.isArray(this.languageValues)) {
+            data["languageValues"] = [];
+            for (let item of this.languageValues)
+                data["languageValues"].push(item ? item.toJSON() : undefined as any);
+        }
+        data["option"] = this.option;
+        data["extValue"] = this.extValue;
+        data["lastModifierUserId"] = this.lastModifierUserId;
+        data["lastModificationTime"] = this.lastModificationTime ? this.lastModificationTime.toISOString() : undefined as any;
+        data["lastModificationDateTime"] = this.lastModificationDateTime;
+        data["fromUserId"] = this.fromUserId;
+        data["typeFromUser"] = this.typeFromUser;
+        data["entityId"] = this.entityId;
+        data["typeEntity"] = this.typeEntity;
+        data["typeInterest"] = this.typeInterest;
+        return data;
+    }
+}
+
+export interface IInterestInputDto {
+    id?: string | undefined;
+    tenantId?: number | undefined;
+    code?: string | undefined;
+    name?: string | undefined;
+    status?: string | undefined;
+    statusName?: string | undefined;
+    keyData?: string | undefined;
+    tags?: string | undefined;
+    clientFiles?: string | undefined;
+    files?: string | undefined;
+    attributes?: string | undefined;
+    extension?: string | undefined;
+    creatorUserId?: string | undefined;
+    creationTime?: Date;
+    creationDateTime?: number;
+    references?: IReferenceDto[] | undefined;
+    keyValues?: IKeyValueDto[] | undefined;
+    languageValues?: ILanguageValueDto[] | undefined;
+    option?: string | undefined;
+    extValue?: string | undefined;
+    lastModifierUserId?: string | undefined;
+    lastModificationTime?: Date;
+    lastModificationDateTime?: number;
+    fromUserId?: string | undefined;
+    typeFromUser?: string | undefined;
+    entityId?: string | undefined;
+    typeEntity?: string | undefined;
+    typeInterest?: string | undefined;
+}
+
+export class InterestOutputDto implements IInterestOutputDto {
+    id?: string | undefined;
+    tenantId?: number | undefined;
+    code?: string | undefined;
+    name?: string | undefined;
+    status?: string | undefined;
+    statusName?: string | undefined;
+    keyData?: string | undefined;
+    tags?: string | undefined;
+    clientFiles?: string | undefined;
+    files?: string | undefined;
+    attributes?: string | undefined;
+    extension?: string | undefined;
+    creatorUserId?: string | undefined;
+    creationTime?: Date;
+    creationDateTime?: number;
+    references?: IReferenceDto[] | undefined;
+    keyValues?: IKeyValueDto[] | undefined;
+    languageValues?: ILanguageValueDto[] | undefined;
+    option?: string | undefined;
+    extValue?: string | undefined;
+    lastModifierUserId?: string | undefined;
+    lastModificationTime?: Date;
+    lastModificationDateTime?: number;
+    fromUserId?: string | undefined;
+    typeFromUser?: string | undefined;
+    entityId?: string | undefined;
+    typeEntity?: string | undefined;
+    typeInterest?: string | undefined;
+
+    constructor(data?: IInterestOutputDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (this as any)[property] = (data as any)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.tenantId = _data["tenantId"];
+            this.code = _data["code"];
+            this.name = _data["name"];
+            this.status = _data["status"];
+            this.statusName = _data["statusName"];
+            this.keyData = _data["keyData"];
+            this.tags = _data["tags"];
+            this.clientFiles = _data["clientFiles"];
+            this.files = _data["files"];
+            this.attributes = _data["attributes"];
+            this.extension = _data["extension"];
+            this.creatorUserId = _data["creatorUserId"];
+            this.creationTime = _data["creationTime"] ? new Date(_data["creationTime"].toString()) : undefined as any;
+            this.creationDateTime = _data["creationDateTime"];
+            if (Array.isArray(_data["references"])) {
+                this.references = [] as any;
+                for (let item of _data["references"])
+                    this.references!.push(IReferenceDto.fromJS(item));
+            }
+            if (Array.isArray(_data["keyValues"])) {
+                this.keyValues = [] as any;
+                for (let item of _data["keyValues"])
+                    this.keyValues!.push(IKeyValueDto.fromJS(item));
+            }
+            if (Array.isArray(_data["languageValues"])) {
+                this.languageValues = [] as any;
+                for (let item of _data["languageValues"])
+                    this.languageValues!.push(ILanguageValueDto.fromJS(item));
+            }
+            this.option = _data["option"];
+            this.extValue = _data["extValue"];
+            this.lastModifierUserId = _data["lastModifierUserId"];
+            this.lastModificationTime = _data["lastModificationTime"] ? new Date(_data["lastModificationTime"].toString()) : undefined as any;
+            this.lastModificationDateTime = _data["lastModificationDateTime"];
+            this.fromUserId = _data["fromUserId"];
+            this.typeFromUser = _data["typeFromUser"];
+            this.entityId = _data["entityId"];
+            this.typeEntity = _data["typeEntity"];
+            this.typeInterest = _data["typeInterest"];
+        }
+    }
+
+    static fromJS(data: any): InterestOutputDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new InterestOutputDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["tenantId"] = this.tenantId;
+        data["code"] = this.code;
+        data["name"] = this.name;
+        data["status"] = this.status;
+        data["statusName"] = this.statusName;
+        data["keyData"] = this.keyData;
+        data["tags"] = this.tags;
+        data["clientFiles"] = this.clientFiles;
+        data["files"] = this.files;
+        data["attributes"] = this.attributes;
+        data["extension"] = this.extension;
+        data["creatorUserId"] = this.creatorUserId;
+        data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : undefined as any;
+        data["creationDateTime"] = this.creationDateTime;
+        if (Array.isArray(this.references)) {
+            data["references"] = [];
+            for (let item of this.references)
+                data["references"].push(item ? item.toJSON() : undefined as any);
+        }
+        if (Array.isArray(this.keyValues)) {
+            data["keyValues"] = [];
+            for (let item of this.keyValues)
+                data["keyValues"].push(item ? item.toJSON() : undefined as any);
+        }
+        if (Array.isArray(this.languageValues)) {
+            data["languageValues"] = [];
+            for (let item of this.languageValues)
+                data["languageValues"].push(item ? item.toJSON() : undefined as any);
+        }
+        data["option"] = this.option;
+        data["extValue"] = this.extValue;
+        data["lastModifierUserId"] = this.lastModifierUserId;
+        data["lastModificationTime"] = this.lastModificationTime ? this.lastModificationTime.toISOString() : undefined as any;
+        data["lastModificationDateTime"] = this.lastModificationDateTime;
+        data["fromUserId"] = this.fromUserId;
+        data["typeFromUser"] = this.typeFromUser;
+        data["entityId"] = this.entityId;
+        data["typeEntity"] = this.typeEntity;
+        data["typeInterest"] = this.typeInterest;
+        return data;
+    }
+}
+
+export interface IInterestOutputDto {
+    id?: string | undefined;
+    tenantId?: number | undefined;
+    code?: string | undefined;
+    name?: string | undefined;
+    status?: string | undefined;
+    statusName?: string | undefined;
+    keyData?: string | undefined;
+    tags?: string | undefined;
+    clientFiles?: string | undefined;
+    files?: string | undefined;
+    attributes?: string | undefined;
+    extension?: string | undefined;
+    creatorUserId?: string | undefined;
+    creationTime?: Date;
+    creationDateTime?: number;
+    references?: IReferenceDto[] | undefined;
+    keyValues?: IKeyValueDto[] | undefined;
+    languageValues?: ILanguageValueDto[] | undefined;
+    option?: string | undefined;
+    extValue?: string | undefined;
+    lastModifierUserId?: string | undefined;
+    lastModificationTime?: Date;
+    lastModificationDateTime?: number;
+    fromUserId?: string | undefined;
+    typeFromUser?: string | undefined;
+    entityId?: string | undefined;
+    typeEntity?: string | undefined;
+    typeInterest?: string | undefined;
+}
+
+export class InterestOutputDtoPagedResultDto implements IInterestOutputDtoPagedResultDto {
+    items?: InterestOutputDto[] | undefined;
+    totalCount?: number;
+
+    constructor(data?: IInterestOutputDtoPagedResultDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (this as any)[property] = (data as any)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            if (Array.isArray(_data["items"])) {
+                this.items = [] as any;
+                for (let item of _data["items"])
+                    this.items!.push(InterestOutputDto.fromJS(item));
+            }
+            this.totalCount = _data["totalCount"];
+        }
+    }
+
+    static fromJS(data: any): InterestOutputDtoPagedResultDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new InterestOutputDtoPagedResultDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (Array.isArray(this.items)) {
+            data["items"] = [];
+            for (let item of this.items)
+                data["items"].push(item ? item.toJSON() : undefined as any);
+        }
+        data["totalCount"] = this.totalCount;
+        return data;
+    }
+}
+
+export interface IInterestOutputDtoPagedResultDto {
+    items?: InterestOutputDto[] | undefined;
+    totalCount?: number;
+}
+
+export class InterestQueryDto implements IInterestQueryDto {
+    maxResultCount?: number;
+    skipCount?: number;
+    sorting?: string | undefined;
+    criterias?: ICriteriaRequestDto[] | undefined;
+    id?: string | undefined;
+    view?: string | undefined;
+    useCache?: boolean;
+    tenantId?: number | undefined;
+    userId?: string | undefined;
+    language?: string | undefined;
+    code?: string | undefined;
+    option?: string | undefined;
+    search?: string | undefined;
+    status?: string | undefined;
+    from?: Date | undefined;
+    to?: Date | undefined;
+    keyValues?: QueryKeyValueDto[] | undefined;
+    cacheKey?: string | undefined;
+
+    constructor(data?: IInterestQueryDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (this as any)[property] = (data as any)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.maxResultCount = _data["maxResultCount"];
+            this.skipCount = _data["skipCount"];
+            this.sorting = _data["sorting"];
+            if (Array.isArray(_data["criterias"])) {
+                this.criterias = [] as any;
+                for (let item of _data["criterias"])
+                    this.criterias!.push(ICriteriaRequestDto.fromJS(item));
+            }
+            this.id = _data["id"];
+            this.view = _data["view"];
+            this.useCache = _data["useCache"];
+            this.tenantId = _data["tenantId"];
+            this.userId = _data["userId"];
+            this.language = _data["language"];
+            this.code = _data["code"];
+            this.option = _data["option"];
+            this.search = _data["search"];
+            this.status = _data["status"];
+            this.from = _data["from"] ? new Date(_data["from"].toString()) : undefined as any;
+            this.to = _data["to"] ? new Date(_data["to"].toString()) : undefined as any;
+            if (Array.isArray(_data["keyValues"])) {
+                this.keyValues = [] as any;
+                for (let item of _data["keyValues"])
+                    this.keyValues!.push(QueryKeyValueDto.fromJS(item));
+            }
+            this.cacheKey = _data["cacheKey"];
+        }
+    }
+
+    static fromJS(data: any): InterestQueryDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new InterestQueryDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["maxResultCount"] = this.maxResultCount;
+        data["skipCount"] = this.skipCount;
+        data["sorting"] = this.sorting;
+        if (Array.isArray(this.criterias)) {
+            data["criterias"] = [];
+            for (let item of this.criterias)
+                data["criterias"].push(item ? item.toJSON() : undefined as any);
+        }
+        data["id"] = this.id;
+        data["view"] = this.view;
+        data["useCache"] = this.useCache;
+        data["tenantId"] = this.tenantId;
+        data["userId"] = this.userId;
+        data["language"] = this.language;
+        data["code"] = this.code;
+        data["option"] = this.option;
+        data["search"] = this.search;
+        data["status"] = this.status;
+        data["from"] = this.from ? this.from.toISOString() : undefined as any;
+        data["to"] = this.to ? this.to.toISOString() : undefined as any;
+        if (Array.isArray(this.keyValues)) {
+            data["keyValues"] = [];
+            for (let item of this.keyValues)
+                data["keyValues"].push(item ? item.toJSON() : undefined as any);
+        }
+        data["cacheKey"] = this.cacheKey;
+        return data;
+    }
+}
+
+export interface IInterestQueryDto {
+    maxResultCount?: number;
+    skipCount?: number;
+    sorting?: string | undefined;
+    criterias?: ICriteriaRequestDto[] | undefined;
+    id?: string | undefined;
+    view?: string | undefined;
+    useCache?: boolean;
+    tenantId?: number | undefined;
+    userId?: string | undefined;
+    language?: string | undefined;
+    code?: string | undefined;
+    option?: string | undefined;
+    search?: string | undefined;
+    status?: string | undefined;
+    from?: Date | undefined;
+    to?: Date | undefined;
+    keyValues?: QueryKeyValueDto[] | undefined;
+    cacheKey?: string | undefined;
 }
 
 export class InterviewScheduleInputDto implements IInterviewScheduleInputDto {
@@ -21240,6 +22036,8 @@ export class JobPostOutputDto implements IJobPostOutputDto {
     numberJobApplicationNew?: number;
     numberSelection?: number;
     numberEvaluation?: number;
+    numberView?: number;
+    numberInterest?: number;
     postFileds?: JobPostFieldOutputDto[] | undefined;
 
     constructor(data?: IJobPostOutputDto) {
@@ -21331,6 +22129,8 @@ export class JobPostOutputDto implements IJobPostOutputDto {
             this.numberJobApplicationNew = _data["numberJobApplicationNew"];
             this.numberSelection = _data["numberSelection"];
             this.numberEvaluation = _data["numberEvaluation"];
+            this.numberView = _data["numberView"];
+            this.numberInterest = _data["numberInterest"];
             if (Array.isArray(_data["postFileds"])) {
                 this.postFileds = [] as any;
                 for (let item of _data["postFileds"])
@@ -21421,6 +22221,8 @@ export class JobPostOutputDto implements IJobPostOutputDto {
         data["numberJobApplicationNew"] = this.numberJobApplicationNew;
         data["numberSelection"] = this.numberSelection;
         data["numberEvaluation"] = this.numberEvaluation;
+        data["numberView"] = this.numberView;
+        data["numberInterest"] = this.numberInterest;
         if (Array.isArray(this.postFileds)) {
             data["postFileds"] = [];
             for (let item of this.postFileds)
@@ -21492,6 +22294,8 @@ export interface IJobPostOutputDto {
     numberJobApplicationNew?: number;
     numberSelection?: number;
     numberEvaluation?: number;
+    numberView?: number;
+    numberInterest?: number;
     postFileds?: JobPostFieldOutputDto[] | undefined;
 }
 
@@ -31645,6 +32449,7 @@ export class UserProfileOutputDto implements IUserProfileOutputDto {
     listValueJobField?: string | undefined;
     description?: string | undefined;
     note?: string | undefined;
+    numberInterest?: number;
 
     constructor(data?: IUserProfileOutputDto) {
         if (data) {
@@ -31709,6 +32514,7 @@ export class UserProfileOutputDto implements IUserProfileOutputDto {
             this.listValueJobField = _data["listValueJobField"];
             this.description = _data["description"];
             this.note = _data["note"];
+            this.numberInterest = _data["numberInterest"];
         }
     }
 
@@ -31773,6 +32579,7 @@ export class UserProfileOutputDto implements IUserProfileOutputDto {
         data["listValueJobField"] = this.listValueJobField;
         data["description"] = this.description;
         data["note"] = this.note;
+        data["numberInterest"] = this.numberInterest;
         return data;
     }
 }
@@ -31818,6 +32625,7 @@ export interface IUserProfileOutputDto {
     listValueJobField?: string | undefined;
     description?: string | undefined;
     note?: string | undefined;
+    numberInterest?: number;
 }
 
 export class UserProfileOutputDtoPagedResultDto implements IUserProfileOutputDtoPagedResultDto {

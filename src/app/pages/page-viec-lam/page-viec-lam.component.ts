@@ -17,14 +17,14 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { forkJoin } from 'rxjs';
 import { TagModule } from 'primeng/tag';
 import {
-  IThanhPhan,
   UngTuyenDialogComponent,
 } from './ung-tuyen-dialog/ung-tuyen-dialog.component';
 import { DialogService } from 'primeng/dynamicdialog';
-import { IDsViecLam } from '../../shared/components/ds-viec-lam/ds-viec-lam.component';
 import { AppConst } from '../../shared/app-const';
 import { TrackElementInViewportDirective } from '../../core/directives/track-element-in-viewport.directive';
 import { CategoriesService } from '../../core/services/categories.service';
+import { IDsViecLam } from '../../shared/components/viec-lam/viec-lam.component';
+import { IThanhPhan } from '../../shared/components/create-manual-form/create-manual-form.component';
 
 @Component({
   selector: 'app-page-viec-lam',

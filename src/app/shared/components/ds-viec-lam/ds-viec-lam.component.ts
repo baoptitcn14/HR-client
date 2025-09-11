@@ -1,4 +1,4 @@
-import { Component, DestroyRef, inject, Input, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import {
   CategoryOutputDto,
   JobPostOutputDto,
@@ -10,38 +10,34 @@ import { SkeletonModule } from 'primeng/skeleton';
 import { RouterModule } from '@angular/router';
 import { CategoriesService } from '../../../core/services/categories.service';
 import { NumberSuffixCurrencyPipe } from '../../../core/pipes/number-suffix-currency.pipe';
+import { IDsViecLam, ViecLamComponent } from '../viec-lam/viec-lam.component';
 
 @Component({
   selector: 'app-ds-viec-lam',
   standalone: true,
   imports: [
     CommonModule,
-    DatePipe,
-    TagModule,
-    DividerModule,
-    SkeletonModule,
-    RouterModule,
-    NumberSuffixCurrencyPipe
+    ViecLamComponent
   ],
   templateUrl: './ds-viec-lam.component.html',
   styleUrl: './ds-viec-lam.component.scss',
 })
-export class DsViecLamComponent implements OnInit {
+export class DsViecLamComponent implements OnChanges {
+
+
   // inject region
   private categoriesService = inject(CategoriesService);
 
-  //state loading
-  isLoading = true;
-
   // declare region
   @Input() viecLams: IDsViecLam[] = [];
+  isLoading = true;
 
-  ngOnInit(): void {
-    this.loadData();
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['viecLams'])
+      this.loadData();
   }
 
   async loadData() {
-
     const khuVucs = await this.categoriesService.getDataCategory('ADDRESS', 1);
     const trinhDos = await this.categoriesService.getDataCategory('SKILL-LEVEL', 1);
 
@@ -58,14 +54,8 @@ export class DsViecLamComponent implements OnInit {
 
     });
 
+
     this.isLoading = false;
   }
 }
 
-export interface IDsViecLam extends JobPostOutputDto {
-  _kyNangsOpenJson: CategoryOutputDto[];
-  _khuVucName: string;
-  _tagsOpenJson: string[];
-  _benefitsOpenJson: CategoryOutputDto[];
-  _quyenLoisOpenJson: CategoryOutputDto[];
-}

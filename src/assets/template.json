@@ -1,0 +1,87 @@
+[
+    {
+        "id": "string",
+        "name": "template",
+        "image": "string",
+        "industry": "",
+        "inputType": "template",
+        "css": "{\"template\":{\"font\":\"Roboto\",\"fontSize\":16,\"lineHeight\":1.5,\"themeColor\":\"24b35f\"}}"
+    },
+    {
+        "id": "row1",
+        "templateId": "string",
+        "name": "row 1",
+        "image": "string",
+        "industry": "",
+        "inputType": "row",
+        "fieldIndex": 0
+    },
+    {
+        "id": "row2",
+        "templateId": "string",
+        "name": "row 2",
+        "image": "string",
+        "industry": "",
+        "inputType": "row",
+        "fieldIndex": 1
+    },
+    {
+        "id": "row3",
+        "templateId": "string",
+        "name": "row 3",
+        "image": "string",
+        "industry": "",
+        "inputType": "row",
+        "fieldIndex": 2
+    },
+    {
+        "id": "col1",
+        "rowId": "row1",
+        "name": "col 1",
+        "image": "string",
+        "industry": "",
+        "inputType": "col",
+        "fieldIndex": 0,
+        "css": "{\"width\":50}"
+    },
+    {
+        "id": "col2",
+        "rowId": "row1",
+        "name": "col 2",
+        "image": "string",
+        "industry": "",
+        "inputType": "col",
+        "fieldIndex": 1,
+        "css": "{\"width\":50}"
+    },
+    {
+        "id": "col3",
+        "rowId": "row2",
+        "name": "col 3",
+        "image": "string",
+        "industry": "",
+        "inputType": "col",
+        "fieldIndex": 0,
+        "css": "{\"width\":100}"
+    },
+    {
+        "id": "col4",
+        "rowId": "row3",
+        "name": "col 4",
+        "image": "string",
+        "industry": "",
+        "inputType": "col",
+        "fieldIndex": 0,
+        "css": "{\"width\":50}"
+    },
+    {
+        "id": "col5",
+        "rowId": "row3",
+        "name": "col 5",
+        "image": "string",
+        "industry": "",
+        "inputType": "col",
+        "fieldIndex": 1,
+        "css": "{\"width\":50}"
+    }
+]

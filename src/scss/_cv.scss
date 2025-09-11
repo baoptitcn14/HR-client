@@ -1,0 +1,81 @@
+app-cv-group-toolbar,
+app-cv-input-toolbar {
+    display: none;
+    position: absolute;
+    top: -35px;
+    z-index: 1;
+    left: 5px;
+    background: #dedfdf;
+    padding: 0.5rem;
+    border-radius: 4px 4px 0 0;
+}
+
+app-cv-input-toolbar {
+    left: none;
+    right: 5px;
+}
+
+
+.cv-input {
+    input[type="text"] {
+        width: 100% !important;
+        border: none;
+
+        &:hover {
+            border: 1px dashed var(--surface-500);
+        }
+    }
+}
+
+.cv-group {
+    padding: 0.5rem;
+    position: relative;
+
+    &:hover {
+        border: 1px solid var(--surface-400);
+        border-radius: 4px;
+
+        app-cv-group-toolbar {
+            display: block;
+        }
+    }
+
+    &.selected {
+        border: 1px solid var(--surface-400);
+        border-radius: 4px;
+    }
+
+    &.cv-group-drag-preview {
+        position: relative;
+
+        input[type="text"] {
+            display: none;
+        }
+
+        &:before {
+            content: attr(code);
+            position: absolute;
+            z-index: 2;
+            top: 0;
+            left: 0;
+            text-align: center;
+            border: 1px solid var(--surface-400);
+            border-radius: 4px;
+            background-color: var(--primary-50);
+            width: 200px;
+            padding: 0.5rem 1rem;
+        }
+    }
+
+    .cv-element {
+
+        &:hover {
+            position: relative;
+
+            app-cv-input-toolbar {
+                display: block;
+            }
+        }
+    }
+
+}

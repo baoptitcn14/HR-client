@@ -7,14 +7,14 @@ import { InputTextModule } from 'primeng/inputtext';
 import { AppConst } from '../../app-const';
 import { CommonModule } from '@angular/common';
 import { CdkDrag, CdkDropList } from '@angular/cdk/drag-drop';
-import { IThanhPhan } from '../../../pages/mau-tieu-chi/mau-tieu-chi';
+import { IThanhPhan } from '../create-manual-form/create-manual-form.component';
 
 @Component({
-  selector: 'app-components',
+  selector: 'app-basic-components',
   standalone: true,
   imports: [CommonModule, IconFieldModule, InputIconModule, InputTextModule, CdkDrag, CdkDropList],
-  templateUrl: './components.component.html',
-  styleUrl: './components.component.scss'
+  templateUrl: './basic-components.component.html',
+  styleUrl: './basic-components.component.scss'
 })
 export class ComponentsComponent implements OnInit {
 

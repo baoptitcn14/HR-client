@@ -22,7 +22,7 @@ import { BehaviorSubject, filter } from 'rxjs';
 export class BreadcrumbsComponent implements OnInit {
   breadcrumbs = signal<MenuItem[]>([]);
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
   ngOnInit(): void {
     this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
@@ -30,8 +30,9 @@ export class BreadcrumbsComponent implements OnInit {
         // Construct the breadcrumb hierarchy
         const root = this.router.routerState.snapshot.root;
         const breadcrumbs: MenuItem[] = [
-          { routerLink: '/', label: 'Home', icon: 'pi pi-home me-2' },
+          { routerLink: '/', label: 'Trang chủ', icon: 'pi pi-home me-2' },
         ];
+
         this.addBreadcrumb(root, [], breadcrumbs);
 
         // Emit the new hierarchy

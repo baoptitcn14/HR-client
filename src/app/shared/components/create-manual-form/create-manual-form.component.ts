@@ -40,17 +40,13 @@ import { TreeSelectModule } from 'primeng/treeselect';
 import { AppConst } from '../../app-const';
 import {
   CategoryInfoServiceProxy,
-  JobFieldServiceProxy,
   CategoryQueryDto,
   ICriteriaRequestDto,
-  JobFieldInputDto,
   CategoryOutputDto,
   JobFieldOutputDto,
 } from '../../service-proxies/sys-service-proxies';
 import { UtilitiesService } from '../../services/utilities.service';
-import { ChonNganhNgheComponent } from '../chon-nganh-nghe/chon-nganh-nghe.component';
-import { ComponentsComponent } from '../components/components.component';
-import { PageHeadingComponent } from '../page-heading/page-heading.component';
+import { ComponentsComponent } from '../basic-components/basic-components.component';
 import { PropertiesViewComponent } from '../properties-view/properties-view.component';
 import { StandardComponentsComponent } from '../standard-components/standard-components.component';
 
@@ -471,6 +467,9 @@ export interface IThanhPhan extends JobFieldOutputDto {
   _listValueOptionOpenJSON?: string[];
   _listRelationOpenJSON?: string[];
   _value: any;
+  _panelSizes?: number[]; // panelSizes cua splitter dùng cho row
+  _panelMinSizes?: number[]; // panelMinSizes cua splitter dùng cho row
+  _listTypeCode?: string[]; // chứa typeCode của các group được thả vào col
   // isAllowDuplicate?: boolean;
   // placeholder?: string;
   // isSearch?: boolean; // dropdown

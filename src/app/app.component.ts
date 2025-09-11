@@ -6,6 +6,7 @@ import { TopComponent } from './layout/top/top.component';
 import { LoadingComponent } from './layout/loading/loading.component';
 import { PrimeNGConfig } from 'primeng/api';
 import { Title } from '@angular/platform-browser';
+import { BreadcrumbsComponent } from './layout/breadcrumbs/breadcrumbs.component';
 
 @Component({
   selector: 'app-root',
@@ -16,6 +17,7 @@ import { Title } from '@angular/platform-browser';
     TopComponent,
     ToastModule,
     LoadingComponent,
+    BreadcrumbsComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',

@@ -1,8 +1,9 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { SectionSearchComponent } from '../../layout/section-search/section-search.component';
-import { DsViecLamComponent, IDsViecLam } from '../../shared/components/ds-viec-lam/ds-viec-lam.component';
+import { DsViecLamComponent } from '../../shared/components/ds-viec-lam/ds-viec-lam.component';
 import { ICriteriaRequestDto, JobPostInfoServiceProxy, JobPostOutputDto, JobPostQueryDto } from '../../shared/service-proxies/sys-service-proxies';
 import { CommonModule } from '@angular/common';
+import { IDsViecLam } from '../../shared/components/viec-lam/viec-lam.component';
 
 @Component({
   selector: 'app-home',
@@ -68,20 +69,20 @@ export class HomeComponent implements OnInit {
         );
       }
 
-      if (filter.hinhThucLamViec && filter.hinhThucLamViec.length > 0) {
-        filterString.push(
-          new ICriteriaRequestDto({
-            propertyName: 'typeJobPost',
-            operation: 6,
-            value: JSON.stringify(filter.hinhThucLamViec),
-          })
-        );
-      }
+      // if (filter.hinhThucLamViec && filter.hinhThucLamViec.length > 0) {
+      //   filterString.push(
+      //     new ICriteriaRequestDto({
+      //       propertyName: 'typeJobPost',
+      //       operation: 6,
+      //       value: JSON.stringify(filter.hinhThucLamViec),
+      //     })
+      //   );
+      // }
 
       if (filterString.length > 0) {
         input.criterias.push(
           new ICriteriaRequestDto({
-            propertyName: 'filter',
+            propertyName: 'title',
             operation: 9,
             value: JSON.stringify(filterString),
           })
