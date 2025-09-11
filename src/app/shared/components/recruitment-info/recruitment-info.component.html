@@ -1,12 +1,23 @@
-<div id="recruitment-info" (click)="onFocus()" [attr.code]="label" cdkDrag
-    [cdkDragPreviewClass]="'cv-group-drag-preview'" class="cv-input cv-group d-flex gap-2 justify-content-between">
+<div
+  id="recruitment-info"
+  (click)="onFocus()"
+  [attr.code]="label"
+  cdkDrag
+  [cdkDragPreviewClass]="'cv-group-drag-preview'"
+  class="cv-input cv-group d-flex gap-2"
+>
+  @for(groupId of listElementGroupId; track groupId) {
+  <div class="cv-element" *ngFor="let element of listElement[groupId]">
+    <input
+      type="text"
+      style="--theme-color: {{ template._css['template']['themeColor'] }}"
+      class="{{ element.code }}"
+      [placeholder]="element.label"
+      [value]="element.defaultValue"
+    />
+    <!-- <app-cv-input-toolbar></app-cv-input-toolbar> -->
+  </div>
+  }
 
-    @for(element of listElement; track element) {
-    <div class="cv-element col-6">
-        <input type="text" class="form-control" [placeholder]="element.label">
-        <app-cv-input-toolbar></app-cv-input-toolbar>
-    </div>
-    }
-
-    <app-cv-group-toolbar></app-cv-group-toolbar>
+  <app-cv-group-toolbar></app-cv-group-toolbar>
 </div>

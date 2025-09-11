@@ -11,18 +11,27 @@ app-cv-input-toolbar {
 }
 
 app-cv-input-toolbar {
-    left: none;
+    left: auto;
     right: 5px;
 }
-
 
 .cv-input {
     input[type="text"] {
         width: 100% !important;
         border: none;
+        padding: 0.3rem;
+        background-color: transparent;
 
         &:hover {
             border: 1px dashed var(--surface-500);
+        }
+
+        &:focus {
+            border: 1px dashed var(--surface-500);
+        }
+
+        &:focus-visible {
+            outline-color: var(--primary-500);
         }
     }
 }
@@ -68,7 +77,6 @@ app-cv-input-toolbar {
     }
 
     .cv-element {
-
         &:hover {
             position: relative;
 
@@ -77,5 +85,4 @@ app-cv-input-toolbar {
             }
         }
     }
-
 }

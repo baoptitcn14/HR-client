@@ -1,0 +1,22 @@
+::ng-deep {
+    .template_basic {
+        #recruitment-info {
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+}
+
+input {
+    &.card_fullname {
+        font-weight: bold;
+        text-transform: uppercase;
+        color: currentColor;
+    }
+
+    &.position_applied {
+        font-weight: bold;
+        text-transform: capitalize;
+    }
+}

@@ -16,7 +16,6 @@
     z-index: 1;
 
     .cv-sidebar-menu {
-
         &-item {
             font-size: 1rem;
             padding: 1.2rem 1.5rem;
@@ -40,7 +39,6 @@
             }
 
             &.active {
-
                 &:before {
                     content: "";
                     position: absolute;
@@ -50,7 +48,6 @@
                     height: 100%;
                     background-color: var(--primary-color);
                 }
-
             }
         }
     }
@@ -93,7 +90,6 @@
 }
 
 ::ng-deep {
-
     #cv-layout {
         .p-splitter {
             background-color: transparent;
@@ -109,7 +105,6 @@
     }
 
     .p-slider-handle {
-
         &:before {
             content: attr(aria-valuenow);
             position: absolute;
@@ -127,14 +122,17 @@
 ._template {
     //pdf 816px x 1056px
     width: 816px;
-    height: auto; //1056px 
+    min-height: 1097px;
+    height: auto; //1056px
     max-width: 100%;
-    
+
     // overflow: hidden;
     margin: auto;
 
     ._row {
+      
         ._col {
+            min-height: 40px;
             height: auto;
             width: 100%;
         }
@@ -160,7 +158,6 @@
     .name {
         color: var(--surface-600);
     }
-
 }
 
 #cv-layout {
@@ -168,7 +165,7 @@
         cursor: move;
     }
 
-     ._row {
+    ._row {
         background-color: var(--surface-c);
     }
 }

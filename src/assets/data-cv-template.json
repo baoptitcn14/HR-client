@@ -505,7 +505,8 @@
                 "industryName": "",
                 "label": "Ngày sinh",
                 "code": "card_dob",
-                "defaultValue": "01/01/1995"
+                "defaultValue": "01/01/1995",
+                "icon": "pi pi-calendar"
             }
         ]
     },
@@ -517,7 +518,8 @@
                 "industryName": "",
                 "label": "Giới tính",
                 "code": "card_gender",
-                "defaultValue": "Nam/Nữ/khác"
+                "defaultValue": "Nam/Nữ/khác",
+                "icon": "pi pi-user"
             }
         ]
     },
@@ -529,7 +531,8 @@
                 "industryName": "",
                 "label": "Số điện thoại",
                 "code": "card_phone",
-                "defaultValue": "089 639 6969"
+                "defaultValue": "089 639 6969",
+                "icon": "pi pi-phone"
             }
         ]
     },
@@ -541,7 +544,8 @@
                 "industryName": "",
                 "label": "Email",
                 "code": "card_email",
-                "defaultValue": "toancoyen@ilearn.net.vn"
+                "defaultValue": "toancoyen@ilearn.net.vn",
+                "icon": "pi pi-envelope"
             }
         ]
     },
@@ -553,7 +557,8 @@
                 "industryName": "",
                 "label": "Website",
                 "code": "card_website",
-                "defaultValue": "https://ilearn.vn"
+                "defaultValue": "https://ilearn.vn",
+                "icon": "pi pi-globe"
             }
         ]
     },
@@ -565,7 +570,8 @@
                 "industryName": "",
                 "label": "Địa chỉ",
                 "code": "card_address",
-                "defaultValue": "STH 18.33, Đường 4D+8C, KĐT Hà Quang 2, TP Nha Trang, Khánh Hòa"
+                "defaultValue": "STH 18.33, Đường 4D+8C, KĐT Hà Quang 2, TP Nha Trang, Khánh Hòa",
+                "icon": "pi pi-map-marker"
             }
         ]
     },

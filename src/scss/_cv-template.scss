@@ -1,0 +1,16 @@
+//template_basic
+
+.template_basic {
+    background: #fff;
+    color: var(--theme-color);
+
+    ._row {
+        background: #fff;
+        min-height: 1097px;
+        width: 100%;
+    }
+
+    #col1 {
+        background: color-mix(in srgb, var(--theme-color) 10%, #fff);
+    }
+}
