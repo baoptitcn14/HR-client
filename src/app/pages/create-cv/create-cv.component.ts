@@ -167,22 +167,28 @@ export class CreateCvComponent implements OnInit {
           // add các thành phần vào nhóm
 
           const listThanhPhan = listDataOfTypeCode.reduce((acc, e) => [
-            ...acc,
-            ...e.map((x: IThanhPhan) => ({ ...x, groupId: groupId, _css: JSON.parse(x.css ?? '{}') } as IThanhPhan)),
+            ...acc.map(
+              (x: IThanhPhan) =>
+                ({
+                  ...x,
+                  groupId: groupId,
+                  _css: JSON.parse(x.css ?? '{"element": {}}'),
+                } as IThanhPhan)
+            ),
+            ...e.map(
+              (x: IThanhPhan) =>
+                ({
+                  ...x,
+                  groupId: groupId,
+                  _css: JSON.parse(x.css ?? '{"element": {}}'),
+                } as IThanhPhan)
+            ),
           ]);
 
           col._listChild = [...col._listChild!, ...listThanhPhan];
 
           // update hash map groupId
-          if (col._hashMapTypeCode && col._hashMapTypeCode[typeCode]) {
-            if (col._hashMapTypeCode[typeCode][groupId]) {
-              listThanhPhan.forEach((e: IThanhPhan) => {
-                col._hashMapTypeCode[typeCode][groupId].push(e);
-              });
-            } else {
-              col._hashMapTypeCode[typeCode][groupId] = listThanhPhan;
-            }
-          } else {
+          if (col._hashMapTypeCode && !col._hashMapTypeCode[typeCode]) {
             col._hashMapTypeCode[typeCode] = {
               [groupId]: listThanhPhan,
             };

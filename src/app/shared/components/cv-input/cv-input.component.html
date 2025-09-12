@@ -1,12 +1,33 @@
-<div class="cv-element" (click)="op.show($event)">
-    <input type="text" style="--theme-color: {{ themeColor }}" class="{{ element.code }}" [placeholder]="element.label"
-        [value]="element.defaultValue" />
+<div class="cv-element" (click)="onFocus($event)">
+  <input
+    type="text"
+    style="--theme-color: {{ themeColor }};  
+    --font-size: {{ element._css['element']['fontSize'] }}px; 
+    --font: {{ element._css['element']['font'] }}; 
+    --color: {{ element._css['element']['color'] }};
+    --text-align: {{ element._css['element']['textAlign'] }};
+    --text-decoration: {{ element._css['element']['textDecoration'] }};
+    --font-style: {{ element._css['element']['fontStyle'] }};
+    --font-weight: {{ element._css['element']['fontWeight'] }};
+    "
+    class="{{ element.code }}"
+    [placeholder]="element.label"
+    [value]="element.defaultValue"
+  />
 
-        {{  element | json }}
+  <app-cv-input-action
+    *ngIf="element.cvInputConfig?.showAction"
+    [element]="element"
+  ></app-cv-input-action>
 
-    <app-cv-input-action *ngIf="config.showAction"></app-cv-input-action>
-
-    <p-overlayPanel #op [styleClass]="'cv-input-overlaypanel'" [appendTo]="'body'">
-        <app-cv-input-toolbar [element]="element" (onUpdateElementEvent)="onUpdateElement($event)"></app-cv-input-toolbar>
-    </p-overlayPanel>
+  <p-overlayPanel
+    #op
+    [styleClass]="'cv-input-overlaypanel'"
+    [appendTo]="'body'"
+  >
+    <app-cv-input-toolbar
+      [element]="element"
+      (onUpdateElementEvent)="onUpdateElement($event)"
+    ></app-cv-input-toolbar>
+  </p-overlayPanel>
 </div>

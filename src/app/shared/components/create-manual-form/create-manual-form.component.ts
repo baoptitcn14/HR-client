@@ -49,6 +49,7 @@ import { UtilitiesService } from '../../services/utilities.service';
 import { ComponentsComponent } from '../basic-components/basic-components.component';
 import { PropertiesViewComponent } from '../properties-view/properties-view.component';
 import { StandardComponentsComponent } from '../standard-components/standard-components.component';
+import { ICvInputConfig } from '../cv-input/cv-input.component';
 
 @Component({
   selector: 'app-create-manual-form',
@@ -476,6 +477,7 @@ export interface IThanhPhan extends JobFieldOutputDto {
   // acceptFileExtensions?: string; // .jpg,.png,.pdf,.doc,.xlsx
   maxFileSize?: number;
   // multiple?: boolean;
+  cvInputConfig?: ICvInputConfig;
 }
 
 export interface ICss {

@@ -1,0 +1,57 @@
+.cv-element {
+    position: relative;
+
+    &:hover {
+        app-cv-input-action {
+            display: block;
+        }
+
+        input[type="text"] {
+            border: 1px dashed var(--surface-500);
+        }
+    }
+
+    input[type="text"] {
+        font-family: var(--font, var(--font-family));
+        font-size: var(--font-size, 1rem);
+        font-weight: var(--font-weight, normal);
+        color: var(--color, var(--surface-500));
+        text-align: var(--text-align, left);
+        text-decoration: var(--text-decoration);
+        font-style: var(--font-style);
+
+        width: 100% !important;
+        border: none;
+        padding: 0.3rem;
+        background-color: transparent;
+
+        &:focus {
+            border: 1px dashed var(--surface-500);
+        }
+
+        &:focus-visible {
+            outline-color: var(--primary-500);
+        }
+
+        &:focus-visible,
+        &:focus {
+            ~ app-cv-input-toolbar {
+                .cv-input-toolbar {
+                    display: flex;
+                }
+            }
+        }
+
+        // css đặc trưng của các mục input
+        &.card_fullname {
+            font-weight: bold;
+            text-transform: uppercase;
+            color: currentColor;
+        }
+
+        &.position_applied {
+            font-weight: bold;
+            text-transform: capitalize;
+        }
+    }
+}

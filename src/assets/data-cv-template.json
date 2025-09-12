@@ -481,7 +481,21 @@
                 "industryName": "",
                 "label": "Họ và tên",
                 "code": "card_fullname",
-                "defaultValue": "Ilearn"
+                "defaultValue": "Ilearn",
+                "cvInputConfig": {
+                    "showToolbar": true,
+                    "showAction": true,
+                    "actionConfig": {
+                        "showMoveUp": true,
+                        "showMoveDown": true,
+                        "showDelete": false,
+                        "showAdd": false
+                    },
+                    "toolbarConfig": {
+                        "showAlign": false,
+                        "showOrderList": false
+                    }
+                }
             }
         ]
     },
@@ -493,7 +507,21 @@
                 "industryName": "",
                 "label": "Vị trí ứng tuyển",
                 "code": "position_applied",
-                "defaultValue": "Giáo viên"
+                "defaultValue": "Giáo viên",
+                "cvInputConfig": {
+                    "showToolbar": true,
+                    "showAction": true,
+                    "actionConfig": {
+                        "showMoveUp": true,
+                        "showMoveDown": true,
+                        "showDelete": false,
+                        "showAdd": false
+                    },
+                    "toolbarConfig": {
+                        "showAlign": false,
+                        "showOrderList": false
+                    }
+                }
             }
         ]
     },
@@ -506,7 +534,21 @@
                 "label": "Ngày sinh",
                 "code": "card_dob",
                 "defaultValue": "01/01/1995",
-                "icon": "pi pi-calendar"
+                "icon": "pi pi-calendar",
+                "cvInputConfig": {
+                    "showToolbar": true,
+                    "showAction": true,
+                    "actionConfig": {
+                        "showMoveUp": true,
+                        "showMoveDown": true,
+                        "showDelete": false,
+                        "showAdd": false
+                    },
+                    "toolbarConfig": {
+                        "showAlign": false,
+                        "showOrderList": false
+                    }
+                }
             }
         ]
     },
@@ -519,7 +561,21 @@
                 "label": "Giới tính",
                 "code": "card_gender",
                 "defaultValue": "Nam/Nữ/khác",
-                "icon": "pi pi-user"
+                "icon": "pi pi-user",
+                "cvInputConfig": {
+                    "showToolbar": true,
+                    "showAction": true,
+                    "actionConfig": {
+                        "showMoveUp": true,
+                        "showMoveDown": true,
+                        "showDelete": false,
+                        "showAdd": false
+                    },
+                    "toolbarConfig": {
+                        "showAlign": false,
+                        "showOrderList": false
+                    }
+                }
             }
         ]
     },
@@ -532,7 +588,21 @@
                 "label": "Số điện thoại",
                 "code": "card_phone",
                 "defaultValue": "089 639 6969",
-                "icon": "pi pi-phone"
+                "icon": "pi pi-phone",
+                "cvInputConfig": {
+                    "showToolbar": true,
+                    "showAction": true,
+                    "actionConfig": {
+                        "showMoveUp": true,
+                        "showMoveDown": true,
+                        "showDelete": false,
+                        "showAdd": false
+                    },
+                    "toolbarConfig": {
+                        "showAlign": false,
+                        "showOrderList": false
+                    }
+                }
             }
         ]
     },
@@ -545,7 +615,21 @@
                 "label": "Email",
                 "code": "card_email",
                 "defaultValue": "toancoyen@ilearn.net.vn",
-                "icon": "pi pi-envelope"
+                "icon": "pi pi-envelope",
+                "cvInputConfig": {
+                    "showToolbar": true,
+                    "showAction": true,
+                    "actionConfig": {
+                        "showMoveUp": true,
+                        "showMoveDown": true,
+                        "showDelete": false,
+                        "showAdd": false
+                    },
+                    "toolbarConfig": {
+                        "showAlign": false,
+                        "showOrderList": false
+                    }
+                }
             }
         ]
     },
@@ -558,7 +642,21 @@
                 "label": "Website",
                 "code": "card_website",
                 "defaultValue": "https://ilearn.vn",
-                "icon": "pi pi-globe"
+                "icon": "pi pi-globe",
+                "cvInputConfig": {
+                    "showToolbar": true,
+                    "showAction": true,
+                    "actionConfig": {
+                        "showMoveUp": true,
+                        "showMoveDown": true,
+                        "showDelete": false,
+                        "showAdd": false
+                    },
+                    "toolbarConfig": {
+                        "showAlign": false,
+                        "showOrderList": false
+                    }
+                }
             }
         ]
     },
@@ -571,7 +669,21 @@
                 "label": "Địa chỉ",
                 "code": "card_address",
                 "defaultValue": "STH 18.33, Đường 4D+8C, KĐT Hà Quang 2, TP Nha Trang, Khánh Hòa",
-                "icon": "pi pi-map-marker"
+                "icon": "pi pi-map-marker",
+                "cvInputConfig": {
+                    "showToolbar": true,
+                    "showAction": true,
+                    "actionConfig": {
+                        "showMoveUp": true,
+                        "showMoveDown": true,
+                        "showDelete": false,
+                        "showAdd": false
+                    },
+                    "toolbarConfig": {
+                        "showAlign": false,
+                        "showOrderList": false
+                    }
+                }
             }
         ]
     },
@@ -2335,55 +2447,55 @@
         ]
     },
     {
-    "typeCode": "Reference",
-    "index": 1,
-    "value": [
-      {
-        "industryId": "",
-        "industryName": "",
-        "label": "Tên người giới thiệu",
-        "code": "reference_name",
-        "defaultValue": "Nguyễn Văn A"
-      }
-    ]
-  },
-  {
-    "typeCode": "Reference",
-    "index": 1,
-    "value": [
-      {
-        "industryId": "",
-        "industryName": "",
-        "label": "Chức vụ",
-        "code": "reference_position",
-        "defaultValue": "Giám đốc"
-      }
-    ]
-  },
-  {
-    "typeCode": "Reference",
-    "index": 1,
-    "value": [
-      {
-        "industryId": "",
-        "industryName": "",
-        "label": "Thông tin liên hệ",
-        "code": "reference_contact",
-        "defaultValue": "Email: abc@gmail.com; Điện thoại: 0123 456 789"
-      }
-    ]
-  },
+        "typeCode": "Reference",
+        "index": 1,
+        "value": [
+            {
+                "industryId": "",
+                "industryName": "",
+                "label": "Tên người giới thiệu",
+                "code": "reference_name",
+                "defaultValue": "Nguyễn Văn A"
+            }
+        ]
+    },
     {
-    "typeCode": "Interest",
-    "index": 1,
-    "value": [
-      {
-        "industryId": "",
-        "industryName": "",
-        "label": "Tên sở thích",
-        "code": "interest_name",
-        "defaultValue": "Teambuilding, tham gia các câu lạc bộ, ca hát, văn nghệ, chơi thể thao"
-      }
-    ]
-  }
+        "typeCode": "Reference",
+        "index": 1,
+        "value": [
+            {
+                "industryId": "",
+                "industryName": "",
+                "label": "Chức vụ",
+                "code": "reference_position",
+                "defaultValue": "Giám đốc"
+            }
+        ]
+    },
+    {
+        "typeCode": "Reference",
+        "index": 1,
+        "value": [
+            {
+                "industryId": "",
+                "industryName": "",
+                "label": "Thông tin liên hệ",
+                "code": "reference_contact",
+                "defaultValue": "Email: abc@gmail.com; Điện thoại: 0123 456 789"
+            }
+        ]
+    },
+    {
+        "typeCode": "Interest",
+        "index": 1,
+        "value": [
+            {
+                "industryId": "",
+                "industryName": "",
+                "label": "Tên sở thích",
+                "code": "interest_name",
+                "defaultValue": "Teambuilding, tham gia các câu lạc bộ, ca hát, văn nghệ, chơi thể thao"
+            }
+        ]
+    }
 ]
