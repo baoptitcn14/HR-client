@@ -1,6 +1,80 @@
-<div class="cv-input-toolbar d-flex gap-1">
-    <i class="pi pi-arrow-up" pTooltip="Di chuyển lên trên" tooltipPosition="top"></i>
-    <i class="pi pi-arrow-down" pTooltip="Di chuyển xuống dưới" tooltipPosition="top"></i>
-    <i class="pi pi-plus" pTooltip="Thêm" tooltipPosition="top"></i>
-    <i class="pi pi-trash" pTooltip="Xóa" tooltipPosition="top"></i>
+<div class="d-flex align-items-center gap-2 justify-content-center cv-input-toolbar">
+
+    <!-- fontsize -->
+    <div class="font-size dropdown cv-input-toolbar-item">
+        <div class="dropdown-display d-flex align-items-center gap-2">
+            {{ element._css['element']['fontSize'] + 'px' }}
+
+            <i class="pi pi-chevron-down"></i>
+        </div>
+        <ul class="dropdown-list p-0">
+            <li *ngFor="let item of fontSizes" class="dropdown-list-item" (click)="onChangeFontSize(item)">
+                <a href="javascript:;">
+                    {{ item + 'px' }}
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- font -->
+    <div class="font dropdown cv-input-toolbar-item">
+        <div class="dropdown-display">
+            {{ element._css['element']['font'] }}
+
+            <i class="pi pi-chevron-down"></i>
+        </div>
+        <ul class="dropdown-list p-0">
+            <li *ngFor="let item of fonts" class="dropdown-list-item" (click)="onChangeFont(item)">
+                <a href="javascript:;">
+                    {{ item }}
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- color -->
+    <div class="color cv-input-toolbar-item">
+        <p-colorPicker [(ngModel)]="element._css['element']['color']"
+            [styleClass]="'cv-input-toolbar-item-colorpicker'" />
+    </div>
+
+    <!-- text decoration -->
+    <div class="text-decoration cv-input-toolbar-item">
+        <!-- BOLD -->
+        <p-button label="B" [text]="true" severity="secondary" />
+
+        <!-- ITALIC -->
+        <p-button label="I" [styleClass]="'italic'" [text]="true" severity="secondary" />
+
+
+        <!-- UNDERLINE -->
+        <p-button label="U" [styleClass]="'underline'" [text]="true" severity="secondary" />
+    </div>
+
+    <!-- order list -->
+    <div class="text-decoration cv-input-toolbar-item gap-1">
+        <!-- bullet -->
+        <p-button icon="pi pi-list" [text]="true" severity="secondary" />
+
+        <!-- check -->
+        <p-button icon="pi pi-list-check" [text]="true" severity="secondary" />
+
+    </div>
+
+    <!-- text align -->
+    <div class="text-decoration cv-input-toolbar-item gap-1">
+        <!-- center -->
+        <p-button icon="pi pi-align-center" [text]="true" severity="secondary" />
+
+        <!-- justify -->
+        <p-button icon="pi pi-align-justify" [text]="true" severity="secondary" />
+
+        <!-- right -->
+        <p-button icon="pi pi-align-right" [text]="true" severity="secondary" />
+
+        <!-- left -->
+        <p-button icon="pi pi-align-left" [styleClass]="'active'" [text]="true" severity="secondary" />
+
+    </div>
+
 </div>

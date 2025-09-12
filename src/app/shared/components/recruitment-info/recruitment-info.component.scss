@@ -7,16 +7,3 @@
         }
     }
 }
-
-input {
-    &.card_fullname {
-        font-weight: bold;
-        text-transform: uppercase;
-        color: currentColor;
-    }
-
-    &.position_applied {
-        font-weight: bold;
-        text-transform: capitalize;
-    }
-}

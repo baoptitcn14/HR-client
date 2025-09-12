@@ -8,10 +8,12 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { CvGroupToolbarComponent } from '../cv-group-toolbar/cv-group-toolbar.component';
+import { CvGroupActionComponent } from '../cv-group-action/cv-group-action.component';
 import { CdkDrag, CdkDropList } from '@angular/cdk/drag-drop';
 import { IThanhPhan } from '../create-manual-form/create-manual-form.component';
+import { CvInputActionComponent } from '../cv-input-action/cv-input-action.component';
 import { CvInputToolbarComponent } from '../cv-input-toolbar/cv-input-toolbar.component';
+import { CvInputComponent } from '../cv-input/cv-input.component';
 
 @Component({
   selector: 'app-recruitment-info',
@@ -19,10 +21,12 @@ import { CvInputToolbarComponent } from '../cv-input-toolbar/cv-input-toolbar.co
   imports: [
     CommonModule,
     FormsModule,
-    CvGroupToolbarComponent,
+    CvGroupActionComponent,
     CdkDrag,
     CdkDropList,
+    CvInputActionComponent,
     CvInputToolbarComponent,
+    CvInputComponent
   ],
   templateUrl: './recruitment-info.component.html',
   styleUrl: './recruitment-info.component.scss',

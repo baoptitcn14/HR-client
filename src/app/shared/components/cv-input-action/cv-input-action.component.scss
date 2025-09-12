@@ -1,4 +1,4 @@
-.cv-group-toolbar {
+.cv-input-action {
     .pi {
         font-size: 0.6rem;
         border: 1px solid var(--surface-500);
@@ -9,7 +9,7 @@
         cursor: pointer;
         transition: all 0.3s ease-in-out;        
 
-        &:not(:last-child):hover {
+        &:not(.pi-plus):not(.pi-trash):hover {
             background-color: var(--surface-600);
         }
 
@@ -17,7 +17,12 @@
             background-color: var(--bs-danger);
             color: var(--bs-white);
             border-color: var(--bs-danger);
+        }
 
+        &-plus {
+            background-color: var(--bs-success);
+            color: var(--bs-white);
+            border-color: var(--bs-success);
         }
     }
 }

@@ -1,5 +1,5 @@
-app-cv-group-toolbar,
-app-cv-input-toolbar {
+app-cv-group-action,
+app-cv-input-action {
     display: none;
     position: absolute;
     top: -35px;
@@ -10,29 +10,65 @@ app-cv-input-toolbar {
     border-radius: 4px 4px 0 0;
 }
 
-app-cv-input-toolbar {
+app-cv-input-action {
     left: auto;
     right: 5px;
 }
 
 .cv-input {
-    input[type="text"] {
-        width: 100% !important;
-        border: none;
-        padding: 0.3rem;
-        background-color: transparent;
+
+    .cv-element {
+        position: relative;
 
         &:hover {
-            border: 1px dashed var(--surface-500);
+
+            app-cv-input-action {
+                display: block;
+            }
+
+            input[type="text"] {
+                border: 1px dashed var(--surface-500);
+            }
         }
 
-        &:focus {
-            border: 1px dashed var(--surface-500);
+        input[type="text"] {
+            width: 100% !important;
+            border: none;
+            padding: 0.3rem;
+            background-color: transparent;
+
+            &:focus {
+                border: 1px dashed var(--surface-500);
+            }
+
+            &:focus-visible {
+                outline-color: var(--primary-500);
+            }
+
+            &:focus-visible,
+            &:focus {
+                ~app-cv-input-toolbar {
+                    .cv-input-toolbar {
+                        display: flex;
+                    }
+                }
+
+            }
+
+            // css đặc trưng của các mục input
+            &.card_fullname {
+                font-weight: bold;
+                text-transform: uppercase;
+                color: currentColor;
+            }
+
+            &.position_applied {
+                font-weight: bold;
+                text-transform: capitalize;
+            }
+
         }
 
-        &:focus-visible {
-            outline-color: var(--primary-500);
-        }
     }
 }
 
@@ -44,7 +80,7 @@ app-cv-input-toolbar {
         border: 1px solid var(--surface-400);
         border-radius: 4px;
 
-        app-cv-group-toolbar {
+        app-cv-group-action {
             display: block;
         }
     }
@@ -76,13 +112,5 @@ app-cv-input-toolbar {
         }
     }
 
-    .cv-element {
-        &:hover {
-            position: relative;
 
-            app-cv-input-toolbar {
-                display: block;
-            }
-        }
-    }
 }

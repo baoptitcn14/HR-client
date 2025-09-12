@@ -168,7 +168,7 @@ export class CreateCvComponent implements OnInit {
 
           const listThanhPhan = listDataOfTypeCode.reduce((acc, e) => [
             ...acc,
-            ...e.map((x: any) => ({ ...x, groupId: groupId })),
+            ...e.map((x: IThanhPhan) => ({ ...x, groupId: groupId, _css: JSON.parse(x.css ?? '{}') } as IThanhPhan)),
           ]);
 
           col._listChild = [...col._listChild!, ...listThanhPhan];
@@ -176,7 +176,7 @@ export class CreateCvComponent implements OnInit {
           // update hash map groupId
           if (col._hashMapTypeCode && col._hashMapTypeCode[typeCode]) {
             if (col._hashMapTypeCode[typeCode][groupId]) {
-              listThanhPhan.forEach((e: any) => {
+              listThanhPhan.forEach((e: IThanhPhan) => {
                 col._hashMapTypeCode[typeCode][groupId].push(e);
               });
             } else {

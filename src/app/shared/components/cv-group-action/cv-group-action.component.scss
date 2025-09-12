@@ -1,0 +1,23 @@
+.cv-group-action {
+    .pi {
+        font-size: 0.6rem;
+        border: 1px solid var(--surface-500);
+        border-radius: 4px;
+        padding: 0.35rem;
+        background-color: var(--surface-500);
+        color: #fff;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;        
+
+        &:not(:last-child):hover {
+            background-color: var(--surface-600);
+        }
+
+        &-trash {
+            background-color: var(--bs-danger);
+            color: var(--bs-white);
+            border-color: var(--bs-danger);
+
+        }
+    }
+}

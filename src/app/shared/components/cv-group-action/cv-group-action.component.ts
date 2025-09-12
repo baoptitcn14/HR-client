@@ -3,14 +3,14 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { TooltipModule } from 'primeng/tooltip';
 
 @Component({
-  selector: 'app-cv-group-toolbar',
+  selector: 'app-cv-group-action',
   standalone: true,
   imports: [
     CdkDragHandle,
     TooltipModule
   ],
-  templateUrl: './cv-group-toolbar.component.html',
-  styleUrl: './cv-group-toolbar.component.scss'
+  templateUrl: './cv-group-action.component.html',
+  styleUrl: './cv-group-action.component.scss'
 })
-export class CvGroupToolbarComponent {
+export class CvGroupActionComponent {
 }
