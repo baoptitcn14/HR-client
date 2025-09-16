@@ -1,0 +1,43 @@
+::ng-deep {
+    .template_basic {
+
+        #RecruitmentInfo,
+        #BusinessCard,
+        #Avatar {
+            .cv-group-name {
+                display: none;
+
+            }
+        }
+
+        .cv-group-name {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+
+            &>div {
+                background-color: var(--bg-color-group-name);
+                border-radius: 20px;
+                width: fit-content;
+                font-size: calc(var(--theme-font-size) * 1.2 * var(--multiplierFS));
+                color: var(--theme-color);
+                padding: 0.8rem;
+                font-weight: bold;
+                position: relative;
+                z-index: 2;
+            }
+
+
+            &::after {
+                position: absolute;
+                content: "";
+                top: 50%;
+                left: 0;
+                right: 0;
+                border: 1px solid var(--bg-color-group-name);
+                z-index: 1;
+                border-radius: 50%;
+            }
+        }
+    }
+}

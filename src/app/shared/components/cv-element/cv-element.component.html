@@ -1,0 +1,30 @@
+<div id="{{ typeCode }}" [attr.code]="label" cdkDrag [cdkDragPreviewClass]="'cv-group-drag-preview'"
+  style="display: flex; flex-direction: column;" class="cv-input cv-group d-flex">
+
+  <div class="cv-group-name" style="margin-bottom: 5px;" *ngIf="label">
+    <div>
+      {{ label }}
+    </div>
+  </div>
+
+
+  @for(groupId of listElementGroupId; track groupId; let last = $last; let first = $first; let idx = $index) {
+
+  <div class="cv-group_element {{groupId}}">
+
+    @for(element of listElement[groupId]; track element; ) {
+
+    <app-cv-input [themeColor]="template._css['template']['themeColor']" [element]="element"></app-cv-input>
+
+    }
+
+    <app-cv-input-action [first]="first" [last]="last" [groupId]="groupId" [index]="idx"
+      (onMoveUpEvent)="onMoveUp($event)" (onMoveDownEvent)="onMoveDown($event)"
+      (onAddEvent)="onAdd($event)"></app-cv-input-action>
+
+
+  </div>
+  }
+
+  <app-cv-group-action></app-cv-group-action>
+</div>

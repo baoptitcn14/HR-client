@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { ColorPickerModule } from 'primeng/colorpicker';
 import { IThanhPhan } from '../create-manual-form/create-manual-form.component';
 import { FormsModule } from '@angular/forms';
 import { ICvInputConfig } from '../cv-input/cv-input.component';
+import { CvService } from '../../../pages/create-cv/cv.service';
 
 @Component({
   selector: 'app-cv-input-toolbar',
@@ -14,11 +15,16 @@ import { ICvInputConfig } from '../cv-input/cv-input.component';
   styleUrl: './cv-input-toolbar.component.scss',
 })
 export class CvInputToolbarComponent {
+
+  // inject region
+  private cvService = inject(CvService);
+
   // input region
   @Input({ required: true }) element!: IThanhPhan;
 
   // output region
   @Output() onUpdateElementEvent = new EventEmitter();
+  @Output() onRestoreSelectionEvent = new EventEmitter();
 
   // declare region
   fontSizes = [
@@ -53,32 +59,29 @@ export class CvInputToolbarComponent {
     this.onUpdateElement();
   }
 
-  onChangeTextStyle(button: {
-    label: string;
-    styleClass: string;
-    active: boolean;
-  }) {
-    button.active = !button.active;
+  onActionToolbar(action: string, data: any) {
+    this.onRestoreSelectionEvent.emit();
 
-    if (button.active) button.styleClass += ' active';
-    else {
-      button.styleClass = button.styleClass.replace(' active', '');
+    if (action == 'textStyle') {
+      if (data.label == 'B') {
+        document.execCommand('bold');
+      } else if (data.label == 'I') {
+        document.execCommand('italic');
+      } else if (data.label == 'U') {
+        document.execCommand('underline');
+      }
+
+      this.onUpdateElement();
+    } else if (action == 'font') {
+      this.element._css['element']['font'] = data;
+    } else if (action == 'fs') {
+      this.element._css['element']['fontSize'] = data;
     }
 
-    if (button.label == 'B') {
-      this.element._css['element']['fontWeight'] = button.active
-        ? 'bold'
-        : 'normal';
-    } else if (button.label == 'I') {
-      this.element._css['element']['fontStyle'] = button.active
-        ? 'italic'
-        : 'normal';
-    } else {
-      this.element._css['element']['textDecoration'] = button.active
-        ? 'underline'
-        : 'none';
-    }
+  }
 
+  onChangeOrderList(type: string) {
+    this.element._css['element']['listStyleType'] = type;
     this.onUpdateElement();
   }
 }

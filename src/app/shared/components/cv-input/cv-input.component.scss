@@ -1,29 +1,110 @@
 .cv-element {
     position: relative;
+    border: 1px dashed transparent;
 
     &:hover {
-        app-cv-input-action {
-            display: block;
-        }
+        // app-cv-input-action {
+        //     display: block;
+        // }
 
         input[type="text"] {
             border: 1px dashed var(--surface-500);
         }
     }
 
-    input[type="text"] {
-        font-family: var(--font, var(--font-family));
-        font-size: var(--font-size, 1rem);
+    .image-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        user-select: none;
+        width: 100%;
+
+        .image-inner {
+
+            width: fit-content;
+            border: 2px dashed transparent;
+            position: relative;
+
+            &:hover,
+            &.resizing {
+                border: 2px dashed var(--surface-300);
+
+                .pi-arrows-h {
+                    display: block;
+                }
+            }
+
+            img {
+                min-width: 80px;
+                min-height: 80px;
+                max-width: 100%;
+                aspect-ratio: 1/1;
+                border-radius: 50%;
+            }
+
+            .pi-arrows-h {
+                display: none;
+                position: absolute;
+                font-size: 1rem;
+                font-weight: bold;
+                color: var(--surface-300);
+            }
+
+            .ne {
+                cursor: ne-resize;
+                content: "";
+                right: 0;
+                top: 0;
+                transform: rotate(-45deg);
+            }
+
+            .se {
+                cursor: se-resize;
+                content: "";
+                right: 0;
+                bottom: 0;
+                transform: rotate(45deg);
+            }
+
+            .sw {
+                content: "";
+                bottom: 0;
+                left: 0;
+                cursor: sw-resize;
+                transform: rotate(-45deg);
+            }
+
+
+            .nw {
+                content: "";
+                top: 0;
+                left: 0;
+                cursor: nw-resize;
+                transform: rotate(45deg);
+            }
+
+
+
+
+        }
+    }
+
+
+    input[type="text"],
+    .editor[contenteditable="true"] {
+        font-family: var(--font, var(--theme-font, var(--font-family)));
+        font-size: calc(var(--font-size) * var(--multiplierFS));
         font-weight: var(--font-weight, normal);
-        color: var(--color, var(--surface-500));
+        color: var(--color, currentColor);
         text-align: var(--text-align, left);
         text-decoration: var(--text-decoration);
         font-style: var(--font-style);
+        line-height: var(--theme-line-height, 1.5);
 
         width: 100% !important;
         border: none;
-        padding: 0.3rem;
         background-color: transparent;
+        padding: 0.2rem;
 
         &:focus {
             border: 1px dashed var(--surface-500);
@@ -35,7 +116,7 @@
 
         &:focus-visible,
         &:focus {
-            ~ app-cv-input-toolbar {
+            ~p-overlayPanel>app-cv-input-toolbar {
                 .cv-input-toolbar {
                     display: flex;
                 }
@@ -44,14 +125,79 @@
 
         // css đặc trưng của các mục input
         &.card_fullname {
-            font-weight: bold;
+            font-weight: var(--font-weight, bold);
             text-transform: uppercase;
-            color: currentColor;
+            color: var(--color, currentColor);
         }
 
         &.position_applied {
-            font-weight: bold;
+            font-weight: var(--font-weight, bold);
             text-transform: capitalize;
         }
+
+        &::placeholder {
+            color: var(--surface-400);
+        }
+    }
+
+    .editor[contenteditable="true"] {
+        display: flex;
+        align-items: center;
+        justify-content: var(--text-align);
+        position: relative;
+
+        &.editor-blank {
+            &::before {
+                content: attr(data-placeholder);
+                color: var(--surface-400);
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                left: 0.2rem;
+                right: 0.2rem;
+                // text-align: var(--text-align);
+                pointer-events: none;
+            }
+
+            &:focus, &:focus-visible {
+                &::before {
+                    opacity: 0.3;
+                }
+            }
+        }
+
+        p {
+            margin: 0 0 4px 0;
+        }
+
+        ol {
+            margin: 0 0 4px 0;
+            list-style: none;
+
+            .bullet {
+                &::before {
+                    content: "\2022";
+                    color: var(--surface-600);
+                    font-weight: bold;
+                    display: inline-block;
+                    width: 1em;
+                    margin-left: -1em;
+                }
+            }
+
+            .ordered {
+                &::before {
+                    counter-increment: item;
+                    content: counter(item) ".";
+                    color: var(--surface-600);
+                    font-weight: bold;
+                    display: inline-block;
+                    width: 1em;
+                    margin-left: -1em;
+                }
+            }
+        }
+
+
     }
 }

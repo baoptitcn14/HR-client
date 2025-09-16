@@ -1,26 +1,6 @@
 <div class="cv-input-action d-flex gap-1">
-  <i
-    class="pi pi-arrow-up"
-    pTooltip="Di chuyển lên trên"
-    tooltipPosition="top"
-    *ngIf="element.cvInputConfig?.actionConfig?.showMoveUp"
-  ></i>
-  <i
-    class="pi pi-arrow-down"
-    *ngIf="element.cvInputConfig?.actionConfig?.showMoveDown"
-    pTooltip="Di chuyển xuống dưới"
-    tooltipPosition="top"
-  ></i>
-  <i
-    class="pi pi-plus"
-    pTooltip="Thêm"
-    tooltipPosition="top"
-    *ngIf="element.cvInputConfig?.actionConfig?.showAdd"
-  ></i>
-  <i
-    class="pi pi-trash"
-    pTooltip="Xóa"
-    tooltipPosition="top"
-    *ngIf="element.cvInputConfig?.actionConfig?.showDelete"
-  ></i>
+  <i class="pi pi-arrow-up" *ngIf="!first" pTooltip="Di chuyển lên trên" tooltipPosition="top" (click)="onMoveUp($event)"></i>
+  <i class="pi pi-arrow-down" *ngIf="!last" pTooltip="Di chuyển xuống dưới" tooltipPosition="top" (click)="onMoveDown($event)"></i>
+  <i class="pi pi-plus" pTooltip="Thêm" tooltipPosition="top" (click)="onAdd($event)"></i>
+  <i class="pi pi-trash" pTooltip="Xóa" tooltipPosition="top"></i>
 </div>

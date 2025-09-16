@@ -149,6 +149,25 @@ export class CreateManualFormComponent {
         .filter((thanhPhan) => thanhPhan.inputType == 'group')
         .map(
           (item) =>
+          ({
+            ...item,
+            _css: JSON.parse(item.css ?? '{}'),
+            _listValueOptionOpenJSON: item.listValueOption
+              ? JSON.parse(item.listValueOption)
+              : [],
+            _listRelationOpenJSON: item.listRelation
+              ? JSON.parse(item.listRelation)
+              : [],
+            // _key: item.key,
+            // _groupId: item.groupId,
+          } as IThanhPhan)
+        );
+
+      this.dsThanhPhanDangCo.forEach((thanhPhan) => {
+        thanhPhan._listChild = this.dsThanhPhanInput
+          .filter((item) => item._groupId == thanhPhan._key)
+          .map(
+            (item) =>
             ({
               ...item,
               _css: JSON.parse(item.css ?? '{}'),
@@ -161,25 +180,6 @@ export class CreateManualFormComponent {
               // _key: item.key,
               // _groupId: item.groupId,
             } as IThanhPhan)
-        );
-
-      this.dsThanhPhanDangCo.forEach((thanhPhan) => {
-        thanhPhan._listChild = this.dsThanhPhanInput
-          .filter((item) => item._groupId == thanhPhan._key)
-          .map(
-            (item) =>
-              ({
-                ...item,
-                _css: JSON.parse(item.css ?? '{}'),
-                _listValueOptionOpenJSON: item.listValueOption
-                  ? JSON.parse(item.listValueOption)
-                  : [],
-                _listRelationOpenJSON: item.listRelation
-                  ? JSON.parse(item.listRelation)
-                  : [],
-                // _key: item.key,
-                // _groupId: item.groupId,
-              } as IThanhPhan)
           );
       });
     }
@@ -269,9 +269,9 @@ export class CreateManualFormComponent {
         leaf: children.filter((x) => x.parentId == object.id).length == 0,
         parent: parent
           ? {
-              key: parent.id,
-              label: parent.name,
-            }
+            key: parent.id,
+            label: parent.name,
+          }
           : undefined,
       };
     }
@@ -469,7 +469,7 @@ export interface IThanhPhan extends JobFieldOutputDto {
   _value: any;
   _panelSizes?: number[]; // panelSizes cua splitter dùng cho row
   _panelMinSizes?: number[]; // panelMinSizes cua splitter dùng cho row
-  _listTypeCode?: string[]; // chứa typeCode của các group được thả vào col
+  _listTypeCode?: {typeCode: string, label: string, layout: string}[]; // chứa typeCode của các group được thả vào col
   _hashMapTypeCode: { [typeCode: string]: { [groupId: string]: any[] } }; // chứa các typeCode là duy nhất làm key và value là hashmap groupId -> listThanhPhan
   // isAllowDuplicate?: boolean;
   // placeholder?: string;
@@ -478,6 +478,8 @@ export interface IThanhPhan extends JobFieldOutputDto {
   maxFileSize?: number;
   // multiple?: boolean;
   cvInputConfig?: ICvInputConfig;
+  icon?: string;
+  _isBlank?: boolean; // element này có giá trị hay không
 }
 
 export interface ICss {

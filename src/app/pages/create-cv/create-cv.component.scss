@@ -1,19 +1,33 @@
 .cv-toolbar {
-    // position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    z-index: 999;
     background-color: #fff;
     padding: 1.5rem;
     border-bottom: 1px solid var(--surface-c);
+    width: 100%;
+
+}
+
+.fixed {
+    position: fixed;
+    z-index: 999999;
+    background-color: #fff;
+    border-bottom: 1px solid var(--surface-c);
+}
+
+#sidebar-group {
+    z-index: 999;
+    top: 80px;
+    height: 100%;
 }
 
 #cv-sidebar {
     background-color: #fff;
     overflow: hidden;
     color: var(--surface-500);
-    z-index: 1;
+    // z-index: 999;
+    // top: 80px;
+    // height: 100%;
 
     .cv-sidebar-menu {
         &-item {
@@ -61,10 +75,13 @@
     overflow: hidden;
     color: var(--surface-500);
     opacity: 0;
+    // z-index: 999;
+    // top: 80px;
+    // left: 200px;
 
     &.show {
         transform: translateX(0);
-        width: 375px;
+        width: 330px;
         opacity: 1;
     }
 
@@ -111,12 +128,57 @@
             top: -20px;
             left: 0;
             font-size: 0.8rem;
+            min-width: 60px;
+            text-align: center;
+            z-index: 2;
+            transform: translateX(-50%);
+        }
+    }
+
+    .font-size {
+        .p-slider-handle {
+            &[aria-valuenow="0.7"]::before {
+                content: "Siêu nhỏ";
+            }
+
+            &[aria-valuenow="0.9"]::before {
+                content: "Nhỏ";
+            }
+
+            &[aria-valuenow="1.1"]::before {
+                content: "Trung bình";
+            }
+
+            &[aria-valuenow="1.3"]::before {
+                content: "Lớn";
+            }
+
+            &[aria-valuenow="1.5"]::before {
+                content: "Siêu lớn";
+            }
         }
     }
 }
 
+
+
 #cv-content {
     background: #fff;
+}
+
+#cv-content {
+
+    font-size: calc(var(--theme-font-size, 0.9rem) * var(--multiplierFS, 1));
+    color: var(--theme-color, var(--surface-600));
+    font-family: var(--theme-font, var(--font-family));
+
+}
+
+.abc {
+    width: 100%;
+    height: 35px;
+    border: 1px solid var(--surface-c);
+    background-color: var(--primary-color);
 }
 
 ._template {
@@ -130,7 +192,7 @@
     margin: auto;
 
     ._row {
-      
+
         ._col {
             min-height: 40px;
             height: auto;

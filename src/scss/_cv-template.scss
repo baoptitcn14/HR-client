@@ -2,7 +2,8 @@
 
 .template_basic {
     background: #fff;
-    color: var(--theme-color);
+    color: var(--bs-dark);
+    // color-mix(in srgb, var(--theme-color) 10%, if(is-light(var(--theme-color)), #000, #fff));
 
     ._row {
         background: #fff;
@@ -11,6 +12,8 @@
     }
 
     #col1 {
-        background: color-mix(in srgb, var(--theme-color) 10%, #fff);
+        // background: color-mix(in srgb, var(--theme-color) 10%, #fff);
+        background-color: var(--theme-color);
+        color: var(--text-color-on-bg);
     }
 }

@@ -1,5 +1,5 @@
 <div id="cv">
-  <div class="cv-toolbar">
+  <div id="cv-toolbar" class="cv-toolbar">
     <div class="container-fluid d-flex gap-2 justify-content-between">
       <div class="cv-name d-flex align-items-center">
         <i class="pi pi-file"></i>
@@ -19,70 +19,62 @@
   <div class="container-fluid">
     <div class="d-flex gap-5 py-4 px-2 w-100 overflow-auto">
       <!-- sidebar desktop -->
-      <div class="d-none d-lg-flex gap-2">
-        <!-- sidebar -->
-        <div id="cv-sidebar" class="shadow-sm rounded">
-          <div class="cv-sidebar-menu d-flex flex-column">
-            @for(item of sidebarContent.listSidebarItem; track item.label) {
-            <div
-              class="d-flex align-items-center gap-3 cv-sidebar-menu-item"
-              [class.active]="item.isActive"
-              (click)="selectSidebarItem(item)"
-            >
-              <i class="{{ item.icon }}"></i>
-              {{ item.label }}
+      <div style="flex-basis: 50%;" class="d-none d-lg-flex gap-2">
+
+        <div id="sidebar-group" class="d-none d-lg-flex gap-2">
+          <!-- sidebar -->
+          <div id="cv-sidebar" class="shadow-sm rounded">
+            <div class="cv-sidebar-menu d-flex flex-column">
+              @for(item of sidebarContent.listSidebarItem; track item.label) {
+              <div class="d-flex align-items-center gap-3 cv-sidebar-menu-item" [class.active]="item.isActive"
+                (click)="selectSidebarItem(item)">
+                <i class="{{ item.icon }}"></i>
+                {{ item.label }}
+              </div>
+              }
             </div>
-            }
           </div>
-        </div>
 
-        <!-- sidebar content  -->
-        <div
-          id="cv-sidebar-content"
-          class="cv-sidebar-content shadow-sm rounded"
-          [class.show]="sidebarContent.show"
-        >
-          <!-- sidebar content header -->
-          <div
-            class="cv-sidebar-content-header d-flex align-items-center justify-content-between gap-sm-2"
-          >
-            <!-- sidebar content header title -->
-            <div class="cv-sidebar-content-header-title">
-              {{ sidebarContent.title }}
+          <!-- sidebar content  -->
+          <div id="cv-sidebar-content" class="cv-sidebar-content shadow-sm rounded" [class.show]="sidebarContent.show">
+            <!-- sidebar content header -->
+            <div class="cv-sidebar-content-header d-flex align-items-center justify-content-between gap-sm-2">
+              <!-- sidebar content header title -->
+              <div class="cv-sidebar-content-header-title">
+                {{ sidebarContent.title }}
+              </div>
+
+              <!-- button close -->
+              <p-button icon="pi pi-times" size="small" [styleClass]="'p-button-xs'" [rounded]="true"
+                severity="secondary" (click)="sidebarContent.show = false" />
+              <!-- end button close -->
             </div>
+            <!-- end sidebar content header -->
 
-            <!-- button close -->
-            <p-button
-              icon="pi pi-times"
-              size="small"
-              [styleClass]="'p-button-xs'"
-              [rounded]="true"
-              severity="secondary"
-              (click)="sidebarContent.show = false"
-            />
-            <!-- end button close -->
+            <!-- sidebar content body -->
+            <div class="cv-sidebar-content-body">
+              @if(sidebarContent.currentTemplate == "Thiết kế & Font") {
+              <ng-container *ngTemplateOutlet="sidebar_content_font"></ng-container>
+              } @else if (sidebarContent.currentTemplate == "Thêm mục") {
+              <ng-container *ngTemplateOutlet="groups"></ng-container>
+              } @else if (sidebarContent.currentTemplate == "Bố cục") {
+              <ng-container *ngTemplateOutlet="layout"></ng-container>
+              }
+            </div>
+            <!-- end sidebar content body -->
           </div>
-          <!-- end sidebar content header -->
-
-          <!-- sidebar content body -->
-          <div class="cv-sidebar-content-body">
-            @if(sidebarContent.currentTemplate == "Thiết kế & Font") {
-            <ng-container
-              *ngTemplateOutlet="sidebar_content_font"
-            ></ng-container>
-            } @else if (sidebarContent.currentTemplate == "Thêm mục") {
-            <ng-container *ngTemplateOutlet="groups"></ng-container>
-            } @else if (sidebarContent.currentTemplate == "Bố cục") {
-            <ng-container *ngTemplateOutlet="layout"></ng-container>
-            }
-          </div>
-          <!-- end sidebar content body -->
         </div>
       </div>
       <!-- end desktop -->
 
       <!-- cv content -->
-      <div id="cv-content" class="flex-grow-1 d-flex justify-content-center">
+      <div id="cv-content" class="flex-grow-1 d-flex justify-content-center" style="
+    --theme-color: {{ template?._css!['template']['themeColor'] }};
+    --theme-font: {{ template?._css!['template']['font'] }};
+    --theme-font-size: {{ template?._css!['template']['fontSize'] + 'px' }};
+    --theme-line-height: {{ template?._css!['template']['lineHeight'] }};
+    --multiplierFS: {{ template?._css!['template']['multiplierFS'] }};
+    ">
         <div class="content shadow-sm">
           <ng-container *ngTemplateOutlet="cv1"></ng-container>
         </div>
@@ -102,47 +94,29 @@
     <!-- font -->
     <div class="d-flex flex-column gap-2">
       <label for="font">Font chữ</label>
-      <p-dropdown
-        [options]="fonts"
-        [optionValue]="'value'"
-        [(ngModel)]="template._css['template']['font']"
-        [styleClass]="'w-100'"
-        appendTo="body"
-        optionLabel="label"
-      />
+      <p-dropdown [options]="fonts" [optionValue]="'value'" [(ngModel)]="template._css['template']['font']"
+        [styleClass]="'w-100'" appendTo="body" optionLabel="label" />
     </div>
 
     <!-- cỡ chữ -->
-    <div class="d-flex flex-column gap-4">
+    <div class="d-flex flex-column gap-4 font-size">
       <label for="font">cỡ chữ</label>
-      <p-slider
-        styleClass="w-100"
-        [(ngModel)]="template._css['template']['fontSize']"
-        [min]="12"
-        [max]="48"
-      />
+      <p-slider styleClass="w-100" [(ngModel)]="template._css['template']['multiplierFS']" [min]="0.7" [max]="1.5"
+        [step]="0.2" />
     </div>
 
     <!-- khoảng cách dòng -->
     <div class="d-flex flex-column gap-4">
-      <label for="font">khoảng cách dòng</label>
-      <p-slider
-        styleClass="w-100"
-        [min]="1"
-        [max]="2"
-        [step]="0.1"
-        [(ngModel)]="template._css['template']['lineHieght']"
-      />
+      <label>khoảng cách dòng</label>
+      <p-slider styleClass="w-100" [min]="1" [max]="2" [step]="0.1"
+        [(ngModel)]="template._css['template']['lineHeight']" />
     </div>
 
     <!-- Màu chủ đề -->
     <div class="d-flex flex-column gap-3">
-      <label for="font">màu chủ đề</label>
-      <p-colorPicker
-        [(ngModel)]="template._css['template']['themeColor']"
-        [inline]="true"
-        styleClass="w-100"
-      />
+      <label>màu chủ đề</label>
+      <p-colorPicker (onChange)="onChangeThemeColor($event)" [(ngModel)]="template._css['template']['themeColor']"
+        [inline]="true" styleClass="w-100" />
     </div>
     }@else { Đang tải dữ liệu template }
   </div>
@@ -150,36 +124,22 @@
 
 <!-- layout template -->
 <ng-template #layout>
-  <div
-    id="cv-layout"
-    cdkDropListGroup
-    class="_template p-2 d-flex flex-column gap-2"
-  >
+  <div id="cv-layout" cdkDropListGroup class="_template p-2 d-flex flex-column gap-2">
     @for (row of listRow; track row.id) {
 
     <!-- condition: row -->
     <div class="_row py-2 d-flex">
-      <p-splitter
-        [minSizes]="row._panelMinSizes!"
-        (onResizeEnd)="onResizeEnd($event, row)"
-        class="w-100"
-        [styleClass]="'w-100'"
-        [panelSizes]="row._panelSizes!"
-      >
+      <p-splitter [minSizes]="row._panelMinSizes!" (onResizeEnd)="onResizeEnd($event, row)" class="w-100"
+        [styleClass]="'w-100'" [panelSizes]="row._panelSizes!">
         @for (col of row._listChild; track col.id) {
         <!-- condition: column -->
         <ng-template pTemplate>
-          <div
-            class="_col p-2 d-flex flex-column gap-2"
-            cdkDropList
-            id="{{ col.id }}"
-            (cdkDropListDropped)="dropIntoCol($event, col)"
-            [cdkDropListData]="col._listTypeCode!"
-          >
+          <div class="_col p-2 d-flex flex-column gap-2" cdkDropList id="{{ col.id }}"
+            (cdkDropListDropped)="dropIntoCol($event, col)" [cdkDropListData]="col._listTypeCode!">
             @for (group of col._listTypeCode; track group) {
 
             <div class="_group text-center p-3 bg-light rounded border" cdkDrag>
-              {{ group }}
+              {{ group.label }}
             </div>
 
             }
@@ -204,24 +164,16 @@
 
       <i>Kéo và thả mục bất kỳ vào vị trí bạn muốn thêm trên CV</i>
 
-      <div
-        class="list-avaible d-flex flex-column gap-2"
-        id="groups"
-        [cdkDropListConnectedTo]="listCdkDropListConnectedTo"
-        cdkDropList
-        [cdkDropListData]="listGroupDistinct"
-        (cdkDropListDropped)="dropIntoCol($event)"
-      >
+      <div class="list-avaible d-flex flex-column gap-2" id="groups"
+        [cdkDropListConnectedTo]="listCdkDropListConnectedTo" cdkDropList [cdkDropListData]="listGroupDistinct"
+        (cdkDropListDropped)="dropIntoCol($event)">
         @for(group of listGroupDistinct; track group) {
-        <div
-          cdkDrag
-          class="d-flex justify-content-between gap-2 align-items-center _group p-3 bg-light rounded border"
-        >
+        <div cdkDrag class="d-flex justify-content-between gap-2 align-items-center _group p-3 bg-light rounded border">
           <div class="d-flex gap-4">
             <span>#</span>
 
             <span class="name">
-              {{ group }}
+              {{ group.label }}
             </span>
           </div>
 
@@ -245,44 +197,38 @@
 </ng-template>
 
 <!-- CV1 -->
- {{ template?._css!['template'] | json }}
 <ng-template #cv1>
-  <div
-    id="cv-template"
-    cdkDropListGroup
-    class="_template p-2 d-flex flex-column {{ template?.code }}"
-    style="--theme-color: {{ template?._css!['template']['themeColor'] }}"
-    [style.fontSize.px]="(template?._css)!['template']['fontSize']"
-  >
+  <div id="cv-template" cdkDropListGroup class="_template d-flex flex-column {{ template?.code }}">
     @for (row of listRow; track row.id) {
 
     <!-- condition: row -->
-    <div id="{{ row.id }}" class="_row py-2 d-flex">
+    <div id="{{ row.id }}" class="_row d-flex">
+
       <!-- condition: column -->
-      <div
-        class="_col p-2 d-flex flex-column gap-2"
-        cdkDropList
-        id="{{ col.id }}"
-        *ngFor="let col of row._listChild"
-        [cdkDropListConnectedTo]="['groups']"
-        (cdkDropListDropped)="dropIntoCol($event, col)"
-        [cdkDropListData]="col._listTypeCode!"
-        [style]="{ 'flex-basis': col._css['width'] + '%' }"
-      >
+      <div class="_col p-2 d-flex flex-column " cdkDropList id="{{ col.id }}" *ngFor="let col of row._listChild"
+        [cdkDropListConnectedTo]="['groups']" (cdkDropListDropped)="dropIntoCol($event, col)"
+        [cdkDropListData]="col._listTypeCode!" [style]="{ 'flex-basis': col._css['width'] + '%' }">
+
         @for (typeCode of col._listTypeCode; track typeCode) {
 
-        <app-recruitment-info
-          [template]="template"
-          [listElement]="col._hashMapTypeCode[typeCode]"
-          [typeCode]="typeCode"
-          [label]="typeCode"
-          *ngIf="typeCode == 'RecruitmentInfo'"
-        ></app-recruitment-info>
 
-        <app-business-card
-          cdkDrag
-          *ngIf="typeCode == 'BusinessCard'"
-        ></app-business-card>
+
+        <ng-container>
+
+          @if( typeCode.layout == '5' ) {
+          <app-cv-element-5 (onUpdateElementEvent)="onUpdateElement($event, col)" [template]="template"
+            [listElement]="col._hashMapTypeCode[typeCode.typeCode]" [typeCode]="typeCode.typeCode"
+            [label]="typeCode.label"></app-cv-element-5>
+
+          }@else {
+          <app-cv-element (onUpdateElementEvent)="onUpdateElement($event, col)" [template]="template"
+            [listElement]="col._hashMapTypeCode[typeCode.typeCode]" [typeCode]="typeCode.typeCode"
+            [label]="typeCode.label"></app-cv-element>
+          }
+
+        </ng-container>
+
+
 
         }
       </div>
