@@ -23,7 +23,7 @@
 
         <div id="sidebar-group" class="d-none d-lg-flex gap-2">
           <!-- sidebar -->
-          <div id="cv-sidebar" class="shadow-sm rounded">
+          <div id="cv-sidebar" class="shadow-sm rounded d-none d-xl-block">
             <div class="cv-sidebar-menu d-flex flex-column">
               @for(item of sidebarContent.listSidebarItem; track item.label) {
               <div class="d-flex align-items-center gap-3 cv-sidebar-menu-item" [class.active]="item.isActive"
@@ -52,7 +52,7 @@
             <!-- end sidebar content header -->
 
             <!-- sidebar content body -->
-            <div class="cv-sidebar-content-body">
+            <div class="cv-sidebar-content-body" style="overflow: auto;"> 
               @if(sidebarContent.currentTemplate == "Thiết kế & Font") {
               <ng-container *ngTemplateOutlet="sidebar_content_font"></ng-container>
               } @else if (sidebarContent.currentTemplate == "Thêm mục") {
@@ -62,6 +62,16 @@
               }
             </div>
             <!-- end sidebar content body -->
+
+             <div class="cv-sidebar-content-footer cv-sidebar-menu d-flex d-xl-none">
+              @for(item of sidebarContent.listSidebarItem; track item.label) {
+              <div class="d-flex align-items-center gap-3 cv-sidebar-menu-item" [class.active]="item.isActive"
+                (click)="selectSidebarItem(item)">
+                <i class="{{ item.icon }}"></i>
+                {{ item.label }}
+              </div>
+              }
+            </div>
           </div>
         </div>
       </div>

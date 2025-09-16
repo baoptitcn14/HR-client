@@ -18,7 +18,9 @@
 #sidebar-group {
     z-index: 999;
     top: 80px;
-    height: 100%;
+    left: 5px;
+    max-height: calc(100vh - 87px);
+
 }
 
 #cv-sidebar {
@@ -29,7 +31,10 @@
     // top: 80px;
     // height: 100%;
 
-    .cv-sidebar-menu {
+    
+}
+
+.cv-sidebar-menu {
         &-item {
             font-size: 1rem;
             padding: 1.2rem 1.5rem;
@@ -65,14 +70,13 @@
             }
         }
     }
-}
 
 .cv-sidebar-content {
     transition: all 0.3s ease-in-out;
     transform: translateX(-200px);
     width: 0;
     background-color: #fff;
-    overflow: hidden;
+    // overflow: hidden;
     color: var(--surface-500);
     opacity: 0;
     // z-index: 999;
@@ -94,6 +98,14 @@
             font-weight: bold;
             color: var(--surface-600);
         }
+    }
+
+    &-body {
+        max-height: calc(100% - 130px);
+    }
+
+    &-footer {
+        height: 60px;
     }
 }
 
@@ -229,5 +241,13 @@
 
     ._row {
         background-color: var(--surface-c);
+    }
+}
+
+//xl
+@media screen and (min-width: 1200px) {
+    .cv-sidebar-content-body {
+        height: auto !important;
+        max-height: calc(100% - 80px);
     }
 }
