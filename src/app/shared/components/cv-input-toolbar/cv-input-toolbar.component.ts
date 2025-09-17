@@ -1,5 +1,13 @@
 import { CommonModule } from '@angular/common';
-import { Component, DestroyRef, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  DestroyRef,
+  EventEmitter,
+  inject,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { ColorPickerModule } from 'primeng/colorpicker';
 import { IThanhPhan } from '../create-manual-form/create-manual-form.component';
@@ -16,7 +24,6 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   styleUrl: './cv-input-toolbar.component.scss',
 })
 export class CvInputToolbarComponent implements OnInit {
-
   // inject region
   private cvService = inject(CvService);
   private destroyRef = inject(DestroyRef);
@@ -24,7 +31,10 @@ export class CvInputToolbarComponent implements OnInit {
   @Input({ required: true }) element!: IThanhPhan;
 
   // output region
-  @Output() onUpdateElementEvent = new EventEmitter<{ element: IThanhPhan, action: string }>();
+  @Output() onUpdateElementEvent = new EventEmitter<{
+    element: IThanhPhan;
+    action: string;
+  }>();
   @Output() onRestoreSelectionEvent = new EventEmitter();
 
   // declare region
@@ -38,7 +48,6 @@ export class CvInputToolbarComponent implements OnInit {
     { label: 'U', styleClass: 'underline', active: false },
   ];
 
-
   ngOnInit(): void {
     this.subscribeStateButtons();
   }
@@ -46,22 +55,30 @@ export class CvInputToolbarComponent implements OnInit {
   // Theo dõi state của các textStyleButtons
   private subscribeStateButtons() {
     // bold button
-    this.cvService.bold$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(data => {
-      this.textStyleButtons[0].active = data;
-      this.textStyleButtons[0].styleClass = data ? 'active' : '';
-    });
+    this.cvService.b$
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((data) => {
+        this.textStyleButtons[0].active = data;
+        this.textStyleButtons[0].styleClass = data ? 'active' : '';
+      });
 
     // italic button
-    this.cvService.italic$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(data => {
-      this.textStyleButtons[1].active = data;
-      this.textStyleButtons[1].styleClass = data ? 'active italic' : 'italic';
-    });
+    this.cvService.i$
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((data) => {
+        this.textStyleButtons[1].active = data;
+        this.textStyleButtons[1].styleClass = data ? 'active italic' : 'italic';
+      });
 
     // underline button
-    this.cvService.underline$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(data => {
-      this.textStyleButtons[2].active = data;
-      this.textStyleButtons[2].styleClass = data ? 'active underline' : 'underline';
-    });
+    this.cvService.u$
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((data) => {
+        this.textStyleButtons[2].active = data;
+        this.textStyleButtons[2].styleClass = data
+          ? 'active underline'
+          : 'underline';
+      });
   }
 
   onUpdateElement(action: string) {
@@ -74,33 +91,29 @@ export class CvInputToolbarComponent implements OnInit {
   }
 
   onActionToolbar(action: string, data: any) {
-
     if (action != 'color') {
-
       this.cvService.restoreSelection();
 
-      if (action == 'textStyle') {
-        if (data.label == 'B') {
-          this.cvService.applyBold();
-        } else if (data.label == 'I') {
-          this.cvService.applyItalic();
-        } else if (data.label == 'U') {
-          this.cvService.applyUnderline();
+      setTimeout(() => {
+        if (action == 'textStyle') {
+          if (data.label == 'B') {
+            this.cvService.applyBold();
+          } else if (data.label == 'I') {
+            this.cvService.applyItalic();
+          } else if (data.label == 'U') {
+            this.cvService.applyUnderline();
+          }
+        } else if (action == 'font') {
+          // this.element._css['element']['font'] = data;
+          document.execCommand('fontName', false, data);
+        } else if (action == 'fs') {
+          this.cvService.setFontSize(data);
+          // this.onUpdateElement('fontSize');
         }
-
-      } else if (action == 'font') {
-        // this.element._css['element']['font'] = data;
-        document.execCommand('fontName', false, data);
-
-      } else if (action == 'fs') {
-        this.cvService.setFontSize(data);
-        // this.onUpdateElement('fontSize');
-      }
+      }, 100);
     } else {
       document.execCommand('foreColor', false, data.value);
     }
-
-
   }
 
   onShowColorPicker(event: any) {
