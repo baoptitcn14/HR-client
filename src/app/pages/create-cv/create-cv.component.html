@@ -1,5 +1,5 @@
 <div id="cv">
-  <div id="cv-toolbar" class="cv-toolbar">
+  <div id="cv-toolbar" class="cv-toolbar d-none d-md-flex">
     <div class="container-fluid d-flex gap-2 justify-content-between">
       <div class="cv-name d-flex align-items-center">
         <i class="pi pi-file"></i>
@@ -17,11 +17,11 @@
   </div>
 
   <div class="container-fluid">
-    <div class="d-flex gap-5 py-4 px-2 w-100 overflow-auto">
+    <div class="d-flex gap-5 pt-4 px-2 w-100 overflow-auto pb-6 pb-md-4">
       <!-- sidebar desktop -->
-      <div style="flex-basis: 50%;" class="d-none d-lg-flex gap-2">
+      <div style="flex-basis: 50%; min-width: 330px;" class="d-none d-md-flex gap-2">
 
-        <div id="sidebar-group" class="d-none d-lg-flex gap-2">
+        <div id="sidebar-group" class="d-none d-md-flex gap-2">
           <!-- sidebar -->
           <div id="cv-sidebar" class="shadow-sm rounded d-none d-xl-block">
             <div class="cv-sidebar-menu d-flex flex-column">
@@ -85,14 +85,16 @@
     --theme-line-height: {{ template?._css!['template']['lineHeight'] }};
     --multiplierFS: {{ template?._css!['template']['multiplierFS'] }};
     ">
-        <div class="content shadow-sm">
+        <div class="content">
           <ng-container *ngTemplateOutlet="cv1"></ng-container>
         </div>
       </div>
       <!-- end cv content -->
     </div>
     <!-- sidebar mobile -->
-    <div class="d-lg-none"></div>
+    <div class="d-md-none">
+
+    </div>
     <!-- end mobile -->
   </div>
 </div>
@@ -134,7 +136,7 @@
 
 <!-- layout template -->
 <ng-template #layout>
-  <div id="cv-layout" cdkDropListGroup class="_template p-2 d-flex flex-column gap-2">
+  <div id="cv-layout" cdkDropListGroup class=" p-2 d-flex flex-column gap-2">
     @for (row of listRow; track row.id) {
 
     <!-- condition: row -->
@@ -208,7 +210,7 @@
 
 <!-- CV1 -->
 <ng-template #cv1>
-  <div id="cv-template" cdkDropListGroup class="_template d-flex flex-column {{ template?.code }}">
+  <div id="cv-template" cdkDropListGroup class="shadow-sm _template d-flex flex-column {{ template?.code }}">
     @for (row of listRow; track row.id) {
 
     <!-- condition: row -->

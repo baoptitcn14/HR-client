@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import { Component, DestroyRef, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { ColorPickerModule } from 'primeng/colorpicker';
 import { IThanhPhan } from '../create-manual-form/create-manual-form.component';
 import { FormsModule } from '@angular/forms';
 import { ICvInputConfig } from '../cv-input/cv-input.component';
 import { CvService } from '../../../pages/create-cv/cv.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-cv-input-toolbar',
@@ -14,22 +15,20 @@ import { CvService } from '../../../pages/create-cv/cv.service';
   templateUrl: './cv-input-toolbar.component.html',
   styleUrl: './cv-input-toolbar.component.scss',
 })
-export class CvInputToolbarComponent {
+export class CvInputToolbarComponent implements OnInit {
 
   // inject region
   private cvService = inject(CvService);
-
+  private destroyRef = inject(DestroyRef);
   // input region
   @Input({ required: true }) element!: IThanhPhan;
 
   // output region
-  @Output() onUpdateElementEvent = new EventEmitter();
+  @Output() onUpdateElementEvent = new EventEmitter<{ element: IThanhPhan, action: string }>();
   @Output() onRestoreSelectionEvent = new EventEmitter();
 
   // declare region
-  fontSizes = [
-    12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48,
-  ];
+  fontSizes = Array.from({ length: 48 }, (_, index) => index + 1).slice(11);
   fonts = ['Arial', 'Times New Roman', 'Inter', 'Roboto'];
   textAlignButtons = ['left', 'center', 'right', 'justify'];
 
@@ -40,48 +39,76 @@ export class CvInputToolbarComponent {
   ];
 
 
-  onUpdateElement() {
-    this.onUpdateElementEvent.emit(this.element);
+  ngOnInit(): void {
+    this.subscribeStateButtons();
   }
 
-  onChangeFontSize(fontSize: number) {
-    this.element._css['element']['fontSize'] = fontSize;
-    this.onUpdateElement();
+  // Theo dõi state của các textStyleButtons
+  private subscribeStateButtons() {
+    // bold button
+    this.cvService.bold$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(data => {
+      this.textStyleButtons[0].active = data;
+      this.textStyleButtons[0].styleClass = data ? 'active' : '';
+    });
+
+    // italic button
+    this.cvService.italic$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(data => {
+      this.textStyleButtons[1].active = data;
+      this.textStyleButtons[1].styleClass = data ? 'active italic' : 'italic';
+    });
+
+    // underline button
+    this.cvService.underline$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(data => {
+      this.textStyleButtons[2].active = data;
+      this.textStyleButtons[2].styleClass = data ? 'active underline' : 'underline';
+    });
   }
 
-  onChangeFont(font: string) {
-    this.element._css['element']['font'] = font;
-    this.onUpdateElement();
+  onUpdateElement(action: string) {
+    this.onUpdateElementEvent.emit({ element: this.element, action });
   }
 
   onChangeTextAlign(textAlign: string) {
     this.element._css['element']['textAlign'] = textAlign;
-    this.onUpdateElement();
+    // this.onUpdateElement();
   }
 
   onActionToolbar(action: string, data: any) {
-    this.onRestoreSelectionEvent.emit();
 
-    if (action == 'textStyle') {
-      if (data.label == 'B') {
-        document.execCommand('bold');
-      } else if (data.label == 'I') {
-        document.execCommand('italic');
-      } else if (data.label == 'U') {
-        document.execCommand('underline');
+    if (action != 'color') {
+
+      this.cvService.restoreSelection();
+
+      if (action == 'textStyle') {
+        if (data.label == 'B') {
+          this.cvService.applyBold();
+        } else if (data.label == 'I') {
+          this.cvService.applyItalic();
+        } else if (data.label == 'U') {
+          this.cvService.applyUnderline();
+        }
+
+      } else if (action == 'font') {
+        // this.element._css['element']['font'] = data;
+        document.execCommand('fontName', false, data);
+
+      } else if (action == 'fs') {
+        this.cvService.setFontSize(data);
+        // this.onUpdateElement('fontSize');
       }
-
-      this.onUpdateElement();
-    } else if (action == 'font') {
-      this.element._css['element']['font'] = data;
-    } else if (action == 'fs') {
-      this.element._css['element']['fontSize'] = data;
+    } else {
+      document.execCommand('foreColor', false, data.value);
     }
 
+
+  }
+
+  onShowColorPicker(event: any) {
+    this.onRestoreSelectionEvent.emit();
   }
 
   onChangeOrderList(type: string) {
     this.element._css['element']['listStyleType'] = type;
-    this.onUpdateElement();
+    // this.onUpdateElement();
   }
 }

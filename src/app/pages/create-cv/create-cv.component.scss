@@ -1,11 +1,10 @@
 .cv-toolbar {
-    top: 0;
     left: 0;
     background-color: #fff;
     padding: 1.5rem;
     border-bottom: 1px solid var(--surface-c);
     width: 100%;
-
+    top: 0;
 }
 
 .fixed {
@@ -19,8 +18,11 @@
     z-index: 999;
     top: 80px;
     left: 5px;
-    max-height: calc(100vh - 87px);
+    max-height: calc(80dvh - 87px);
 
+    &.fixed {
+        max-height: calc(95dvh - 87px);
+    }
 }
 
 #cv-sidebar {
@@ -76,12 +78,11 @@
     transform: translateX(-200px);
     width: 0;
     background-color: #fff;
-    // overflow: hidden;
     color: var(--surface-500);
     opacity: 0;
-    // z-index: 999;
-    // top: 80px;
-    // left: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 
     &.show {
         transform: translateX(0);
@@ -102,6 +103,7 @@
 
     &-body {
         max-height: calc(100% - 130px);
+        flex-grow: 1;
     }
 
     &-footer {
@@ -186,12 +188,12 @@
 
 }
 
-.abc {
-    width: 100%;
-    height: 35px;
-    border: 1px solid var(--surface-c);
-    background-color: var(--primary-color);
-}
+// .abc {
+//     width: 100%;
+//     height: 35px;
+//     border: 1px solid var(--surface-c);
+//     background-color: var(--primary-color);
+// }
 
 ._template {
     //pdf 816px x 1056px
@@ -250,4 +252,9 @@
         height: auto !important;
         max-height: calc(100% - 80px);
     }
+
+}
+
+.pb-6 {
+    padding-bottom: 5rem;
 }

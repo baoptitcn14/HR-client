@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, HostListener, inject, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { AfterViewChecked, Component, ElementRef, EventEmitter, HostListener, inject, Input, OnInit, Output, Sanitizer, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CvInputActionComponent } from '../cv-input-action/cv-input-action.component';
 import { CvInputToolbarComponent } from '../cv-input-toolbar/cv-input-toolbar.component';
 import { OverlayPanel, OverlayPanelModule } from 'primeng/overlaypanel';
 import { IThanhPhan } from '../create-manual-form/create-manual-form.component';
 import { CvService } from '../../../pages/create-cv/cv.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-cv-input',
@@ -20,7 +21,7 @@ import { CvService } from '../../../pages/create-cv/cv.service';
   templateUrl: './cv-input.component.html',
   styleUrl: './cv-input.component.scss',
 })
-export class CvInputComponent {
+export class CvInputComponent implements AfterViewChecked {
 
 
   // inject region
@@ -30,16 +31,9 @@ export class CvInputComponent {
 
   @Input() themeColor: string = '';
   @Input({ required: true }) element!: IThanhPhan;
-  // @Input() first = false;
-  // @Input() last = false;
-  // @Input() index = 0;
 
   @ViewChild('op') op!: OverlayPanel;
-
-  // event region
-  // @Output() onMoveUpEvent = new EventEmitter<IMoveEvent>();
-  // @Output() onMoveDownEvent = new EventEmitter<IMoveEvent>();
-  // @Output() onAddEvent = new EventEmitter<IMoveEvent>();
+  @ViewChild('editor') editor!: ElementRef;
 
 
   // declare region
@@ -55,13 +49,16 @@ export class CvInputComponent {
   width = 200;
   height = 200;
 
+
   @HostListener('document:mouseup', ['$event']) onMouseUp(event: MouseEvent) {
     this.onMouseUpImageScale();
   }
 
-  checkBlank(event: any) {
+  ngAfterViewChecked(): void {
+    // this.cvService.restoreSelection()
+  }
 
-    console.log(event.target.innerHTML);
+  checkBlank(event: any) {
 
     (this.element as any)._isBlank
       = this.cvService.isContentEditableEmpty(event.target.innerHTML);
@@ -73,19 +70,15 @@ export class CvInputComponent {
     }
   }
 
-  onUpdateElement(element: IThanhPhan) {
-    this.element = element;
+  onUpdateElementFromToolbar(event: { element: IThanhPhan, action: string }) {
+
+    this.element = event.element;
+
   }
 
   onInputEditor(event: any) {
-
     this.element._isBlank
       = this.cvService.isContentEditableEmpty(event.target.innerHTML);
-
-    if (this.element._isBlank) {
-      this.element._value = "";
-    } else
-      this.element._value = event.target.innerHTML;
   }
 
   // Gọi hàm này khi editor focus hoặc selection thay đổi

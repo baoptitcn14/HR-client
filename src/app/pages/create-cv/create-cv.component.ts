@@ -411,6 +411,9 @@ export class CreateCvComponent implements OnInit {
           label: item.label,
           layout: item.layout
         }));
+
+
+      console.log(this.listGroupDistinct)
     });
   }
 

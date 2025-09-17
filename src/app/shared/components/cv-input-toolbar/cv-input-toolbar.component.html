@@ -7,7 +7,7 @@
       <i class="pi pi-chevron-down"></i>
     </div>
     <ul class="dropdown-list p-0">
-      <li *ngFor="let item of fontSizes" class="dropdown-list-item"  (click)="onActionToolbar('fs', item)">
+      <li *ngFor="let item of fontSizes" class="dropdown-list-item" (click)="onActionToolbar('fs', item)">
         <a href="javascript:;">
           {{ item + "px" }}
         </a>
@@ -33,16 +33,17 @@
 
   <!-- color -->
   <div class="color cv-input-toolbar-item">
-    <p-colorPicker (onChange)="onUpdateElement()" [(ngModel)]="element._css['element']['color']"
+    <p-colorPicker (onChange)="onActionToolbar('color', $event)" (onShow)="onShowColorPicker($event)"
       [styleClass]="'cv-input-toolbar-item-colorpicker'" />
   </div>
 
   <!-- text decoration -->
   <div class="text-decoration cv-input-toolbar-item">
+
     @for(button of textStyleButtons; track button.label) {
 
-    <p-button [label]="button.label" [styleClass]="button.styleClass" (click)="onActionToolbar('textStyle', button)" [text]="true"
-      severity="secondary" />
+    <p-button [label]="button.label" [styleClass]="button.styleClass" (click)="onActionToolbar('textStyle', button)"
+      [text]="true" severity="secondary" />
 
     }
   </div>
@@ -62,7 +63,8 @@
   @if(element.cvInputConfig?.toolbarConfig?.showAlign) {
   <div class="text-decoration cv-input-toolbar-item gap-1">
     @for(align of textAlignButtons; track align) {
-    <p-button icon="pi pi-align-{{ align }}" [text]="true" severity="secondary" (click)="onActionToolbar('align', align)" />
+    <p-button icon="pi pi-align-{{ align }}" [text]="true" severity="secondary"
+      (click)="onActionToolbar('align', align)" />
     }
   </div>
   }

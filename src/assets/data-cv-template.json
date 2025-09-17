@@ -1731,6 +1731,7 @@
     },
     {
         "typeCode": "Education",
+        "label": "Học vấn",
         "index": 1,
         "value": [
             {
@@ -1744,6 +1745,7 @@
     },
     {
         "typeCode": "Education",
+        "label": "Học vấn",
         "index": 1,
         "value": [
             {
@@ -1757,6 +1759,7 @@
     },
     {
         "typeCode": "Education",
+        "label": "Học vấn",
         "index": 1,
         "value": [
             {
@@ -1770,6 +1773,7 @@
     },
     {
         "typeCode": "Education",
+        "label": "Học vấn",
         "index": 1,
         "value": [
             {
@@ -1783,6 +1787,7 @@
     },
     {
         "typeCode": "Education",
+        "label": "Học vấn",
         "index": 1,
         "value": [
             {
@@ -1796,6 +1801,7 @@
     },   
     {
         "typeCode": "Experience",
+        "label": "Kinh nghiệm",
         "index": 1,
         "value": [
             {
@@ -1809,6 +1815,7 @@
     },
     {
         "typeCode": "Experience",
+        "label": "Kinh nghiệm",
         "index": 1,
         "value": [
             {
@@ -1822,6 +1829,7 @@
     },
     {
         "typeCode": "Experience",
+        "label": "Kinh nghiệm",
         "index": 1,
         "value": [
             {
@@ -1835,6 +1843,7 @@
     },
     {
         "typeCode": "Experience",
+        "label": "Kinh nghiệm",
         "index": 1,
         "value": [
             {
@@ -1848,6 +1857,7 @@
     },
     {
         "typeCode": "Experience",
+        "label": "Kinh nghiệm",
         "index": 1,
         "value": [
             {
@@ -1861,6 +1871,7 @@
     },
     {
         "typeCode": "Experience",
+        "label": "Kinh nghiệm",
         "index": 1,
         "value": [
             {
@@ -3077,6 +3088,7 @@
     },
     {
         "typeCode": "Activity",
+        "label": "Hoạt động",
         "index": 1,
         "value": [
             {
@@ -3090,6 +3102,7 @@
     },
     {
         "typeCode": "Activity",
+        "label": "Hoạt động",
         "index": 1,
         "value": [
             {
@@ -3103,6 +3116,7 @@
     },
     {
         "typeCode": "Activity",
+        "label": "Hoạt động",
         "index": 1,
         "value": [
             {
@@ -3116,6 +3130,7 @@
     },
     {
         "typeCode": "Activity",
+        "label": "Hoạt động",
         "index": 1,
         "value": [
             {
@@ -3129,6 +3144,7 @@
     },
     {
         "typeCode": "Activity",
+        "label": "Hoạt động",
         "index": 1,
         "value": [
             {
@@ -3157,6 +3173,7 @@
     },
     {
         "typeCode": "Certificate",
+        "label": "Chứng chi",
         "index": 1,
         "value": [
             {
@@ -3611,6 +3628,7 @@
     },
     {
         "typeCode": "Certificate",
+        "label": "Chứng chi",
         "index": 1,
         "value": [
             {
@@ -3624,6 +3642,7 @@
     },
     {
         "typeCode": "Certificate",
+        "label": "Chứng chi",
         "index": 1,
         "value": [
             {
@@ -3637,6 +3656,7 @@
     },
     {
         "typeCode": "Certificate",
+        "label": "Chứng chi",
         "index": 1,
         "value": [
             {
@@ -3650,6 +3670,7 @@
     },
     {
         "typeCode": "Skill",
+        "label": "Kỹ năng",
         "index": 1,
         "value": [
             {
@@ -5269,6 +5290,7 @@
     },
     {
         "typeCode": "Skill",
+        "label": "Kỹ năng",
         "index": 1,
         "value": [
             {
@@ -5282,6 +5304,7 @@
     },
     {
         "typeCode": "Skill",
+        "label": "Kỹ năng",
         "index": 1,
         "value": [
             {
@@ -5295,6 +5318,7 @@
     },
     {
         "typeCode": "Skill",
+        "label": "Kỹ năng",
         "index": 1,
         "value": [
             {
@@ -5323,6 +5347,7 @@
     },
     {
         "typeCode": "Award",
+        "label": "Giải thưởng",
         "index": 1,
         "value": [
             {
@@ -5336,6 +5361,7 @@
     },
     {
         "typeCode": "Award",
+        "label": "Giải thưởng",
         "index": 1,
         "value": [
             {
@@ -5349,6 +5375,7 @@
     },
     {
         "typeCode": "Award",
+        "label": "Giải thưởng",
         "index": 1,
         "value": [
             {
@@ -5362,6 +5389,7 @@
     },
     {
         "typeCode": "Award",
+        "label": "Giải thưởng",
         "index": 1,
         "value": [
             {
@@ -5390,6 +5418,7 @@
     },
     {
         "typeCode": "Reference",
+        "label": "Người giới thiệu",
         "index": 1,
         "value": [
             {
@@ -5403,6 +5432,7 @@
     },
     {
         "typeCode": "Reference",
+        "label": "Người giới thiệu",
         "index": 1,
         "value": [
             {
@@ -5416,6 +5446,7 @@
     },
     {
         "typeCode": "Reference",
+        "label": "Người giới thiệu",
         "index": 1,
         "value": [
             {
@@ -5429,6 +5460,7 @@
     },
     {
         "typeCode": "Interest",
+        "label": "Sở thích",
         "index": 1,
         "value": [
             {

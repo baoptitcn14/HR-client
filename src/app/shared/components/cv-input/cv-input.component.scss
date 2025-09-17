@@ -106,9 +106,9 @@
         background-color: transparent;
         padding: 0.2rem;
 
-        &:focus {
-            border: 1px dashed var(--surface-500);
-        }
+        // &:focus {
+        //     border: 1px dashed var(--surface-500);
+        // }
 
         &:focus-visible {
             outline-color: var(--primary-500);
@@ -141,9 +141,9 @@
     }
 
     .editor[contenteditable="true"] {
-        display: flex;
-        align-items: center;
-        justify-content: var(--text-align);
+        // display: flex;
+        // align-items: center;
+        text-align: var(--text-align);
         position: relative;
 
         &.editor-blank {

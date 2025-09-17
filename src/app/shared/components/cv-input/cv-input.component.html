@@ -22,9 +22,10 @@
     </div>
   </div>
   }@else if(element.inputType === 'editor') {
-  <div (mouseup)="saveSelection()" (input)="checkBlank($event)" [class.editor-blank]="element._isBlank" [attr.data-placeholder]="element.label"
-    spellcheck="false" (keyup)="saveSelection()" class="editor {{ element.code }}" contenteditable="true"
-    (blur)="onInputEditor($event)" [innerHTML]="element._value" style="
+  <div #editor (mouseup)="saveSelection()" (input)="checkBlank($event)" [class.editor-blank]="element._isBlank"
+    [attr.data-placeholder]="element.label" spellcheck="false" (keyup)="saveSelection()"
+    class="editor {{ element.code }}" contenteditable="true" (blur)="onInputEditor($event)" [innerHTML]="element._value"
+    style="
     --font-size: {{ element._css['element']['fontSize'] }}px; 
     --color: {{ element._css['element']['color'] }};
     --text-align: {{ element._css['element']['textAlign'] }};
@@ -36,19 +37,10 @@
   </div>
 
   }@else {
-  <!-- <input type="text" style="
-    --font-size: {{ element._css['element']['fontSize'] }}px; 
-    --color: {{ element._css['element']['color'] }};
-    --text-align: {{ element._css['element']['textAlign'] }};
-    --text-decoration: {{ element._css['element']['textDecoration'] }};
-    --font-style: {{ element._css['element']['fontStyle'] }};
-    --font-weight: {{ element._css['element']['fontWeight'] }};
-    --font: {{ element._css['element']['font'] }};    
-    " class="{{ element.code }}" [placeholder]="element.label" [value]="element.defaultValue"
-    [(ngModel)]="element._value" /> -->
-  <div (mouseup)="saveSelection()" (input)="checkBlank($event)" [attr.data-placeholder]="element.label" spellcheck="false" (keyup)="saveSelection()"
-    class="editor {{ element.code }}" [class.editor-blank]="element._isBlank" contenteditable="true"
-    (blur)="onInputEditor($event)" (keydown)="onKeyDown($event)" [innerHTML]="element._value" style="
+  <div #editor (mouseup)="saveSelection()" (input)="checkBlank($event)" [attr.data-placeholder]="element.label"
+    spellcheck="false" (keyup)="saveSelection()" class="editor {{ element.code }}"
+    [class.editor-blank]="element._isBlank" contenteditable="true" (blur)="onInputEditor($event)"
+    (keydown)="onKeyDown($event)" [innerHTML]="element._value" style="
     --font-size: {{ element._css['element']['fontSize'] }}px; 
     --color: {{ element._css['element']['color'] }};
     --text-align: {{ element._css['element']['textAlign'] }};
@@ -64,6 +56,8 @@
 
   <p-overlayPanel #op [styleClass]="'cv-input-overlaypanel'" [appendTo]="'body'">
     <app-cv-input-toolbar [element]="element" (onRestoreSelectionEvent)="restoreSelection()"
-      (onUpdateElementEvent)="onUpdateElement($event)"></app-cv-input-toolbar>
+      (onUpdateElementEvent)="onUpdateElementFromToolbar($event)"></app-cv-input-toolbar>
   </p-overlayPanel>
 </div>
+
+
