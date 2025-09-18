@@ -1,7 +1,29 @@
 <div class="cv-group-action d-flex gap-1">
-    <i  class="pi pi-arrows-alt" cdkDragHandle pTooltip="Di chuyển mục" tooltipPosition="top"></i>
-    <i class="pi pi-arrow-up" pTooltip="Di chuyển lên trên" tooltipPosition="top"></i>
-    <i class="pi pi-arrow-down" pTooltip="Di chuyển xuống dưới" tooltipPosition="top"></i>
-    <!-- <i class="pi pi-user"></i> -->
-    <i class="pi pi-trash" pTooltip="Xóa" tooltipPosition="top"></i>
+  <i
+    class="pi pi-arrows-alt"
+    cdkDragHandle
+    pTooltip="Di chuyển mục"
+    tooltipPosition="top"
+  ></i>
+  <i
+    class="pi pi-arrow-up"
+    pTooltip="Di chuyển lên trên"
+    tooltipPosition="top"
+    (click)="onMoveUp($event)"
+    *ngIf="!first"
+  ></i>
+  <i
+    class="pi pi-arrow-down"
+    pTooltip="Di chuyển xuống dưới"
+    tooltipPosition="top"
+    (click)="onMoveDown($event)"
+    *ngIf="!last"
+  ></i>
+  <!-- <i class="pi pi-user"></i> -->
+  <i
+    class="pi pi-trash"
+    pTooltip="Xóa"
+    tooltipPosition="top"
+    (click)="onDelete($event)"
+  ></i>
 </div>

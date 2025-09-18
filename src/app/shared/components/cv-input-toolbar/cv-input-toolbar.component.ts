@@ -102,23 +102,20 @@ export class CvInputToolbarComponent implements OnInit {
         this.cvService.applyUnderline();
       }
     } else if (action == 'font') {
-      document.execCommand('fontName', false, data);
+      this.cvService.setFontFamily(data);
     } else if (action == 'fs') {
       this.cvService.setFontSize(data);
     } else if (action == 'orderList') {
       if (data == 'bullet') {
-
         this.cvService.applyOrderListBullet();
-
       } else if (data == 'number') {
         this.cvService.applyOrderListNumber();
       }
     } else if (action == 'color') {
-      this.cvService.applyFontColor(data.value)
+      this.cvService.applyFontColor(data.value);
     } else if (action == 'align') {
       this.cvService.applyAlignment(data);
     }
-
   }
 
   onShowColorPicker(event: any) {

@@ -1,13 +1,18 @@
-<div class="d-flex align-items-center gap-2 justify-content-center cv-input-toolbar">
+<div
+  class="d-flex align-items-center gap-2 justify-content-center cv-input-toolbar"
+>
   <!-- fontsize -->
   <div class="font-size dropdown cv-input-toolbar-item">
     <div class="dropdown-display d-flex align-items-center gap-2">
-      {{ element._css["element"]?.fontSize + "px" }}
-
+      Cỡ chữ
       <i class="pi pi-chevron-down"></i>
     </div>
     <ul class="dropdown-list p-0">
-      <li *ngFor="let item of fontSizes" class="dropdown-list-item" (click)="onActionToolbar('fs', item)">
+      <li
+        *ngFor="let item of fontSizes"
+        class="dropdown-list-item"
+        (click)="onActionToolbar('fs', item)"
+      >
         <a href="javascript:;">
           {{ item + "px" }}
         </a>
@@ -18,12 +23,16 @@
   <!-- font -->
   <div class="font dropdown cv-input-toolbar-item">
     <div class="dropdown-display">
-      {{ element._css["element"]["font"] }}
+      Kiểu chữ
 
       <i class="pi pi-chevron-down"></i>
     </div>
     <ul class="dropdown-list p-0">
-      <li *ngFor="let item of fonts" class="dropdown-list-item" (click)="onActionToolbar('font', item)">
+      <li
+        *ngFor="let item of fonts"
+        class="dropdown-list-item"
+        (click)="onActionToolbar('font', item)"
+      >
         <a href="javascript:;">
           {{ item }}
         </a>
@@ -33,17 +42,24 @@
 
   <!-- color -->
   <div class="color cv-input-toolbar-item">
-    <p-colorPicker (onChange)="onActionToolbar('color', $event)" (onShow)="onShowColorPicker($event)"
-      [styleClass]="'cv-input-toolbar-item-colorpicker'" />
+    <p-colorPicker
+      (onChange)="onActionToolbar('color', $event)"
+      (onShow)="onShowColorPicker($event)"
+      [styleClass]="'cv-input-toolbar-item-colorpicker'"
+    />
   </div>
 
   <!-- text decoration -->
   <div class="text-decoration cv-input-toolbar-item">
-
     @for(button of textStyleButtons; track button.label) {
 
-    <p-button [label]="button.label" [styleClass]="button.styleClass" (click)="onActionToolbar('textStyle', button)"
-      [text]="true" severity="secondary" />
+    <p-button
+      [label]="button.label"
+      [styleClass]="button.styleClass"
+      (click)="onActionToolbar('textStyle', button)"
+      [text]="true"
+      severity="secondary"
+    />
 
     }
   </div>
@@ -52,10 +68,20 @@
   @if(element.cvInputConfig?.toolbarConfig?.showOrderList) {
   <div class="text-decoration cv-input-toolbar-item gap-1">
     <!-- bullet -->
-    <p-button icon="pi pi-list" (click)="onActionToolbar('orderList', 'bullet')" [text]="true" severity="secondary" />
+    <p-button
+      icon="pi pi-list"
+      (click)="onActionToolbar('orderList', 'bullet')"
+      [text]="true"
+      severity="secondary"
+    />
 
     <!-- check -->
-    <p-button icon="pi pi-list-check" (click)="onActionToolbar('orderList', 'number')" [text]="true" severity="secondary" />
+    <p-button
+      icon="pi pi-list-check"
+      (click)="onActionToolbar('orderList', 'number')"
+      [text]="true"
+      severity="secondary"
+    />
   </div>
   }
 
@@ -63,8 +89,12 @@
   @if(element.cvInputConfig?.toolbarConfig?.showAlign) {
   <div class="text-decoration cv-input-toolbar-item gap-1">
     @for(align of textAlignButtons; track align) {
-    <p-button icon="pi pi-align-{{ align }}" [text]="true" severity="secondary"
-      (click)="onActionToolbar('align', align)" />
+    <p-button
+      icon="pi pi-align-{{ align }}"
+      [text]="true"
+      severity="secondary"
+      (click)="onActionToolbar('align', align)"
+    />
     }
   </div>
   }

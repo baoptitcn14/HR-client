@@ -7,16 +7,12 @@ import { IMoveEvent } from '../cv-input/cv-input.component';
 @Component({
   selector: 'app-cv-input-action',
   standalone: true,
-  imports: [
-    CommonModule,
-    TooltipModule
-  ],
+  imports: [CommonModule, TooltipModule],
   templateUrl: './cv-input-action.component.html',
-  styleUrl: './cv-input-action.component.scss'
+  styleUrl: './cv-input-action.component.scss',
 })
 export class CvInputActionComponent {
   // input region
-  // @Input({ required: true }) element!: IThanhPhan;
   @Input({ required: true }) groupId!: any;
   @Input() first = false;
   @Input() last = false;
@@ -26,38 +22,42 @@ export class CvInputActionComponent {
   @Output() onMoveUpEvent = new EventEmitter<IMoveEvent>();
   @Output() onMoveDownEvent = new EventEmitter<IMoveEvent>();
   @Output() onAddEvent = new EventEmitter<IMoveEvent>();
-
+  @Output() onDeleteEvent = new EventEmitter<IMoveEvent>();
 
   // di chuyển lên trên
   onMoveUp(event: any) {
     event.stopPropagation();
-    this.onMoveUpEvent.emit(
-      {
-        index: this.index,
-        groupId: this.groupId
-      }
-    );
+    this.onMoveUpEvent.emit({
+      index: this.index,
+      groupId: this.groupId,
+    });
   }
   // di chuyển xuong duoi
   onMoveDown(event: any) {
     event.stopPropagation();
-    this.onMoveDownEvent.emit(
-      {
-        index: this.index,
-        groupId: this.groupId
-      }
-    );
+    this.onMoveDownEvent.emit({
+      index: this.index,
+      groupId: this.groupId,
+    });
   }
 
   // them
   onAdd(event: any) {
     event.stopPropagation();
 
-    this.onAddEvent.emit(
-      {
-        index: this.index,
-        groupId: this.groupId
-      }
-    );
+    this.onAddEvent.emit({
+      index: this.index,
+      groupId: this.groupId,
+    });
+  }
+
+  //Xóa
+  onDelete(event: any) {
+    event.stopPropagation();
+
+    this.onDeleteEvent.emit({
+      index: this.index,
+      groupId: this.groupId,
+    });
   }
 }

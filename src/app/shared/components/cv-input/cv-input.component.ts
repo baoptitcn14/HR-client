@@ -1,12 +1,17 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewChecked, Component, ElementRef, EventEmitter, HostListener, inject, Input, OnInit, Output, Sanitizer, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  inject,
+  Input,
+  ViewChild,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { CvInputActionComponent } from '../cv-input-action/cv-input-action.component';
 import { CvInputToolbarComponent } from '../cv-input-toolbar/cv-input-toolbar.component';
 import { OverlayPanel, OverlayPanelModule } from 'primeng/overlaypanel';
 import { IThanhPhan } from '../create-manual-form/create-manual-form.component';
 import { CvService } from '../../../pages/create-cv/cv.service';
-import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-cv-input',
@@ -14,16 +19,13 @@ import { DomSanitizer } from '@angular/platform-browser';
   imports: [
     CommonModule,
     FormsModule,
-    CvInputActionComponent,
     CvInputToolbarComponent,
     OverlayPanelModule,
   ],
   templateUrl: './cv-input.component.html',
   styleUrl: './cv-input.component.scss',
 })
-export class CvInputComponent implements AfterViewChecked {
-
-
+export class CvInputComponent {
   // inject region
   cvService = inject(CvService);
 
@@ -34,7 +36,6 @@ export class CvInputComponent implements AfterViewChecked {
 
   @ViewChild('op') op!: OverlayPanel;
   @ViewChild('editor') editor!: ElementRef;
-
 
   // declare region
   focus = false;
@@ -49,7 +50,6 @@ export class CvInputComponent implements AfterViewChecked {
   width = 200;
   height = 200;
 
-
   @HostListener('document:mouseup', ['$event']) onMouseUp(event: MouseEvent) {
     this.onMouseUpImageScale();
   }
@@ -58,14 +58,10 @@ export class CvInputComponent implements AfterViewChecked {
     this.op.hide();
   }
 
-  ngAfterViewChecked(): void {
-    // this.cvService.restoreSelection()
-  }
-
   checkBlank(event: any) {
-
-    (this.element as any)._isBlank
-      = this.cvService.isContentEditableEmpty(event.target.innerHTML);
+    (this.element as any)._isBlank = this.cvService.isContentEditableEmpty(
+      event.target.innerHTML
+    );
   }
 
   onFocus(event: any) {
@@ -74,15 +70,14 @@ export class CvInputComponent implements AfterViewChecked {
     }
   }
 
-  onUpdateElementFromToolbar(event: { element: IThanhPhan, action: string }) {
-
+  onUpdateElementFromToolbar(event: { element: IThanhPhan; action: string }) {
     this.element = event.element;
-
   }
 
   onInputEditor(event: any) {
-    this.element._isBlank
-      = this.cvService.isContentEditableEmpty(event.target.innerHTML);
+    this.element._isBlank = this.cvService.isContentEditableEmpty(
+      event.target.innerHTML
+    );
   }
 
   // Gọi hàm này khi editor focus hoặc selection thay đổi
@@ -121,21 +116,26 @@ export class CvInputComponent implements AfterViewChecked {
 
     switch (this.activeCorner) {
       case 'se':
-        this.element._css['element']['width'] = this.width = this.startWidth + dx;
+        this.element._css['element']['width'] = this.width =
+          this.startWidth + dx;
         break;
       case 'ne':
-        this.element._css['element']['width'] = this.width = this.startWidth + dx;
+        this.element._css['element']['width'] = this.width =
+          this.startWidth + dx;
         break;
       case 'sw':
-        this.element._css['element']['width'] = this.width = this.startWidth - dx;
+        this.element._css['element']['width'] = this.width =
+          this.startWidth - dx;
         break;
       case 'nw':
-        this.element._css['element']['width'] = this.width = this.startWidth - dx;
+        this.element._css['element']['width'] = this.width =
+          this.startWidth - dx;
         break;
     }
 
     // giữ tỷ lệ ảnh 1/1
-    this.element._css['element']['height'] = this.height = this.element._css['element']['width'] * (1 / 1);
+    this.element._css['element']['height'] = this.height =
+      this.element._css['element']['width'] * (1 / 1);
   }
 }
 

@@ -1,62 +1,95 @@
-<div class="cv-element" (click)="onFocus($event)" style="display: flex; align-items: flex-start; gap: 10px;">
-
-  <i class="cv-icon {{ element.icon }} fw-bold" style="padding-top: 5px;" *ngIf="element.icon"></i>
+<div
+  class="cv-element"
+  (click)="onFocus($event)"
+  style="display: flex; align-items: flex-start; gap: 10px"
+>
+  <i
+    class="cv-icon {{ element.icon }} fw-bold"
+    style="padding-top: 5px"
+    *ngIf="element.icon"
+  ></i>
 
   @if(element.code === 'avatar') {
-  <div class="image-wrapper" (mousemove)="onMouseMoveImageScale($event)" *ngIf="element.code === 'avatar'">
+  <div
+    class="image-wrapper"
+    (mousemove)="onMouseMoveImageScale($event)"
+    *ngIf="element.code === 'avatar'"
+  >
     <div class="image-inner" [class.resizing]="resizing">
-      <img [src]="element._value" alt="avatar" [width]="width" [height]="height" />
+      <img
+        [src]="element._value"
+        alt="avatar"
+        [width]="width"
+        [height]="height"
+      />
 
       <!-- góc dưới phải -->
-      <i class="pi pi-arrows-h se" (mousedown)="onMouseDownImageScale($event, 'se')"></i>
+      <i
+        class="pi pi-arrows-h se"
+        (mousedown)="onMouseDownImageScale($event, 'se')"
+      ></i>
 
       <!-- góc dưới trái -->
-      <i class="pi pi-arrows-h sw" (mousedown)="onMouseDownImageScale($event, 'sw')"></i>
+      <i
+        class="pi pi-arrows-h sw"
+        (mousedown)="onMouseDownImageScale($event, 'sw')"
+      ></i>
 
       <!-- góc trên trái -->
-      <i class="pi pi-arrows-h nw" (mousedown)="onMouseDownImageScale($event, 'nw')"></i>
+      <i
+        class="pi pi-arrows-h nw"
+        (mousedown)="onMouseDownImageScale($event, 'nw')"
+      ></i>
 
       <!-- góc trên phải -->
-      <i class="pi pi-arrows-h ne" (mousedown)="onMouseDownImageScale($event, 'ne')"></i>
-
+      <i
+        class="pi pi-arrows-h ne"
+        (mousedown)="onMouseDownImageScale($event, 'ne')"
+      ></i>
     </div>
   </div>
   }@else if(element.inputType === 'editor') {
-  <div #editor (mouseup)="saveSelection()" (input)="checkBlank($event)" [class.editor-blank]="element._isBlank"
-    [attr.data-placeholder]="element.label" spellcheck="false" (keyup)="saveSelection()"
-    class="editor {{ element.code }}" contenteditable="true" (blur)="onInputEditor($event)" [innerHTML]="element._value"
-    style="
-    --font-size: {{ element._css['element']['fontSize'] }}px; 
-    --color: {{ element._css['element']['color'] }};
-    --text-align: {{ element._css['element']['textAlign'] }};
-    --text-decoration: {{ element._css['element']['textDecoration'] }};
-    --font-style: {{ element._css['element']['fontStyle'] }};
-    --font-weight: {{ element._css['element']['fontWeight'] }};
-    --font: {{ element._css['element']['font'] }};    
-    ">
-  </div>
+  <div
+    #editor
+    (mouseup)="saveSelection()"
+    (input)="checkBlank($event)"
+    [class.editor-blank]="element._isBlank"
+    [attr.data-placeholder]="element.label"
+    spellcheck="false"
+    (keyup)="saveSelection()"
+    class="editor {{ element.code }} field-{{ element.fieldIndex }}"
+    contenteditable="true"
+    (blur)="onInputEditor($event)"
+    [innerHTML]="element._value"
+  ></div>
 
   }@else {
-  <div #editor (mouseup)="saveSelection()" (input)="checkBlank($event)" [attr.data-placeholder]="element.label"
-    spellcheck="false" (keyup)="saveSelection()" class="editor {{ element.code }}"
-    [class.editor-blank]="element._isBlank" contenteditable="true" (blur)="onInputEditor($event)"
-    (keydown)="onKeyDown($event)" [innerHTML]="element._value" style="
-    --font-size: {{ element._css['element']['fontSize'] }}px; 
-    --color: {{ element._css['element']['color'] }};
-    --text-align: {{ element._css['element']['textAlign'] }};
-    --text-decoration: {{ element._css['element']['textDecoration'] }};
-    --font-style: {{ element._css['element']['fontStyle'] }};
-    --font-weight: {{ element._css['element']['fontWeight'] }};
-    --font: {{ element._css['element']['font'] }};    
-    ">
-  </div>
+  <div
+    #editor
+    (mouseup)="saveSelection()"
+    (input)="checkBlank($event)"
+    [attr.data-placeholder]="element.label"
+    spellcheck="false"
+    (keyup)="saveSelection()"
+    class="editor {{ element.code }} field-{{ element.fieldIndex }}"
+    [class.editor-blank]="element._isBlank"
+    contenteditable="true"
+    (blur)="onInputEditor($event)"
+    (keydown)="onKeyDown($event)"
+    [innerHTML]="element._value"
+  ></div>
 
   }
 
-  <p-overlayPanel #op [styleClass]="'cv-input-overlaypanel'" [appendTo]="'body'">
-    <app-cv-input-toolbar [element]="element" (onRestoreSelectionEvent)="restoreSelection()"
-      (onUpdateElementEvent)="onUpdateElementFromToolbar($event)"></app-cv-input-toolbar>
+  <p-overlayPanel
+    #op
+    [styleClass]="'cv-input-overlaypanel'"
+    [appendTo]="'body'"
+  >
+    <app-cv-input-toolbar
+      [element]="element"
+      (onRestoreSelectionEvent)="restoreSelection()"
+      (onUpdateElementEvent)="onUpdateElementFromToolbar($event)"
+    ></app-cv-input-toolbar>
   </p-overlayPanel>
 </div>
-
-

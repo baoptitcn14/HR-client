@@ -13,7 +13,7 @@ export class CvService {
   i$ = new BehaviorSubject<boolean>(false);
   u$ = new BehaviorSubject<boolean>(false);
 
-  constructor() { }
+  constructor() {}
 
   saveSelection() {
     const selection = window.getSelection();
@@ -101,11 +101,8 @@ export class CvService {
 
   // set Font family
   setFontFamily(font: string) {
-    if (this.range) {
-      const span = document.createElement('span');
-      span.style.fontFamily = font;
-      this.range.surroundContents(span);
-    }
+    document.execCommand('fontName', false, font);
+    this.keepSelectionText();
   }
 
   //apply font weight
@@ -148,15 +145,22 @@ export class CvService {
 
   //apply align
   applyAlignment(align: string) {
-
-    if(align == 'justify') align = 'full';
+    if (align == 'justify') align = 'full';
 
     document.execCommand('justify' + align.toUpperCase());
+
+    if (
+      document.activeElement?.firstElementChild?.firstElementChild &&
+      document.activeElement?.firstElementChild?.firstElementChild.tagName ==
+        'BR'
+    ) {
+      document.activeElement?.firstElementChild?.firstElementChild.remove();
+    }
+
     this.keepSelectionText();
   }
 
   private keepSelectionText() {
-
     const selection = window.getSelection();
     if (!selection!.rangeCount) return;
 
@@ -168,42 +172,48 @@ export class CvService {
       node = node.parentNode!;
     }
 
-    if (node && node.nodeName != "DIV") {
+    if (node && node.nodeName != 'DIV') {
       this.range = document.createRange();
       this.range.selectNodeContents(node);
       this.restoreSelection();
     }
 
     document.activeElement?.normalize();
-
   }
 
   //set Font size
   setFontSize(size: number) {
     const self = this;
 
-
     if (this.range) {
       const textContent = this.range!.cloneContents().textContent;
 
       // kiểm tra text đc bôi đen có chung 1 container không
 
-      const startContainer = this.range.startContainer.parentElement as HTMLElement;
+      const startContainer = this.range.startContainer
+        .parentElement as HTMLElement;
       const endContainer = this.range.endContainer.parentElement as HTMLElement;
 
       if (startContainer == endContainer) {
         if (
-          (startContainer && startContainer.nodeName === 'SPAN'
-            && isFullSelection(startContainer))
-          || (this.range.startContainer as HTMLElement).nodeName === 'SPAN'
-          && isFullSelection(this.range.startContainer as HTMLElement)
+          (startContainer &&
+            startContainer.nodeName === 'SPAN' &&
+            isFullSelection(startContainer)) ||
+          ((this.range.startContainer as HTMLElement).nodeName === 'SPAN' &&
+            isFullSelection(this.range.startContainer as HTMLElement))
         ) {
           startContainer.className = 'font-size-' + size; // đổi class
 
-          if (startContainer.childNodes.length == 1 && startContainer.firstChild?.nodeType === Node.TEXT_NODE) {
+          if (
+            startContainer.childNodes.length == 1 &&
+            startContainer.firstChild?.nodeType === Node.TEXT_NODE
+          ) {
             this.range.selectNodeContents(startContainer.firstChild);
             this.range.setStart(startContainer.firstChild, 0);
-            this.range.setEnd(startContainer.firstChild, (startContainer.firstChild as Text).length);
+            this.range.setEnd(
+              startContainer.firstChild,
+              (startContainer.firstChild as Text).length
+            );
           } else {
             this.range.selectNodeContents(startContainer);
             this.range.setStart(startContainer, 0);
@@ -211,7 +221,6 @@ export class CvService {
           }
 
           this.restoreSelection();
-
         } else {
           const span = document.createElement('span');
           span.classList.add('font-size-' + size);
@@ -220,11 +229,16 @@ export class CvService {
           // selection đang ở span
           this.range = document.createRange();
 
-
-          if (span.childNodes.length == 1 && span.firstChild?.nodeType === Node.TEXT_NODE) {
+          if (
+            span.childNodes.length == 1 &&
+            span.firstChild?.nodeType === Node.TEXT_NODE
+          ) {
             this.range.selectNodeContents(span.firstChild);
             this.range.setStart(span.firstChild, 0);
-            this.range.setEnd(span.firstChild, (span.firstChild as Text).length);
+            this.range.setEnd(
+              span.firstChild,
+              (span.firstChild as Text).length
+            );
           } else {
             this.range.selectNodeContents(span);
             this.range.setStart(span, 0);
@@ -232,21 +246,19 @@ export class CvService {
           }
 
           this.restoreSelection();
-
         }
       } else {
-
         const startOffset = this.range.startOffset;
         const endOffset = this.range.endOffset;
 
-
         // nếu startContainer chỉ có 1 textNode con
-        if (startContainer.childNodes.length == 1 && startContainer.firstChild?.nodeType === Node.TEXT_NODE) {
-
+        if (
+          startContainer.childNodes.length == 1 &&
+          startContainer.firstChild?.nodeType === Node.TEXT_NODE
+        ) {
           //Xóa đoạn text đc bôi đen dựa vào startOffset
           const textNode = startContainer.firstChild as Text;
           textNode.deleteData(startOffset, textNode.length);
-
         }
 
         //Xóa đoạn text đc bôi đen dựa vào endOffset
@@ -263,18 +275,15 @@ export class CvService {
         this.range.insertNode(span);
 
         // document.activeElement!.insertBefore(span, endContainer);
-
       }
-
-
-
     }
 
-
     function isFullSelection(span: HTMLElement): boolean {
-
       // Nếu span chỉ có 1 textNode con
-      if (span.childNodes.length === 1 && span.firstChild?.nodeType === Node.TEXT_NODE) {
+      if (
+        span.childNodes.length === 1 &&
+        span.firstChild?.nodeType === Node.TEXT_NODE
+      ) {
         const textNode = span.firstChild as Text;
         return (
           self.range!.startContainer === textNode &&
@@ -287,13 +296,17 @@ export class CvService {
       // Nếu span có nhiều node con (text + element)
       // => kiểm tra selection bao hết từ đầu đến cuối
       const startOk =
-        (self.range!.startContainer === span && self.range!.startOffset === 0) ||
-        (span.contains(self.range!.startContainer) && self.range!.startOffset === 0);
+        (self.range!.startContainer === span &&
+          self.range!.startOffset === 0) ||
+        (span.contains(self.range!.startContainer) &&
+          self.range!.startOffset === 0);
 
       const endOk =
-        (self.range!.endContainer === span && self.range!.endOffset === span.childNodes.length) ||
+        (self.range!.endContainer === span &&
+          self.range!.endOffset === span.childNodes.length) ||
         (span.contains(self.range!.endContainer) &&
-          self.range!.endOffset === self.range!.endContainer.textContent?.length);
+          self.range!.endOffset ===
+            self.range!.endContainer.textContent?.length);
 
       return startOk && endOk;
     }

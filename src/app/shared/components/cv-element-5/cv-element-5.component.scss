@@ -1,3 +1,7 @@
 .date-time {
     max-width: 150px;
+    div.editor:first {
+        text-align: right;
+        justify-self: flex-end;
+    }
 }

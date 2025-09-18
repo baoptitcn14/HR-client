@@ -3,10 +3,6 @@
     border: 1px dashed transparent;
 
     &:hover {
-        // app-cv-input-action {
-        //     display: block;
-        // }
-
         input[type="text"] {
             border: 1px dashed var(--surface-500);
         }
@@ -20,7 +16,6 @@
         width: 100%;
 
         .image-inner {
-
             width: fit-content;
             border: 2px dashed transparent;
             position: relative;
@@ -74,7 +69,6 @@
                 transform: rotate(-45deg);
             }
 
-
             .nw {
                 content: "";
                 top: 0;
@@ -82,33 +76,20 @@
                 cursor: nw-resize;
                 transform: rotate(45deg);
             }
-
-
-
-
         }
     }
 
-
-    input[type="text"],
     .editor[contenteditable="true"] {
-        font-family: var(--font, var(--theme-font, var(--font-family)));
-        font-size: calc(var(--font-size) * var(--multiplierFS));
-        font-weight: var(--font-weight, normal);
-        color: var(--color, currentColor);
-        text-align: var(--text-align, left);
-        text-decoration: var(--text-decoration);
-        font-style: var(--font-style);
+        font-family: var(--theme-font, var(--font-family));
+        font-size: calc(var(--theme-font-size) * var(--multiplierFS));
+        color: currentColor;
         line-height: var(--theme-line-height, 1.5);
 
         width: 100% !important;
         border: none;
         background-color: transparent;
         padding: 0.2rem;
-
-        // &:focus {
-        //     border: 1px dashed var(--surface-500);
-        // }
+        position: relative;
 
         &:focus-visible {
             outline-color: var(--primary-500);
@@ -116,35 +97,26 @@
 
         &:focus-visible,
         &:focus {
-            ~p-overlayPanel>app-cv-input-toolbar {
+            ~ p-overlayPanel > app-cv-input-toolbar {
                 .cv-input-toolbar {
                     display: flex;
                 }
             }
         }
 
-        // css đặc trưng của các mục input
-        &.card_fullname {
-            font-weight: var(--font-weight, bold);
-            text-transform: uppercase;
-            color: var(--color, currentColor);
+        // begin CSS app-cv-element-5 layout = 5
+        &.field-0,
+        &.field-1,
+        &.field-2,
+        &.field-3 {
+            font-weight: bold;
         }
 
-        &.position_applied {
-            font-weight: var(--font-weight, bold);
-            text-transform: capitalize;
+        &.field-1 {
+            text-align: right !important;
         }
 
-        &::placeholder {
-            color: var(--surface-400);
-        }
-    }
-
-    .editor[contenteditable="true"] {
-        // display: flex;
-        // align-items: center;
-        text-align: var(--text-align);
-        position: relative;
+        //end CSS app-cv-element-5 layout = 5
 
         &.editor-blank {
             &::before {
@@ -155,49 +127,32 @@
                 transform: translateY(-50%);
                 left: 0.2rem;
                 right: 0.2rem;
-                // text-align: var(--text-align);
                 pointer-events: none;
             }
 
-            &:focus, &:focus-visible {
+            &:focus,
+            &:focus-visible {
                 &::before {
                     opacity: 0.3;
                 }
             }
         }
 
-        p {
-            margin: 0 0 4px 0;
+        // css đặc trưng của các mục input
+        &.card_fullname {
+            text-transform: uppercase;
+            text-align: center;
+            font-size: calc(var(--theme-font-size) * 1.7 * var(--multiplierFS));
         }
 
-        ol {
-            margin: 0 0 4px 0;
-            list-style: none;
-
-            .bullet {
-                &::before {
-                    content: "\2022";
-                    color: var(--surface-600);
-                    font-weight: bold;
-                    display: inline-block;
-                    width: 1em;
-                    margin-left: -1em;
-                }
-            }
-
-            .ordered {
-                &::before {
-                    counter-increment: item;
-                    content: counter(item) ".";
-                    color: var(--surface-600);
-                    font-weight: bold;
-                    display: inline-block;
-                    width: 1em;
-                    margin-left: -1em;
-                }
-            }
+        &.position_applied {
+            text-transform: capitalize;
+            text-align: center;
+            font-size: calc(var(--theme-font-size) * 1.5 * var(--multiplierFS));
         }
 
-
+        &::placeholder {
+            color: var(--surface-400);
+        }
     }
 }

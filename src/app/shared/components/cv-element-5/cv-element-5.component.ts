@@ -10,12 +10,12 @@ import {
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CvGroupActionComponent } from '../cv-group-action/cv-group-action.component';
-import { CdkDrag, CdkDropList } from '@angular/cdk/drag-drop';
+import { CdkDrag } from '@angular/cdk/drag-drop';
 import { IThanhPhan } from '../create-manual-form/create-manual-form.component';
 import { CvInputActionComponent } from '../cv-input-action/cv-input-action.component';
-import { CvInputToolbarComponent } from '../cv-input-toolbar/cv-input-toolbar.component';
 import { CvInputComponent, IMoveEvent } from '../cv-input/cv-input.component';
 import { UtilitiesService } from '../../services/utilities.service';
+import { CvElementBaseDirective } from '../../../pages/create-cv/cv-element-base.directive';
 
 @Component({
   selector: 'app-cv-element-5',
@@ -25,105 +25,17 @@ import { UtilitiesService } from '../../services/utilities.service';
     FormsModule,
     CvGroupActionComponent,
     CdkDrag,
-    CdkDropList,
     CvInputActionComponent,
-    CvInputToolbarComponent,
     CvInputComponent,
   ],
   templateUrl: './cv-element-5.component.html',
   styleUrl: './cv-element-5.component.scss',
 })
-export class CvElement5Component implements OnChanges {
-
-  private utilitiesService = inject(UtilitiesService);
-
+export class CvElement5Component extends CvElementBaseDirective {
   // input region
-  @Input({ required: true }) template: any;
-  @Input() typeCode = 'cv-element-5';
-  @Input() label = 'cv-element-5';
-  @Input() focus = false;
-  @Input() listElement: { [key: string]: any[] } = {};
+  @Input() override typeCode = 'cv-element-5';
+  @Input() override label = 'cv-element-5';
 
-  // output region
-  @Output() onFocusEvent = new EventEmitter<string>();
-  @Output() onUpdateElementEvent = new EventEmitter<IUpdateElement>();
-
-  // variable region
-  listElementProcessed: { [key: string]: IThanhPhan[] } = {};
-  listElementGroupId: string[] = [];
-
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['listElement']) {
-      this.processListElement();
-    }
-  }
-
-  private processListElement() {
-    // get unique list groupId
-    if (!this.listElement) return;
-    this.listElementGroupId = Object.keys(this.listElement).filter(
-      (k, i, arr) => arr.indexOf(k) === i
-    );
-  }
-
-
-  onMoveUp(event: IMoveEvent) {
-
-    if (event.index === 0) return;
-
-    let entries = Object.entries(this.listElement);
-
-    const group = entries[event.index];
-    const temp = entries[event.index - 1];
-
-    entries[event.index - 1] = group;
-    entries[event.index] = temp;
-
-    this.listElement = Object.fromEntries(entries);
-
-    this.processListElement();
-
-    this.onUpdateElementEvent.emit({
-      groupId: event.groupId,
-      data: this.listElement[event.groupId],
-    });
-  }
-
-  onMoveDown(event: IMoveEvent) {
-
-    if (event.index === this.listElementGroupId.length - 1) return;
-
-    let entries = Object.entries(this.listElement);
-
-    const group = entries[event.index];
-    const temp = entries[event.index + 1];
-
-    entries[event.index + 1] = group;
-    entries[event.index] = temp;
-
-    this.listElement = Object.fromEntries(entries);
-
-    this.processListElement();
-
-    this.onUpdateElementEvent.emit({
-      groupId: event.groupId,
-      data: this.listElement[event.groupId],
-    });
-  }
-
-  onAdd(event: IMoveEvent) {
-    const group = this.listElement[event.groupId];
-
-    this.listElement[event.groupId.split('#')[0] + '#' + this.utilitiesService.customId(8)] = structuredClone(group);
-
-    this.processListElement();
-
-    this.onUpdateElementEvent.emit({
-      groupId: event.groupId,
-      data: this.listElement[event.groupId],
-    });
-  }
 }
 
 export interface IUpdateElement {

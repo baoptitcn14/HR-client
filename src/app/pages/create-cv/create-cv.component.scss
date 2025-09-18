@@ -21,7 +21,7 @@
     max-height: calc(80dvh - 87px);
 
     &.fixed {
-        max-height: calc(95dvh - 87px);
+        height: calc(95dvh - 87px);
     }
 }
 
@@ -29,11 +29,10 @@
     background-color: #fff;
     overflow: hidden;
     color: var(--surface-500);
-    // z-index: 999;
-    // top: 80px;
-    // height: 100%;
 
-
+    &-wrap {
+        min-width: 330px;
+    }
 }
 
 .cv-sidebar-menu {
@@ -174,8 +173,6 @@
     }
 }
 
-
-
 #cv-content {
     background: #fff;
     font-size: calc(var(--theme-font-size, 0.9rem) * var(--multiplierFS, 1));
@@ -189,18 +186,19 @@
     min-height: 1097px;
     height: auto; //1056px
     max-width: 100%;
-
-    // overflow: hidden;
     margin: auto;
 
     ._row {
-
         ._col {
             min-height: 40px;
             height: auto;
             width: 100%;
         }
     }
+}
+
+#groups {
+    min-height: 30px;
 }
 
 ._group {
@@ -223,15 +221,12 @@
     .name {
         color: var(--surface-600);
     }
-
-
 }
 
 .list-used {
     ._group {
         cursor: pointer;
         opacity: 0.6;
-
     }
 }
 
@@ -252,6 +247,9 @@
         max-height: calc(100% - 80px);
     }
 
+    #cv-sidebar-wrap {
+        min-width: 520px;
+    }
 }
 
 .pb-6 {
