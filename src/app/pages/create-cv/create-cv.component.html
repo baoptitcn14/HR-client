@@ -52,7 +52,7 @@
             <!-- end sidebar content header -->
 
             <!-- sidebar content body -->
-            <div class="cv-sidebar-content-body" style="overflow: auto;"> 
+            <div class="cv-sidebar-content-body" style="overflow: auto;">
               @if(sidebarContent.currentTemplate == "Thiết kế & Font") {
               <ng-container *ngTemplateOutlet="sidebar_content_font"></ng-container>
               } @else if (sidebarContent.currentTemplate == "Thêm mục") {
@@ -63,7 +63,7 @@
             </div>
             <!-- end sidebar content body -->
 
-             <div class="cv-sidebar-content-footer cv-sidebar-menu d-flex d-xl-none">
+            <div class="cv-sidebar-content-footer cv-sidebar-menu d-flex d-xl-none">
               @for(item of sidebarContent.listSidebarItem; track item.label) {
               <div class="d-flex align-items-center gap-3 cv-sidebar-menu-item" [class.active]="item.isActive"
                 (click)="selectSidebarItem(item)">
@@ -177,9 +177,9 @@
       <i>Kéo và thả mục bất kỳ vào vị trí bạn muốn thêm trên CV</i>
 
       <div class="list-avaible d-flex flex-column gap-2" id="groups"
-        [cdkDropListConnectedTo]="listCdkDropListConnectedTo" cdkDropList [cdkDropListData]="listGroupDistinct"
+        [cdkDropListConnectedTo]="listCdkDropListConnectedTo" cdkDropList [cdkDropListData]="listGroupAvailable"
         (cdkDropListDropped)="dropIntoCol($event)">
-        @for(group of listGroupDistinct; track group) {
+        @for(group of listGroupAvailable; track group) {
         <div cdkDrag class="d-flex justify-content-between gap-2 align-items-center _group p-3 bg-light rounded border">
           <div class="d-flex gap-4">
             <span>#</span>
@@ -203,7 +203,18 @@
 
       <i>Click để xem vị trí của mục trên CV</i>
 
-      <div class="list-aviable"></div>
+      <div class="list-used d-flex flex-column gap-2">
+        @for(group of listGroupUsedDistinct; track group) {
+        <div class="d-flex justify-content-center gap-2 align-items-center _group p-3 bg-light rounded border ">
+          <div class="d-flex gap-4">
+            <span class="name">
+              {{ group.label }}
+            </span>
+          </div>
+
+        </div>
+        }
+      </div>
     </div>
   </div>
 </ng-template>

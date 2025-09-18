@@ -13,7 +13,7 @@ export class CvService {
   i$ = new BehaviorSubject<boolean>(false);
   u$ = new BehaviorSubject<boolean>(false);
 
-  constructor() {}
+  constructor() { }
 
   saveSelection() {
     const selection = window.getSelection();
@@ -22,70 +22,54 @@ export class CvService {
       this.range = selection.getRangeAt(0);
     }
 
-    // nếu là bôi đen text
-    if (this.range?.collapsed == false) {
-      const span = document.createElement('span');
-      span.classList.add('active-text');
-      this.range.surroundContents(span);
-    } else {
-      document.activeElement
-        ?.querySelectorAll('.active-text')
-        .forEach((item) => {
-          const childNodes = item.childNodes;
-          item.replaceWith(...(childNodes as any));
-        });
-
-      document.activeElement?.normalize();
-    }
-
-    this.checkTagName();
+    // this.checkTagName();
   }
 
-  private checkTagName() {
-    const self = this;
-    if (this.range) {
-      const starContainer = this.range.startContainer
-        .parentElement as HTMLElement;
+  // private checkTagName() {
+  //   const self = this;
+  //   if (this.range) {
+  //     const starContainer = this.range.startContainer
+  //       .parentElement as HTMLElement;
 
-      // checkParent(starContainer);
-      if (starContainer.tagName == 'SPAN') {
-        checkParent(starContainer);
-      } else {
-        if (starContainer) {
-          this.b$.next(starContainer.tagName === 'B');
-          this.i$.next(starContainer.tagName === 'I');
-          this.u$.next(starContainer.tagName === 'U');
-        }
+  //     // checkParent(starContainer);
+  //     if (starContainer.tagName == 'SPAN') {
+  //       checkParent(starContainer);
+  //     } else {
+  //       if (starContainer) {
+  //         this.b$.next(starContainer.tagName === 'B');
+  //         this.i$.next(starContainer.tagName === 'I');
+  //         this.u$.next(starContainer.tagName === 'U');
+  //       }
 
-        const ancestor = this.range.commonAncestorContainer as HTMLElement;
+  //       const ancestor = this.range.commonAncestorContainer as HTMLElement;
 
-        if (ancestor) {
-          if (!this.b$.value) this.b$.next(ancestor.tagName === 'B');
+  //       if (ancestor) {
+  //         if (!this.b$.value) this.b$.next(ancestor.tagName === 'B');
 
-          if (!this.i$.value) this.i$.next(ancestor.tagName === 'I');
+  //         if (!this.i$.value) this.i$.next(ancestor.tagName === 'I');
 
-          if (!this.u$.value) this.u$.next(ancestor.tagName === 'U');
+  //         if (!this.u$.value) this.u$.next(ancestor.tagName === 'U');
 
-          checkParent(ancestor);
-        }
-      }
-    }
+  //         checkParent(ancestor);
+  //       }
+  //     }
+  //   }
 
-    // Kiểm tra cha có phải thẻ b, i, u không
-    function checkParent(element: HTMLElement) {
-      const parentNode = element.parentElement as HTMLElement;
+  //   // Kiểm tra cha có phải thẻ b, i, u không
+  //   function checkParent(element: HTMLElement) {
+  //     const parentNode = element.parentElement as HTMLElement;
 
-      if (!parentNode || parentNode.tagName == 'SPAN') return;
+  //     if (!parentNode || parentNode.tagName == 'SPAN') return;
 
-      if (!self.b$.value) self.b$.next(parentNode.tagName === 'B');
+  //     if (!self.b$.value) self.b$.next(parentNode.tagName === 'B');
 
-      if (!self.i$.value) self.i$.next(parentNode.tagName === 'I');
+  //     if (!self.i$.value) self.i$.next(parentNode.tagName === 'I');
 
-      if (!self.u$.value) self.u$.next(parentNode.tagName === 'U');
+  //     if (!self.u$.value) self.u$.next(parentNode.tagName === 'U');
 
-      checkParent(parentNode);
-    }
-  }
+  //     checkParent(parentNode);
+  //   }
+  // }
 
   getRange() {
     return this.range;
@@ -100,6 +84,10 @@ export class CvService {
         selection.addRange(this.range);
       }
     }
+  }
+
+  setRange(range: Range) {
+    this.range = range;
   }
 
   // Kiểm tra editor có rỗng không
@@ -122,189 +110,192 @@ export class CvService {
 
   //apply font weight
   applyBold() {
-    if (this.b$.value || (this.range && this.range.collapsed == false))
-      this.applyTextStyle('b');
+    document.execCommand('bold');
+    this.keepSelectionText();
   }
 
   //apply italic
   applyItalic() {
-    if (this.i$.value || (this.range && this.range.collapsed == false))
-      this.applyTextStyle('i');
+    document.execCommand('italic');
+
+    this.keepSelectionText();
   }
 
   //apply underline
   applyUnderline() {
-    if (this.u$.value || (this.range && this.range.collapsed == false))
-      this.applyTextStyle('u');
+    document.execCommand('underline');
+    this.keepSelectionText();
   }
 
-  //apply text style
-  private applyTextStyle(style: 'b' | 'i' | 'u') {
-    const self = this;
+  //applyOrderListBullet
+  applyOrderListBullet() {
+    document.execCommand('insertUnorderedList');
+    this.keepSelectionText();
+  }
 
-    if (this.range) {
-      // nếu là bôi đen text
-      if (this.range.collapsed == false) {
-        let text = document.activeElement?.querySelector('.active-text');
+  //applyOrderListNumber
+  applyOrderListNumber() {
+    document.execCommand('insertOrderedList');
+    this.keepSelectionText();
+  }
 
-        if (text) {
-          let value = this[`${style}$`].value;
-          this[`${style}$`].next(!this[`${style}$`].value);
+  // apply font color
+  applyFontColor(color: string) {
+    document.execCommand('foreColor', false, color);
 
-          if (value == false) {
-            const tag = document.createElement(style);
-            this.range.surroundContents(tag);
-          } else {
-            // const childNodes = text.childNodes;
-            // text.replaceWith(...(childNodes as any));
-            checkParent(text as HTMLElement, style);
-          }
-        }
-        
-      }
-      // chỉ là con trỏ
-      else {
-      }
+    this.keepSelectionText();
+  }
 
-      // // kiểm tra có phải là thẻ DIV không
-      // if (
-      //   (this.range.startContainer.parentElement &&
-      //     this.range.startContainer.parentElement.nodeName === 'DIV') ||
-      //   (this.range.startContainer &&
-      //     this.range.startContainer.nodeName === 'DIV')
-      // ) {
-      //   // nếu đúng thì ...
-      //   // kiểm tra state của style
+  //apply align
+  applyAlignment(align: string) {
 
-      //   // lấy value của style hiện tại
-      //   let value = this[`${style}$`].value;
+    if(align == 'justify') align = 'full';
 
-      //   // đổi trạng thái
-      //   this[`${style}$`].next(!this[`${style}$`].value);
+    document.execCommand('justify' + align.toUpperCase());
+    this.keepSelectionText();
+  }
 
-      //   if (value == false) {
-      //     //  nếu chưa thì kích hoạt và thêm thẻ vào
-      //     const tag = document.createElement(style);
-      //     this.range.surroundContents(tag);
-      //   } else {
-      //     // nếu đang kích hoạt thì xóa thẻ đi
-      //     const childNodes = this.range.startContainer.childNodes;
+  private keepSelectionText() {
 
-      //     let node = null;
+    const selection = window.getSelection();
+    if (!selection!.rangeCount) return;
 
-      //     for (let i = 0; i < childNodes.length; i++) {
-      //       if (
-      //         childNodes[i].nodeName === style.toUpperCase() &&
-      //         childNodes[i].textContent ==
-      //           this.range.cloneContents().textContent
-      //       ) {
-      //         node = childNodes[i];
-      //         break;
-      //       }
-      //     }
+    const range = selection!.getRangeAt(0);
+    let node = range.commonAncestorContainer;
 
-      //     if (node) {
-      //       var childNodess = node.childNodes;
-      //       node.replaceWith(...(childNodess as any));
-      //     } else {
-      //       //nếu không thấy node, dò tìm con của các node không phải #text
-      //       const nodes = (
-      //         this.range.startContainer as HTMLDivElement
-      //       ).querySelectorAll(style.toUpperCase());
-
-      //       for (let i = 0; i < nodes.length; i++) {
-      //         if (nodes[i].nodeName === 'text') continue;
-
-      //         if (this.range.collapsed == false) {
-      //           if (
-      //             nodes[i].textContent == this.range.cloneContents().textContent
-      //           ) {
-      //             const childNodes = nodes[i].childNodes;
-      //             nodes[i].replaceWith(...(childNodes as any));
-      //             break;
-      //           }
-      //         } else {
-      //           console.log(nodes[i], this.range);
-      //         }
-      //       }
-      //     }
-      //   }
-      // } else {
-      //   // nếu không phải là DIV => SPAN, U, I, B
-
-      //   if (
-      //     this.range.startContainer &&
-      //     this.range.startContainer.parentElement?.tagName === 'SPAN'
-      //   ) {
-      //   } else proccess(style);
-      // }
+    // Nếu node là Text thì lấy node cha
+    if (node.nodeType === Node.TEXT_NODE) {
+      node = node.parentNode!;
     }
 
-    function proccess(style: 'u' | 'i' | 'b') {
-      if (
-        self.range!.startContainer.parentElement?.tagName ===
-        style.slice(0, 1).toUpperCase()
-      ) {
-        if (self[`${style}$`].value) {
-          const childNodes =
-            self.range!.startContainer.parentElement.childNodes;
-          self.range!.startContainer.parentElement.replaceWith(
-            ...(childNodes as any)
-          );
-        } else {
-          //  nếu chưa thì kích hoạt và thêm thẻ vào
-          const tag = document.createElement(style);
-          self.range!.surroundContents(tag);
-        }
-
-        self[`${style}$`].next(!self[`${style}$`].value);
-      } else {
-        if (self[`${style}$`].value) {
-          checkParent(
-            self.range!.startContainer.parentElement as any,
-            style.slice(0, 1).toUpperCase()
-          );
-        } else {
-          //  nếu chưa thì kích hoạt và thêm thẻ vào
-          const tag = document.createElement(style);
-          self.range!.surroundContents(tag);
-        }
-        self[`${style}$`].next(!self[`${style}$`].value);
-      }
+    if (node && node.nodeName != "DIV") {
+      this.range = document.createRange();
+      this.range.selectNodeContents(node);
+      this.restoreSelection();
     }
 
-    // Kiểm tra cha có phải thẻ b, i, u không
-    function checkParent(element: HTMLElement, style: string) {
-      let parentNode = element.parentElement as HTMLElement;
+    document.activeElement?.normalize();
 
-      if (!parentNode || parentNode.tagName == 'div') return;
-
-      if (parentNode.tagName === style.toUpperCase()) {
-        const childNodes = parentNode.childNodes;
-        parentNode.replaceWith(...(childNodes as any));
-
-        document.activeElement?.normalize();
-
-      } else checkParent(parentNode, style);
-    }
   }
 
   //set Font size
   setFontSize(size: number) {
+    const self = this;
+
+
     if (this.range) {
-      const container = this.range.startContainer.parentElement as HTMLElement;
+      const textContent = this.range!.cloneContents().textContent;
 
-      const l = this.range.startContainer.textContent!.trim().length;
+      // kiểm tra text đc bôi đen có chung 1 container không
 
-      if (container && container.tagName === 'SPAN') {
-        container.className = 'font-size-' + size; // đổi class
+      const startContainer = this.range.startContainer.parentElement as HTMLElement;
+      const endContainer = this.range.endContainer.parentElement as HTMLElement;
+
+      if (startContainer == endContainer) {
+        if (
+          (startContainer && startContainer.nodeName === 'SPAN'
+            && isFullSelection(startContainer))
+          || (this.range.startContainer as HTMLElement).nodeName === 'SPAN'
+          && isFullSelection(this.range.startContainer as HTMLElement)
+        ) {
+          startContainer.className = 'font-size-' + size; // đổi class
+
+          if (startContainer.childNodes.length == 1 && startContainer.firstChild?.nodeType === Node.TEXT_NODE) {
+            this.range.selectNodeContents(startContainer.firstChild);
+            this.range.setStart(startContainer.firstChild, 0);
+            this.range.setEnd(startContainer.firstChild, (startContainer.firstChild as Text).length);
+          } else {
+            this.range.selectNodeContents(startContainer);
+            this.range.setStart(startContainer, 0);
+            this.range.setEnd(startContainer, startContainer.childNodes.length);
+          }
+
+          this.restoreSelection();
+
+        } else {
+          const span = document.createElement('span');
+          span.classList.add('font-size-' + size);
+          this.range.surroundContents(span);
+
+          // selection đang ở span
+          this.range = document.createRange();
+
+
+          if (span.childNodes.length == 1 && span.firstChild?.nodeType === Node.TEXT_NODE) {
+            this.range.selectNodeContents(span.firstChild);
+            this.range.setStart(span.firstChild, 0);
+            this.range.setEnd(span.firstChild, (span.firstChild as Text).length);
+          } else {
+            this.range.selectNodeContents(span);
+            this.range.setStart(span, 0);
+            this.range.setEnd(span, span.childNodes.length);
+          }
+
+          this.restoreSelection();
+
+        }
       } else {
+
+        const startOffset = this.range.startOffset;
+        const endOffset = this.range.endOffset;
+
+
+        // nếu startContainer chỉ có 1 textNode con
+        if (startContainer.childNodes.length == 1 && startContainer.firstChild?.nodeType === Node.TEXT_NODE) {
+
+          //Xóa đoạn text đc bôi đen dựa vào startOffset
+          const textNode = startContainer.firstChild as Text;
+          textNode.deleteData(startOffset, textNode.length);
+
+        }
+
+        //Xóa đoạn text đc bôi đen dựa vào endOffset
+        const textNodeEnd = endContainer.firstChild as Text;
+        textNodeEnd.deleteData(0, endOffset);
+
+        //Thêm span
+
         const span = document.createElement('span');
         span.classList.add('font-size-' + size);
-        this.range.surroundContents(span);
+        span.innerText = textContent!;
+
+        this.range.deleteContents();
+        this.range.insertNode(span);
+
+        // document.activeElement!.insertBefore(span, endContainer);
+
       }
 
-      this.restoreSelection();
+
+
+    }
+
+
+    function isFullSelection(span: HTMLElement): boolean {
+
+      // Nếu span chỉ có 1 textNode con
+      if (span.childNodes.length === 1 && span.firstChild?.nodeType === Node.TEXT_NODE) {
+        const textNode = span.firstChild as Text;
+        return (
+          self.range!.startContainer === textNode &&
+          self.range!.endContainer === textNode &&
+          self.range!.startOffset === 0 &&
+          self.range!.endOffset === textNode.length
+        );
+      }
+
+      // Nếu span có nhiều node con (text + element)
+      // => kiểm tra selection bao hết từ đầu đến cuối
+      const startOk =
+        (self.range!.startContainer === span && self.range!.startOffset === 0) ||
+        (span.contains(self.range!.startContainer) && self.range!.startOffset === 0);
+
+      const endOk =
+        (self.range!.endContainer === span && self.range!.endOffset === span.childNodes.length) ||
+        (span.contains(self.range!.endContainer) &&
+          self.range!.endOffset === self.range!.endContainer.textContent?.length);
+
+      return startOk && endOk;
     }
   }
 }

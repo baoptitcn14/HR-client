@@ -33,45 +33,45 @@
     // top: 80px;
     // height: 100%;
 
-    
+
 }
 
 .cv-sidebar-menu {
-        &-item {
-            font-size: 1rem;
-            padding: 1.2rem 1.5rem;
-            cursor: pointer;
-            position: relative;
-            transition: all 0.3s linear;
+    &-item {
+        font-size: 1rem;
+        padding: 1.2rem 1.5rem;
+        cursor: pointer;
+        position: relative;
+        transition: all 0.3s linear;
+        font-weight: bold;
+
+        .pi {
             font-weight: bold;
+        }
+
+        &:hover,
+        &.active {
+            background-color: var(--highlight-bg);
+            color: var(--primary-color);
 
             .pi {
-                font-weight: bold;
-            }
-
-            &:hover,
-            &.active {
-                background-color: var(--highlight-bg);
                 color: var(--primary-color);
-
-                .pi {
-                    color: var(--primary-color);
-                }
             }
+        }
 
-            &.active {
-                &:before {
-                    content: "";
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    width: 3px;
-                    height: 100%;
-                    background-color: var(--primary-color);
-                }
+        &.active {
+            &:before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 3px;
+                height: 100%;
+                background-color: var(--primary-color);
             }
         }
     }
+}
 
 .cv-sidebar-content {
     transition: all 0.3s ease-in-out;
@@ -178,22 +178,10 @@
 
 #cv-content {
     background: #fff;
-}
-
-#cv-content {
-
     font-size: calc(var(--theme-font-size, 0.9rem) * var(--multiplierFS, 1));
     color: var(--theme-color, var(--surface-600));
     font-family: var(--theme-font, var(--font-family));
-
 }
-
-// .abc {
-//     width: 100%;
-//     height: 35px;
-//     border: 1px solid var(--surface-c);
-//     background-color: var(--primary-color);
-// }
 
 ._template {
     //pdf 816px x 1056px
@@ -221,6 +209,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    user-select: none;
 
     &:hover {
         background-color: var(--highlight-bg) !important;
@@ -233,6 +222,16 @@
 
     .name {
         color: var(--surface-600);
+    }
+
+
+}
+
+.list-used {
+    ._group {
+        cursor: pointer;
+        opacity: 0.6;
+
     }
 }
 

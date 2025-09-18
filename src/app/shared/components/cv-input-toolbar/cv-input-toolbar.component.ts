@@ -49,37 +49,37 @@ export class CvInputToolbarComponent implements OnInit {
   ];
 
   ngOnInit(): void {
-    this.subscribeStateButtons();
+    // this.subscribeStateButtons();
   }
 
   // Theo dõi state của các textStyleButtons
-  private subscribeStateButtons() {
-    // bold button
-    this.cvService.b$
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((data) => {
-        this.textStyleButtons[0].active = data;
-        this.textStyleButtons[0].styleClass = data ? 'active' : '';
-      });
+  // private subscribeStateButtons() {
+  //   // bold button
+  //   this.cvService.b$
+  //     .pipe(takeUntilDestroyed(this.destroyRef))
+  //     .subscribe((data) => {
+  //       this.textStyleButtons[0].active = data;
+  //       this.textStyleButtons[0].styleClass = data ? 'active' : '';
+  //     });
 
-    // italic button
-    this.cvService.i$
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((data) => {
-        this.textStyleButtons[1].active = data;
-        this.textStyleButtons[1].styleClass = data ? 'active italic' : 'italic';
-      });
+  //   // italic button
+  //   this.cvService.i$
+  //     .pipe(takeUntilDestroyed(this.destroyRef))
+  //     .subscribe((data) => {
+  //       this.textStyleButtons[1].active = data;
+  //       this.textStyleButtons[1].styleClass = data ? 'active italic' : 'italic';
+  //     });
 
-    // underline button
-    this.cvService.u$
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((data) => {
-        this.textStyleButtons[2].active = data;
-        this.textStyleButtons[2].styleClass = data
-          ? 'active underline'
-          : 'underline';
-      });
-  }
+  //   // underline button
+  //   this.cvService.u$
+  //     .pipe(takeUntilDestroyed(this.destroyRef))
+  //     .subscribe((data) => {
+  //       this.textStyleButtons[2].active = data;
+  //       this.textStyleButtons[2].styleClass = data
+  //         ? 'active underline'
+  //         : 'underline';
+  //     });
+  // }
 
   onUpdateElement(action: string) {
     this.onUpdateElementEvent.emit({ element: this.element, action });
@@ -91,37 +91,42 @@ export class CvInputToolbarComponent implements OnInit {
   }
 
   onActionToolbar(action: string, data: any) {
-    if (action != 'color') {
-      this.cvService.restoreSelection();
+    this.cvService.restoreSelection();
 
-      setTimeout(() => {
-        if (action == 'textStyle') {
-          if (data.label == 'B') {
-            this.cvService.applyBold();
-          } else if (data.label == 'I') {
-            this.cvService.applyItalic();
-          } else if (data.label == 'U') {
-            this.cvService.applyUnderline();
-          }
-        } else if (action == 'font') {
-          // this.element._css['element']['font'] = data;
-          document.execCommand('fontName', false, data);
-        } else if (action == 'fs') {
-          this.cvService.setFontSize(data);
-          // this.onUpdateElement('fontSize');
-        }
-      }, 100);
-    } else {
-      document.execCommand('foreColor', false, data.value);
+    if (action == 'textStyle') {
+      if (data.label == 'B') {
+        this.cvService.applyBold();
+      } else if (data.label == 'I') {
+        this.cvService.applyItalic();
+      } else if (data.label == 'U') {
+        this.cvService.applyUnderline();
+      }
+    } else if (action == 'font') {
+      document.execCommand('fontName', false, data);
+    } else if (action == 'fs') {
+      this.cvService.setFontSize(data);
+    } else if (action == 'orderList') {
+      if (data == 'bullet') {
+
+        this.cvService.applyOrderListBullet();
+
+      } else if (data == 'number') {
+        this.cvService.applyOrderListNumber();
+      }
+    } else if (action == 'color') {
+      this.cvService.applyFontColor(data.value)
+    } else if (action == 'align') {
+      this.cvService.applyAlignment(data);
     }
+
   }
 
   onShowColorPicker(event: any) {
     this.onRestoreSelectionEvent.emit();
   }
 
-  onChangeOrderList(type: string) {
-    this.element._css['element']['listStyleType'] = type;
-    // this.onUpdateElement();
-  }
+  // onChangeOrderList(type: string) {
+  //   this.element._css['element']['listStyleType'] = type;
+  //   // this.onUpdateElement();
+  // }
 }

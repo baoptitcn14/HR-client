@@ -99,8 +99,11 @@ export class CreateCvComponent implements OnInit {
 
   template?: IThanhPhan; // cấu hình font, font size, theme color, line height
   listRow: IThanhPhan[] = []; // số dòng có trên template
-  listGroupDistinct: any[] = []; // danh sách mục
   dataCvTemplate: any[] = [];
+
+  listGroupUsedDistinct: any[] = []; // danh sách mục đã sử dụng
+  listGroupAvailable: any[] = []; // danh sách mục chưa sử dụng
+
 
   listCdkDropListConnectedTo: string[] = [];
 
@@ -118,7 +121,6 @@ export class CreateCvComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getTemplate();
     this.getDataCvTemplate();
 
   }
@@ -242,6 +244,9 @@ export class CreateCvComponent implements OnInit {
 
         }
       }
+
+      // đưa group có type code này  vào list Used
+      this.listGroupUsedDistinct.splice(0, 0, data);
     }
   }
 
@@ -359,6 +364,11 @@ export class CreateCvComponent implements OnInit {
           layout: e.layout
         }));
 
+      // loại bỏ các group đã được sử dụng trong listGroupAvailable
+      this.listGroupAvailable = this.listGroupAvailable.filter((e) => !col._listTypeCode!.find((x) => x.typeCode == e.typeCode));
+      this.listGroupUsedDistinct = [...this.listGroupUsedDistinct, ...col._listTypeCode];
+
+
       // từ các mã code của group lấy các element thuộc group đó và tạo groupId cho nhóm 
       col._listTypeCode.forEach((e) => {
 
@@ -392,7 +402,6 @@ export class CreateCvComponent implements OnInit {
         }
       })
 
-
     }
   }
 
@@ -401,7 +410,7 @@ export class CreateCvComponent implements OnInit {
       this.dataCvTemplate = data;
 
       // distinct by lable property
-      this.listGroupDistinct = data
+      this.listGroupAvailable = data
         .filter(
           (item, i, arr) =>
             arr.findIndex((e) => e.typeCode == item.typeCode) == i
@@ -413,7 +422,9 @@ export class CreateCvComponent implements OnInit {
         }));
 
 
-      console.log(this.listGroupDistinct)
+      this.getTemplate();
+
+
     });
   }
 

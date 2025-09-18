@@ -52,10 +52,10 @@
   @if(element.cvInputConfig?.toolbarConfig?.showOrderList) {
   <div class="text-decoration cv-input-toolbar-item gap-1">
     <!-- bullet -->
-    <p-button icon="pi pi-list" (click)="onChangeOrderList('bullet')" [text]="true" severity="secondary" />
+    <p-button icon="pi pi-list" (click)="onActionToolbar('orderList', 'bullet')" [text]="true" severity="secondary" />
 
     <!-- check -->
-    <p-button icon="pi pi-list-check" (click)="onChangeOrderList('number')" [text]="true" severity="secondary" />
+    <p-button icon="pi pi-list-check" (click)="onActionToolbar('orderList', 'number')" [text]="true" severity="secondary" />
   </div>
   }
 

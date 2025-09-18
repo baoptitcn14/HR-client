@@ -54,6 +54,10 @@ export class CvInputComponent implements AfterViewChecked {
     this.onMouseUpImageScale();
   }
 
+  @HostListener('document:scroll', ['$event']) onScroll(event: any) {
+    this.op.hide();
+  }
+
   ngAfterViewChecked(): void {
     // this.cvService.restoreSelection()
   }
