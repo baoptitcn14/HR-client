@@ -1,0 +1,18 @@
+<div class="d-flex gap-3 p-4" style="width: fit-content; margin: auto; background-color: #fff;">
+
+    <div class="image-upload">
+        <canvas id="canvas" ></canvas>
+    </div>
+
+    <div class="image-preview d-flex flex-column gap-3 align-items-center">
+        <img id="preview" style="width: 150px; height: 150px;" />
+
+
+        <p-button label="Đổi ảnh" icon="pi pi-upload" severity="info" (click)="onUpload()"></p-button>
+
+        <p-button label="Hoàn tất" icon="pi pi-check" severity="success" (click)="onSave()"></p-button>
+    </div>
+
+</div>
+
+<input type="file" id="upload" class="d-none" />

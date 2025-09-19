@@ -10,6 +10,7 @@ import { HttpClient } from '@angular/common/http';
 import {
   CdkDrag,
   CdkDragDrop,
+  CdkDragPlaceholder,
   CdkDropList,
   CdkDropListGroup,
   moveItemInArray,
@@ -36,11 +37,12 @@ import { IMoveGroupEvent } from './cv-element-base.directive';
     CdkDrag,
     CdkDropList,
     CdkDropListGroup,
+    CdkDragPlaceholder,
     SplitterModule,
     DividerModule,
     // components group
     CvElementComponent,
-    CvElement5Component,
+    CvElement5Component    
   ],
   templateUrl: './create-cv.component.html',
   styleUrl: './create-cv.component.scss',
@@ -324,7 +326,7 @@ export class CreateCvComponent implements OnInit {
 
   //#region get data
   private getTemplate() {
-    this.http.get<IThanhPhan[]>('/assets/template.json').subscribe((data) => {
+    this.http.get<IThanhPhan[]>('assets/template.json').subscribe((data) => {
       const templateData = data.map((item: IThanhPhan) => ({
         ...item,
         _css: JSON.parse(item.css ?? '{}'),
@@ -447,7 +449,7 @@ export class CreateCvComponent implements OnInit {
   }
 
   private getDataCvTemplate() {
-    this.http.get<any[]>('/assets/data-cv-template.json').subscribe((data) => {
+    this.http.get<any[]>('assets/data-cv-template.json').subscribe((data) => {
       this.dataCvTemplate = data;
 
       // distinct by lable property

@@ -1,7 +1,7 @@
 <section class="ds-viec-lam row row-gap-2">
-  @for (viecLam of viecLams; track viecLam.id) {
+  @for (viecLam of viecLams; track viecLam.id; let last = $last) {
   <div class="col-12 col-md-6 col-xl-4 " *ngIf="!isLoading">
-    <app-viec-lam [viecLam]="viecLam" [isLoading]="isLoading"></app-viec-lam>
+    <app-viec-lam [viecLam]="viecLam" [last]="last" [isLoading]="isLoading"></app-viec-lam>
   </div>
   }
 </section>

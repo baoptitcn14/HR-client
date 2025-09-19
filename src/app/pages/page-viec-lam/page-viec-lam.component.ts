@@ -25,6 +25,7 @@ import { TrackElementInViewportDirective } from '../../core/directives/track-ele
 import { CategoriesService } from '../../core/services/categories.service';
 import { IDsViecLam } from '../../shared/components/viec-lam/viec-lam.component';
 import { IThanhPhan } from '../../shared/components/create-manual-form/create-manual-form.component';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-page-viec-lam',
@@ -41,6 +42,7 @@ export class PageViecLamComponent implements OnInit {
   private dialogService = inject(DialogService);
   private jobPostFieldService = inject(JobPostFieldInfoServiceProxy);
   private categoriesService = inject(CategoriesService);
+  private title = inject(Title);
 
   //declare region
   tinTuyenDung?: IDsViecLam;
@@ -54,6 +56,9 @@ export class PageViecLamComponent implements OnInit {
         .pipe(takeUntilDestroyed(this.destroyRef))
         .subscribe(([viecLam]) => {
           this.tinTuyenDung = viecLam as IDsViecLam;
+
+          this.title.setTitle(this.tinTuyenDung.title!);
+
           this.xuLyDuLieuViecLam();
         });
     }

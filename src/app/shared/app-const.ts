@@ -10,6 +10,8 @@ export class AppConst {
   static homeUrl: string;
   static appTitle: string;
   static registerAccount: string;
+  static logoBrand: string;
+
   //#endregion
 
 
@@ -18,7 +20,7 @@ export class AppConst {
     authToken: 'AuthToken',
     userId: 'UserId',
     tenantId: 'TenantId',
-    active: 'Active'    
+    active: 'Active'
   };
 
   static readonly idZero = '00000000-0000-0000-0000-000000000000';
@@ -61,7 +63,6 @@ export class AppConst {
     ],
   };
 
-  static readonly logoQlcvUrl = './logo_qlcv.png';
 
   // static readonly editor = ClassicEditor;
   static readonly placehoderImage = 'https://placehold.co/300x200';

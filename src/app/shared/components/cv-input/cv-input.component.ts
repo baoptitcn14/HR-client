@@ -12,6 +12,10 @@ import { CvInputToolbarComponent } from '../cv-input-toolbar/cv-input-toolbar.co
 import { OverlayPanel, OverlayPanelModule } from 'primeng/overlaypanel';
 import { IThanhPhan } from '../create-manual-form/create-manual-form.component';
 import { CvService } from '../../../pages/create-cv/cv.service';
+import { ButtonModule } from 'primeng/button';
+import { DialogModule } from 'primeng/dialog';
+import { CropImageComponent } from '../crop-image/crop-image.component';
+
 
 @Component({
   selector: 'app-cv-input',
@@ -21,6 +25,9 @@ import { CvService } from '../../../pages/create-cv/cv.service';
     FormsModule,
     CvInputToolbarComponent,
     OverlayPanelModule,
+    ButtonModule,
+    DialogModule,
+    CropImageComponent
   ],
   templateUrl: './cv-input.component.html',
   styleUrl: './cv-input.component.scss',
@@ -39,6 +46,7 @@ export class CvInputComponent {
 
   // declare region
   focus = false;
+  showDialogUploadImage = false;
 
   // declare biến xử lý sự kiện scale hình
   resizing = false;
@@ -56,6 +64,10 @@ export class CvInputComponent {
 
   @HostListener('document:scroll', ['$event']) onScroll(event: any) {
     this.op.hide();
+  }
+
+  onShowDialog() {
+    this.showDialogUploadImage = true;
   }
 
   checkBlank(event: any) {

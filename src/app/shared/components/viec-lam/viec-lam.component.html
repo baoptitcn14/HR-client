@@ -1,4 +1,5 @@
-<div class="viec-lam d-flex flex-column gap-1 rounded shadow-sm p-3" *ngIf="viecLam">
+<div class="viec-lam d-flex flex-column gap-1 rounded shadow-sm p-3"
+    style="--height: {{  viecLamService.height > 0 ? viecLamService.height : 'auto' }}px;" *ngIf="viecLam">
     <div class="viec-lam-thong-tin d-flex gap-2">
         <!-- logo company -->
         <div class="viec-lam-logo-cty">
@@ -64,7 +65,7 @@
         <p-divider type="solid" [styleClass]="'m-1'" />
 
         <!-- tags -->
-        <div class="d-flex gap-2 align-items-center" style="width: 100%; white-space: nowrap; overflow: auto;">
+        <div class="d-flex gap-2 align-items-center tags">
             @for (tag of viecLam._tagsOpenJson; track tag) {
             <a href="http://">
                 <p-tag severity="secondary" value="{{ tag }}" [rounded]="true" />

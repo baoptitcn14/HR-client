@@ -16,6 +16,7 @@
     </div>
   </div>
 
+
   <div class="container-fluid">
     <div class="d-flex gap-5 pt-4 px-2 w-100 overflow-auto pb-6 pb-md-4">
       <!-- sidebar desktop -->
@@ -25,11 +26,8 @@
           <div id="cv-sidebar" class="shadow-sm rounded d-none d-xl-block">
             <div class="cv-sidebar-menu d-flex flex-column">
               @for(item of sidebarContent.listSidebarItem; track item.label) {
-              <div
-                class="d-flex align-items-center gap-3 cv-sidebar-menu-item"
-                [class.active]="item.isActive"
-                (click)="selectSidebarItem(item)"
-              >
+              <div class="d-flex align-items-center gap-3 cv-sidebar-menu-item" [class.active]="item.isActive"
+                (click)="selectSidebarItem(item)">
                 <i class="{{ item.icon }}"></i>
                 {{ item.label }}
               </div>
@@ -38,42 +36,25 @@
           </div>
 
           <!-- sidebar content  -->
-          <div
-            id="cv-sidebar-content"
-            class="cv-sidebar-content shadow-sm rounded"
-            [class.show]="sidebarContent.show"
-          >
+          <div id="cv-sidebar-content" class="cv-sidebar-content shadow-sm rounded" [class.show]="sidebarContent.show">
             <!-- sidebar content header -->
-            <div
-              class="cv-sidebar-content-header d-flex align-items-center justify-content-between gap-sm-2"
-            >
+            <div class="cv-sidebar-content-header d-flex align-items-center justify-content-between gap-sm-2">
               <!-- sidebar content header title -->
               <div class="cv-sidebar-content-header-title">
                 {{ sidebarContent.title }}
               </div>
 
               <!-- button close -->
-              <p-button
-                icon="pi pi-times"
-                size="small"
-                [styleClass]="'p-button-xs'"
-                [rounded]="true"
-                severity="secondary"
-                (click)="sidebarContent.show = false"
-              />
+              <p-button icon="pi pi-times" size="small" [styleClass]="'p-button-xs'" [rounded]="true"
+                severity="secondary" (click)="sidebarContent.show = false" />
               <!-- end button close -->
             </div>
             <!-- end sidebar content header -->
 
             <!-- sidebar content body -->
-            <div
-              class="cv-sidebar-content-body"
-              style="overflow-y: auto; overflow-x: hidden"
-            >
+            <div class="cv-sidebar-content-body" style="overflow-y: auto; overflow-x: hidden">
               @if(sidebarContent.currentTemplate == "Thiết kế & Font") {
-              <ng-container
-                *ngTemplateOutlet="sidebar_content_font"
-              ></ng-container>
+              <ng-container *ngTemplateOutlet="sidebar_content_font"></ng-container>
               } @else if (sidebarContent.currentTemplate == "Thêm mục") {
               <ng-container *ngTemplateOutlet="groups"></ng-container>
               } @else if (sidebarContent.currentTemplate == "Bố cục") {
@@ -82,15 +63,10 @@
             </div>
             <!-- end sidebar content body -->
 
-            <div
-              class="cv-sidebar-content-footer cv-sidebar-menu d-flex d-xl-none"
-            >
+            <div class="cv-sidebar-content-footer cv-sidebar-menu d-flex d-xl-none">
               @for(item of sidebarContent.listSidebarItem; track item.label) {
-              <div
-                class="d-flex align-items-center gap-3 cv-sidebar-menu-item"
-                [class.active]="item.isActive"
-                (click)="selectSidebarItem(item)"
-              >
+              <div class="d-flex align-items-center gap-3 cv-sidebar-menu-item" [class.active]="item.isActive"
+                (click)="selectSidebarItem(item)">
                 <i class="{{ item.icon }}"></i>
                 {{ item.label }}
               </div>
@@ -102,17 +78,13 @@
       <!-- end desktop -->
 
       <!-- cv content -->
-      <div
-        id="cv-content"
-        class="flex-grow-1 d-flex justify-content-center"
-        style="
+      <div id="cv-content" class="flex-grow-1 d-flex justify-content-center" style="
     --theme-color: {{ (template?._css)!['template']['themeColor'] }};
     --theme-font: {{ (template?._css)!['template']['font'] }};
     --theme-font-size: {{ (template?._css)!['template']['fontSize'] + 'px' }};
     --theme-line-height: {{ (template?._css)!['template']['lineHeight'] }};
     --multiplierFS: {{ (template?._css)!['template']['multiplierFS'] }};
-    "
-      >
+    ">
         <div class="content">
           <ng-container *ngTemplateOutlet="cv1"></ng-container>
         </div>
@@ -132,49 +104,29 @@
     <!-- font -->
     <div class="d-flex flex-column gap-2">
       <label for="font">Font chữ</label>
-      <p-dropdown
-        [options]="fonts"
-        [optionValue]="'value'"
-        [(ngModel)]="template._css['template']['font']"
-        [styleClass]="'w-100'"
-        appendTo="body"
-        optionLabel="label"
-      />
+      <p-dropdown [options]="fonts" [optionValue]="'value'" [(ngModel)]="template._css['template']['font']"
+        [styleClass]="'w-100'" appendTo="body" optionLabel="label" />
     </div>
 
     <!-- cỡ chữ -->
     <div class="d-flex flex-column gap-4 font-size">
       <label for="font">cỡ chữ</label>
-      <p-slider
-        styleClass="w-100"
-        [(ngModel)]="template._css['template']['multiplierFS']"
-        [min]="0.7"
-        [max]="1.5"
-        [step]="0.2"
-      />
+      <p-slider styleClass="w-100" [(ngModel)]="template._css['template']['multiplierFS']" [min]="0.7" [max]="1.5"
+        [step]="0.2" />
     </div>
 
     <!-- khoảng cách dòng -->
     <div class="d-flex flex-column gap-4">
       <label>khoảng cách dòng</label>
-      <p-slider
-        styleClass="w-100"
-        [min]="1"
-        [max]="2"
-        [step]="0.1"
-        [(ngModel)]="template._css['template']['lineHeight']"
-      />
+      <p-slider styleClass="w-100" [min]="1" [max]="2" [step]="0.1"
+        [(ngModel)]="template._css['template']['lineHeight']" />
     </div>
 
     <!-- Màu chủ đề -->
     <div class="d-flex flex-column gap-3">
       <label>màu chủ đề</label>
-      <p-colorPicker
-        (onChange)="onChangeThemeColor($event)"
-        [(ngModel)]="template._css['template']['themeColor']"
-        [inline]="true"
-        styleClass="w-100"
-      />
+      <p-colorPicker (onChange)="onChangeThemeColor($event)" [(ngModel)]="template._css['template']['themeColor']"
+        [inline]="true" styleClass="w-100" />
     </div>
     }@else { Đang tải dữ liệu template }
   </div>
@@ -187,23 +139,13 @@
 
     <!-- condition: row -->
     <div class="_row py-2 d-flex">
-      <p-splitter
-        [minSizes]="row._panelMinSizes!"
-        (onResizeEnd)="onResizeEnd($event, row)"
-        class="w-100"
-        [styleClass]="'w-100'"
-        [panelSizes]="row._panelSizes!"
-      >
+      <p-splitter [minSizes]="row._panelMinSizes!" (onResizeEnd)="onResizeEnd($event, row)" class="w-100"
+        [styleClass]="'w-100'" [panelSizes]="row._panelSizes!">
         @for (col of row._listChild; track col.id) {
         <!-- condition: column -->
         <ng-template pTemplate>
-          <div
-            class="_col p-2 d-flex flex-column gap-2"
-            cdkDropList
-            id="{{ col.id }}"
-            (cdkDropListDropped)="dropIntoCol($event, col)"
-            [cdkDropListData]="col._listTypeCode!"
-          >
+          <div class="_col p-2 d-flex flex-column gap-2" cdkDropList id="{{ col.id }}"
+            (cdkDropListDropped)="dropIntoCol($event, col)" [cdkDropListData]="col._listTypeCode!">
             @for (group of col._listTypeCode; track group) {
 
             <div class="_group text-center p-3 bg-light rounded border" cdkDrag>
@@ -255,19 +197,16 @@
         </div>
       </div> -->
 
-      <div
-        class="list-avaible d-flex flex-column gap-2"
-        id="groups"
-        [cdkDropListConnectedTo]="listCdkDropListConnectedTo"
-        cdkDropList
-        [cdkDropListData]="listGroupAvailable"
-        (cdkDropListDropped)="dropIntoCol($event)"
-      >
+      <div class="list-avaible d-flex flex-column gap-2" id="groups"
+        [cdkDropListConnectedTo]="listCdkDropListConnectedTo" cdkDropList [cdkDropListData]="listGroupAvailable"
+        (cdkDropListDropped)="dropIntoCol($event)">
         @for(group of listGroupAvailable; track group) {
-        <div
-          cdkDrag
-          class="d-flex justify-content-between gap-2 align-items-center _group p-3 bg-light rounded border"
-        >
+
+
+
+        <div cdkDrag class="d-flex justify-content-between gap-2 align-items-center _group p-3 bg-light rounded border">
+          <div class="_group-placeholder" *cdkDragPlaceholder></div>
+
           <div class="d-flex gap-4">
             <span>#</span>
 
@@ -292,9 +231,7 @@
 
       <div class="list-used d-flex flex-column gap-2">
         @for(group of listGroupUsedDistinct; track group) {
-        <div
-          class="d-flex justify-content-center gap-2 align-items-center _group p-3 bg-light rounded border"
-        >
+        <div class="d-flex justify-content-center gap-2 align-items-center _group p-3 bg-light rounded border">
           <div class="d-flex gap-4">
             <span class="name">
               {{ group.label }}
@@ -309,26 +246,15 @@
 
 <!-- CV1 -->
 <ng-template #cv1>
-  <div
-    id="cv-template"
-    cdkDropListGroup
-    class="shadow-sm _template d-flex flex-column {{ template?.code }}"
-  >
+  <div id="cv-template" cdkDropListGroup class="shadow-sm _template d-flex flex-column {{ template?.code }}">
     @for (row of listRow; track row.id) {
 
     <!-- condition: row -->
     <div id="{{ row.id }}" class="_row d-flex">
       <!-- condition: column -->
-      <div
-        class="_col p-2 d-flex flex-column"
-        cdkDropList
-        id="{{ col.id }}"
-        *ngFor="let col of row._listChild"
-        [cdkDropListConnectedTo]="['groups']"
-        (cdkDropListDropped)="dropIntoCol($event, col)"
-        [cdkDropListData]="col._listTypeCode!"
-        [style]="{ 'flex-basis': col._css['width'] + '%' }"
-      >
+      <div class="_col p-2 d-flex flex-column" cdkDropList id="{{ col.id }}" *ngFor="let col of row._listChild"
+        [cdkDropListConnectedTo]="['groups']" (cdkDropListDropped)="dropIntoCol($event, col)"
+        [cdkDropListData]="col._listTypeCode!" [style]="{ 'flex-basis': col._css['width'] + '%' }">
         @for (group of col._listTypeCode; track group; let idx = $index; let
         last = $last; let first = $first) {
 
@@ -337,35 +263,19 @@
           <!-- LƯU Ý app-cv-element-5 CHỈ DÀNH CHO GROUP CÓ col._hashMapTypeCode[group.typeCode].LENGTH >= 5 -->
           <!-- GROUP PHẢI CÓ THUỘC TÍNH layout, CÁC THÀNH PHẦN CON PHẢI CÓ fieldIndex, fieldIndex bắt đầu = 0 -->
           <!-- LƯU Ý TƯƠNG TỰ CHO CÁC app-cv-element-X -->
-          <app-cv-element-5
-            (onMoveGroupEvent)="onMoveGroupEvent($event, col)"
-            (onDeleteGroupEvent)="onDeleteGroupEvent($event, col)"
-            [colId]="col.id"
-            [idx]="idx"
-            [first]="first"
-            [last]="last"
-            [template]="template"
-            [listElement]="col._hashMapTypeCode[group.typeCode]"
-            [typeCode]="group.typeCode"
-            [label]="group.label"
-          ></app-cv-element-5>
+          <app-cv-element-5 (onMoveGroupEvent)="onMoveGroupEvent($event, col)"
+            (onDeleteGroupEvent)="onDeleteGroupEvent($event, col)" [colId]="col.id" [idx]="idx" [first]="first"
+            [last]="last" [template]="template" [listElement]="col._hashMapTypeCode[group.typeCode]"
+            [typeCode]="group.typeCode" [label]="group.label"></app-cv-element-5>
 
           }@else {
           <!-- CÁC THÀNH PHẦN CON SẼ XẾP THÀNH CỘT -->
           <!-- GROUP K cần CÓ THUỘC TÍNH layout, CÁC THÀNH PHẦN CON K cần CÓ fieldIndex -->
           <!-- Chỉ áp dụng cho app-cv-element -->
-          <app-cv-element
-            (onMoveGroupEvent)="onMoveGroupEvent($event, col)"
-            (onDeleteGroupEvent)="onDeleteGroupEvent($event, col)"
-            [colId]="col.id"
-            [idx]="idx"
-            [first]="first"
-            [last]="last"
-            [template]="template"
-            [listElement]="col._hashMapTypeCode[group.typeCode]"
-            [typeCode]="group.typeCode"
-            [label]="group.label"
-          ></app-cv-element>
+          <app-cv-element (onMoveGroupEvent)="onMoveGroupEvent($event, col)"
+            (onDeleteGroupEvent)="onDeleteGroupEvent($event, col)" [colId]="col.id" [idx]="idx" [first]="first"
+            [last]="last" [template]="template" [listElement]="col._hashMapTypeCode[group.typeCode]"
+            [typeCode]="group.typeCode" [label]="group.label"></app-cv-element>
           }
         </ng-container>
 

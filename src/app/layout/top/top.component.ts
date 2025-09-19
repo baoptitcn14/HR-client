@@ -61,7 +61,7 @@ export class TopComponent implements OnInit {
   ];
 
   formUyQuyen!: FormGroup;
-  logoQlcv = AppConst.logoQlcvUrl;
+  logoBrand = AppConst.logoBrand;
   urlLogin = AppConst.loginUrl;
 
   appTenantService = inject(AppTenantService);

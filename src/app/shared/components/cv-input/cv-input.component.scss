@@ -29,12 +29,27 @@
                 }
             }
 
+            &:hover {
+                p-button {
+                    display: block;
+                }
+            }
+
             img {
                 min-width: 80px;
                 min-height: 80px;
                 max-width: 100%;
                 aspect-ratio: 1/1;
                 border-radius: 50%;
+            }
+
+            p-button {
+                display: none;
+                position: absolute;
+                bottom: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 101px;
             }
 
             .pi-arrows-h {
@@ -97,7 +112,7 @@
 
         &:focus-visible,
         &:focus {
-            ~ p-overlayPanel > app-cv-input-toolbar {
+            ~p-overlayPanel>app-cv-input-toolbar {
                 .cv-input-toolbar {
                     display: flex;
                 }
