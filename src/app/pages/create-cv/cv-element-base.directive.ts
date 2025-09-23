@@ -38,6 +38,9 @@ export abstract class CvElementBaseDirective implements OnChanges {
   @Output() onMoveGroupEvent = new EventEmitter<IMoveGroupEvent>();
   @Output() onDeleteGroupEvent = new EventEmitter<string>();
 
+  // output update date label
+  @Output() onUpdateLabelEvent = new EventEmitter<{ label: string, typeCode: string }>();
+
   // variable region
   listElementProcessed: { [key: string]: IThanhPhan[] } = {};
   listElementGroupId: string[] = [];
@@ -88,11 +91,13 @@ export abstract class CvElementBaseDirective implements OnChanges {
   }
 
   onAdd(event: IMoveEvent) {
-    const group = this.listElement[event.groupId];
+    const editors = this.listElement[event.groupId];
 
     this.listElement[
       event.groupId.split('#')[0] + '#' + this.utilitiesService.customId(8)
-    ] = structuredClone(group);
+    ] = structuredClone(
+      editors.map(m => ({ ...m, _value: '', _isBlank: true }))
+    );
 
     this.processListElement();
   }

@@ -23,4 +23,19 @@ import { CvElementBaseDirective } from '../../../pages/create-cv/cv-element-base
   templateUrl: './cv-element.component.html',
   styleUrl: './cv-element.component.scss',
 })
-export class CvElementComponent extends CvElementBaseDirective {}
+export class CvElementComponent extends CvElementBaseDirective {
+  onKeyDown(event: any) {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+    }
+  }
+
+  onKeyUp(event: any) {
+    this.onUpdateLabelEvent.emit(
+      {
+        label: event.target.innerHTML,
+        typeCode: this.typeCode,
+      }
+    );
+  }
+}

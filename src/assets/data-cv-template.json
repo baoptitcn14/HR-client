@@ -1,5 +1,33 @@
 [
     {
+        "typeCode": "Others",
+        "label": "Thông tin thêm",
+        "value": [
+            {
+                "industryId": "",
+                "industryName": "",
+                "label": "Thông tin thêm",
+                "code": "others",
+                "defaultValue": "",
+                "icon": "pi pi-info-circle",
+                "cvInputConfig": {
+                    "showToolbar": true,
+                    "showAction": true,
+                    "actionConfig": {
+                        "showMoveUp": true,
+                        "showMoveDown": true,
+                        "showDelete": false,
+                        "showAdd": false
+                    },
+                    "toolbarConfig": {
+                        "showAlign": false,
+                        "showOrderList": false
+                    }
+                }
+            }
+        ]
+    },
+    {
         "label": "Mục tiêu nghề nghiệp",
         "typeCode": "CareerObjective",
         "value": [
@@ -1798,7 +1826,7 @@
                 "defaultValue": "2017"
             }
         ]
-    },   
+    },
     {
         "typeCode": "Experience",
         "label": "Kinh nghiệm",

@@ -1,7 +1,18 @@
 <div id="{{ typeCode }}" [attr.code]="label" cdkDrag [cdkDragPreviewClass]="'cv-group-drag-preview'"
   style="display: flex; flex-direction: column" class="cv-input cv-group d-flex">
   <div class="cv-group-name" style="margin-bottom: 5px" *ngIf="label">
-    {{ label }}
+    <div class="cv-element" [class.cv-group-name-editable]="typeCode.startsWith('Others')">
+
+      @if( typeCode.startsWith('Others')) {
+      <div #editor spellcheck="false" class="editor" contenteditable="true" [innerHTML]="label"
+        (keydown)="onKeyDown($event)" (blur)="onKeyUp($event)"></div>
+      }@else {
+      <div class="editor">
+        {{ label }}
+      </div>
+      }
+
+    </div>
   </div>
 
   @for(groupId of listElementGroupId; track groupId; let last = $last; let first

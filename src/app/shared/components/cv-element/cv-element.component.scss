@@ -25,7 +25,16 @@
                 font-weight: bold;
                 position: relative;
                 z-index: 2;
+
+                .editor {
+                    font-size: calc(var(--theme-font-size) * 1.2 * var(--multiplierFS));
+                }
+
+                &.cv-group-name-editable {
+                    padding: 0.323rem 0.8rem;
+                }
             }
+
 
 
             &::after {
@@ -38,6 +47,8 @@
                 z-index: 1;
                 border-radius: 50%;
             }
+
+
         }
     }
 }

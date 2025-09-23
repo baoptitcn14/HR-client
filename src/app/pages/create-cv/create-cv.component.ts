@@ -13,6 +13,7 @@ import {
   CdkDragPlaceholder,
   CdkDropList,
   CdkDropListGroup,
+  copyArrayItem,
   moveItemInArray,
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
@@ -23,6 +24,12 @@ import { UtilitiesService } from '../../shared/services/utilities.service';
 import { CvService } from './cv.service';
 import { CvElement5Component } from '../../shared/components/cv-element-5/cv-element-5.component';
 import { IMoveGroupEvent } from './cv-element-base.directive';
+import { TooltipModule } from 'primeng/tooltip';
+import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
+import { InputGroupModule } from 'primeng/inputgroup';
+import { InputTextModule } from 'primeng/inputtext';
+import { JobFieldInfoServiceProxy, JobFieldInputDto, JobFieldServiceProxy } from '../../shared/service-proxies/sys-service-proxies';
+import { switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-create-cv',
@@ -40,9 +47,13 @@ import { IMoveGroupEvent } from './cv-element-base.directive';
     CdkDragPlaceholder,
     SplitterModule,
     DividerModule,
+    TooltipModule,
+    InputGroupAddonModule,
+    InputGroupModule,
+    InputTextModule,
     // components group
     CvElementComponent,
-    CvElement5Component    
+    CvElement5Component
   ],
   templateUrl: './create-cv.component.html',
   styleUrl: './create-cv.component.scss',
@@ -52,7 +63,8 @@ export class CreateCvComponent implements OnInit {
   private http = inject(HttpClient);
   private utilService = inject(UtilitiesService);
   private cvService = inject(CvService);
-  // declare region
+  private jobFieldService = inject(JobFieldServiceProxy);
+  // declare region  
 
   fonts = [
     {
@@ -126,6 +138,137 @@ export class CreateCvComponent implements OnInit {
     this.getDataCvTemplate();
   }
 
+  // UPDATE LABEL TYPE CODE Event
+  onUpdateLabelEvent(event: { label: string, typeCode: string }, col: IThanhPhan) {
+
+    let typeCode = col._listTypeCode?.find((e) => e.typeCode == event.typeCode);
+
+    if (typeCode) {
+      typeCode.label = event.label;
+    }
+
+  }
+
+  //#region EVENT LƯU CV, UNDO, REDO PREVIEW
+
+  onSave() {
+
+    // Lưu data 
+    // tempalte ( image, inputType, css )
+    const template = {
+      ...this.template,
+      id: undefined,
+      css: JSON.stringify(this.template?._css),
+    };
+
+    // Lưu data 
+    // Rows ( image, fieldIndex, inputType, templateId )
+    const listRow = this.listRow.map((r) => ({
+      image: r.image,
+      fieldIndex: r.fieldIndex,
+      inputType: r.inputType,
+      templateId: '',
+      id: undefined
+    }) as IThanhPhan);
+
+    // Lưu data 
+    // Cols ( image, fieldIndex, inputType, templateId, rowId, css )
+    const listCol = this.listRow.flatMap((r) => r._listChild).map((c) => ({
+      ...c,
+      templateId: '',
+      rowId: '',
+      css: JSON.stringify(c._css),
+      id: undefined
+    })) as IThanhPhan[];
+
+    // Lưu data 
+    // hashCode ( label, fieldIndex, hashCode, layout, templateId, rowId, colId, ) 
+    // editors, image ( _value: innerHtml, inputType, fieldIndex, cvInputConfig, code, templateId, rowId, colId, icon?, css?  )
+    //  gán dữ liệu trên editor hiện tại 
+    let listEditor: IThanhPhan[] = [];
+
+    listCol.forEach(c => {
+
+      const listContentEditorCurrent = Object.keys(c._hashMapTypeCode)
+        .flatMap((hashCode) =>
+          this.cvService.getInnerHtmlInputsByHashCode(hashCode, Object.keys(c._hashMapTypeCode[hashCode]), true)
+        )
+
+      Object.keys(c._hashMapTypeCode).forEach(hashCode => {
+
+
+
+        listContentEditorCurrent.forEach(e => {
+
+          // key của Group
+          const key = Object.keys(e)[0];
+
+          // các editor có trong Group
+          const value = Object.values(e)[0] as IThanhPhan[];
+
+          // lấy ds editor của group (key) trong hashcode này
+          const listEditorInGroup = c._hashMapTypeCode[hashCode][key];
+
+          // nếu listGroup tồn tại
+          if (listEditorInGroup) {
+            listEditor = [...listEditor, ...listEditorInGroup.map((ed: any) => ({
+              ...ed,
+              _value: value.find((x: any) => x.code == ed.code)?._value,
+              defaultValue: '',
+              css: JSON.stringify(ed._css),
+              templateId: '',
+              rowId: '',
+              colId: '',
+            }))];
+          }
+        })
+
+      })
+
+    })
+
+    // Lưu data
+    // listHashCode ( label, fieldIndex, typeCode, layout, templateId, rowId, colId, )
+    const listHashCode = listCol.flatMap((c) => c._listTypeCode)
+
+    console.log(listHashCode)
+
+
+    // CALL API
+    // this.createCv([template] as IThanhPhan[]).pipe(
+    //   switchMap((listTemplate) => {
+    //     const templateId = listTemplate[0].id;
+    //     listRow.forEach((r) => (r.templateId = templateId));
+    //     return this.createCv(listRow as IThanhPhan[]);
+    //   }),
+    //   switchMap((listRow) => {
+
+    //     listRow.forEach((r) => {
+    //       listCol.forEach((c) => {
+    //         if (c.rowId == r.id) {
+    //           c.rowId = r.id;
+    //           c.templateId = r.templateId;
+    //         }
+    //       });
+    //     });
+
+    //     return this.createCv(listCol);
+    //   }),
+    //   switchMap((listCol) => {
+
+    //     return this.createCv(listCol);
+    //   })
+    // );
+
+  }
+
+  private createCv(fields: IThanhPhan[]) {
+    const input = fields.map(m => JobFieldInputDto.fromJS(m));
+    return this.jobFieldService.createOrUpdateList(input);
+  }
+
+  //#endregion
+
   //#region EVENT ACTIONS TOOLBAR GROUP
 
   onMoveGroupEvent(event: IMoveGroupEvent, col: IThanhPhan) {
@@ -143,13 +286,18 @@ export class CreateCvComponent implements OnInit {
       (e) => e.typeCode !== typeCode
     );
 
+    // xóa dữ liệu trong hashmap của col
+    delete col._hashMapTypeCode[typeCode];
+
     // remove group from listGroupUsedDistinct
     this.listGroupUsedDistinct = this.listGroupUsedDistinct.filter(
       (e) => e.typeCode !== typeCode
     );
 
-    // add group to listGroupAvailable
-    this.listGroupAvailable.push(data);
+    if (typeCode != OTHERS_TYEPCODE) {
+      // add group to listGroupAvailable
+      this.listGroupAvailable.push(data);
+    }
   }
 
   //#endregion
@@ -170,12 +318,15 @@ export class CreateCvComponent implements OnInit {
   //#endregion
 
   //#region sidebar content
+
+  // bắt sự kiện khi resize các cột
   onResizeEnd(event: SplitterResizeEndEvent, row: IThanhPhan) {
     row._listChild!.forEach((e, i) => (e._css['width'] = event.sizes[i]));
 
     row._panelSizes = this.updatePanelSizes(row);
   }
 
+  // update width của các cột trên row
   private updatePanelSizes(row: IThanhPhan) {
     return row._listChild!.map((e) => e._css['width']);
   }
@@ -186,7 +337,12 @@ export class CreateCvComponent implements OnInit {
 
   // hàm xử lý khi thả group vào col
   dropIntoCol(event: CdkDragDrop<any[]>, col?: IThanhPhan) {
+
+    if (event.previousContainer === event.container && event.container.id == 'groups') return;
+
     const data = event.previousContainer.data[event.previousIndex];
+
+    // if (col && col._hashMapTypeCode[data.typeCode]) return;
 
     if (data) {
       const typeCode = data.typeCode;
@@ -198,12 +354,25 @@ export class CreateCvComponent implements OnInit {
           event.currentIndex
         );
       } else {
-        transferArrayItem(
-          event.previousContainer.data,
-          event.container.data,
-          event.previousIndex,
-          event.currentIndex
-        );
+
+        if (typeCode != OTHERS_TYEPCODE) {
+          transferArrayItem(
+            event.previousContainer.data,
+            event.container.data,
+            event.previousIndex,
+            event.currentIndex
+          );
+        } else {
+
+          // nếu là thông tin thêm thì copy
+
+          copyArrayItem(
+            event.previousContainer.data,
+            event.container.data,
+            event.previousIndex,
+            event.currentIndex
+          )
+        }
 
         if (col) {
           const listDataOfTypeCode = this.dataCvTemplate
@@ -217,26 +386,31 @@ export class CreateCvComponent implements OnInit {
 
           const groupId = typeCode + '#' + this.utilService.customId(8);
 
-          // add các thành phần vào nhóm
+          // bởi vì thông tin thêm ( others ) không phải là duy nhất trong 1 template
+          // nên khi thêm others vào template phải tạo cho nó 1 cái typeCode khác là duy nhất
+          // sẽ gọi chung là hashCode = typeCode hoặc typeCode#random nếu là others
+          const hashCode = typeCode == OTHERS_TYEPCODE ? `${typeCode}#${this.utilService.customId(8)}` : typeCode;
 
-          // const defaultCssJson = `{"element": {"fontSize": "${this.template?._css['template']['fontSize']}", "font": "${this.template?._css['template']['font']}"}}`;
+          // nếu là Others thì lấy data ra và upadate typeCode thành hashCode
+          if (typeCode == OTHERS_TYEPCODE) {
 
-          const listThanhPhan = (
-            listDataOfTypeCode
-              .reduce((acc, e) => [...acc, ...e])
-              .map((e: IThanhPhan) => ({
-                ...e,
-                // _css: JSON.parse(e.css ?? defaultCssJson),
-                groupId: groupId,
-                _value: e._value ?? e.defaultValue,
-              })) as any[]
-          ).sort((e1: any, e2: any) => e1.fieldIndex - e2.fieldIndex);
+            const index = col._listTypeCode!.findIndex(e => e.typeCode == typeCode);
 
-          const colPreviousId = event.previousContainer.id;
+            if (index > -1) {
+              col._listTypeCode?.splice(index, 1, {
+                ...col._listTypeCode![index],
+                typeCode: hashCode
+              });
+            }
+
+          }
           // tìm Row chứa column, column này có thành phần được kéo
+          const colPreviousId = event.previousContainer.id;
+
           const rowContainerColPrevious = this.listRow.find(
             (r) => r._listChild?.findIndex((e) => e.id == colPreviousId) != -1
           );
+
 
           // Kiểm tra có phải kéo từ 1 row khác không
           if (rowContainerColPrevious) {
@@ -247,26 +421,60 @@ export class CreateCvComponent implements OnInit {
 
             if (colPrevious) {
               // Kiểm tra col này có cái typeCode đang đc kéo không
-              if (colPrevious._hashMapTypeCode[typeCode]) {
-                col._hashMapTypeCode[typeCode] =
-                  colPrevious._hashMapTypeCode[typeCode];
-                delete colPrevious._hashMapTypeCode[typeCode];
-              } else {
-                // update hash map groupId
-                if (col._hashMapTypeCode && !col._hashMapTypeCode[typeCode]) {
-                  col._hashMapTypeCode[typeCode] = {
-                    [groupId]: listThanhPhan,
-                  };
-                }
+              if (colPrevious._hashMapTypeCode[hashCode]) {
+
+                // Danh sách group có trong hashCode này
+                const groupIds = Object.keys(colPrevious._hashMapTypeCode[hashCode]);
+
+                // data hiện tại trên giao diện
+                const dataCurrent = this.cvService.getInnerHtmlInputsByHashCode(hashCode, groupIds);
+
+                groupIds.forEach((groupId) => {
+
+                  // gans duwx liệu cho các editor
+                  colPrevious._hashMapTypeCode[hashCode][groupId] =
+                    colPrevious._hashMapTypeCode[hashCode][groupId].map((e: IThanhPhan) => {
+
+                      const group = dataCurrent[groupId] as IThanhPhan[];
+
+                      let editor = group.find(x => x.code == e.code);
+
+                      return {
+                        ...e,
+                        _value: editor?._value
+                      }
+                    })
+
+                });
+
+                col._hashMapTypeCode[hashCode] = colPrevious._hashMapTypeCode[hashCode];
+
+                // Xóa data ở col bị kéo
+                delete colPrevious._hashMapTypeCode[hashCode];
+
               }
             }
           } else {
             // ====> sẽ tính _listChild sau, có thể là ở sự kiện Save
-            // col._listChild = [...col._listChild!, ...listThanhPhan];
+
+            // add các thành phần vào nhóm
+
+            const listThanhPhan = (
+              listDataOfTypeCode
+                .reduce((acc, e) => [...acc, ...e])
+                .map((e: IThanhPhan) => ({
+                  ...e,
+                  _css: JSON.parse(e.css ?? '{}'),
+                  groupId: groupId,
+                  _value: e._value ?? e.defaultValue,
+                  _isBlank: !e._value && !e.defaultValue
+                })) as any[]
+            ).sort((e1: any, e2: any) => e1.fieldIndex - e2.fieldIndex);
 
             // update hash map groupId
-            if (col._hashMapTypeCode && !col._hashMapTypeCode[typeCode]) {
-              col._hashMapTypeCode[typeCode] = {
+
+            if (col._hashMapTypeCode && !col._hashMapTypeCode[hashCode]) {
+              col._hashMapTypeCode[hashCode] = {
                 [groupId]: listThanhPhan,
               };
             }
@@ -274,16 +482,21 @@ export class CreateCvComponent implements OnInit {
         }
       }
 
-      // đưa group có type code này  vào list Used
+      if (data.typeCode != OTHERS_TYEPCODE) {
 
-      const idxGroup = this.listGroupUsedDistinct.findIndex(
-        (x) => x.typeCode == data.typeCode
-      );
+        // đưa group có type code này  vào list Used
 
-      if (idxGroup < 0) this.listGroupUsedDistinct.splice(0, 0, data);
-      else {
-        if (!col) this.listGroupUsedDistinct.splice(idxGroup, 1);
+        const idxGroup = this.listGroupUsedDistinct.findIndex(
+          (x) => x.typeCode == data.typeCode
+        );
+
+        if (idxGroup < 0) this.listGroupUsedDistinct.splice(0, 0, data);
+        else {
+          if (!col) this.listGroupUsedDistinct.splice(idxGroup, 1);
+        }
       }
+
+
     }
   }
 
@@ -321,7 +534,6 @@ export class CreateCvComponent implements OnInit {
       );
     }
   }
-
   //#endregion
 
   //#region get data
@@ -394,6 +606,8 @@ export class CreateCvComponent implements OnInit {
           typeCode: e.typeCode,
           label: e.label,
           layout: e.layout,
+          fieldIndex: e.fieldIndex,
+          colId: col.id,
         }));
 
       // loại bỏ các group đã được sử dụng trong listGroupAvailable
@@ -423,13 +637,11 @@ export class CreateCvComponent implements OnInit {
         const groupId = typeCode + '#' + this.utilService.customId(8);
 
         // add các thành phần vào nhóm
-        // const defaultCssJson = `{"element": {"fontSize": "${this.template?._css['template']['fontSize']}", "font": "${this.template?._css['template']['font']}"}}`;
-
         const listThanhPhan = listDataOfTypeCode
           .reduce((acc, e) => [...acc, ...e], [])
           .map((e: IThanhPhan) => ({
             ...e,
-            // _css: JSON.parse(e.css ?? defaultCssJson),
+            _css: JSON.parse(e.css ?? '{}'),
             groupId: groupId,
             _value: e._value ?? e.defaultValue,
             _isBlank: this.cvService.isContentEditableEmpty(
@@ -470,3 +682,8 @@ export class CreateCvComponent implements OnInit {
 
   //#endregion
 }
+
+// type code của Thông tin thêm
+export const OTHERS_TYEPCODE = 'Others';
+
+// const defaultCssJson = `{"element": {\"width\": \"200\",\"height\": \"200\"}}`;

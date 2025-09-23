@@ -469,7 +469,7 @@ export interface IThanhPhan extends JobFieldOutputDto {
   _value: any;
   _panelSizes?: number[]; // panelSizes cua splitter dùng cho row
   _panelMinSizes?: number[]; // panelMinSizes cua splitter dùng cho row
-  _listTypeCode?: {typeCode: string, label: string, layout: string}[]; // chứa typeCode của các group được thả vào col
+  _listTypeCode?: { typeCode: string, label: string, layout: string }[]; // chứa typeCode của các group được thả vào col
   _hashMapTypeCode: { [typeCode: string]: { [groupId: string]: any[] } }; // chứa các typeCode là duy nhất làm key và value là hashmap groupId -> listThanhPhan
   // isAllowDuplicate?: boolean;
   // placeholder?: string;
@@ -480,6 +480,8 @@ export interface IThanhPhan extends JobFieldOutputDto {
   cvInputConfig?: ICvInputConfig;
   icon?: string;
   _isBlank?: boolean; // element này có giá trị hay không
+  image?: string;
+
 }
 
 export interface ICss {

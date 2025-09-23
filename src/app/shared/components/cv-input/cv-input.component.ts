@@ -1,10 +1,14 @@
 import { CommonModule } from '@angular/common';
 import {
+  AfterViewInit,
   Component,
   ElementRef,
   HostListener,
   inject,
   Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
   ViewChild,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -32,7 +36,8 @@ import { CropImageComponent } from '../crop-image/crop-image.component';
   templateUrl: './cv-input.component.html',
   styleUrl: './cv-input.component.scss',
 })
-export class CvInputComponent {
+export class CvInputComponent implements OnChanges {
+
   // inject region
   cvService = inject(CvService);
 
@@ -65,6 +70,14 @@ export class CvInputComponent {
   @HostListener('document:scroll', ['$event']) onScroll(event: any) {
     this.op.hide();
   }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['element'] && this.element.code?.toLowerCase() === 'avatar') {
+      this.width = parseInt(this.element._css['element']['width']) || 200;
+      this.height = parseInt(this.element._css['element']['height']) || 200;
+    }
+  }
+
 
   onShowDialog() {
     this.showDialogUploadImage = true;
@@ -146,8 +159,13 @@ export class CvInputComponent {
     }
 
     // giữ tỷ lệ ảnh 1/1
-    this.element._css['element']['height'] = this.height =
-      this.element._css['element']['width'] * (1 / 1);
+    this.element._css['element']['height'] = this.height = this.width * (1 / 1);
+  }
+
+  //save Image
+  onSaveImage(event: string) {
+    this.element._value = event;
+    this.showDialogUploadImage = false;
   }
 }
 

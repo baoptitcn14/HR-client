@@ -1,21 +1,38 @@
 <div id="cv">
+  <!-- ====== BEGIN TOOLBAR ======= -->
   <div id="cv-toolbar" class="cv-toolbar d-none d-md-flex">
     <div class="container-fluid d-flex gap-2 justify-content-between">
-      <div class="cv-name d-flex align-items-center">
-        <i class="pi pi-file"></i>
-        <input type="text" class="form-control" placeholder="Tên CV" />
+
+      <div style="flex-basis: 40%;">
+        <p-inputGroup>
+          <p-inputGroupAddon>
+            <i class="pi pi-file"></i>
+          </p-inputGroupAddon>
+          <input pInputText placeholder="Tên CV" class="input-sm py-1" />
+        </p-inputGroup>
       </div>
 
-      <div class="toolbar-actions d-flex gap-2 align-items-center">
-        <i class="pi pi-undo"></i>
+      <div class="toolbar-actions d-flex gap-4 align-items-center">
 
-        <button class="btn btn-primary">Xem trước</button>
+        <div class="d-flex gap-2">
+          <p-button icon="pi pi-undo fs-5" class="undo" [disabled] pTooltip="Undo" severity="secondary" [text]="true"
+            [size]="'small'" [rounded]="true"></p-button>
+          <p-button icon="pi pi-undo fs-5" class="redo" pTooltip="Redo" severity="secondary" [text]="true"
+            [size]="'small'" [rounded]="true"></p-button>
+        </div>
 
-        <button class="btn btn-primary">Lưu CV</button>
+        <div class="d-flex gap-2">
+          <p-button icon="pi pi-eye" label="Xem trước" [size]="'small'" severity="secondary" raised="true"
+            [outlined]="true"></p-button>
+
+          <p-button icon="pi pi-save" label="Lưu CV" [size]="'small'" severity="primary" raised="true"
+            (click)="onSave()"></p-button>
+        </div>
+
       </div>
     </div>
   </div>
-
+  <!-- ====== END TOOLBAR ======= -->
 
   <div class="container-fluid">
     <div class="d-flex gap-5 pt-4 px-2 w-100 overflow-auto pb-6 pb-md-4">
@@ -77,7 +94,7 @@
       </div>
       <!-- end desktop -->
 
-      <!-- cv content -->
+      <!-- ======= BEGIN CV TEMPLATE ======== -->
       <div id="cv-content" class="flex-grow-1 d-flex justify-content-center" style="
     --theme-color: {{ (template?._css)!['template']['themeColor'] }};
     --theme-font: {{ (template?._css)!['template']['font'] }};
@@ -89,7 +106,7 @@
           <ng-container *ngTemplateOutlet="cv1"></ng-container>
         </div>
       </div>
-      <!-- end cv content -->
+      <!--  ======= END CV TEMPLATE ======== -->
     </div>
     <!-- sidebar mobile -->
     <div class="d-md-none"></div>
@@ -174,35 +191,10 @@
 
       <i>Kéo và thả mục bất kỳ vào vị trí bạn muốn thêm trên CV</i>
 
-      <!-- THONG TIN THEM -->
-      <!-- <div
-        cdkDropList
-        (cdkDropListDropped)="dropIntoCol($event)"
-        [cdkDropListConnectedTo]="listCdkDropListConnectedTo"
-        class="list-avaible d-flex flex-column gap-2"
-      >
-        <div
-          cdkDrag
-          class="d-flex justify-content-between gap-2 align-items-center _group p-3 bg-light rounded border"
-        >
-          <div class="d-flex gap-4">
-            <span>#</span>
-
-            <span class="name">
-              {{ group.label }}
-            </span>
-          </div>
-
-          <i class="pi pi-arrows-alt"></i>
-        </div>
-      </div> -->
-
       <div class="list-avaible d-flex flex-column gap-2" id="groups"
         [cdkDropListConnectedTo]="listCdkDropListConnectedTo" cdkDropList [cdkDropListData]="listGroupAvailable"
         (cdkDropListDropped)="dropIntoCol($event)">
         @for(group of listGroupAvailable; track group) {
-
-
 
         <div cdkDrag class="d-flex justify-content-between gap-2 align-items-center _group p-3 bg-light rounded border">
           <div class="_group-placeholder" *cdkDragPlaceholder></div>
@@ -272,10 +264,11 @@
           <!-- CÁC THÀNH PHẦN CON SẼ XẾP THÀNH CỘT -->
           <!-- GROUP K cần CÓ THUỘC TÍNH layout, CÁC THÀNH PHẦN CON K cần CÓ fieldIndex -->
           <!-- Chỉ áp dụng cho app-cv-element -->
-          <app-cv-element (onMoveGroupEvent)="onMoveGroupEvent($event, col)"
-            (onDeleteGroupEvent)="onDeleteGroupEvent($event, col)" [colId]="col.id" [idx]="idx" [first]="first"
-            [last]="last" [template]="template" [listElement]="col._hashMapTypeCode[group.typeCode]"
-            [typeCode]="group.typeCode" [label]="group.label"></app-cv-element>
+          <app-cv-element (onUpdateLabelEvent)="onUpdateLabelEvent($event, col)"
+            (onMoveGroupEvent)="onMoveGroupEvent($event, col)" (onDeleteGroupEvent)="onDeleteGroupEvent($event, col)"
+            [colId]="col.id" [idx]="idx" [first]="first" [last]="last" [template]="template"
+            [listElement]="col._hashMapTypeCode[group.typeCode]" [typeCode]="group.typeCode"
+            [label]="group.label"></app-cv-element>
           }
         </ng-container>
 

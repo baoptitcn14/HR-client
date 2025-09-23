@@ -1,4 +1,5 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
+import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 
 @Component({
@@ -11,6 +12,14 @@ import { ButtonModule } from 'primeng/button';
   styleUrl: './crop-image.component.scss'
 })
 export class CropImageComponent implements AfterViewInit {
+
+  // inject region
+  private messageService = inject(MessageService);
+
+  // out in region
+  @Output() onSaveEvent = new EventEmitter<string>();
+
+
   ngAfterViewInit(): void {
     setTimeout(() => {
       this.cropImage();
@@ -37,6 +46,30 @@ export class CropImageComponent implements AfterViewInit {
     upload.addEventListener("change", (e: any) => {
       const file = e.target.files[0];
       if (!file) return;
+
+      // nếu không phải hình ảnh thì khong cho upload
+      if (!file.type.startsWith("image/")) {
+
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: 'File must be an image'
+        })
+
+        return;
+      }
+
+      // nếu kích thước file lớn hơn 5mb thì khong cho upload
+      if (file.size > 5 * 1024 * 1024) {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: 'File size must be less than 5MB'
+        })
+        return;
+      }
+
+
       const reader = new FileReader();
       reader.onload = () => {
         img.src = reader.result as string;
@@ -127,7 +160,8 @@ export class CropImageComponent implements AfterViewInit {
   }
 
   onSave() {
-
+    const preview = document.getElementById("preview") as HTMLImageElement;
+    this.onSaveEvent.emit(preview.src);
   }
 
 }

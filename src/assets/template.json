@@ -50,6 +50,7 @@
                 "code": "avatar",
                 "defaultValue": "/assets/media/default-avatar.png",
                 "inputType": "image",
+                "css": "{\"element\": {\"width\": \"200\",\"height\": \"200\"}}",   
                 "cvInputConfig": {
                     "showToolbar": false,
                     "showAction": false,
@@ -805,7 +806,7 @@
                 "label": "Tên hoạt động",
                 "code": "activity_title",
                 "defaultValue": "Tham gia CLB HỌC THUẬT",
-                "fieldIndex": 1,
+                "fieldIndex": 0,
                 "cvInputConfig": {
                     "showToolbar": true,
                     "showAction": true,

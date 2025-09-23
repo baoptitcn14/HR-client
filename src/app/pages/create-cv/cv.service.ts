@@ -13,7 +13,7 @@ export class CvService {
   i$ = new BehaviorSubject<boolean>(false);
   u$ = new BehaviorSubject<boolean>(false);
 
-  constructor() {}
+  constructor() { }
 
   saveSelection() {
     const selection = window.getSelection();
@@ -152,7 +152,7 @@ export class CvService {
     if (
       document.activeElement?.firstElementChild?.firstElementChild &&
       document.activeElement?.firstElementChild?.firstElementChild.tagName ==
-        'BR'
+      'BR'
     ) {
       document.activeElement?.firstElementChild?.firstElementChild.remove();
     }
@@ -306,9 +306,61 @@ export class CvService {
           self.range!.endOffset === span.childNodes.length) ||
         (span.contains(self.range!.endContainer) &&
           self.range!.endOffset ===
-            self.range!.endContainer.textContent?.length);
+          self.range!.endContainer.textContent?.length);
 
       return startOk && endOk;
     }
+  }
+
+  // Lấy tất cả innerHtml của editors trong tất cả group thuộc hashMap này 
+  getInnerHtmlInputsByHashCode(hashCode: string, groupIds: string[], getGroupLabel?: boolean) {
+
+    let result = {} as any;
+
+    const hashCodeElement = document.getElementById(hashCode) as HTMLElement;
+    const groupLabel = hashCodeElement.querySelector('.cv-group-name .editor');
+
+
+    if (hashCodeElement) {
+
+      groupIds.forEach((groupId) => {
+
+        const group = document.getElementsByClassName(groupId);
+
+        if (group.length > 0) {
+
+          if (hashCode.toLowerCase() == 'avatar') {
+
+            const image = group[0].querySelector('img');
+
+            result[groupId] = [{
+              groupLabel: getGroupLabel ? groupLabel?.innerHTML : undefined,
+              _value: image!.src,
+              code: image!.getAttribute('data-code'),
+            }];
+
+          } else {
+
+            const editor = group[0].querySelectorAll('.editor');
+
+            result[groupId] = Array.from(editor).map((e) => ({
+              groupLabel: getGroupLabel ? groupLabel?.innerHTML : undefined,
+              _value: e.innerHTML,
+              code: e.getAttribute('data-code'),
+            }));
+
+          }
+
+        }
+
+
+      })
+
+      return result;
+
+    }
+
+    return undefined;
+
   }
 }

@@ -1,10 +1,15 @@
 .cv-toolbar {
     left: 0;
     background-color: #fff;
-    padding: 1.5rem;
+    padding: 0.5rem 1.5rem;
     border-bottom: 1px solid var(--surface-c);
     width: 100%;
     top: 0;
+
+    .redo {
+        transform: scaleX(-1);
+    }
+
 }
 
 .fixed {
@@ -174,7 +179,6 @@
 }
 
 #cv-content {
-    background: #fff;
     font-size: calc(var(--theme-font-size, 0.9rem) * var(--multiplierFS, 1));
     color: var(--theme-color, var(--surface-600));
     font-family: var(--theme-font, var(--font-family));

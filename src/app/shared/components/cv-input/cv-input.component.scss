@@ -1,173 +1,175 @@
-.cv-element {
-    position: relative;
-    border: 1px dashed transparent;
+::ng-deep {
+    .cv-element {
+        position: relative;
+        border: 1px dashed transparent;
 
-    &:hover {
-        input[type="text"] {
-            border: 1px dashed var(--surface-500);
+        &:hover {
+            input[type="text"] {
+                border: 1px dashed var(--surface-500);
+            }
         }
-    }
 
-    .image-wrapper {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        user-select: none;
-        width: 100%;
+        .image-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            user-select: none;
+            width: 100%;
 
-        .image-inner {
-            width: fit-content;
-            border: 2px dashed transparent;
-            position: relative;
+            .image-inner {
+                width: fit-content;
+                border: 2px dashed transparent;
+                position: relative;
 
-            &:hover,
-            &.resizing {
-                border: 2px dashed var(--surface-300);
+                &:hover,
+                &.resizing {
+                    border: 2px dashed var(--surface-300);
+
+                    .pi-arrows-h {
+                        display: block;
+                    }
+                }
+
+                &:hover {
+                    p-button {
+                        display: block;
+                    }
+                }
+
+                img {
+                    min-width: 80px;
+                    min-height: 80px;
+                    max-width: 100%;
+                    aspect-ratio: 1/1;
+                    border-radius: 50%;
+                }
+
+                p-button {
+                    display: none;
+                    position: absolute;
+                    bottom: 20px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    width: 101px;
+                }
 
                 .pi-arrows-h {
-                    display: block;
+                    display: none;
+                    position: absolute;
+                    font-size: 1rem;
+                    font-weight: bold;
+                    color: var(--surface-300);
                 }
-            }
 
-            &:hover {
-                p-button {
-                    display: block;
+                .ne {
+                    cursor: ne-resize;
+                    content: "";
+                    right: 0;
+                    top: 0;
+                    transform: rotate(-45deg);
                 }
-            }
 
-            img {
-                min-width: 80px;
-                min-height: 80px;
-                max-width: 100%;
-                aspect-ratio: 1/1;
-                border-radius: 50%;
-            }
+                .se {
+                    cursor: se-resize;
+                    content: "";
+                    right: 0;
+                    bottom: 0;
+                    transform: rotate(45deg);
+                }
 
-            p-button {
-                display: none;
-                position: absolute;
-                bottom: 20px;
-                left: 50%;
-                transform: translateX(-50%);
-                width: 101px;
-            }
+                .sw {
+                    content: "";
+                    bottom: 0;
+                    left: 0;
+                    cursor: sw-resize;
+                    transform: rotate(-45deg);
+                }
 
-            .pi-arrows-h {
-                display: none;
-                position: absolute;
-                font-size: 1rem;
-                font-weight: bold;
-                color: var(--surface-300);
-            }
-
-            .ne {
-                cursor: ne-resize;
-                content: "";
-                right: 0;
-                top: 0;
-                transform: rotate(-45deg);
-            }
-
-            .se {
-                cursor: se-resize;
-                content: "";
-                right: 0;
-                bottom: 0;
-                transform: rotate(45deg);
-            }
-
-            .sw {
-                content: "";
-                bottom: 0;
-                left: 0;
-                cursor: sw-resize;
-                transform: rotate(-45deg);
-            }
-
-            .nw {
-                content: "";
-                top: 0;
-                left: 0;
-                cursor: nw-resize;
-                transform: rotate(45deg);
-            }
-        }
-    }
-
-    .editor[contenteditable="true"] {
-        font-family: var(--theme-font, var(--font-family));
-        font-size: calc(var(--theme-font-size) * var(--multiplierFS));
-        color: currentColor;
-        line-height: var(--theme-line-height, 1.5);
-
-        width: 100% !important;
-        border: none;
-        background-color: transparent;
-        padding: 0.2rem;
-        position: relative;
-
-        &:focus-visible {
-            outline-color: var(--primary-500);
-        }
-
-        &:focus-visible,
-        &:focus {
-            ~p-overlayPanel>app-cv-input-toolbar {
-                .cv-input-toolbar {
-                    display: flex;
+                .nw {
+                    content: "";
+                    top: 0;
+                    left: 0;
+                    cursor: nw-resize;
+                    transform: rotate(45deg);
                 }
             }
         }
 
-        // begin CSS app-cv-element-5 layout = 5
-        &.field-0,
-        &.field-1,
-        &.field-2,
-        &.field-3 {
-            font-weight: bold;
-        }
+        .editor[contenteditable="true"] {
+            font-family: var(--theme-font, var(--font-family));
+            font-size: calc(var(--theme-font-size) * var(--multiplierFS));
+            color: currentColor;
+            line-height: var(--theme-line-height, 1.5);
 
-        &.field-1 {
-            text-align: right !important;
-        }
+            width: 100% !important;
+            border: none;
+            background-color: transparent;
+            padding: 0.2rem;
+            position: relative;
 
-        //end CSS app-cv-element-5 layout = 5
-
-        &.editor-blank {
-            &::before {
-                content: attr(data-placeholder);
-                color: var(--surface-400);
-                position: absolute;
-                top: 50%;
-                transform: translateY(-50%);
-                left: 0.2rem;
-                right: 0.2rem;
-                pointer-events: none;
-            }
-
-            &:focus,
             &:focus-visible {
-                &::before {
-                    opacity: 0.3;
+                outline-color: var(--primary-500);
+            }
+
+            &:focus-visible,
+            &:focus {
+                ~p-overlayPanel>app-cv-input-toolbar {
+                    .cv-input-toolbar {
+                        display: flex;
+                    }
                 }
             }
-        }
 
-        // css đặc trưng của các mục input
-        &.card_fullname {
-            text-transform: uppercase;
-            text-align: center;
-            font-size: calc(var(--theme-font-size) * 1.7 * var(--multiplierFS));
-        }
+            // begin CSS app-cv-element-5 layout = 5
+            &.field-0,
+            &.field-1,
+            &.field-2,
+            &.field-3 {
+                font-weight: bold;
+            }
 
-        &.position_applied {
-            text-transform: capitalize;
-            text-align: center;
-            font-size: calc(var(--theme-font-size) * 1.5 * var(--multiplierFS));
-        }
+            &.field-1 {
+                text-align: right !important;
+            }
 
-        &::placeholder {
-            color: var(--surface-400);
+            //end CSS app-cv-element-5 layout = 5
+
+            &.editor-blank {
+                &::before {
+                    content: attr(data-placeholder);
+                    color: var(--surface-400);
+                    position: absolute;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    left: 0.2rem;
+                    right: 0.2rem;
+                    pointer-events: none;
+                }
+
+                &:focus,
+                &:focus-visible {
+                    &::before {
+                        opacity: 0.3;
+                    }
+                }
+            }
+
+            // css đặc trưng của các mục input
+            &.card_fullname {
+                text-transform: uppercase;
+                text-align: center;
+                font-size: calc(var(--theme-font-size) * 1.7 * var(--multiplierFS));
+            }
+
+            &.position_applied {
+                text-transform: capitalize;
+                text-align: center;
+                font-size: calc(var(--theme-font-size) * 1.5 * var(--multiplierFS));
+            }
+
+            &::placeholder {
+                color: var(--surface-400);
+            }
         }
     }
 }
