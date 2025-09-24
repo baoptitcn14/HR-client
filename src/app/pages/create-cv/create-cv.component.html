@@ -8,7 +8,7 @@
           <p-inputGroupAddon>
             <i class="pi pi-file"></i>
           </p-inputGroupAddon>
-          <input pInputText placeholder="Tên CV" class="input-sm py-1" />
+          <input pInputText placeholder="Tên CV" class="input-sm py-1" [(ngModel)]="cvName" />
         </p-inputGroup>
       </div>
 
@@ -23,7 +23,7 @@
 
         <div class="d-flex gap-2">
           <p-button icon="pi pi-eye" label="Xem trước" [size]="'small'" severity="secondary" raised="true"
-            [outlined]="true"></p-button>
+            [outlined]="true" (click)="previewCV()"></p-button>
 
           <p-button icon="pi pi-save" label="Lưu CV" [size]="'small'" severity="primary" raised="true"
             (click)="onSave()"></p-button>
@@ -107,6 +107,7 @@
         </div>
       </div>
       <!--  ======= END CV TEMPLATE ======== -->
+
     </div>
     <!-- sidebar mobile -->
     <div class="d-md-none"></div>
@@ -238,13 +239,14 @@
 
 <!-- CV1 -->
 <ng-template #cv1>
-  <div id="cv-template" cdkDropListGroup class="shadow-sm _template d-flex flex-column {{ template?.code }}">
+  <div id="cv-template" #cvTemplate cdkDropListGroup
+    class="shadow-sm _template d-flex flex-column {{ template?.code }}">
     @for (row of listRow; track row.id) {
 
     <!-- condition: row -->
     <div id="{{ row.id }}" class="_row d-flex">
       <!-- condition: column -->
-      <div class="_col p-2 d-flex flex-column" cdkDropList id="{{ col.id }}" *ngFor="let col of row._listChild"
+      <div class="_col p-2 d-flex flex-column" cdkDropList id="col{{ colIdx + 1 }}" *ngFor="let col of row._listChild; let colIdx = index;"
         [cdkDropListConnectedTo]="['groups']" (cdkDropListDropped)="dropIntoCol($event, col)"
         [cdkDropListData]="col._listTypeCode!" [style]="{ 'flex-basis': col._css['width'] + '%' }">
         @for (group of col._listTypeCode; track group; let idx = $index; let
@@ -276,7 +278,6 @@
       </div>
       <!-- end condition: column -->
     </div>
-
     }
   </div>
 </ng-template>

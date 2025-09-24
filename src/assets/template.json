@@ -10,7 +10,7 @@
     },
     {
         "id": "row1",
-        "templateId": "string",
+        "templateId": "template1",
         "name": "row 1",
         "image": "string",
         "industry": "",

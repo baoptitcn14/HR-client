@@ -15,6 +15,7 @@ import {
   SettingInfoServiceProxy,
   TenantServiceProxy,
   TokenAuthServiceProxy,
+  UserCVServiceProxy,
 } from './sys-service-proxies';
 
 @NgModule({
@@ -36,7 +37,8 @@ import {
     JobPostInfoServiceProxy,
     JobApplicationInfoServiceProxy,
     JobApplicationServiceProxy,
-    JobPostFieldInfoServiceProxy
+    JobPostFieldInfoServiceProxy,
+    UserCVServiceProxy
   ],
 })
 export class ServiceProxiesModule {}

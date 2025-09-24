@@ -6,11 +6,11 @@ export class AppConst {
   static domain: string;
   static sysAPI: string;
   static baseUrl: string;
-  static loginUrl: string;
   static homeUrl: string;
   static appTitle: string;
   static registerAccount: string;
   static logoBrand: string;
+  static loginUrl: string;
 
   //#endregion
 

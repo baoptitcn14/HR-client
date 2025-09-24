@@ -129,6 +129,7 @@ export class CropImageComponent implements AfterViewInit {
         const url = URL.createObjectURL(blob);
         preview.src = url; // Gắn blob vào <img>
       }, "image/png");
+
     }
 
 
@@ -159,9 +160,27 @@ export class CropImageComponent implements AfterViewInit {
     document.getElementById("upload")?.click();
   }
 
-  onSave() {
+  async onSave() {
     const preview = document.getElementById("preview") as HTMLImageElement;
-    this.onSaveEvent.emit(preview.src);
+
+    // return base64 image
+
+    const base64 = await this.blobUrlToBase64(preview.src);
+
+    this.onSaveEvent.emit(base64);
+  }
+
+
+  private async blobUrlToBase64(blobUrl: string): Promise<string> {
+    const response = await fetch(blobUrl);       // Lấy blob từ blob URL
+    const blob = await response.blob();
+
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = () => resolve(reader.result as string);
+      reader.onerror = reject;
+      reader.readAsDataURL(blob); // convert Blob -> Base64
+    });
   }
 
 }
