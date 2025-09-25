@@ -10,11 +10,9 @@ import {
 } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { ColorPickerModule } from 'primeng/colorpicker';
-import { IThanhPhan } from '../create-manual-form/create-manual-form.component';
 import { FormsModule } from '@angular/forms';
-import { ICvInputConfig } from '../cv-input/cv-input.component';
 import { CvService } from '../../../pages/create-cv/cv.service';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { IThanhPhan } from '../../../pages/page-viec-lam/ung-tuyen-dialog/ung-tuyen-dialog.component';
 
 @Component({
   selector: 'app-cv-input-toolbar',
@@ -86,7 +84,7 @@ export class CvInputToolbarComponent implements OnInit {
   }
 
   onChangeTextAlign(textAlign: string) {
-    this.element._css['element']['textAlign'] = textAlign;
+    this.element._css!['element']['textAlign'] = textAlign;
     // this.onUpdateElement();
   }
 

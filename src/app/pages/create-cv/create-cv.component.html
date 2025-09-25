@@ -3,12 +3,12 @@
   <div id="cv-toolbar" class="cv-toolbar d-none d-md-flex">
     <div class="container-fluid d-flex gap-2 justify-content-between">
 
-      <div style="flex-basis: 40%;">
+      <div style="flex-basis: 40%;" *ngIf="template">
         <p-inputGroup>
           <p-inputGroupAddon>
             <i class="pi pi-file"></i>
           </p-inputGroupAddon>
-          <input pInputText placeholder="Tên CV" class="input-sm py-1" [(ngModel)]="cvName" />
+          <input pInputText placeholder="Tên CV" class="input-sm py-1" [(ngModel)]="template.name" />
         </p-inputGroup>
       </div>
 

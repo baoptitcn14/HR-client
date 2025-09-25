@@ -53,6 +53,11 @@ export class TopComponent implements OnInit {
       icon: 'pi pi-fw pi-info',
       routerLink: '/create-cv',
     },
+      {
+      label: 'CV của tôi',
+      icon: 'pi pi-fw pi-info',
+      routerLink: '/user-cv',
+    },
     {
       label: 'Thoát',
       icon: 'pi pi-fw pi-sign-out',

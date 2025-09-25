@@ -1,6 +1,6 @@
 [
     {
-        "id": "template1",
+        "id": "default_template1",
         "code": "template_basic",
         "name": "template",
         "image": "string",
@@ -9,8 +9,8 @@
         "css": "{\"template\":{\"font\":\"Roboto\",\"fontSize\":13,\"lineHeight\":1.5,\"themeColor\":\"#4570de\", \"multiplierFS\": 1.1}}"
     },
     {
-        "id": "row1",
-        "templateId": "template1",
+        "id": "default_row1",
+        "templateId": "default_template1",
         "name": "row 1",
         "image": "string",
         "industry": "",
@@ -18,8 +18,8 @@
         "fieldIndex": 0
     },
     {
-        "id": "col1",
-        "rowId": "row1",
+        "id": "default_col1",
+        "rowId": "default_row1",
         "name": "col 1",
         "image": "string",
         "industry": "",
@@ -28,8 +28,8 @@
         "css": "{\"width\":35}"
     },
     {
-        "id": "col2",
-        "rowId": "row1",
+        "id": "default_col2",
+        "rowId": "default_row1",
         "name": "col 2",
         "image": "string",
         "industry": "",
@@ -41,7 +41,7 @@
         "label": "Hình ảnh",
         "typeCode": "Avatar",
         "fieldIndex": 0,
-        "columId": "col1",
+        "columId": "default_col1",
         "value": [
             {
                 "industryId": "",
@@ -72,7 +72,7 @@
         "label": "Danh thiếp",
         "typeCode": "RecruitmentInfo",
         "fieldIndex": 1,
-        "columId": "col1",
+        "columId": "default_col1",
         "value": [
             {
                 "industryId": "",
@@ -101,7 +101,7 @@
         "label": "Danh thiếp",
         "typeCode": "RecruitmentInfo",
         "fieldIndex": 1,
-        "columId": "col1",
+        "columId": "default_col1",
         "value": [
             {
                 "industryId": "",
@@ -130,7 +130,7 @@
         "typeCode": "BusinessCard",
         "label": "Thông tin liên hệ",
         "fieldIndex": 2,
-        "columId": "col1",
+        "columId": "default_col1",
         "value": [
             {
                 "industryId": "",
@@ -160,7 +160,7 @@
         "typeCode": "BusinessCard",
         "label": "Thông tin liên hệ",
         "fieldIndex": 2,
-        "columId": "col1",
+        "columId": "default_col1",
         "value": [
             {
                 "industryId": "",
@@ -190,7 +190,7 @@
         "typeCode": "BusinessCard",
         "label": "Thông tin liên hệ",
         "fieldIndex": 2,
-        "columId": "col1",
+        "columId": "default_col1",
         "value": [
             {
                 "industryId": "",
@@ -220,7 +220,7 @@
         "typeCode": "BusinessCard",
         "label": "Thông tin liên hệ",
         "fieldIndex": 2,
-        "columId": "col1",
+        "columId": "default_col1",
         "value": [
             {
                 "industryId": "",
@@ -250,7 +250,7 @@
         "typeCode": "BusinessCard",
         "label": "Thông tin liên hệ",
         "fieldIndex": 2,
-        "columId": "col1",
+        "columId": "default_col1",
         "value": [
             {
                 "industryId": "",
@@ -280,7 +280,7 @@
         "typeCode": "BusinessCard",
         "label": "Thông tin liên hệ",
         "fieldIndex": 2,
-        "columId": "col1",
+        "columId": "default_col1",
         "value": [
             {
                 "industryId": "",
@@ -311,7 +311,7 @@
         "typeCode": "Education",
         "layout": "5",
         "fieldIndex": 3,
-        "columId": "col1",
+        "columId": "default_col1",
         "value": [
             {
                 "industryId": "",
@@ -342,7 +342,7 @@
         "typeCode": "Education",
         "layout": "5",
         "fieldIndex": 3,
-        "columId": "col1",
+        "columId": "default_col1",
         "value": [
             {
                 "industryId": "",
@@ -373,7 +373,7 @@
         "typeCode": "Education",
         "layout": "5",
         "fieldIndex": 3,
-        "columId": "col1",
+        "columId": "default_col1",
         "value": [
             {
                 "industryId": "",
@@ -404,7 +404,7 @@
         "typeCode": "Education",
         "layout": "5",
         "fieldIndex": 3,
-        "columId": "col1",
+        "columId": "default_col1",
         "value": [
             {
                 "industryId": "",
@@ -435,7 +435,7 @@
         "typeCode": "Education",
         "layout": "5",
         "fieldIndex": 3,
-        "columId": "col1",
+        "columId": "default_col1",
         "value": [
             {
                 "industryId": "",
@@ -465,7 +465,7 @@
         "label": "Kỹ năng",
         "typeCode": "Skill",
         "fieldIndex": 4,
-        "columId": "col1",
+        "columId": "default_col1",
         "value": [
             {
                 "industryId": "",
@@ -494,7 +494,7 @@
         "label": "Sở thích",
         "typeCode": "Interest",
         "fieldIndex": 5,
-        "columId": "col1",
+        "columId": "default_col1",
         "value": [
             {
                 "industryId": "",
@@ -524,7 +524,7 @@
         "label": "Người giới thiệu",
         "typeCode": "Reference",
         "fieldIndex": 6,
-        "columId": "col1",
+        "columId": "default_col1",
         "value": [
             {
                 "industryId": "",
@@ -553,7 +553,7 @@
         "label": "Mục tiêu nghề nghiệp",
         "typeCode": "CareerObjective",
         "fieldIndex": 1,
-        "columId": "col2",
+        "columId": "default_col2",
         "value": [
             {
                 "industryId": "",
@@ -583,7 +583,7 @@
         "typeCode": "Experience",
         "layout": "5",
         "fieldIndex": 2,
-        "columId": "col2",
+        "columId": "default_col2",
         "label": "Kinh nghiệm làm việc",
         "value": [
             {
@@ -614,7 +614,7 @@
         "typeCode": "Experience",
         "layout": "5",
         "fieldIndex": 2,
-        "columId": "col2",
+        "columId": "default_col2",
         "label": "Kinh nghiệm làm việc",
         "value": [
             {
@@ -645,7 +645,7 @@
         "typeCode": "Experience",
         "layout": "5",
         "fieldIndex": 2,
-        "columId": "col2",
+        "columId": "default_col2",
         "label": "Kinh nghiệm làm việc",
         "value": [
             {
@@ -676,7 +676,7 @@
         "typeCode": "Experience",
         "layout": "5",
         "fieldIndex": 2,
-        "columId": "col2",
+        "columId": "default_col2",
         "label": "Kinh nghiệm làm việc",
         "value": [
             {
@@ -707,7 +707,7 @@
         "typeCode": "Experience",
         "layout": "5",
         "fieldIndex": 2,
-        "columId": "col2",
+        "columId": "default_col2",
         "label": "Kinh nghiệm làm việc",
         "value": [
             {
@@ -739,7 +739,7 @@
         "label": "Chứng chỉ",
         "typeCode": "Certificate",
         "fieldIndex": 4,
-        "columId": "col2",
+        "columId": "default_col2",
         "value": [
             {
                 "industryId": "",
@@ -768,7 +768,7 @@
         "label": "Chứng chỉ",
         "typeCode": "Certificate",
         "fieldIndex": 4,
-        "columId": "col2",
+        "columId": "default_col2",
         "value": [
             {
                 "industryId": "",
@@ -798,7 +798,7 @@
         "typeCode": "Activity",
         "layout": "5",
         "fieldIndex": 5,
-        "columId": "col2",
+        "columId": "default_col2",
         "value": [
             {
                 "industryId": "",
@@ -829,7 +829,7 @@
         "typeCode": "Activity",
         "layout": "5",
         "fieldIndex": 5,
-        "columId": "col2",
+        "columId": "default_col2",
         "value": [
             {
                 "industryId": "",
@@ -860,7 +860,7 @@
         "typeCode": "Activity",
         "layout": "5",
         "fieldIndex": 5,
-        "columId": "col2",
+        "columId": "default_col2",
         "value": [
             {
                 "industryId": "",
@@ -891,7 +891,7 @@
         "typeCode": "Activity",
         "layout": "5",
         "fieldIndex": 5,
-        "columId": "col2",
+        "columId": "default_col2",
         "value": [
             {
                 "industryId": "",
@@ -922,7 +922,7 @@
         "typeCode": "Activity",
         "layout": "5",
         "fieldIndex": 5,
-        "columId": "col2",
+        "columId": "default_col2",
         "value": [
             {
                 "industryId": "",

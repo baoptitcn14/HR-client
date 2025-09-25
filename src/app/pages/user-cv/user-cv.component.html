@@ -1,0 +1,30 @@
+<div class="container py-5 bg-white">
+    <div class="d-flex gap-3 align-items-center">
+
+        @for(cv of userCvs; track cv.id) {
+
+        <div class="cv-item shadow-sm rounded border p-3 d-flex flex-column gap-4">
+
+            <div class="cv-item-name pb-2 border-bottom">
+                {{ cv.name }}
+            </div>
+
+            <img [src]="cv.name" alt="avatar">
+
+            <div class="actions d-flex gap-2">
+
+                <p-button [icon]="'pi pi-pencil'" [label]="'Chỉnh sửa'" [size]="'small'" severity="secondary"
+                    raised="true" [outlined]="true" (click)="goToEditPage(cv.id!)"></p-button>
+
+                <p-button [icon]="'pi pi-download'" [label]="'Tải về'" [size]="'small'" severity="secondary"
+                    raised="true" [outlined]="true" (click)="download(cv.id!)"></p-button>
+
+            </div>
+
+
+        </div>
+
+        }
+    </div>
+
+</div>

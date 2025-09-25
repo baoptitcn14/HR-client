@@ -30,10 +30,9 @@ import { DialogFooterDirective } from '../../../shared/directives/dialog-footer.
 import { DialogFooterComponent } from '../../../shared/dialog-partials/dialog-footer/dialog-footer.component';
 import { MessageService } from 'primeng/api';
 import { AppSessionService } from '../../../shared/session/app-session.service';
-import { UtilitiesService } from '../../../shared/services/utilities.service';
 import { v4 as uuidv4 } from 'uuid';
 import { CalendarModule } from 'primeng/calendar';
-import { DEVICES, IThanhPhan } from '../../../shared/components/create-manual-form/create-manual-form.component';
+import { ICvInputConfig } from '../../../shared/components/cv-input/cv-input.component';
 
 @Component({
   selector: 'app-ung-tuyen-dialog',
@@ -216,3 +215,54 @@ export const STATUS_UNGTUYEN = {
   REJECTED: 'rejected',
   ACCEPTED: 'accepted',
 };
+
+// ===========
+
+export interface IThanhPhan extends JobFieldOutputDto {
+  _index?: number;
+  _listChild?: any[];
+  _key?: string;
+  _isSelected?: boolean;
+  _css: ICss;
+  _groupId?: string;
+  _cssClass?: string;
+  _listValueOptionOpenJSON?: string[];
+  _listRelationOpenJSON?: string[];
+  _value?: any;
+  _panelSizes?: number[]; // panelSizes cua splitter dùng cho row
+  _panelMinSizes?: number[]; // panelMinSizes cua splitter dùng cho row
+  _listTypeCode?: { typeCode: string, label: string, layout: string }[]; // chứa typeCode của các group được thả vào col
+  _hashMapTypeCode?: { [typeCode: string]: { [groupId: string]: any[] } }; // chứa các typeCode là duy nhất làm key và value là hashmap groupId -> listThanhPhan
+  // isAllowDuplicate?: boolean;
+  // placeholder?: string;
+  // isSearch?: boolean; // dropdown
+  // acceptFileExtensions?: string; // .jpg,.png,.pdf,.doc,.xlsx
+  maxFileSize?: number;
+  // multiple?: boolean;
+  cvInputConfig?: ICvInputConfig;
+  icon?: string;
+  _isBlank?: boolean; // element này có giá trị hay không
+  image?: string;
+
+}
+
+export const DEVICES = {
+  DESKTOP: 'desktop',
+  TABLET: 'tablet',
+  MOBILE: 'mobile',
+};
+
+export const LIST_DEVICE = [
+  {
+    value: DEVICES.DESKTOP,
+    icon: 'pi pi-desktop',
+  },
+  {
+    value: DEVICES.TABLET,
+    icon: 'pi pi-tablet',
+  },
+  {
+    value: DEVICES.MOBILE,
+    icon: 'pi pi-mobile',
+  },
+];

@@ -5,6 +5,7 @@ import { PageViecLamComponent } from './pages/page-viec-lam/page-viec-lam.compon
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 import { authRouteGuard } from './shared/auth-guard/auth-route.guard';
 import { CreateCvComponent } from './pages/create-cv/create-cv.component';
+import { UserCvComponent } from './pages/user-cv/user-cv.component';
 
 export const routes: Routes = [
   {
@@ -23,6 +24,18 @@ export const routes: Routes = [
   {
     path: 'user-profile',
     component: UserProfileComponent,
+    canActivate: [authRouteGuard]
+  },
+  {
+    path: 'user-cv',
+    component: UserCvComponent,
+    data: { title: 'CV của tôi', breadcrumb: 'CV của tôi' },
+    canActivate: [authRouteGuard]
+  },
+  {
+    path: 'create-cv/:id',
+    component: CreateCvComponent,
+    data: { title: 'Tạo CV', breadcrumb: 'Tạo CV' },
     canActivate: [authRouteGuard]
   },
   {

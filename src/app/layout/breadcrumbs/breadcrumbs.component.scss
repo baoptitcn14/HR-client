@@ -3,30 +3,44 @@
         border-radius: 0;
         border: none;
         padding: 0.6rem;
-        max-width: 960px;
         margin: auto;
         width: 100%;
         background: transparent;
+    }
 
-        // li {
-        //     a {
-        //         font-size: 0.86rem;
 
-        //         span.pi {
-        //             font-size: 0.9rem;
-        //         }
-        //     }
-        // }
+    @media screen and (min-width: 576px) {
+        .p-breadcrumb {
+            max-width: 540px;
+        }
+    }
+
+    @media screen and (min-width: 768px) {
+        .p-breadcrumb {
+            max-width: 720px;
+        }
+    }
+
+    @media screen and (min-width: 992px) {
+        .p-breadcrumb {
+            max-width: 960px;
+        }
+    }
+
+    @media screen and (min-width: 1200px) {
+        .p-breadcrumb {
+            max-width: 1140px;
+        }
+    }
+
+
+    @media screen and (min-width: 1400px) {
+        .p-breadcrumb {
+            max-width: 1320px;
+        }
     }
 }
-
 
 .max-w-full {
     max-width: 100%;
 }
-
-// .breadcrumbs {
-//     border-top: 1px solid var(--surface-c);
-//     border-bottom: 1px solid var(--surface-c);
-
-// }

@@ -3,7 +3,7 @@
 
         // position: sticky;
         // top: 0;
-        
+
 
         .fixed {
             .p-menubar {
@@ -31,9 +31,8 @@
 
             #menu-horizontal {
                 justify-content: start;
-                max-width: 960px;
                 margin: auto;
-                
+
                 .p-menuitem-content {
 
                     &:hover {
@@ -102,4 +101,37 @@
             }
         }
     }
+
+    @media screen and (min-width: 576px) {
+        #menu-horizontal {
+            max-width: 540px;
+        }
+    }
+
+    @media screen and (min-width: 768px) {
+        #menu-horizontal {
+            max-width: 720px;
+        }
+    }
+
+    @media screen and (min-width: 992px) {
+        #menu-horizontal {
+            max-width: 960px;
+        }
+    }
+
+    @media screen and (min-width: 1200px) {
+        #menu-horizontal {
+            max-width: 1140px;
+        }
+    }
+
+
+    @media screen and (min-width: 1400px) {
+        #menu-horizontal {
+            max-width: 1320px;
+        }
+    }
+
+
 }

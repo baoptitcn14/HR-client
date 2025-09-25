@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { TooltipModule } from 'primeng/tooltip';
-import { IThanhPhan } from '../create-manual-form/create-manual-form.component';
 import { CommonModule } from '@angular/common';
 import { IMoveEvent } from '../cv-input/cv-input.component';
 

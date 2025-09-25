@@ -48,7 +48,7 @@ export class MenuHorizontalComponent implements OnInit {
   }
 
   inViewportChange(isInViewport: any) {
-    this.menuClass = isInViewport ? ' shadow' : 'shadow fixed';
+    this.menuClass = isInViewport ? 'shadow' : 'shadow fixed';
   }
 
   private loadMenuHr() {

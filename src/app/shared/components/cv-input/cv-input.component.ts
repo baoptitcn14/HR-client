@@ -14,11 +14,11 @@ import {
 import { FormsModule } from '@angular/forms';
 import { CvInputToolbarComponent } from '../cv-input-toolbar/cv-input-toolbar.component';
 import { OverlayPanel, OverlayPanelModule } from 'primeng/overlaypanel';
-import { IThanhPhan } from '../create-manual-form/create-manual-form.component';
 import { CvService } from '../../../pages/create-cv/cv.service';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { CropImageComponent } from '../crop-image/crop-image.component';
+import { IThanhPhan } from '../../../pages/page-viec-lam/ung-tuyen-dialog/ung-tuyen-dialog.component';
 
 
 @Component({
@@ -73,8 +73,8 @@ export class CvInputComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['element'] && this.element.code?.toLowerCase() === 'avatar') {
-      this.width = parseInt(this.element._css['element']['width']) || 200;
-      this.height = parseInt(this.element._css['element']['height']) || 200;
+      this.width = parseInt(this.element._css!!['element']['width']) || 200;
+      this.height = parseInt(this.element._css!!['element']['height']) || 200;
     }
   }
 
@@ -141,25 +141,25 @@ export class CvInputComponent implements OnChanges {
 
     switch (this.activeCorner) {
       case 'se':
-        this.element._css['element']['width'] = this.width =
+        this.element._css!['element']['width'] = this.width =
           this.startWidth + dx;
         break;
       case 'ne':
-        this.element._css['element']['width'] = this.width =
+        this.element._css!['element']['width'] = this.width =
           this.startWidth + dx;
         break;
       case 'sw':
-        this.element._css['element']['width'] = this.width =
+        this.element._css!['element']['width'] = this.width =
           this.startWidth - dx;
         break;
       case 'nw':
-        this.element._css['element']['width'] = this.width =
+        this.element._css!['element']['width'] = this.width =
           this.startWidth - dx;
         break;
     }
 
     // giữ tỷ lệ ảnh 1/1
-    this.element._css['element']['height'] = this.height = this.width * (1 / 1);
+    this.element._css!['element']['height'] = this.height = this.width * (1 / 1);
   }
 
   //save Image

@@ -7,9 +7,9 @@ import {
   OnChanges,
   SimpleChanges,
 } from '@angular/core';
-import { IThanhPhan } from '../../shared/components/create-manual-form/create-manual-form.component';
 import { IMoveEvent } from '../../shared/components/cv-input/cv-input.component';
 import { UtilitiesService } from '../../shared/services/utilities.service';
+import { IThanhPhan } from '../page-viec-lam/ung-tuyen-dialog/ung-tuyen-dialog.component';
 
 @Directive()
 export abstract class CvElementBaseDirective implements OnChanges {

@@ -11,11 +11,10 @@ import {
 import { FormsModule } from '@angular/forms';
 import { CvGroupActionComponent } from '../cv-group-action/cv-group-action.component';
 import { CdkDrag } from '@angular/cdk/drag-drop';
-import { IThanhPhan } from '../create-manual-form/create-manual-form.component';
 import { CvInputActionComponent } from '../cv-input-action/cv-input-action.component';
 import { CvInputComponent, IMoveEvent } from '../cv-input/cv-input.component';
-import { UtilitiesService } from '../../services/utilities.service';
 import { CvElementBaseDirective } from '../../../pages/create-cv/cv-element-base.directive';
+import { IThanhPhan } from '../../../pages/page-viec-lam/ung-tuyen-dialog/ung-tuyen-dialog.component';
 
 @Component({
   selector: 'app-cv-element-5',
