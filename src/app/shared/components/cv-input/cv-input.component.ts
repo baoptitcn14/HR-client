@@ -72,12 +72,11 @@ export class CvInputComponent implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['element'] && this.element.code?.toLowerCase() === 'avatar') {
-      this.width = parseInt(this.element._css!!['element']['width']) || 200;
-      this.height = parseInt(this.element._css!!['element']['height']) || 200;
+    if (changes['element'] && this.element?.code?.toLowerCase() === 'avatar') {
+      this.width = parseInt(this.element._css!['element']['width']) || 200;
+      this.height = parseInt(this.element._css!['element']['height']) || 200;
     }
   }
-
 
   onShowDialog() {
     this.showDialogUploadImage = true;

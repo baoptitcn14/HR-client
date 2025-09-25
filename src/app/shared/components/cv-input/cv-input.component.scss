@@ -113,26 +113,12 @@
 
             &:focus-visible,
             &:focus {
-                ~p-overlayPanel>app-cv-input-toolbar {
+                ~ p-overlayPanel > app-cv-input-toolbar {
                     .cv-input-toolbar {
                         display: flex;
                     }
                 }
             }
-
-            // begin CSS app-cv-element-5 layout = 5
-            &.field-0,
-            &.field-1,
-            &.field-2,
-            &.field-3 {
-                font-weight: bold;
-            }
-
-            &.field-1 {
-                text-align: right !important;
-            }
-
-            //end CSS app-cv-element-5 layout = 5
 
             &.editor-blank {
                 &::before {
@@ -172,4 +158,23 @@
             }
         }
     }
+
+    // begin CSS app-cv-element-5 layout = 5
+
+    .cv-element-5 {
+        .editor {
+            &.field-0,
+            &.field-1,
+            &.field-2,
+            &.field-3 {
+                font-weight: bold;
+            }
+
+            &.field-1 {
+                text-align: right !important;
+            }
+        }
+    }
+
+    //end CSS app-cv-element-5 layout = 5
 }

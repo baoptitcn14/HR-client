@@ -42,6 +42,7 @@
         "typeCode": "Avatar",
         "fieldIndex": 0,
         "columId": "default_col1",
+        "inputType": "typeCode",
         "value": [
             {
                 "industryId": "",
@@ -73,6 +74,7 @@
         "typeCode": "RecruitmentInfo",
         "fieldIndex": 1,
         "columId": "default_col1",
+        "inputType": "typeCode",
         "value": [
             {
                 "industryId": "",
@@ -102,6 +104,7 @@
         "typeCode": "RecruitmentInfo",
         "fieldIndex": 1,
         "columId": "default_col1",
+        "inputType": "typeCode",
         "value": [
             {
                 "industryId": "",
@@ -131,6 +134,7 @@
         "label": "Thông tin liên hệ",
         "fieldIndex": 2,
         "columId": "default_col1",
+        "inputType": "typeCode",
         "value": [
             {
                 "industryId": "",
@@ -161,6 +165,7 @@
         "label": "Thông tin liên hệ",
         "fieldIndex": 2,
         "columId": "default_col1",
+        "inputType": "typeCode",
         "value": [
             {
                 "industryId": "",
@@ -191,6 +196,7 @@
         "label": "Thông tin liên hệ",
         "fieldIndex": 2,
         "columId": "default_col1",
+        "inputType": "typeCode",
         "value": [
             {
                 "industryId": "",
@@ -221,6 +227,7 @@
         "label": "Thông tin liên hệ",
         "fieldIndex": 2,
         "columId": "default_col1",
+        "inputType": "typeCode",
         "value": [
             {
                 "industryId": "",
@@ -251,6 +258,7 @@
         "label": "Thông tin liên hệ",
         "fieldIndex": 2,
         "columId": "default_col1",
+        "inputType": "typeCode",
         "value": [
             {
                 "industryId": "",
@@ -281,6 +289,7 @@
         "label": "Thông tin liên hệ",
         "fieldIndex": 2,
         "columId": "default_col1",
+        "inputType": "typeCode",
         "value": [
             {
                 "industryId": "",
@@ -312,6 +321,7 @@
         "layout": "5",
         "fieldIndex": 3,
         "columId": "default_col1",
+        "inputType": "typeCode",
         "value": [
             {
                 "industryId": "",
@@ -343,6 +353,7 @@
         "layout": "5",
         "fieldIndex": 3,
         "columId": "default_col1",
+        "inputType": "typeCode",
         "value": [
             {
                 "industryId": "",
@@ -374,6 +385,7 @@
         "layout": "5",
         "fieldIndex": 3,
         "columId": "default_col1",
+        "inputType": "typeCode",
         "value": [
             {
                 "industryId": "",
@@ -405,6 +417,7 @@
         "layout": "5",
         "fieldIndex": 3,
         "columId": "default_col1",
+        "inputType": "typeCode",
         "value": [
             {
                 "industryId": "",
@@ -436,6 +449,7 @@
         "layout": "5",
         "fieldIndex": 3,
         "columId": "default_col1",
+        "inputType": "typeCode",
         "value": [
             {
                 "industryId": "",
@@ -466,6 +480,7 @@
         "typeCode": "Skill",
         "fieldIndex": 4,
         "columId": "default_col1",
+        "inputType": "typeCode",
         "value": [
             {
                 "industryId": "",
@@ -495,6 +510,7 @@
         "typeCode": "Interest",
         "fieldIndex": 5,
         "columId": "default_col1",
+        "inputType": "typeCode",
         "value": [
             {
                 "industryId": "",
@@ -525,6 +541,7 @@
         "typeCode": "Reference",
         "fieldIndex": 6,
         "columId": "default_col1",
+        "inputType": "typeCode",
         "value": [
             {
                 "industryId": "",
@@ -554,6 +571,7 @@
         "typeCode": "CareerObjective",
         "fieldIndex": 1,
         "columId": "default_col2",
+        "inputType": "typeCode",
         "value": [
             {
                 "industryId": "",
@@ -584,6 +602,7 @@
         "layout": "5",
         "fieldIndex": 2,
         "columId": "default_col2",
+        "inputType": "typeCode",
         "label": "Kinh nghiệm làm việc",
         "value": [
             {
@@ -615,6 +634,7 @@
         "layout": "5",
         "fieldIndex": 2,
         "columId": "default_col2",
+        "inputType": "typeCode",
         "label": "Kinh nghiệm làm việc",
         "value": [
             {
@@ -646,6 +666,7 @@
         "layout": "5",
         "fieldIndex": 2,
         "columId": "default_col2",
+        "inputType": "typeCode",
         "label": "Kinh nghiệm làm việc",
         "value": [
             {
@@ -677,6 +698,7 @@
         "layout": "5",
         "fieldIndex": 2,
         "columId": "default_col2",
+        "inputType": "typeCode",
         "label": "Kinh nghiệm làm việc",
         "value": [
             {
@@ -708,6 +730,7 @@
         "layout": "5",
         "fieldIndex": 2,
         "columId": "default_col2",
+        "inputType": "typeCode",
         "label": "Kinh nghiệm làm việc",
         "value": [
             {
@@ -740,6 +763,7 @@
         "typeCode": "Certificate",
         "fieldIndex": 4,
         "columId": "default_col2",
+        "inputType": "typeCode",
         "value": [
             {
                 "industryId": "",
@@ -769,6 +793,7 @@
         "typeCode": "Certificate",
         "fieldIndex": 4,
         "columId": "default_col2",
+        "inputType": "typeCode",
         "value": [
             {
                 "industryId": "",
@@ -799,6 +824,7 @@
         "layout": "5",
         "fieldIndex": 5,
         "columId": "default_col2",
+        "inputType": "typeCode",
         "value": [
             {
                 "industryId": "",
@@ -830,6 +856,7 @@
         "layout": "5",
         "fieldIndex": 5,
         "columId": "default_col2",
+        "inputType": "typeCode",
         "value": [
             {
                 "industryId": "",
@@ -861,6 +888,7 @@
         "layout": "5",
         "fieldIndex": 5,
         "columId": "default_col2",
+        "inputType": "typeCode",
         "value": [
             {
                 "industryId": "",
@@ -892,6 +920,7 @@
         "layout": "5",
         "fieldIndex": 5,
         "columId": "default_col2",
+        "inputType": "typeCode",
         "value": [
             {
                 "industryId": "",
@@ -923,6 +952,7 @@
         "layout": "5",
         "fieldIndex": 5,
         "columId": "default_col2",
+        "inputType": "typeCode",
         "value": [
             {
                 "industryId": "",

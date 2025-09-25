@@ -12,8 +12,7 @@
         width: 100%;
     }
 
-    #col1 {
-        // background: color-mix(in srgb, var(--theme-color) 10%, #fff);
+    .col1 {
         background-color: var(--theme-color);
         color: var(--text-color-on-bg);        
     }
