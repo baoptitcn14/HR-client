@@ -1,7 +1,78 @@
+@if(isLoading) {
 <section class="ds-viec-lam row row-gap-2">
-  @for (viecLam of viecLams; track viecLam.id; let last = $last) {
-  <div class="col-12 col-md-6 col-xl-4 " *ngIf="!isLoading">
-    <app-viec-lam [viecLam]="viecLam" [last]="last" [isLoading]="isLoading"></app-viec-lam>
+  @for (placeholder of listPlaceHolder; track placeholder) {
+  <div class="{{  layout == 'grid' ? 'col-12 col-md-6 col-xl-4' : 'col-12'}}">
+
+    <div class="viec-lam viec-lam-placeholder d-flex flex-column gap-1 rounded shadow-sm p-3">
+      <div class="viec-lam-thong-tin d-flex gap-2">
+        <!-- logo company -->
+        <div class="viec-lam-logo-cty">
+          <p-skeleton width="5rem" height="5rem" />
+        </div>
+
+        <div class="d-flex flex-column gap-2">
+
+          <!-- title -->
+          <a>
+            <h3 class="fw-bold title text-primary text-uppercase m-0">
+              <p-skeleton width="10rem" styleClass="mr-2" borderRadius="16px" />
+            </h3>
+          </a>
+
+          <!-- company -->
+          <a class="company">
+            <h3 class="company m-0">
+              <p-skeleton width="10rem" styleClass="mr-2" borderRadius="16px" />
+            </h3>
+          </a>
+
+          <!-- mức lương | khu vực -->
+          <div class="d-flex gap-2 align-items-md-center flex-column flex-md-row">
+            <p-skeleton width="10rem" styleClass="mr-2" borderRadius="16px" />
+            <span class="text-muted d-flex gap-2 align-items-center">
+              <p-skeleton width="7rem" styleClass="mr-2" borderRadius="16px" />
+            </span>
+          </div>
+
+          <!-- thời gian cập nhật | kỹ năng-->
+          <div class="d-flex gap-2 align-items-center">
+            <p-skeleton width="7rem" styleClass="mr-2" borderRadius="16px" />
+            <p-skeleton width="7rem" borderRadius="16px" />
+          </div>
+        </div>
+      </div>
+      <!-- info job -->
+
+      <div class="viec-lam-thong-tin d-flex flex-column gap-2">
+
+
+        <!-- divider -->
+        <p-divider type="solid" [styleClass]="'m-1'" />
+
+        <!-- tags -->
+        <div class="d-flex gap-2 align-items-center tags">
+          <p-skeleton width="3rem" styleClass="mr-2" borderRadius="16px" />
+          <p-skeleton width="3rem" styleClass="mr-2" borderRadius="16px" />
+          <p-skeleton width="3rem" styleClass="mr-2" borderRadius="16px" />
+        </div>
+      </div>
+    </div>
+
+
   </div>
   }
 </section>
+}@else {
+<section class="ds-viec-lam row row-gap-2" style="--multiplierFS: {{ multiplierFS }}">
+  @for (viecLam of viecLams; track viecLam.id; let last = $last) {
+  <div class="{{  layout == 'grid' ? 'col-12 col-md-6 col-xl-4' : 'col-12'}}" *ngIf="!isLoading">
+    <app-viec-lam [viecLam]="viecLam" [last]="last" [isLoading]="isLoading"
+      [showButtonApply]="showButtonApply"></app-viec-lam>
+  </div>
+  }
+
+  <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows" [totalRecords]="120"
+    [rowsPerPageOptions]="[10, 20, 30]" />
+
+</section>
+}

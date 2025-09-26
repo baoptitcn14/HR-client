@@ -1,0 +1,103 @@
+<div id="js-advanced-filter" class="advanced-filter">
+
+    <div  class="d-flex flex-column">
+
+        <!-- mucLuong -->
+        <ng-container
+            *ngTemplateOutlet="radio; context: { label: 'Mức lương', options: mucLuongs, model: 'mucLuong', name: 'mucLuong' }">
+        </ng-container>
+
+        <p-divider [type]="'dashed'"></p-divider>
+
+        <!-- capBac -->
+        <ng-container
+            *ngTemplateOutlet="radio; context: { label: 'Cấp bậc', options: capBacs, model: 'capBac', name: 'capBac' }">
+        </ng-container>
+
+        <p-divider [type]="'dashed'"></p-divider>
+
+        <!-- kinhNghiem -->
+        <ng-container
+            *ngTemplateOutlet="radio; context: { label: 'Kinh nghiệm', options: kinhNghiems, model: 'kinhNghiem', name: 'kinhNghiem' }">
+        </ng-container>
+
+        <p-divider [type]="'dashed'"></p-divider>
+
+        <!-- hinhThucLamViec -->
+        <ng-container
+            *ngTemplateOutlet="radio; context: { label: 'Hình thức làm việc', options: hinhThucLamViecs, model: 'hinhThucLamViec', name: 'hinhThucLamViec' }">
+        </ng-container>
+
+        <p-divider [type]="'dashed'"></p-divider>
+
+        <!-- Kỹ năng -->
+        <ng-container
+            *ngTemplateOutlet="radio; context: { label: 'Kỹ năng', options: kyNangs, model: 'kyNang', name: 'kyNang' }">
+        </ng-container>
+
+    </div>
+
+</div>
+
+<ng-template #radio let-label="label" let-options="options" let-model="model" let-name="name">
+
+    <div class="d-flex flex-column gap-3">
+
+        <label class="fw-bold title">
+            {{ label }}
+        </label>
+
+        <div class="options ">
+
+            <div class="field-check">
+                <p-radioButton [inputId]="name + '-all'" [name]="name" [value]="'ALL'" [(ngModel)]="filter[model]" />
+                <label [for]="name + '-all'" class="ms-2">
+                    Tất cả
+                </label>
+            </div>
+
+            @for(option of options; track option.value) {
+            <div class="field-check">
+                <p-radioButton [inputId]="option.id" [name]="name" [value]="option.id" [(ngModel)]="filter[model]" />
+                <label [for]="option.id" class="ms-2">
+                    {{ option.name }}
+                </label>
+            </div>
+            }
+
+        </div>
+
+    </div>
+
+</ng-template>
+
+<!-- <ng-template #checkbox let-label="label" let-options="options" let-model="model" let-name="name">
+
+    <div class="d-flex flex-column gap-3">
+
+        <label class="fw-bold title">
+            {{ label }}
+        </label>
+
+        <div class="options ">
+
+            <div class="field-check">
+                <p-radioButton [inputId]="name + '-all'" [name]="name" [value]="'ALL'" [(ngModel)]="filter[model]" />
+                <label [for]="name + '-all'" class="ms-2">
+                    Tất cả
+                </label>
+            </div>
+
+            @for(option of options; track option.value) {
+            <div class="field-check">
+                <p-radioButton [inputId]="option.id" [name]="name" [value]="option.id" [(ngModel)]="filter[model]" />
+                <label [for]="option.id" class="ms-2">
+                    {{ option.name }}
+                </label>
+            </div>
+            }
+
+        </div>
+
+    </div>
+</ng-template> -->

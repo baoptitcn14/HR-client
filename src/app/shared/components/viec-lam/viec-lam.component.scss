@@ -1,12 +1,15 @@
+$multiplierFSs: var(--multiplierFS);
+
 .viec-lam {
     background-color: #fff;
     transition: all 0.3s ease-in-out;
     border: 1px solid #fff;
-    font-size: 0.8rem;
+    font-size: calc(0.8rem);
     text-decoration: none;
     overflow: hidden;
     height: var(--height);
     justify-content: space-between;
+
 
     &:hover {
         border-color: var(--primary-400);
@@ -33,10 +36,10 @@
         white-space: normal;
         line-height: 1.4;
         max-height: calc(1.4em * 2);
+        font-size: calc(0.9rem);
     }
 
     .company {
-        font-size: 0.8rem;
         display: -webkit-box;
         -webkit-line-clamp: 1;
         -webkit-box-orient: vertical;
@@ -68,6 +71,32 @@
 
 ::ng-deep {
     .p-tag {
-        font-size: 0.65rem !important;
+        font-size: 0.6rem;
     }
+}
+
+@media screen and (min-width: 768px) {
+    .viec-lam {
+
+        font-size: calc(0.8rem * $multiplierFSs);
+
+        &-logo-cty {
+            img {
+
+                max-width: calc(60px + var(--multiplierFS) * 20px);
+            }
+        }
+
+        .title {
+
+            font-size: calc(1rem * var(--multiplierFS));
+        }
+
+    }
+
+    .p-tag {
+
+        font-size: calc(0.65rem * var(--multiplierFS));
+    }
+
 }

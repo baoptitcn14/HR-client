@@ -1,60 +1,70 @@
 <div class="viec-lam d-flex flex-column gap-1 rounded shadow-sm p-3"
-    style="--height: {{  viecLamService.height > 0 ? viecLamService.height : 'auto' }}px;" *ngIf="viecLam">
-    <div class="viec-lam-thong-tin d-flex gap-2">
-        <!-- logo company -->
-        <div class="viec-lam-logo-cty">
-            <img src="https://placehold.co/60" alt="Logo" />
-        </div>
+    style="--height: {{  height > 0 ? height +'px' : 'auto' }}" *ngIf="viecLam && !isLoading">
+    <div class="viec-lam-thong-tin d-flex gap-3 justify-content-between">
 
-        <div class="d-flex flex-column gap-2">
+        <div class="d-flex gap-2 viec-lam-thong-tin">
+            <!-- logo company -->
+            <div class="viec-lam-logo-cty">
+                <img src="https://placehold.co/120" alt="Logo" />
+            </div>
 
-            <!-- title -->
-            <a class="text-decoration-none" [routerLink]="['/job', viecLam.id]">
-                <h3 class="fw-bold title text-primary text-uppercase m-0">
-                    {{ viecLam.title }}
-                </h3>
-            </a>
+            <div class="d-flex flex-column gap-2">
 
-            <!-- company -->
-            <a [routerLink]="['/job', viecLam.id]" class="company text-decoration-none text-uppercase"
-                title="{{ viecLam.companyName }}">
-                <h3 class="company m-0">
-                    {{ viecLam.companyName }}
-                </h3>
-            </a>
+                <!-- title -->
+                <a class="text-decoration-none" [routerLink]="['/job', viecLam.id]">
+                    <h3 class="fw-bold title text-primary text-uppercase m-0">
+                        {{ viecLam.title }}
+                    </h3>
+                </a>
 
-            <!-- mức lương | khu vực -->
-            <div class="d-flex gap-2 align-items-md-center flex-column flex-md-row">
-                <span class="fw-bold fs-6">{{ viecLam.salaryMin | numberSuffixCurrency }} - {{ viecLam.salaryMax |
-                    numberSuffixCurrency }}
-                </span>
-                <span class="text-muted d-flex gap-2 align-items-center">
-                    | {{ viecLam._khuVucName }}
+                <!-- company -->
+                <a [routerLink]="['/job', viecLam.id]" class="company text-decoration-none text-uppercase"
+                    title="{{ viecLam.companyName }}">
+                    <h3 class="company m-0">
+                        {{ viecLam.companyName }}
+                    </h3>
+                </a>
 
-                    <ng-container *ngIf="isLoading && viecLam.location">
+                <!-- mức lương | khu vực -->
+                <div class="d-flex gap-2 align-items-md-center flex-column flex-md-row">
+                    <span class="fw-bold fs-6">{{ viecLam.salaryMin | numberSuffixCurrency }} - {{ viecLam.salaryMax |
+                        numberSuffixCurrency }}
+                    </span>
+                    <span class="text-muted d-flex gap-2 align-items-center">
+                        | {{ viecLam._khuVucName }}
+
+                        <ng-container *ngIf="isLoading && viecLam.location">
+                            <p-skeleton width="10rem" borderRadius="16px" />
+                        </ng-container>
+                    </span>
+                </div>
+
+                <!-- thời gian cập nhật | kỹ năng-->
+                <div class="d-flex gap-2 align-items-center ">
+                    <span class="text-muted align-items-center d-flex gap-2 date">
+                        Cập nhật:
+                        {{
+                        viecLam.lastModificationTime
+                        ? (viecLam.lastModificationTime | date : "dd/MM/yyyy")
+                        : (viecLam.creationTime | date : "dd/MM/yyyy")
+                        }}
+
+                    </span>
+
+                    <ng-container *ngIf="isLoading && viecLam.jobLevel">
+                        <p-skeleton width="10rem" styleClass="mr-2" borderRadius="16px" />
                         <p-skeleton width="10rem" borderRadius="16px" />
                     </ng-container>
-                </span>
-            </div>
-
-            <!-- thời gian cập nhật | kỹ năng-->
-            <div class="d-flex gap-2 align-items-center">
-                <span class="text-muted align-items-center d-flex gap-2 date">
-                    Cập nhật:
-                    {{
-                    viecLam.lastModificationTime
-                    ? (viecLam.lastModificationTime | date : "dd/MM/yyyy")
-                    : (viecLam.creationTime | date : "dd/MM/yyyy")
-                    }}
-
-                </span>
-
-                <ng-container *ngIf="isLoading && viecLam.jobLevel">
-                    <p-skeleton width="10rem" styleClass="mr-2" borderRadius="16px" />
-                    <p-skeleton width="10rem" borderRadius="16px" />
-                </ng-container>
+                </div>
             </div>
         </div>
+
+        @if(showButtonApply) {
+        <div class=" align-items-center d-none d-lg-flex" style="flex-basis: 21%;">
+            <p-button label="Ứng tuyển ngay" severity="primary" raised="true" [size]="'large'" [styleClass]="'w-100'"
+                (click)="onApply()"></p-button>
+        </div>
+        }
     </div>
     <!-- info job -->
 

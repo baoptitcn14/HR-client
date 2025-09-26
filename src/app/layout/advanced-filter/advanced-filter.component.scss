@@ -1,0 +1,52 @@
+.advanced-filter {
+    background: var(--bluegray-50);
+    overflow: auto;
+
+    .title {
+        color: var(--surface-600);
+    }
+
+    .options {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
+
+        .field-check {
+
+            display: flex;
+            align-items: center;
+
+            label {
+                font-size: 0.9rem;
+                color: var(--surface-600);
+            }
+        }
+    }
+
+    &.sticky {
+        position: sticky;
+        z-index: 3;
+        top: 150px;
+    }
+
+
+
+}
+
+@media screen and (min-width: 768px) {
+    .advanced-filter {
+        .options {
+            grid-template-columns: repeat(1, minmax(0, 1fr));
+        }
+    }
+
+}
+
+@media screen and (min-width: 1280px) {
+    .advanced-filter {
+        .options {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+    }
+
+}

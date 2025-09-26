@@ -7,7 +7,7 @@ import { BehaviorSubject } from 'rxjs';
 export class ViecLamService {
 
   maxHeight$ = new BehaviorSubject<number>(0);
-  height = 0;
+  height$ = new BehaviorSubject<number>(0);
 
   constructor() { }
 }

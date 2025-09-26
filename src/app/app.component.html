@@ -1,21 +1,27 @@
-<!-- begin top -->
-<app-top></app-top>
-<!-- end top -->
+<div class="d-flex flex-column" id="app">
+  <!-- begin top -->
+  <app-top></app-top>
+  <!-- end top -->
 
-<!-- begin menu -->
-<app-menu-horizontal></app-menu-horizontal>
-<!-- end menu -->
+  <!-- begin menu -->
+  <app-menu-horizontal></app-menu-horizontal>
+  <!-- end menu -->
 
 
-<main class="main">
+  <main class="main flex-grow-1">
 
-  <!-- begin breadcrumb -->
-  <app-breadcrumbs></app-breadcrumbs>
-  <!-- end breadcrumb -->
+    <!-- begin breadcrumb -->
+    <app-breadcrumbs></app-breadcrumbs>
+    <!-- end breadcrumb -->
 
-  <router-outlet />
-</main>
+    <router-outlet />
+  </main>
 
+  <!-- begin footer -->
+  <app-footer></app-footer>
+  <!-- end footer -->
+
+</div>
 <p-toast></p-toast>
 
 <app-loading></app-loading>

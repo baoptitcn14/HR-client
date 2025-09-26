@@ -1,7 +1,15 @@
 ::ng-deep {
     #search-section {
-        background: linear-gradient(135deg, #c5d5f9 0%, #4786c3 50% 50%, #c5d5f9 100%);
-        padding: 0.5rem;
+        background: linear-gradient(90deg, #6992eb 0%, #b3caf2 50% 50%, #6992eb 100%);
+        padding: 1.5rem;
+
+        &.fixed {
+            position: fixed;
+            width: 100dvw;
+            top: 42px;
+            left: 0;
+            z-index: 5;
+        }
 
         .search-section-content {
             width: 100%;
@@ -44,10 +52,6 @@
     @media screen and (min-width: 768px) {
         #search-section {
             padding: 1.5rem;
-
-            .search-section-content {
-                width: 90%;
-            }
         }
     }
 
@@ -55,13 +59,29 @@
         #search-section {
             padding: 2.5rem;
 
+            &.fixed {
+                top: 49px;
+            }
+
             .p-autocomplete-input.p-inputtext {
-                height: 4rem;
+                height: 3rem;
                 padding-right: 120px;
             }
 
             .search-section-content {
-                width: 80%;
+
+                .search-box {
+
+                    .button-search {
+                        margin-top: -17px;
+
+                        &>button {
+                            font-size: 1rem;
+                            padding: 0.5375rem 0.7625rem;
+                        }
+
+                    }
+                }
             }
         }
 
@@ -69,17 +89,20 @@
 
     @media screen and (min-width: 1200px) {
         #search-section {
-            padding: 2.5rem;
+            padding: 4rem;
 
             .p-autocomplete-input.p-inputtext {
                 height: 4rem;
                 padding-right: 120px;
             }
-
-            .search-section-content {
-                width: 70%;
-            }
         }
 
+    }
+
+    .sticky {
+        #search-section {
+            background: linear-gradient(90deg, #6992eb80 0%, #b3caf2 50% 50%, #6992eb80 100%);
+            backdrop-filter: blur(10px);
+        }
     }
 }

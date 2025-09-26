@@ -7,6 +7,7 @@ import { LoadingComponent } from './layout/loading/loading.component';
 import { PrimeNGConfig } from 'primeng/api';
 import { Title } from '@angular/platform-browser';
 import { BreadcrumbsComponent } from './layout/breadcrumbs/breadcrumbs.component';
+import { FooterComponent } from './layout/footer/footer.component';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +18,8 @@ import { BreadcrumbsComponent } from './layout/breadcrumbs/breadcrumbs.component
     TopComponent,
     ToastModule,
     LoadingComponent,
-    BreadcrumbsComponent
+    BreadcrumbsComponent,
+    FooterComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
@@ -124,7 +126,7 @@ export class AppComponent implements OnInit {
       prevMinute: 'Phút trước',
       prevSecond: 'Giây trước',
       searchMessage: 'Tìm tin nhắn',
-      selectionMessage: 'Chọn tin nhắn',
+      selectionMessage: 'Nhiều dữ liệu được chọn',
       strong: 'Mạnh',
       weak: 'Yếu',
       weekHeader: 'Tuần',

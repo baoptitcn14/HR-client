@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
@@ -44,11 +44,12 @@ import { CategoriesService } from '../../core/services/categories.service';
 })
 export class SectionSearchComponent implements OnInit {
   // inject region
-  private categoryInfoService = inject(CategoryInfoServiceProxy);
   private jobPostInfoServiceProxy = inject(JobPostInfoServiceProxy);
   private categoriesService = inject(CategoriesService);
 
-  // output region
+  // input, output region
+  @Input() showfilters = true;
+  @Input() fixed = false;
   @Output() onSearchEvent = new EventEmitter();
 
   // declare category region
@@ -65,6 +66,7 @@ export class SectionSearchComponent implements OnInit {
   };
 
   suggestions: PostOutputDto[] = [];
+
 
   ngOnInit(): void {
     this.getLocations();

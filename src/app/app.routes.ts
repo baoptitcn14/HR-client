@@ -6,6 +6,7 @@ import { UserProfileComponent } from './pages/user-profile/user-profile.componen
 import { authRouteGuard } from './shared/auth-guard/auth-route.guard';
 import { CreateCvComponent } from './pages/create-cv/create-cv.component';
 import { UserCvComponent } from './pages/user-cv/user-cv.component';
+import { JobsComponent } from './pages/jobs/jobs.component';
 
 export const routes: Routes = [
   {
@@ -16,6 +17,10 @@ export const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
+  },
+  {
+    path: 'jobs',
+    component: JobsComponent,
   },
   {
     path: 'job/:id',
