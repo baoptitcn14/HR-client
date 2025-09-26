@@ -1,11 +1,24 @@
-import { AfterViewInit, Component, DestroyRef, inject, Input, NgZone, OnDestroy, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  DestroyRef,
+  inject,
+  Input,
+  NgZone,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { TagModule } from 'primeng/tag';
 import { CommonModule, DatePipe } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { DividerModule } from 'primeng/divider';
 import { SkeletonModule } from 'primeng/skeleton';
 import { NumberSuffixCurrencyPipe } from '../../../core/pipes/number-suffix-currency.pipe';
-import { JobPostOutputDto, CategoryOutputDto } from '../../service-proxies/sys-service-proxies';
+import {
+  JobPostOutputDto,
+  CategoryOutputDto,
+} from '../../service-proxies/sys-service-proxies';
 import { ViecLamService } from './viec-lam.service';
 import { ButtonModule } from 'primeng/button';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -21,33 +34,28 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     SkeletonModule,
     RouterModule,
     NumberSuffixCurrencyPipe,
-    ButtonModule
+    ButtonModule,
   ],
   templateUrl: './viec-lam.component.html',
-  styleUrl: './viec-lam.component.scss'
+  styleUrl: './viec-lam.component.scss',
 })
 export class ViecLamComponent implements AfterViewInit, OnDestroy {
-
   //inject
   private ngZone = inject(NgZone);
   private destroyRef = inject(DestroyRef);
+  private cdr = inject(ChangeDetectorRef);
 
   viecLamService = inject(ViecLamService);
 
   @Input() viecLam?: IDsViecLam;
   @Input() last = false;
   @Input() showButtonApply = false;
-  //state loading 
+  //state loading
   @Input() isLoading = true;
 
   height: number = 0;
 
   ngAfterViewInit(): void {
-
-    this.viecLamService.height$.subscribe((height) => {
-      this.height = height
-    })
-
     this.ngZone.onStable
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(() => {
@@ -59,20 +67,26 @@ export class ViecLamComponent implements AfterViewInit, OnDestroy {
         });
 
         if (this.last) {
-          this.viecLamService.height$.next(this.viecLamService.maxHeight$.value)
+          this.viecLamService.height$.next(
+            this.viecLamService.maxHeight$.value
+          );
         }
-      });
 
+        this.viecLamService.height$.subscribe((height) => {
+          this.height = this.viecLamService.height$.value;
+
+          this.cdr.detectChanges();
+        });
+      });
   }
 
   ngOnDestroy(): void {
-    this.viecLamService.maxHeight$.next(0);;
+    this.viecLamService.maxHeight$.next(0);
   }
 
   onApply() {
     console.log(this.viecLam);
   }
-
 }
 
 export interface IDsViecLam extends JobPostOutputDto {
@@ -82,4 +96,3 @@ export interface IDsViecLam extends JobPostOutputDto {
   _benefitsOpenJson: CategoryOutputDto[];
   _quyenLoisOpenJson: CategoryOutputDto[];
 }
-
