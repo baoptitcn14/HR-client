@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { SectionSearchComponent } from '../../layout/section-search/section-search.component';
-import { DsViecLamComponent } from '../../shared/components/ds-viec-lam/ds-viec-lam.component';
+import { DsViecLamComponent, IPageEvent } from '../../shared/components/ds-viec-lam/ds-viec-lam.component';
 import { ICriteriaRequestDto, JobPostInfoServiceProxy, JobPostOutputDto, JobPostQueryDto } from '../../shared/service-proxies/sys-service-proxies';
 import { CommonModule } from '@angular/common';
 import { IDsViecLam } from '../../shared/components/viec-lam/viec-lam.component';
@@ -18,6 +18,12 @@ export class HomeComponent implements OnInit {
   jobPostInfoServiceProxy = inject(JobPostInfoServiceProxy);
 
   // declare data
+  controlPaginator = {
+    first: 0,
+    rows: 5,
+    totalRecords: 0,
+    showPaginator: true,
+  }
 
   ngOnInit(): void {
     this.getJobPosts();
@@ -29,14 +35,20 @@ export class HomeComponent implements OnInit {
     this.getJobPosts(filter);
   }
 
+  onPageChange(event: IPageEvent) {
+    this.controlPaginator.first = event.first;
+    this.controlPaginator.rows = event.rows;
+    this.getJobPosts();
+  }
+
   // endregion
 
   //get data
   private getJobPosts(filter?: any) {
 
     const input = new JobPostQueryDto();
-    input.skipCount = 0;
-    input.maxResultCount = 100;
+    input.skipCount = this.controlPaginator.first;
+    input.maxResultCount = this.controlPaginator.rows;
 
     input.criterias = [
       new ICriteriaRequestDto({
@@ -92,6 +104,9 @@ export class HomeComponent implements OnInit {
 
     this.jobPostInfoServiceProxy.getAll(input).subscribe((res) => {
       this.jobPosts = res.items as IDsViecLam[];
+
+      this.controlPaginator.totalRecords = res.totalCount!;
+
     });
   }
 }

@@ -1,6 +1,6 @@
-<div id="js-advanced-filter" class="advanced-filter">
+<div id="js-advanced-filter" class="advanced-filter" [class.show]="showFilter">
 
-    <div  class="d-flex flex-column">
+    <div class="d-flex flex-column">
 
         <!-- mucLuong -->
         <ng-container
@@ -36,6 +36,21 @@
         </ng-container>
 
     </div>
+
+</div>
+
+
+<div class="overlay" [class.show]="showFilter"></div>
+
+<div class="d-block d-md-none bottom-toolbar">
+
+    <p-buttonGroup>
+        <p-button class="flex-grow-1" [styleClass]="'w-100'" severity="secondary" label="Lọc nâng cao"
+            (click)="showAdvancedFilter()" icon="pi pi-filter"></p-button>
+        <p-button (click)="onPriviousPage()" severity="secondary" [outlined]="true" icon="pi pi-angle-left" />
+        <p-button (click)="onNextPage()" severity="secondary" [outlined]="true" icon="pi pi-angle-right" />
+    </p-buttonGroup>
+
 
 </div>
 

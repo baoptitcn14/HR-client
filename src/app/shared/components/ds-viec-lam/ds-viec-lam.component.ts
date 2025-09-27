@@ -30,16 +30,17 @@ export class DsViecLamComponent implements OnChanges {
   @Input() layout: 'grid' | 'list' = 'grid';
   @Input() multiplierFS = 1;
   @Input() showButtonApply = false;
+  @Input() first: number = 0;
+  @Input() rows: number = 10;
+  @Input() totalRecords: number = 0;
+  @Input() showPaginator: boolean = false;
 
   // output region
-  @Output() onPageChangeEvent = new EventEmitter<any>();
+  @Output() onPageChangeEvent = new EventEmitter<IPageEvent>();
 
   // declare region
   isLoading = true;
-  listPlaceHolder = Array.from({ length: 9 }, (_, index) => index);
-  first: number = 0;
-  rows: number = 10;
-
+  listPlaceHolder: any[] = [];
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['viecLams'])
@@ -47,6 +48,9 @@ export class DsViecLamComponent implements OnChanges {
   }
 
   async loadData() {
+
+    this.listPlaceHolder = Array.from({ length: this.rows }, (_, index) => index)
+
     const khuVucs = await this.categoriesService.getDataCategory('ADDRESS', 1);
     const trinhDos = await this.categoriesService.getDataCategory('SKILL-LEVEL', 1);
 
@@ -65,15 +69,16 @@ export class DsViecLamComponent implements OnChanges {
 
     setTimeout(() => {
       this.isLoading = false;
-    }, 1000)
+    }, 300)
   }
 
   onPageChange(event: any) {
+    this.isLoading = true;
     this.onPageChangeEvent.emit(event);
   }
 }
 
-interface PageEvent {
+export interface IPageEvent {
   first: number;
   rows: number;
   page: number;

@@ -1,6 +1,14 @@
 <app-section-search (onSearchEvent)="onSearch($event)"></app-section-search>
 <div [style]="{ background: 'var(--bluegray-50)' }">
   <div class="container py-5">
-    <app-ds-viec-lam [viecLams]="jobPosts"></app-ds-viec-lam>
+    <app-ds-viec-lam 
+    [viecLams]="jobPosts" 
+    [totalRecords]="controlPaginator.totalRecords" 
+    [showPaginator]="controlPaginator.showPaginator"
+    [first]="controlPaginator.first"
+    [rows]="controlPaginator.rows"
+    (onPageChangeEvent)="onPageChange($event)"
+    >
+  </app-ds-viec-lam>
   </div>
 </div>

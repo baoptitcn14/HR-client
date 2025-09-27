@@ -7,17 +7,16 @@
         <div class="row p-4">
 
             <div class="col-12 col-md-4">
-                <app-advanced-filter></app-advanced-filter>
-                <div class="d-block d-md-none">
-                </div>
+                <app-advanced-filter (onNextPageEvent)="onNextPage()" (onPreviousPageEvent)="onPriviousPage()"></app-advanced-filter>
+
             </div>
 
             <div class="col-12 col-md-8">
-                <app-ds-viec-lam [viecLams]="jobPosts" [layout]="'list'" [showButtonApply]="true"
-                    [multiplierFS]="1.3"></app-ds-viec-lam>
+                <app-ds-viec-lam [viecLams]="jobPosts" [layout]="'list'" [showButtonApply]="true" [multiplierFS]="1.3"
+                    [totalRecords]="controlPaginator.totalRecords" [showPaginator]="controlPaginator.showPaginator"
+                    [first]="controlPaginator.first" [rows]="controlPaginator.rows"
+                    (onPageChangeEvent)="onPageChange($event)"></app-ds-viec-lam>
             </div>
-
         </div>
-
     </div>
 </div>

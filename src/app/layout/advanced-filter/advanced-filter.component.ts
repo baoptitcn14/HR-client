@@ -1,10 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { CategoriesService } from '../../core/services/categories.service';
 import { CategoryOutputDto } from '../../shared/service-proxies/sys-service-proxies';
 import { FormsModule } from '@angular/forms';
 import { DividerModule } from 'primeng/divider';
+import { ButtonModule } from 'primeng/button';
+import { ButtonGroupModule } from 'primeng/buttongroup';
 
 @Component({
   selector: 'app-advanced-filter',
@@ -13,7 +15,9 @@ import { DividerModule } from 'primeng/divider';
     CommonModule,
     FormsModule,
     RadioButtonModule,
-    DividerModule
+    DividerModule,
+    ButtonModule,
+    ButtonGroupModule
   ],
   templateUrl: './advanced-filter.component.html',
   styleUrl: './advanced-filter.component.scss'
@@ -22,6 +26,10 @@ export class AdvancedFilterComponent implements OnInit {
 
   // inject region
   private categoriesService = inject(CategoriesService);
+
+  //output region
+  @Output() onNextPageEvent = new EventEmitter();
+  @Output() onPreviousPageEvent = new EventEmitter();
 
   //declare region
   khuVucs: CategoryOutputDto[] = [];
@@ -41,6 +49,8 @@ export class AdvancedFilterComponent implements OnInit {
     capBac: 'ALL',
   }
 
+  //control show hide
+  showFilter: boolean = false;
 
   ngOnInit(): void {
 
@@ -60,6 +70,24 @@ export class AdvancedFilterComponent implements OnInit {
 
     }
   }
+
+  //#region Xử lý tương tác 
+
+  onPriviousPage() {
+    this.onPreviousPageEvent.emit();
+  }
+
+  onNextPage() {
+    this.onNextPageEvent.emit();
+  }
+
+  showAdvancedFilter() {
+    this.showFilter = !this.showFilter;
+
+    document.getElementsByTagName('body')[0].style.overflow = this.showFilter ? 'hidden' : 'auto';
+  }
+
+  //#endregion
 
 
   async loadData() {

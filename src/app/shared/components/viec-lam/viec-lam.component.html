@@ -26,7 +26,7 @@
                 </a>
 
                 <!-- mức lương | khu vực -->
-                <div class="d-flex gap-2 align-items-md-center flex-column flex-md-row">
+                <div class="d-flex gap-2 align-items-md-center">
                     <span class="fw-bold fs-6">{{ viecLam.salaryMin | numberSuffixCurrency }} - {{ viecLam.salaryMax |
                         numberSuffixCurrency }}
                     </span>
@@ -60,8 +60,8 @@
         </div>
 
         @if(showButtonApply) {
-        <div class=" align-items-center d-none d-lg-flex" style="flex-basis: 21%; min-width: 135px;">
-            <p-button label="Ứng tuyển ngay" severity="primary" raised="true" [size]="'large'" [styleClass]="'w-100'"
+        <div class=" align-items-center d-none d-lg-flex" style="min-width: 145px;">
+            <p-button label="Ứng tuyển ngay" severity="primary" raised="true" [styleClass]="'w-100'"
                 (click)="onApply()"></p-button>
         </div>
         }

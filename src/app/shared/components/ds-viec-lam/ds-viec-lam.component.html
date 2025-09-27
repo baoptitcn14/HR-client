@@ -71,8 +71,9 @@
   </div>
   }
 
-  <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows" [totalRecords]="120"
-    [rowsPerPageOptions]="[10, 20, 30]" />
+  <p-paginator *ngIf="showPaginator" (onPageChange)="onPageChange($event)" [pageLinkSize]="3" [showPageLinks]="true"
+    [showCurrentPageReport]="true" [first]="first" [rows]="rows" [totalRecords]="totalRecords"
+    [showFirstLastIcon]="false" />
 
 </section>
 }

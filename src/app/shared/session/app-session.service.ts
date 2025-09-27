@@ -59,7 +59,8 @@ export class AppSessionService {
 
     this.currentUserService.logout(input).subscribe(r => {
       this.cookieService.deleteAll('/', AppConst.domain);
-      location.href = AppConst.loginUrl;
+      // location.href = AppConst.loginUrl;
+      location.reload();
     });
 
   }

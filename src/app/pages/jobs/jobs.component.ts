@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, Host, HostListener, inject, OnInit } from '@angular/core';
-import { DsViecLamComponent } from '../../shared/components/ds-viec-lam/ds-viec-lam.component';
+import { DsViecLamComponent, IPageEvent } from '../../shared/components/ds-viec-lam/ds-viec-lam.component';
 import { AdvancedFilterComponent } from '../../layout/advanced-filter/advanced-filter.component';
 import { IDsViecLam } from '../../shared/components/viec-lam/viec-lam.component';
 import { JobPostInfoServiceProxy, JobPostQueryDto, ICriteriaRequestDto } from '../../shared/service-proxies/sys-service-proxies';
 import { SectionSearchComponent } from '../../layout/section-search/section-search.component';
 import { TrackElementInViewportDirective } from '../../core/directives/track-element-in-viewport.directive';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-jobs',
@@ -15,7 +16,8 @@ import { TrackElementInViewportDirective } from '../../core/directives/track-ele
     SectionSearchComponent,
     DsViecLamComponent,
     AdvancedFilterComponent,
-    TrackElementInViewportDirective
+    TrackElementInViewportDirective,
+    ButtonModule
   ],
   templateUrl: './jobs.component.html',
   styleUrl: './jobs.component.scss'
@@ -25,6 +27,15 @@ export class JobsComponent implements OnInit {
   jobPostInfoServiceProxy = inject(JobPostInfoServiceProxy);
   jobPosts: IDsViecLam[] = [];
   isInViewport = true;
+
+  // declare data
+  controlPaginator = {
+    first: 0,
+    rows: 5,
+    totalRecords: 0,
+    showPaginator: true,
+  }
+
 
   @HostListener('window:scroll', ['$event'])
   onScroll(event: any) {
@@ -54,14 +65,30 @@ export class JobsComponent implements OnInit {
     this.getJobPosts(filter);
   }
 
+  onNextPage() {
+    this.controlPaginator.first += this.controlPaginator.rows;
+    this.getJobPosts();
+  }
+
+  onPriviousPage() {
+    this.controlPaginator.first -= this.controlPaginator.rows;
+    this.getJobPosts();
+  }
+
+  onPageChange(event: IPageEvent) {
+    this.controlPaginator.first = event.first;
+    this.controlPaginator.rows = event.rows;
+    this.getJobPosts();
+  }
+
   // endregion
 
   //get data
   private getJobPosts(filter?: any) {
 
     const input = new JobPostQueryDto();
-    input.skipCount = 0;
-    input.maxResultCount = 100;
+    input.skipCount = this.controlPaginator.first;
+    input.maxResultCount = this.controlPaginator.rows;
 
     input.criterias = [
       new ICriteriaRequestDto({
@@ -117,6 +144,8 @@ export class JobsComponent implements OnInit {
 
     this.jobPostInfoServiceProxy.getAll(input).subscribe((res) => {
       this.jobPosts = res.items as IDsViecLam[];
+
+      this.controlPaginator.totalRecords = res.totalCount!;
     });
   }
 }

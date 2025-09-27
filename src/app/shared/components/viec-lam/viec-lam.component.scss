@@ -7,7 +7,7 @@ $multiplierFSs: var(--multiplierFS);
     font-size: calc(0.8rem);
     text-decoration: none;
     overflow: hidden;
-    height: var(--height);
+    height: auto;
     justify-content: space-between;
 
 
@@ -73,11 +73,19 @@ $multiplierFSs: var(--multiplierFS);
     .p-tag {
         font-size: 0.6rem;
     }
+
+    @media screen and (min-width: 768px) {
+        .p-tag {
+
+            font-size: calc(0.65rem * var(--multiplierFS));
+        }
+
+    }
 }
 
 @media screen and (min-width: 768px) {
     .viec-lam {
-
+        height: var(--height);
         font-size: calc(0.8rem * $multiplierFSs);
 
         &-logo-cty {
@@ -96,7 +104,7 @@ $multiplierFSs: var(--multiplierFS);
 
     .p-tag {
 
-        font-size: calc(0.65rem * var(--multiplierFS));
+        font-size: calc(0.65rem * var(--multiplierFS)) !important;
     }
 
 }
