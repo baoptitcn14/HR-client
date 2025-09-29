@@ -31,7 +31,7 @@ import { CvElementComponent } from '../../shared/components/cv-element/cv-elemen
 import { UtilitiesService } from '../../shared/services/utilities.service';
 import { CvService } from './cv.service';
 import { CvElement5Component } from '../../shared/components/cv-element-5/cv-element-5.component';
-import { IMoveGroupEvent } from './cv-element-base.directive';
+import { IMoveHashCodeEvent } from './cv-element-base.directive';
 import { TooltipModule } from 'primeng/tooltip';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { InputGroupModule } from 'primeng/inputgroup';
@@ -53,6 +53,8 @@ import { ActivatedRoute } from '@angular/router';
 import { ICvInputConfig } from '../../shared/components/cv-input/cv-input.component';
 import { MessageService } from 'primeng/api';
 import { forkJoin } from 'rxjs';
+import { AppTenantService } from '../../shared/session/app-tenant.service';
+import { CvListTemplateComponent } from '../../shared/components/cv-list-template/cv-list-template.component';
 
 @Component({
   selector: 'app-create-cv',
@@ -74,6 +76,7 @@ import { forkJoin } from 'rxjs';
     InputGroupAddonModule,
     InputGroupModule,
     InputTextModule,
+    CvListTemplateComponent,
     // components group
     CvElementComponent,
     CvElement5Component,
@@ -91,6 +94,7 @@ export class CreateCvComponent implements OnInit {
   private appSessionService = inject(AppSessionService);
   private activatedRoute = inject(ActivatedRoute);
   private messageService = inject(MessageService);
+  private appTenant = inject(AppTenantService);
   // declare region
 
   fonts = [
@@ -139,8 +143,6 @@ export class CreateCvComponent implements OnInit {
     ],
   };
 
-  template?: ICv;
-
   // cấu hình font, font size, theme color, line height
   listRow: ICv[] = []; // số dòng có trên template
   dataCvTemplate: any[] = [];
@@ -152,6 +154,13 @@ export class CreateCvComponent implements OnInit {
 
   // create cv or Update cv
   templateId: string = '';
+
+  // declare data template Default khi tạo mới CV
+  templateDefaultCode: string = '';
+
+  //data template
+  template?: ICv;
+
 
   @HostListener('window:scroll', ['$event'])
   onScroll(event: any) {
@@ -190,25 +199,26 @@ export class CreateCvComponent implements OnInit {
     // Lưu data
     // tempalte ( image, inputType, css )
 
-    const templateId = uuidv4();
+    const templateId = this.templateId ? this.templateId : uuidv4();
 
     const template = {
       ...this.template,
       id: templateId,
       css: JSON.stringify(this.template?._css),
       name: this.template!.name ?? 'Name Default',
+      inputConfig: JSON.stringify(this.template!.inputConfig),
     };
 
     // Lưu data
     // Rows ( image, fieldIndex, inputType, templateId )
     const listRow = this.listRow.map(
       (r) =>
-        ({
-          fieldIndex: r.fieldIndex,
-          inputType: r.inputType,
-          templateId: templateId,
-          id: r.id,
-        } as ICv)
+      ({
+        fieldIndex: r.fieldIndex,
+        inputType: r.inputType,
+        templateId: templateId,
+        id: r.id,
+      } as ICv)
     );
 
     // Lưu data
@@ -219,6 +229,7 @@ export class CreateCvComponent implements OnInit {
         templateId: templateId,
         rowId: c.rowId,
         css: JSON.stringify(c._css),
+        inputConfig: JSON.stringify(c.inputConfig),
       }))
     ) as ICv[];
 
@@ -282,9 +293,9 @@ export class CreateCvComponent implements OnInit {
                   inputConfig: JSON.stringify(ed.cvInputConfig),
                   value:
                     ed.inputType == INPUT_TYPE_CODE.IMAGE
-                      ? ed._value.split(',')[1]
-                      : value.find((x: any) => x.code == ed.code)?._value,
-                  id: uuidv4(),
+                      ? ed.value?.split(',')[1]
+                      : value.find((x: any) => x.code == ed.code)?.value,
+                  id: ed.id ?? uuidv4(),
                 })),
               ] as ICv[];
             }
@@ -306,6 +317,7 @@ export class CreateCvComponent implements OnInit {
           UserCVInputDto.fromJS({
             ...m,
             userId: this.appSessionService.userId,
+            tenantId: this.appTenant.currentTenant?.id ?? 1
           })
         )
       )
@@ -327,7 +339,7 @@ export class CreateCvComponent implements OnInit {
 
   //#region EVENT ACTIONS TOOLBAR GROUP
 
-  onMoveGroupEvent(event: IMoveGroupEvent, col: ICv) {
+  onMoveHashCode(event: IMoveHashCodeEvent, col: ICv) {
     const temp = col._listTypeCode![event.previousIndex];
 
     col._listTypeCode![event.previousIndex] =
@@ -335,7 +347,7 @@ export class CreateCvComponent implements OnInit {
     col._listTypeCode![event.currentIndex] = temp;
   }
 
-  onDeleteGroupEvent(typeCode: string, col: ICv) {
+  onDeleteHashCode(typeCode: string, col: ICv) {
     const data = col._listTypeCode?.find((e) => e.typeCode == typeCode);
 
     col._listTypeCode = col._listTypeCode?.filter(
@@ -389,6 +401,12 @@ export class CreateCvComponent implements OnInit {
 
   //#endregion
 
+
+  onChooseTemplate(template: ICv) {
+    this.templateDefaultCode = template.code!;
+    this.getTemplateDefault();
+  }
+
   //#region CV preview
 
   // hàm xử lý khi thả group vào col
@@ -440,7 +458,7 @@ export class CreateCvComponent implements OnInit {
               )
             );
 
-          let groupId = typeCode + '#' + this.utilService.customId(8);
+          let groupId = 0 + '#' + typeCode + '#' + this.utilService.customId(8);
 
           // bởi vì thông tin thêm ( others ) không phải là duy nhất trong 1 template
           // nên khi thêm others vào template phải tạo cho nó 1 cái typeCode khác là duy nhất
@@ -453,7 +471,7 @@ export class CreateCvComponent implements OnInit {
           // nếu là Others thì lấy data ra và update typeCode thành hashCode
           if (typeCode == OTHERS_TYEPCODE) {
             // cập nhật lại groupId
-            groupId = hashCode + '#' + this.utilService.customId(8);
+            groupId = 0 + '#' + hashCode + '#' + this.utilService.customId(8);
 
             const index = col._listTypeCode!.findIndex(
               (e: ITypeCode) => e.typeCode == typeCode
@@ -506,7 +524,7 @@ export class CreateCvComponent implements OnInit {
 
                         return {
                           ...e,
-                          _value: editor?._value,
+                          value: editor?.value,
                         };
                       }
                     );
@@ -531,8 +549,8 @@ export class CreateCvComponent implements OnInit {
                   ...e,
                   _css: JSON.parse(e.css ?? '{}'),
                   groupId: groupId,
-                  _value: e._value ?? e.defaultValue,
-                  _isBlank: !e._value && !e.defaultValue,
+                  value: e.value ?? e.defaultValue,
+                  _isBlank: !e.value && !e.defaultValue,
                   id: uuidv4(),
                 })) as any[]
             ).sort((e1: any, e2: any) => e1.fieldIndex - e2.fieldIndex);
@@ -601,13 +619,15 @@ export class CreateCvComponent implements OnInit {
 
   //#region get data
   private getTemplateDefault() {
-    this.http.get<ICv[]>('assets/template.json').subscribe((data) => {
-      this.proccessDataTemplate(data);
-    });
+    if (this.templateDefaultCode)
+      this.http.get<ICv[]>(`assets/${this.templateDefaultCode}.json`).subscribe((data) => {
+        this.proccessDataTemplate(data);
+      });
   }
 
   // Xử lý dữ liệu sau khi lấy về
   private proccessDataTemplate(data: ICv[]) {
+
     // mở css json ra
     const templateData = data.map((e) => {
       return {
@@ -632,30 +652,30 @@ export class CreateCvComponent implements OnInit {
       .filter((item) => item.inputType == INPUT_TYPE_CODE.ROW)
       .map(
         (r) =>
-          ({
-            ...r,
-            id: r.id?.startsWith('default') ? uuidv4() : r.id,
-            _listChild: templateData
-              .filter(
-                (e) => e.rowId == r.id && e.inputType == INPUT_TYPE_CODE.COLUMN
-              )
-              .map((e) => ({
-                ...e,
-                _listChild: [] as ICv[],
-                _listTypeCode: [] as string[],
-                _hashMapTypeCode: {},
-              })),
-            _panelSizes: templateData
-              .filter(
-                (e) => e.rowId == r.id && e.inputType == INPUT_TYPE_CODE.COLUMN
-              )
-              .map((e) => e._css!['width']),
-            _panelMinSizes: templateData
-              .filter(
-                (e) => e.rowId == r.id && e.inputType == INPUT_TYPE_CODE.COLUMN
-              )
-              .map((e) => 20),
-          } as any)
+        ({
+          ...r,
+          id: r.id?.startsWith('default') ? uuidv4() : r.id,
+          _listChild: templateData
+            .filter(
+              (e) => e.rowId == r.id && e.inputType == INPUT_TYPE_CODE.COLUMN
+            )
+            .map((e) => ({
+              ...e,
+              _listChild: [] as ICv[],
+              _listTypeCode: [] as string[],
+              _hashMapTypeCode: {},
+            })),
+          _panelSizes: templateData
+            .filter(
+              (e) => e.rowId == r.id && e.inputType == INPUT_TYPE_CODE.COLUMN
+            )
+            .map((e) => e._css!['width']),
+          _panelMinSizes: templateData
+            .filter(
+              (e) => e.rowId == r.id && e.inputType == INPUT_TYPE_CODE.COLUMN
+            )
+            .map((e) => 20),
+        } as any)
       );
 
     // danh sách các type code ( Mục ) của template
@@ -681,8 +701,11 @@ export class CreateCvComponent implements OnInit {
     //   .filter((item: ICv) => item.inputType == INPUT_TYPE_CODE.COLUMN)
     //   .map((r) => r.id) as string[];
 
-    // set color theme
-    this.onChangeThemeColor();
+
+    setTimeout(() => {
+      // set color theme
+      this.onChangeThemeColor();
+    }, 300)
   }
   private proccessDataCol(
     col: ICv,
@@ -694,7 +717,7 @@ export class CreateCvComponent implements OnInit {
     if (col) {
       const newColumnId = col.id?.startsWith('default_') ? uuidv4() : col.id; // gen id cho column
 
-      // lấy danh sách các group thuộc col này và order theo field index tăng dần
+      // lấy danh sách các mục ( typecode | hashcode ) thuộc col này và order theo field index tăng dần
       col._listTypeCode = typeCodes
         .filter((e) => e.columId == col.id)
         .sort((a, b) => parseInt(a.fieldIndex!) - parseInt(b.fieldIndex!))
@@ -703,16 +726,17 @@ export class CreateCvComponent implements OnInit {
         )
         .map(
           (e) =>
-            ({
-              typeCode: e.typeCode,
-              label: e.label,
-              layout: isCreateCv ? (e as any).layout : e.defaultValue,
-              fieldIndex: e.fieldIndex,
-              columId: newColumnId,
-            } as ITypeCode)
+          ({
+            typeCode: e.typeCode,
+            label: e.label,
+            layout: isCreateCv ? (e as any).layout : e.defaultValue,
+            fieldIndex: e.fieldIndex,
+            columId: newColumnId,
+            id: e.id?.startsWith('default') ? uuidv4() : e.id,
+          } as ITypeCode)
         );
 
-      // loại bỏ các group đã được sử dụng trong listGroupAvailable
+      // loại bỏ các mục đã được sử dụng trong listGroupAvailable
 
       this.listGroupAvailable = this.listGroupAvailable.filter(
         (e) =>
@@ -725,34 +749,35 @@ export class CreateCvComponent implements OnInit {
       ];
 
       // từ các mã code của typeCode lấy các input thuộc typeCode đó và tạo hashCode cho nhóm
-      col._listTypeCode.forEach((e: ITypeCode) => {
+      col._listTypeCode.forEach((e: ITypeCode, i) => {
         const typeCode = e.typeCode;
 
         const listInputOfTypeCode = !this.templateId
           ? // Đây là data lấy từ file json
-            (typeCodes as any)
-              .filter((e: any) => e.typeCode == typeCode)
-              .map((e: any) =>
-                //  phần typecode value là 1 array input, đây là cấu trúc trong file json
-                e.value.filter(
-                  (x: ICv) => x.industryId == (this.template?.industryId ?? '')
-                )
+          (typeCodes as any)
+            .filter((e: any) => e.typeCode == typeCode)
+            .map((e: any) =>
+              //  phần typecode value là 1 array input, đây là cấu trúc trong file json
+              e.value.filter(
+                (x: ICv) => x.industryId == (this.template?.industryId ?? '')
               )
+            )
           : // đây là data lấy từ db, dto khác với json ở trên
-            // lấy editor trực tiếp từ data lấy về
-            templateData.filter(
-              (e: ICv) =>
-                e.columId == col.id &&
-                e.groupId?.includes(typeCode.toLowerCase())
-            );
+          // lấy editor trực tiếp từ data lấy về
+          templateData.filter(
+            (e: ICv) =>
+              e.columId == col.id &&
+              e.groupId?.includes(typeCode.toLowerCase())
+          );
+
+        const groupId = 0 + '#' + typeCode + '#' + this.utilService.customId(8);
 
         //  danh sách nhóm thuộc type code này
-        const groupId = typeCode + '#' + this.utilService.customId(8);
-
         let groupIds = (
           listInputOfTypeCode.map((e: ICv) => e.groupId ?? groupId) as string[]
         ).filter((x, i, arr) => arr.findIndex((y) => y == x) == i);
 
+        // Nếu không có nhóm thì tạo nhóm mới
         if (groupIds.length == 0) {
           groupIds = [groupId];
         }
@@ -763,15 +788,15 @@ export class CreateCvComponent implements OnInit {
             !isCreateCv
               ? listInputOfTypeCode.filter((e: ICv) => e.groupId == groupId)
               : listInputOfTypeCode.reduce(
-                  (acc: any, e: any) => [...acc, ...e],
-                  []
-                )
+                (acc: any, e: any) => [...acc, ...e],
+                []
+              )
           )
             .map((e: ICv) => ({
               ...e,
               groupId: groupId,
               _css: JSON.parse(e.css ?? '{}'),
-              _value: e.value ?? e.defaultValue,
+              value: e.value ?? e.defaultValue,
               _isBlank: this.cvService.isContentEditableEmpty(
                 (e.value ?? e.defaultValue)!
               ),
@@ -789,8 +814,6 @@ export class CreateCvComponent implements OnInit {
           }
         });
       });
-
-      console.log(col);
 
       //gán newId cho column
       col.id = newColumnId;
@@ -812,11 +835,11 @@ export class CreateCvComponent implements OnInit {
         )
         .map(
           (item: ITypeCode) =>
-            ({
-              typeCode: item.typeCode,
-              label: item.label,
-              layout: item.layout,
-            } as ITypeCode)
+          ({
+            typeCode: item.typeCode,
+            label: item.label,
+            layout: item.layout,
+          } as ITypeCode)
         );
 
       if (this.templateId) {
@@ -834,7 +857,7 @@ export class CreateCvComponent implements OnInit {
             }
           }
         );
-      } else this.getTemplateDefault();
+      }
     });
   }
 
@@ -900,7 +923,6 @@ export interface ICv extends UserCVOutputDto {
   _listChild?: ICv[];
   _isSelected?: boolean;
   _css: ICss;
-  _value?: any;
   _panelSizes?: number[]; // panelSizes cua splitter dùng cho row
   _panelMinSizes?: number[]; // panelMinSizes cua splitter dùng cho row
   _listTypeCode?: ITypeCode[]; // chứa typeCode của các group được thả vào col

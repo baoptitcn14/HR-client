@@ -1,10 +1,18 @@
-
 //template_basic
 
-.template_basic {
+.template_basic_1 {
     background: #fff;
     color: var(--bs-dark);
     // color-mix(in srgb, var(--theme-color) 10%, if(is-light(var(--theme-color)), #000, #fff));
+
+    #RecruitmentInfo,
+    #BusinessCard,
+    #Avatar {
+        .cv-group-name {
+            display: none;
+
+        }
+    }
 
     ._row {
         background: #fff;
@@ -14,7 +22,7 @@
 
     .col1 {
         background-color: var(--theme-color);
-        color: var(--text-color-on-bg);        
+        color: var(--text-color-on-bg);
     }
 
 }

@@ -1,0 +1,29 @@
+[
+    {
+        "id": "default_template1",
+        "code": "template_basic_1",
+        "name": "template basic 1",
+        "image": "https://placehold.co/300x400/jpg",
+        "industry": "",
+        "inputType": "template",
+        "css": "{\"template\":{\"font\":\"Roboto\",\"fontSize\":13,\"lineHeight\":1.5,\"themeColor\":\"#4570de\", \"multiplierFS\": 1.1}}"
+    },
+    {
+        "id": "default_template2",
+        "code": "template_basic_2",
+        "name": "template basic 2",
+        "image": "https://placehold.co/300x400/jpg",
+        "industry": "",
+        "inputType": "template",
+        "css": "{\"template\":{\"font\":\"Roboto\",\"fontSize\":13,\"lineHeight\":1.5,\"themeColor\":\"#4570de\", \"multiplierFS\": 1.1}}"
+    },
+    {
+        "id": "default_template3",
+        "code": "template_basic_3",
+        "name": "template basic 3",
+        "image": "https://placehold.co/300x400/jpg",
+        "industry": "",
+        "inputType": "template",
+        "css": "{\"template\":{\"font\":\"Roboto\",\"fontSize\":13,\"lineHeight\":1.5,\"themeColor\":\"#4570de\", \"multiplierFS\": 1.1}}"
+    }
+]

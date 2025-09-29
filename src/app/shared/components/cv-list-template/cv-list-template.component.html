@@ -1,0 +1,41 @@
+<!-- ====== BEGIN LIST CV TEMPLATE ======= -->
+<div class="list-cv-template-container container">
+
+  <div class="d-flex flex-column gap-3">
+    <label class="fw-bold">Danh sách CV</label>
+
+
+    <div class="list-cv-template row">
+      @for (template of listTemplate; track template.id) {
+
+      <div class="col-12 col-md-4 col-lg-3">
+
+        <div class="cv-template">
+
+          <div class="d-flex flex-column gap-3">
+
+            <div class="img-container">
+
+              <img src="{{ template.image }}" alt="{{ template.name }}">
+
+              <p-button label="Dùng mẫu" [rounded]="true" [styleClass]="'w-100'" [size]="'small'" severity="primary" raised="true"
+                (click)="onChoose(template)"></p-button>
+
+            </div>
+
+            <div class="cv-template-name">
+              {{ template.name }}
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      }
+
+    </div>
+
+
+  </div>
+  <!-- ====== END LIST CV TEMPLATE ======= -->

@@ -30,6 +30,7 @@ export class AdvancedFilterComponent implements OnInit {
   //output region
   @Output() onNextPageEvent = new EventEmitter();
   @Output() onPreviousPageEvent = new EventEmitter();
+  @Output() onChangeFilterEvent = new EventEmitter();
 
   //declare region
   khuVucs: CategoryOutputDto[] = [];
@@ -85,6 +86,10 @@ export class AdvancedFilterComponent implements OnInit {
     this.showFilter = !this.showFilter;
 
     document.getElementsByTagName('body')[0].style.overflow = this.showFilter ? 'hidden' : 'auto';
+  }
+
+  onChange() {
+    this.onNextPageEvent.emit();
   }
 
   //#endregion

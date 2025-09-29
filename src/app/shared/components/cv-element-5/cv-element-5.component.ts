@@ -12,9 +12,9 @@ import { FormsModule } from '@angular/forms';
 import { CvGroupActionComponent } from '../cv-group-action/cv-group-action.component';
 import { CdkDrag } from '@angular/cdk/drag-drop';
 import { CvInputActionComponent } from '../cv-input-action/cv-input-action.component';
-import { CvInputComponent, IMoveEvent } from '../cv-input/cv-input.component';
+import { CvInputComponent } from '../cv-input/cv-input.component';
 import { CvElementBaseDirective } from '../../../pages/create-cv/cv-element-base.directive';
-import { IThanhPhan } from '../../../pages/page-viec-lam/ung-tuyen-dialog/ung-tuyen-dialog.component';
+import { ICv } from '../../../pages/create-cv/create-cv.component';
 
 @Component({
   selector: 'app-cv-element-5',
@@ -39,5 +39,5 @@ export class CvElement5Component extends CvElementBaseDirective {
 
 export interface IUpdateElement {
   groupId: string;
-  data: IThanhPhan[];
+  data: ICv[];
 }

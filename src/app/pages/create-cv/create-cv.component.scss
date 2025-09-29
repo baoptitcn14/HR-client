@@ -249,6 +249,10 @@
 
     ._row {
         background-color: var(--surface-c);
+        ._col {
+            width: 100%;
+            height: 100%;
+        }
     }
 }
 

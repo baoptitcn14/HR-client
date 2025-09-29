@@ -1,40 +1,33 @@
-import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit, signal } from '@angular/core';
-import {
-  ActivatedRoute,
-  ActivatedRouteSnapshot,
-  Data,
-  NavigationEnd,
-  Router,
-  RouterModule,
-} from '@angular/router';
+import { Injectable } from '@angular/core';
+import { NavigationEnd, ActivatedRouteSnapshot, Data, Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
-import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { BehaviorSubject, filter } from 'rxjs';
-import { BreadcrumbsService } from './breadcrumbs.service';
 
-@Component({
-  selector: 'app-breadcrumbs',
-  standalone: true,
-  imports: [CommonModule, BreadcrumbModule, RouterModule],
-  templateUrl: './breadcrumbs.component.html',
-  styleUrl: './breadcrumbs.component.scss',
+@Injectable({
+  providedIn: 'root'
 })
-export class BreadcrumbsComponent implements OnInit {
+export class BreadcrumbsService {
 
-  breadcrumbService = inject(BreadcrumbsService);
+  breadcrumbs = new BehaviorSubject<MenuItem[]>([]);
 
-  breadcrumbs = signal<MenuItem[]>([]);
+  constructor() { }
 
+  subcribeRouter(router: Router) {
+    router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe((event) => {
+        // Construct the breadcrumb hierarchy
+        const root = router.routerState.snapshot.root;
 
-  constructor(private router: Router) { }
-  ngOnInit(): void {
+        const breadcrumbs: MenuItem[] = [
+          { routerLink: '/', label: 'Trang chủ', icon: 'pi pi-home me-2' },
+        ];
 
-    this.breadcrumbService.subcribeRouter(this.router);
+        this.addBreadcrumb(root, [], breadcrumbs);
 
-    this.breadcrumbService.breadcrumbs.subscribe((breadcrumbs) => {
-      this.breadcrumbs.set(breadcrumbs);
-    })
+        // Emit the new hierarchy
+        this.breadcrumbs.next(breadcrumbs);
+      });
   }
 
   private addBreadcrumb(

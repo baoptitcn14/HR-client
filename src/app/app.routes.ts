@@ -7,6 +7,7 @@ import { authRouteGuard } from './shared/auth-guard/auth-route.guard';
 import { CreateCvComponent } from './pages/create-cv/create-cv.component';
 import { UserCvComponent } from './pages/user-cv/user-cv.component';
 import { JobsComponent } from './pages/jobs/jobs.component';
+import { ListJobComponent } from './pages/jobs/list-job/list-job.component';
 
 export const routes: Routes = [
   {
@@ -21,10 +22,19 @@ export const routes: Routes = [
   {
     path: 'jobs',
     component: JobsComponent,
-  },
-  {
-    path: 'job/:id',
-    component: PageViecLamComponent,
+    data: { breadcrumb: 'Việc làm' },
+    children: [
+      {
+        path: '',
+        component: ListJobComponent,
+        data: { breadcrumb: 'Danh sách' },
+      },
+      {
+        path: 'job/:slugId',
+        component: PageViecLamComponent,
+        data: { breadcrumb: 'Chi tiết công việc' },
+      }
+    ]
   },
   {
     path: 'user-profile',
@@ -40,7 +50,7 @@ export const routes: Routes = [
   {
     path: 'create-cv/:id',
     component: CreateCvComponent,
-    data: { title: 'Tạo CV', breadcrumb: 'Tạo CV' },
+    data: { title: 'Chỉnh sửa CV', breadcrumb: 'Chỉnh sửa CV' },
     canActivate: [authRouteGuard]
   },
   {
@@ -55,3 +65,4 @@ export const routes: Routes = [
     component: PageNotFoundComponent,
   },
 ];
+

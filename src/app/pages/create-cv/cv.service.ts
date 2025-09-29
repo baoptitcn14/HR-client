@@ -13,6 +13,11 @@ export class CvService {
   i$ = new BehaviorSubject<boolean>(false);
   u$ = new BehaviorSubject<boolean>(false);
 
+
+  // Theo dõi undo, redo
+  undo: IAction[] = [];
+  redo: IAction[] = [];
+
   constructor() { }
 
   saveSelection() {
@@ -335,7 +340,7 @@ export class CvService {
 
             result[groupId] = [{
               groupLabel: getGroupLabel ? groupLabel?.innerHTML : undefined,
-              _value: image!.src,
+              value: image!.src,
               code: image!.getAttribute('data-code'),
             }];
 
@@ -345,14 +350,13 @@ export class CvService {
 
             result[groupId] = Array.from(editor).map((e) => ({
               groupLabel: getGroupLabel ? groupLabel?.innerHTML : undefined,
-              _value: e.innerHTML,
+              value: e.innerHTML,
               code: e.getAttribute('data-code'),
             }));
 
           }
 
         }
-
 
       })
 
@@ -363,4 +367,9 @@ export class CvService {
     return undefined;
 
   }
+}
+
+export interface IAction {
+  type: 'delete_group' | 'delete_hashCode' | 'add_group' | 'add_hashCode' | 'update_input';
+  data: any;
 }

@@ -65,7 +65,8 @@
         <div class="options ">
 
             <div class="field-check">
-                <p-radioButton [inputId]="name + '-all'" [name]="name" [value]="'ALL'" [(ngModel)]="filter[model]" />
+                <p-radioButton [inputId]="name + '-all'" [name]="name" [value]="'ALL'" [(ngModel)]="filter[model]"
+                    (ngModelChange)="onChange()" />
                 <label [for]="name + '-all'" class="ms-2">
                     Tất cả
                 </label>
@@ -73,7 +74,8 @@
 
             @for(option of options; track option.value) {
             <div class="field-check">
-                <p-radioButton [inputId]="option.id" [name]="name" [value]="option.id" [(ngModel)]="filter[model]" />
+                <p-radioButton [inputId]="option.id" [name]="name" [value]="option.id" [(ngModel)]="filter[model]"
+                    (ngModelChange)="onChange()" />
                 <label [for]="option.id" class="ms-2">
                     {{ option.name }}
                 </label>

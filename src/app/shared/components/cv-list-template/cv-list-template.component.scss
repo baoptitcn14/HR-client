@@ -1,0 +1,49 @@
+.cv-template {
+    cursor: pointer;
+    padding: 1rem;
+    border: 1px solid var(--surface-200);
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: var(--surface-100);
+    transition: all 0.3s ease-in-out;
+
+    .img-container {
+        position: relative;
+        overflow: hidden;
+
+        img {
+            width: 100%;
+        }
+
+        p-button {
+            position: absolute;
+            width: 80%;
+            bottom: 20px;
+            left: 10%;
+            right: 10%;
+            transform: translateY(99px);
+            transition: transform 0.3s ease-in-out;
+            z-index: 2;
+            border-radius: 2rem;
+        }
+    }
+
+
+    &-name {
+        text-align: center;
+        font-weight: bold;
+        font-size: 1.2rem;
+    }
+
+    &:hover {
+        border-color: var(--primary-200);
+        background-color: var(--primary-50);
+
+        .img-container {
+            p-button {
+                transform: translateY(0);
+                box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.3);
+            }
+        }
+    }
+}

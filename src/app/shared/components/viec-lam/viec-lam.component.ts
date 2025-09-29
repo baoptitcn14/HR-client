@@ -80,6 +80,14 @@ export class ViecLamComponent implements AfterViewInit, OnDestroy {
       });
   }
 
+  slugify(text: string): string {
+    return text
+      .toLowerCase()
+      .normalize('NFD').replace(/[\u0300-\u036f]/g, '') // bỏ dấu tiếng Việt
+      .replace(/[^a-z0-9]+/g, '-')                     // thay space, ký tự đặc biệt = "-"
+      .replace(/^-+|-+$/g, '');                        // bỏ "-" ở đầu/cuối
+  }
+
   ngOnDestroy(): void {
     this.viecLamService.maxHeight$.next(0);
   }

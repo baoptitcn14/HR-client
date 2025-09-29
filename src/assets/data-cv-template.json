@@ -1767,7 +1767,8 @@
                 "industryName": "",
                 "label": "Tên trường",
                 "code": "edu_school",
-                "defaultValue": "Ilearn"
+                "defaultValue": "Ilearn",
+                "fieldIndex": 0
             }
         ]
     },
@@ -1781,7 +1782,8 @@
                 "industryName": "",
                 "label": "Ngành học / Chuyên ngành",
                 "code": "edu_major",
-                "defaultValue": "Lập trình python"
+                "defaultValue": "Lập trình python",
+                "fieldIndex": 3
             }
         ]
     },
@@ -1795,7 +1797,8 @@
                 "industryName": "",
                 "label": "Trình độ",
                 "code": "edu_level",
-                "defaultValue": "Đại học"
+                "defaultValue": "Đại học",
+                "fieldIndex": 4
             }
         ]
     },
@@ -1809,7 +1812,8 @@
                 "industryName": "",
                 "label": "Bắt đầu",
                 "code": "edu_start",
-                "defaultValue": "2013"
+                "defaultValue": "2013",
+                "fieldIndex": 1
             }
         ]
     },
@@ -1823,7 +1827,8 @@
                 "industryName": "",
                 "label": "Kết thúc",
                 "code": "edu_end",
-                "defaultValue": "2017"
+                "defaultValue": "2017",
+                "fieldIndex": 2
             }
         ]
     },

@@ -1,16 +1,16 @@
 import { CommonModule } from '@angular/common';
 import { Component, Host, HostListener, inject, OnInit } from '@angular/core';
-import { DsViecLamComponent, IPageEvent } from '../../shared/components/ds-viec-lam/ds-viec-lam.component';
-import { AdvancedFilterComponent } from '../../layout/advanced-filter/advanced-filter.component';
-import { IDsViecLam } from '../../shared/components/viec-lam/viec-lam.component';
-import { JobPostInfoServiceProxy, JobPostQueryDto, ICriteriaRequestDto } from '../../shared/service-proxies/sys-service-proxies';
-import { SectionSearchComponent } from '../../layout/section-search/section-search.component';
-import { TrackElementInViewportDirective } from '../../core/directives/track-element-in-viewport.directive';
 import { ButtonModule } from 'primeng/button';
 import { RouterModule } from '@angular/router';
+import { TrackElementInViewportDirective } from '../../../core/directives/track-element-in-viewport.directive';
+import { AdvancedFilterComponent } from '../../../layout/advanced-filter/advanced-filter.component';
+import { SectionSearchComponent } from '../../../layout/section-search/section-search.component';
+import { DsViecLamComponent, IPageEvent } from '../../../shared/components/ds-viec-lam/ds-viec-lam.component';
+import { IDsViecLam } from '../../../shared/components/viec-lam/viec-lam.component';
+import { JobPostInfoServiceProxy, JobPostQueryDto, ICriteriaRequestDto } from '../../../shared/service-proxies/sys-service-proxies';
 
 @Component({
-  selector: 'app-jobs',
+  selector: 'app-list-job',
   standalone: true,
   imports: [
     CommonModule,
@@ -21,10 +21,10 @@ import { RouterModule } from '@angular/router';
     ButtonModule,
     RouterModule
   ],
-  templateUrl: './jobs.component.html',
-  styleUrl: './jobs.component.scss'
+  templateUrl: './list-job.component.html',
+  styleUrl: './list-job.component.scss'
 })
-export class JobsComponent implements OnInit {
+export class ListJobComponent implements OnInit {
   // region inject
   jobPostInfoServiceProxy = inject(JobPostInfoServiceProxy);
   jobPosts: IDsViecLam[] = [];
@@ -37,7 +37,6 @@ export class JobsComponent implements OnInit {
     totalRecords: 0,
     showPaginator: true,
   }
-
 
   @HostListener('window:scroll', ['$event'])
   onScroll(event: any) {
@@ -72,7 +71,7 @@ export class JobsComponent implements OnInit {
     this.getJobPosts();
   }
 
-  onPriviousPage() {
+  onPreviousPage() {
     this.controlPaginator.first -= this.controlPaginator.rows;
     this.getJobPosts();
   }

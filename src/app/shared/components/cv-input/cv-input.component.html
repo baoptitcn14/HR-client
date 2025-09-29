@@ -18,7 +18,7 @@
     <div class="image-inner" [class.resizing]="resizing">
       <img
         [attr.data-code]="element.code"
-        [src]="element._value"
+        [src]="element.value"
         alt="avatar"
         [width]="width"
         [height]="height"
@@ -83,7 +83,7 @@
     class="editor {{ element.code }} field-{{ element.fieldIndex }}"
     contenteditable="true"
     (blur)="onInputEditor($event)"
-    [innerHTML]="element._value"
+    [innerHTML]="element.value"
   ></div>
 
   }@else {
@@ -100,7 +100,7 @@
     contenteditable="true"
     (blur)="onInputEditor($event)"
     (keydown)="onKeyDown($event)"
-    [innerHTML]="element._value"
+    [innerHTML]="element.value"
   ></div>
 
   }

@@ -26,6 +26,7 @@ import { TrackElementInViewportDirective } from '../../core/directives/track-ele
 import { CategoriesService } from '../../core/services/categories.service';
 import { IDsViecLam } from '../../shared/components/viec-lam/viec-lam.component';
 import { Title } from '@angular/platform-browser';
+import { BreadcrumbsService } from '../../layout/breadcrumbs/breadcrumbs.service';
 
 @Component({
   selector: 'app-page-viec-lam',
@@ -38,46 +39,40 @@ export class PageViecLamComponent implements OnInit {
   //inject region
   private activatedRoute = inject(ActivatedRoute);
   private jobPostInfoService = inject(JobPostInfoServiceProxy);
-  private categoryInfoService = inject(CategoryInfoServiceProxy);
   private dialogService = inject(DialogService);
   private jobPostFieldService = inject(JobPostFieldInfoServiceProxy);
   private categoriesService = inject(CategoriesService);
   private title = inject(Title);
+  private destroyRef = inject(DestroyRef);
+  private breadcrumbsService = inject(BreadcrumbsService);
 
   //declare region
   tinTuyenDung?: IDsViecLam;
   isButtonApplyOutOfViewport = false; // biến này theo dõi nút Ứng tuyển có ngoài viewport hay không
 
-  private destroyRef = inject(DestroyRef);
 
   ngOnInit(): void {
-    if (this.activatedRoute.snapshot.params['id']) {
-      forkJoin([this.getViecLam()])
+    if (this.activatedRoute.snapshot.params['slugId']) {
+
+      // Tách slug & id
+      const id = this.activatedRoute.snapshot.params['slugId'].split('_').pop();
+
+      forkJoin([this.getViecLam(id)])
         .pipe(takeUntilDestroyed(this.destroyRef))
         .subscribe(([viecLam]) => {
           this.tinTuyenDung = viecLam as IDsViecLam;
 
           this.title.setTitle(this.tinTuyenDung.title!);
 
+          this.breadcrumbsService.breadcrumbs.next([
+            { label: 'Trang chủ', routerLink: '/' },
+            { label: 'Việc làm', routerLink: '/jobs' },
+            { label: this.tinTuyenDung.title!, routerLink: '/jobs/job/' + this.tinTuyenDung.id },
+          ]);
+
           this.xuLyDuLieuViecLam();
         });
     }
-  }
-
-  private getLocations() {
-    const input = new CategoryQueryDto();
-
-    input.criterias = [
-      new ICriteriaRequestDto({
-        propertyName: 'groupCode',
-        operation: 0,
-        value: 'ADDRESS',
-      }),
-    ];
-
-    input.sorting = 'hashCode asc';
-
-    return this.categoryInfoService.getList(input);
   }
 
   onInViewportChange(event: boolean) {
@@ -148,9 +143,9 @@ export class PageViecLamComponent implements OnInit {
     } as IDsViecLam;
   }
 
-  private getViecLam() {
+  private getViecLam(id: string) {
     const input = new JobPostQueryDto();
-    input.id = this.activatedRoute.snapshot.params['id'];
+    input.id = id;
     input.tenantId = AppConst.tenantDefaultId;
 
     return this.jobPostInfoService.get(input);

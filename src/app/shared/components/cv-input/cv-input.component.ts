@@ -19,6 +19,7 @@ import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { CropImageComponent } from '../crop-image/crop-image.component';
 import { IThanhPhan } from '../../../pages/page-viec-lam/ung-tuyen-dialog/ung-tuyen-dialog.component';
+import { ICv } from '../../../pages/create-cv/create-cv.component';
 
 
 @Component({
@@ -44,7 +45,7 @@ export class CvInputComponent implements OnChanges {
   // input region
 
   @Input() themeColor: string = '';
-  @Input({ required: true }) element!: IThanhPhan;
+  @Input({ required: true }) element!: ICv;
 
   @ViewChild('op') op!: OverlayPanel;
   @ViewChild('editor') editor!: ElementRef;
@@ -94,7 +95,7 @@ export class CvInputComponent implements OnChanges {
     }
   }
 
-  onUpdateElementFromToolbar(event: { element: IThanhPhan; action: string }) {
+  onUpdateElementFromToolbar(event: { element: ICv; action: string }) {
     this.element = event.element;
   }
 
@@ -163,7 +164,7 @@ export class CvInputComponent implements OnChanges {
 
   //save Image
   onSaveImage(event: string) {
-    this.element._value = event;
+    this.element.value = event;
     this.showDialogUploadImage = false;
   }
 }

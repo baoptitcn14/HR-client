@@ -15,22 +15,30 @@ export class PdfPreviewService {
             const pdfWidth = pdf.internal.pageSize.getWidth();
             const pdfHeight = pdf.internal.pageSize.getHeight();
 
-            const imgWidth = pdfWidth;
-            const imgHeight = (canvas.height * imgWidth) / canvas.width;
+            // const imgWidth = pdfWidth;
+            // const imgHeight = (canvas.height * imgWidth) / canvas.width;
 
-            let heightLeft = imgHeight;
-            let position = 0;
+            const margin = 3; // mm - lề trái/phải/trên/dưới
+
+            const usableWidth = pdfWidth - margin * 2;
+            const usableHeight = (canvas.height * usableWidth) / canvas.width;
+
+            let heightLeft = usableHeight;
+
+            // tính vị trí x để căn giữa
+            const centerX = (pdfWidth - usableWidth) / 2;
+            const centerY = (pdfHeight - usableHeight) / 2;
+
 
             // Trang đầu tiên
-            pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+            pdf.addImage(imgData, "PNG", centerX, centerY, usableWidth, usableHeight);
             heightLeft -= pdfHeight;
 
             // Các trang tiếp theo
             while (heightLeft > 0) {
-                position = heightLeft - imgHeight;
                 pdf.addPage();
-                pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
-                heightLeft -= pdfHeight;
+                pdf.addImage(imgData, "PNG", centerX, centerY, usableWidth, usableHeight);
+                heightLeft -= pdfHeight - margin * 2;
             }
 
             // Lấy blob thay vì save
