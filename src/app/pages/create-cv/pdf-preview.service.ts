@@ -1,5 +1,4 @@
-import { inject, Injectable } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
+import { Injectable } from '@angular/core';
 import html2canvas from 'html2canvas-pro';
 import { jsPDF } from "jspdf";
 
@@ -18,7 +17,7 @@ export class PdfPreviewService {
             // const imgWidth = pdfWidth;
             // const imgHeight = (canvas.height * imgWidth) / canvas.width;
 
-            const margin = 3; // mm - lề trái/phải/trên/dưới
+            const margin = 1; // mm - lề trái/phải/trên/dưới
 
             const usableWidth = pdfWidth - margin * 2;
             const usableHeight = (canvas.height * usableWidth) / canvas.width;

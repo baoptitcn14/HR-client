@@ -38,7 +38,7 @@ export class AppSessionService {
           },
           (error) => {
             this.cookieService.deleteAll('/', AppConst.domain);
-            location.href = AppConst.loginUrl;
+            // location.href = AppConst.loginUrl;
 
             reject(error);
           }

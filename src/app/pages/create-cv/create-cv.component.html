@@ -94,11 +94,11 @@
 
       <!-- ======= BEGIN CV TEMPLATE ======== -->
       <div id="cv-content" class="flex-grow-1 d-flex justify-content-center" style="
-    --theme-color: {{ (template?._css)!['template']['themeColor'] }};
-    --theme-font: {{ (template?._css)!['template']['font'] }};
-    --theme-font-size: {{ (template?._css)!['template']['fontSize'] + 'px' }};
-    --theme-line-height: {{ (template?._css)!['template']['lineHeight'] }};
-    --multiplierFS: {{ (template?._css)!['template']['multiplierFS'] }};
+    --theme-color: {{ (template._css)!['template']['themeColor'] }};
+    --theme-font: {{ (template._css)!['template']['font'] }};
+    --theme-font-size: {{ (template._css)!['template']['fontSize'] + 'px' }};
+    --theme-line-height: {{ (template._css)!['template']['lineHeight'] }};
+    --multiplierFS: {{ (template._css)!['template']['multiplierFS'] }};
     ">
         <div class="content">
           <ng-container *ngTemplateOutlet="cv1"></ng-container>
@@ -242,7 +242,7 @@
 <!-- CV1 -->
 <ng-template #cv1>
   <div id="cv-template" #cvTemplate cdkDropListGroup
-    class="shadow-sm _template d-flex flex-column {{ templateDefaultCode }}">
+    class="shadow-sm _template d-flex flex-column {{ templateDefaultCode }} {{ template?.code }}">
     @for (row of listRow; track row.id) {
 
     <!-- condition: row -->

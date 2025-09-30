@@ -13,6 +13,7 @@ import { ColorPickerModule } from 'primeng/colorpicker';
 import { FormsModule } from '@angular/forms';
 import { CvService } from '../../../pages/create-cv/cv.service';
 import { IThanhPhan } from '../../../pages/page-viec-lam/ung-tuyen-dialog/ung-tuyen-dialog.component';
+import { ICv } from '../../../pages/create-cv/create-cv.component';
 
 @Component({
   selector: 'app-cv-input-toolbar',
@@ -26,11 +27,11 @@ export class CvInputToolbarComponent implements OnInit {
   private cvService = inject(CvService);
   private destroyRef = inject(DestroyRef);
   // input region
-  @Input({ required: true }) element!: IThanhPhan;
+  @Input({ required: true }) element!: ICv;
 
   // output region
   @Output() onUpdateElementEvent = new EventEmitter<{
-    element: IThanhPhan;
+    element: ICv;
     action: string;
   }>();
   @Output() onRestoreSelectionEvent = new EventEmitter();
