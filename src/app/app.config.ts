@@ -78,8 +78,12 @@ export function appSesionInitializerFactory(
       isLogin = await tokenInitService.init();
 
 
-      if (isLogin)
+      if (isLogin) {
+        //  lấy tenants của user đang đăng nhập
+        await appTenantService.init();
         isLogin = await appSessionService.init();
+
+      }
 
       firstLogin = isLogin;
     }
