@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { ICv } from '../../../pages/create-cv/create-cv.component';
 
@@ -19,6 +19,9 @@ export class CvListTemplateComponent implements OnInit {
 
   // inject region
   private http = inject(HttpClient);
+
+  //input region
+  @Input() display: 'grid' | 'list' = 'grid';
 
   //output region
   @Output() onChooseTemplateEvent = new EventEmitter<ICv>();

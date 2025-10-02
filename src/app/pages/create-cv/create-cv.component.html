@@ -38,7 +38,7 @@
       <div id="cv-sidebar-wrap" class="d-none d-md-flex gap-2">
         <div id="sidebar-group" class="d-none d-md-flex gap-2">
           <!-- sidebar -->
-          <div id="cv-sidebar" class="shadow-sm rounded d-none d-xl-block">
+          <div id="cv-sidebar" class="shadow-sm rounded d-block" [class.d-md-none]="sidebarContent.show">
             <div class="cv-sidebar-menu d-flex flex-column">
               @for(item of sidebarContent.listSidebarItem; track item.label) {
               <div class="d-flex align-items-center gap-3 cv-sidebar-menu-item" [class.active]="item.isActive"
@@ -74,11 +74,14 @@
               <ng-container *ngTemplateOutlet="groups"></ng-container>
               } @else if (sidebarContent.currentTemplate == "Bố cục") {
               <ng-container *ngTemplateOutlet="layout"></ng-container>
+              } @else if (sidebarContent.currentTemplate == "Đổi mẫu") {
+              <app-cv-list-template (onChooseTemplateEvent)="onChooseTemplate($event)"
+                [display]="'list'"></app-cv-list-template>
               }
             </div>
             <!-- end sidebar content body -->
 
-            <div class="cv-sidebar-content-footer cv-sidebar-menu d-flex d-xl-none">
+            <div class="cv-sidebar-content-footer cv-sidebar-menu d-none" [class.d-md-flex]="sidebarContent.show">
               @for(item of sidebarContent.listSidebarItem; track item.label) {
               <div class="d-flex align-items-center gap-3 cv-sidebar-menu-item" [class.active]="item.isActive"
                 (click)="selectSidebarItem(item)">
@@ -260,16 +263,17 @@
           <!-- LƯU Ý app-cv-element-5 CHỈ DÀNH CHO GROUP CÓ col._hashMapTypeCode[group.typeCode].LENGTH >= 5 -->
           <!-- GROUP PHẢI CÓ THUỘC TÍNH layout, CÁC THÀNH PHẦN CON PHẢI CÓ fieldIndex, fieldIndex bắt đầu = 0 -->
           <!-- LƯU Ý TƯƠNG TỰ CHO CÁC app-cv-element-X -->
-          <app-cv-element-5 class="cv-element-5" (onMoveHashCodeEvent)="onMoveHashCode($event, col)"
-            (onDeleteHashCodeEvent)="onDeleteHashCode($event, col)" [idx]="idx" [first]="first" [last]="last"
-            [template]="template" [listElement]="col._hashMapTypeCode![group.typeCode]" [typeCode]="group.typeCode"
+          <app-cv-element-5 class="cv-element-5" [attr.data-code]="group.typeCode"
+            (onMoveHashCodeEvent)="onMoveHashCode($event, col)" (onDeleteHashCodeEvent)="onDeleteHashCode($event, col)"
+            [idx]="idx" [first]="first" [last]="last" [template]="template"
+            [listElement]="col._hashMapTypeCode![group.typeCode]" [typeCode]="group.typeCode"
             [label]="group.label"></app-cv-element-5>
 
           }@else {
           <!-- CÁC THÀNH PHẦN CON SẼ XẾP THÀNH CỘT -->
           <!-- GROUP K cần CÓ THUỘC TÍNH layout, CÁC THÀNH PHẦN CON K cần CÓ fieldIndex -->
           <!-- Chỉ áp dụng cho app-cv-element -->
-          <app-cv-element (onUpdateLabelEvent)="onUpdateLabelEvent($event, col)"
+          <app-cv-element [attr.data-code]="group.typeCode" (onUpdateLabelEvent)="onUpdateLabelEvent($event, col)"
             (onMoveHashCodeEvent)="onMoveHashCode($event, col)" (onDeleteHashCodeEvent)="onDeleteHashCode($event, col)"
             [idx]="idx" [first]="first" [last]="last" [template]="template"
             [listElement]="col._hashMapTypeCode![group.typeCode]" [typeCode]="group.typeCode"

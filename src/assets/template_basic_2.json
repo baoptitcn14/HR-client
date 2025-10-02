@@ -1,21 +1,39 @@
 [
     {
-        "id": "default_template1",
+        "id": "default_template2",
         "code": "template_basic",
         "name": "template",
         "image": "string",
         "industry": "",
         "inputType": "template",
-        "css": "{\"template\":{\"font\":\"Roboto\",\"fontSize\":13,\"lineHeight\":1.5,\"themeColor\":\"#4570de\", \"multiplierFS\": 1.1}}"
+        "css": "{\"template\":{\"font\":\"Roboto\",\"fontSize\":13,\"lineHeight\":1.5,\"themeColor\":\"#00b14f\", \"multiplierFS\": 1.1}}"
     },
     {
         "id": "default_row1",
-        "templateId": "default_template1",
+        "templateId": "default_template2",
         "name": "row 1",
         "image": "string",
         "industry": "",
         "inputType": "row",
         "fieldIndex": 0
+    },
+    {
+        "id": "default_row2",
+        "templateId": "default_template2",
+        "name": "row 2",
+        "image": "string",
+        "industry": "",
+        "inputType": "row",
+        "fieldIndex": 1
+    },
+    {
+        "id": "default_row3",
+        "templateId": "default_template2",
+        "name": "row 3",
+        "image": "string",
+        "industry": "",
+        "inputType": "row",
+        "fieldIndex": 2
     },
     {
         "id": "default_col1",
@@ -38,6 +56,37 @@
         "css": "{\"width\":65}"
     },
     {
+        "id": "default_col3",
+        "rowId": "default_row2",
+        "name": "col 3",
+        "image": "string",
+        "industry": "",
+        "inputType": "col",
+        "fieldIndex": 0,
+        "css": "{\"width\":100}"
+    },
+   
+    {
+        "id": "default_col6",
+        "rowId": "default_row3",
+        "name": "col 6",
+        "image": "string",
+        "industry": "",
+        "inputType": "col",
+        "fieldIndex": 0,
+        "css": "{\"width\":35}"
+    },
+    {
+        "id": "default_col7",
+        "rowId": "default_row3",
+        "name": "col 7",
+        "image": "string",
+        "industry": "",
+        "inputType": "col",
+        "fieldIndex": 1,
+        "css": "{\"width\":65}"
+    },
+    {
         "label": "Hình ảnh",
         "typeCode": "Avatar",
         "fieldIndex": 0,
@@ -51,7 +100,7 @@
                 "code": "avatar",
                 "defaultValue": "/assets/media/default-avatar.png",
                 "inputType": "image",
-                "css": "{\"element\": {\"width\": \"200\",\"height\": \"200\"}}",   
+                "css": "{\"element\": {\"width\": \"200\",\"height\": \"200\"}}",
                 "cvInputConfig": {
                     "showToolbar": false,
                     "showAction": false,
@@ -73,7 +122,7 @@
         "label": "Danh thiếp",
         "typeCode": "RecruitmentInfo",
         "fieldIndex": 1,
-        "columId": "default_col1",
+        "columId": "default_col2",
         "inputType": "typeCode",
         "value": [
             {
@@ -103,7 +152,7 @@
         "label": "Danh thiếp",
         "typeCode": "RecruitmentInfo",
         "fieldIndex": 1,
-        "columId": "default_col1",
+        "columId": "default_col2",
         "inputType": "typeCode",
         "value": [
             {
@@ -132,8 +181,8 @@
     {
         "typeCode": "BusinessCard",
         "label": "Thông tin liên hệ",
-        "fieldIndex": 2,
-        "columId": "default_col1",
+        "fieldIndex": 1,
+        "columId": "default_col3",
         "inputType": "typeCode",
         "value": [
             {
@@ -163,70 +212,8 @@
     {
         "typeCode": "BusinessCard",
         "label": "Thông tin liên hệ",
-        "fieldIndex": 2,
-        "columId": "default_col1",
-        "inputType": "typeCode",
-        "value": [
-            {
-                "industryId": "",
-                "industryName": "",
-                "label": "Giới tính",
-                "code": "card_gender",
-                "defaultValue": "Nam/Nữ/khác",
-                "icon": "pi pi-user",
-                "cvInputConfig": {
-                    "showToolbar": true,
-                    "showAction": true,
-                    "actionConfig": {
-                        "showMoveUp": true,
-                        "showMoveDown": true,
-                        "showDelete": false,
-                        "showAdd": false
-                    },
-                    "toolbarConfig": {
-                        "showAlign": false,
-                        "showOrderList": false
-                    }
-                }
-            }
-        ]
-    },
-    {
-        "typeCode": "BusinessCard",
-        "label": "Thông tin liên hệ",
-        "fieldIndex": 2,
-        "columId": "default_col1",
-        "inputType": "typeCode",
-        "value": [
-            {
-                "industryId": "",
-                "industryName": "",
-                "label": "Số điện thoại",
-                "code": "card_phone",
-                "defaultValue": "089 639 6969",
-                "icon": "pi pi-phone",
-                "cvInputConfig": {
-                    "showToolbar": true,
-                    "showAction": true,
-                    "actionConfig": {
-                        "showMoveUp": true,
-                        "showMoveDown": true,
-                        "showDelete": false,
-                        "showAdd": false
-                    },
-                    "toolbarConfig": {
-                        "showAlign": false,
-                        "showOrderList": false
-                    }
-                }
-            }
-        ]
-    },
-    {
-        "typeCode": "BusinessCard",
-        "label": "Thông tin liên hệ",
-        "fieldIndex": 2,
-        "columId": "default_col1",
+        "fieldIndex": 1,
+        "columId": "default_col3",
         "inputType": "typeCode",
         "value": [
             {
@@ -256,17 +243,17 @@
     {
         "typeCode": "BusinessCard",
         "label": "Thông tin liên hệ",
-        "fieldIndex": 2,
-        "columId": "default_col1",
+        "fieldIndex": 1,
+        "columId": "default_col4",
         "inputType": "typeCode",
         "value": [
             {
                 "industryId": "",
                 "industryName": "",
-                "label": "Website",
-                "code": "card_website",
-                "defaultValue": "https://ilearn.vn",
-                "icon": "pi pi-globe",
+                "label": "Giới tính",
+                "code": "card_gender",
+                "defaultValue": "Nam/Nữ/khác",
+                "icon": "pi pi-user",
                 "cvInputConfig": {
                     "showToolbar": true,
                     "showAction": true,
@@ -287,8 +274,8 @@
     {
         "typeCode": "BusinessCard",
         "label": "Thông tin liên hệ",
-        "fieldIndex": 2,
-        "columId": "default_col1",
+        "fieldIndex": 1,
+        "columId": "default_col4",
         "inputType": "typeCode",
         "value": [
             {
@@ -316,11 +303,73 @@
         ]
     },
     {
+        "typeCode": "BusinessCard",
+        "label": "Thông tin liên hệ",
+        "fieldIndex": 1,
+        "columId": "default_col5",
+        "inputType": "typeCode",
+        "value": [
+            {
+                "industryId": "",
+                "industryName": "",
+                "label": "Số điện thoại",
+                "code": "card_phone",
+                "defaultValue": "089 639 6969",
+                "icon": "pi pi-phone",
+                "cvInputConfig": {
+                    "showToolbar": true,
+                    "showAction": true,
+                    "actionConfig": {
+                        "showMoveUp": true,
+                        "showMoveDown": true,
+                        "showDelete": false,
+                        "showAdd": false
+                    },
+                    "toolbarConfig": {
+                        "showAlign": false,
+                        "showOrderList": false
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "typeCode": "BusinessCard",
+        "label": "Thông tin liên hệ",
+        "fieldIndex": 1,
+        "columId": "default_col5",
+        "inputType": "typeCode",
+        "value": [
+            {
+                "industryId": "",
+                "industryName": "",
+                "label": "Website",
+                "code": "card_website",
+                "defaultValue": "https://ilearn.vn",
+                "icon": "pi pi-globe",
+                "cvInputConfig": {
+                    "showToolbar": true,
+                    "showAction": true,
+                    "actionConfig": {
+                        "showMoveUp": true,
+                        "showMoveDown": true,
+                        "showDelete": false,
+                        "showAdd": false
+                    },
+                    "toolbarConfig": {
+                        "showAlign": false,
+                        "showOrderList": false
+                    }
+                }
+            }
+        ]
+    },
+    {
         "label": "Học vấn",
         "typeCode": "Education",
         "layout": "5",
-        "fieldIndex": 3,
-        "columId": "default_col1",
+        "fieldIndex": 4,
+        "columId": "default_col7",
         "inputType": "typeCode",
         "value": [
             {
@@ -351,8 +400,8 @@
         "label": "Học vấn",
         "typeCode": "Education",
         "layout": "5",
-        "fieldIndex": 3,
-        "columId": "default_col1",
+        "fieldIndex": 4,
+        "columId": "default_col7",
         "inputType": "typeCode",
         "value": [
             {
@@ -383,8 +432,8 @@
         "label": "Học vấn",
         "typeCode": "Education",
         "layout": "5",
-        "fieldIndex": 3,
-        "columId": "default_col1",
+        "fieldIndex": 4,
+        "columId": "default_col7",
         "inputType": "typeCode",
         "value": [
             {
@@ -415,8 +464,8 @@
         "label": "Học vấn",
         "typeCode": "Education",
         "layout": "5",
-        "fieldIndex": 3,
-        "columId": "default_col1",
+        "fieldIndex": 4,
+        "columId": "default_col7",
         "inputType": "typeCode",
         "value": [
             {
@@ -447,8 +496,8 @@
         "label": "Học vấn",
         "typeCode": "Education",
         "layout": "5",
-        "fieldIndex": 3,
-        "columId": "default_col1",
+        "fieldIndex": 4,
+        "columId": "default_col7",
         "inputType": "typeCode",
         "value": [
             {
@@ -479,7 +528,7 @@
         "label": "Kỹ năng",
         "typeCode": "Skill",
         "fieldIndex": 4,
-        "columId": "default_col1",
+        "columId": "default_col6",
         "inputType": "typeCode",
         "value": [
             {
@@ -509,7 +558,7 @@
         "label": "Sở thích",
         "typeCode": "Interest",
         "fieldIndex": 5,
-        "columId": "default_col1",
+        "columId": "default_col6",
         "inputType": "typeCode",
         "value": [
             {
@@ -540,7 +589,7 @@
         "label": "Người giới thiệu",
         "typeCode": "Reference",
         "fieldIndex": 6,
-        "columId": "default_col1",
+        "columId": "default_col6",
         "inputType": "typeCode",
         "value": [
             {
@@ -570,7 +619,7 @@
         "label": "Mục tiêu nghề nghiệp",
         "typeCode": "CareerObjective",
         "fieldIndex": 1,
-        "columId": "default_col2",
+        "columId": "default_col6",
         "inputType": "typeCode",
         "value": [
             {
@@ -601,7 +650,7 @@
         "typeCode": "Experience",
         "layout": "5",
         "fieldIndex": 2,
-        "columId": "default_col2",
+        "columId": "default_col7",
         "inputType": "typeCode",
         "label": "Kinh nghiệm làm việc",
         "value": [
@@ -633,7 +682,7 @@
         "typeCode": "Experience",
         "layout": "5",
         "fieldIndex": 2,
-        "columId": "default_col2",
+        "columId": "default_col7",
         "inputType": "typeCode",
         "label": "Kinh nghiệm làm việc",
         "value": [
@@ -665,7 +714,7 @@
         "typeCode": "Experience",
         "layout": "5",
         "fieldIndex": 2,
-        "columId": "default_col2",
+        "columId": "default_col7",
         "inputType": "typeCode",
         "label": "Kinh nghiệm làm việc",
         "value": [
@@ -697,7 +746,7 @@
         "typeCode": "Experience",
         "layout": "5",
         "fieldIndex": 2,
-        "columId": "default_col2",
+        "columId": "default_col7",
         "inputType": "typeCode",
         "label": "Kinh nghiệm làm việc",
         "value": [
@@ -729,7 +778,7 @@
         "typeCode": "Experience",
         "layout": "5",
         "fieldIndex": 2,
-        "columId": "default_col2",
+        "columId": "default_col7",
         "inputType": "typeCode",
         "label": "Kinh nghiệm làm việc",
         "value": [
@@ -762,7 +811,7 @@
         "label": "Chứng chỉ",
         "typeCode": "Certificate",
         "fieldIndex": 4,
-        "columId": "default_col2",
+        "columId": "default_col7",
         "inputType": "typeCode",
         "value": [
             {
@@ -792,7 +841,7 @@
         "label": "Chứng chỉ",
         "typeCode": "Certificate",
         "fieldIndex": 4,
-        "columId": "default_col2",
+        "columId": "default_col7",
         "inputType": "typeCode",
         "value": [
             {
@@ -823,7 +872,7 @@
         "typeCode": "Activity",
         "layout": "5",
         "fieldIndex": 5,
-        "columId": "default_col2",
+        "columId": "default_col7",
         "inputType": "typeCode",
         "value": [
             {
@@ -855,7 +904,7 @@
         "typeCode": "Activity",
         "layout": "5",
         "fieldIndex": 5,
-        "columId": "default_col2",
+        "columId": "default_col7",
         "inputType": "typeCode",
         "value": [
             {
@@ -887,7 +936,7 @@
         "typeCode": "Activity",
         "layout": "5",
         "fieldIndex": 5,
-        "columId": "default_col2",
+        "columId": "default_col7",
         "inputType": "typeCode",
         "value": [
             {
@@ -919,7 +968,7 @@
         "typeCode": "Activity",
         "layout": "5",
         "fieldIndex": 5,
-        "columId": "default_col2",
+        "columId": "default_col7",
         "inputType": "typeCode",
         "value": [
             {
@@ -951,7 +1000,7 @@
         "typeCode": "Activity",
         "layout": "5",
         "fieldIndex": 5,
-        "columId": "default_col2",
+        "columId": "default_col7",
         "inputType": "typeCode",
         "value": [
             {

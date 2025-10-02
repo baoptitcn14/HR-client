@@ -67,7 +67,7 @@ export class PageViecLamComponent implements OnInit {
           this.breadcrumbsService.breadcrumbs.next([
             { label: 'Trang chủ', routerLink: '/' },
             { label: 'Việc làm', routerLink: '/jobs' },
-            { label: this.tinTuyenDung.title!, routerLink: '/jobs/job/' + this.tinTuyenDung.id },
+            { label: this.tinTuyenDung.title!, routerLink: '/jobs/job/' + this.tinTuyenDung.id, disabled: true,  },
           ]);
 
           this.xuLyDuLieuViecLam();

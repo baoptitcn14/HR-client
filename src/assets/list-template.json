@@ -15,7 +15,7 @@
         "image": "https://placehold.co/300x400/jpg",
         "industry": "",
         "inputType": "template",
-        "css": "{\"template\":{\"font\":\"Roboto\",\"fontSize\":13,\"lineHeight\":1.5,\"themeColor\":\"#4570de\", \"multiplierFS\": 1.1}}"
+        "css": "{\"template\":{\"font\":\"Roboto\",\"fontSize\":13,\"lineHeight\":1.5,\"themeColor\":\"#00b14f\", \"multiplierFS\": 1.1}}"
     },
     {
         "id": "default_template3",

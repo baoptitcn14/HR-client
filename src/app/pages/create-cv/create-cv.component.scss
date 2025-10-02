@@ -36,7 +36,7 @@
     color: var(--surface-500);
 
     &-wrap {
-        min-width: 330px;
+       width: auto;
     }
 }
 
@@ -90,7 +90,7 @@
 
     &.show {
         transform: translateX(0);
-        width: 330px;
+        width: 405px;
         opacity: 1;
     }
 
@@ -263,9 +263,9 @@
         max-height: calc(100% - 80px);
     }
 
-    #cv-sidebar-wrap {
-        min-width: 520px;
-    }
+    // #cv-sidebar-wrap {
+    //     min-width: 520px;
+    // }
 }
 
 .pb-6 {

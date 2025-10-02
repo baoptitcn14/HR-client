@@ -140,6 +140,11 @@ export class CreateCvComponent implements OnInit {
         icon: 'pi pi-th-large',
         isActive: false,
       },
+      {
+        label: 'Đổi mẫu',
+        icon: 'pi pi-copy',
+        isActive: false,
+      },
     ],
   };
 
@@ -619,8 +624,15 @@ export class CreateCvComponent implements OnInit {
 
   //#region get data
   private getTemplateDefault() {
+    debugger;
     if (this.templateDefaultCode)
       this.http.get<ICv[]>(`assets/${this.templateDefaultCode}.json`).subscribe((data) => {
+
+        // lấy hết data hiện tại sau đó map qua template mới chọn 
+
+          //#code logic
+
+        // sau đó đưa data vào để render
         this.proccessDataTemplate(data);
       });
   }

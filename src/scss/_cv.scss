@@ -38,6 +38,10 @@ app-cv-input {
         border-radius: 4px;
     }
 
+    .card_fullname {
+        color: var(--theme-color) !important;
+    }
+
     &.cv-group-drag-preview {
         position: relative;
         flex-direction: column;
@@ -84,4 +88,8 @@ app-cv-input {
             min-width: 62px;
         }
     }
+}
+
+.cv-group-name > div {
+    color: var(--theme-color);
 }
