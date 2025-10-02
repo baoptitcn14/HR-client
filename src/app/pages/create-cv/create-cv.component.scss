@@ -1,3 +1,16 @@
+// ====== MOBILE SIDEBAR
+
+.cv-siderbar-mobile {
+    margin: 0 -10px;
+
+
+    .cv-sidebar-menu-item {
+        padding: 1.2rem 1.5rem;
+    }
+}
+
+//======> END MOBILE SIDEBAR
+
 .cv-toolbar {
     left: 0;
     background-color: #fff;
@@ -9,20 +22,18 @@
     .redo {
         transform: scaleX(-1);
     }
-
 }
 
 .fixed {
     position: fixed;
     z-index: 999999;
-    background-color: #fff;
     border-bottom: 1px solid var(--surface-c);
 }
 
 #sidebar-group {
     z-index: 999;
     top: 80px;
-    left: 5px;
+    left: 0;
     max-height: calc(80dvh - 87px);
 
     &.fixed {
@@ -35,15 +46,20 @@
     overflow: hidden;
     color: var(--surface-500);
 
+    .cv-sidebar-menu {
+        width: 30px;
+    }
+
     &-wrap {
-       width: auto;
+        width: 405px;
     }
 }
 
 .cv-sidebar-menu {
     &-item {
         font-size: 1rem;
-        padding: 1.2rem 1.5rem;
+        // padding: 1.2rem 1.5rem;
+        padding: 5px 5px 5px 9px;
         cursor: pointer;
         position: relative;
         transition: all 0.3s linear;
@@ -258,9 +274,23 @@
 
 //xl
 @media screen and (min-width: 1200px) {
+    #sidebar-group {
+        left: 17.5px;
+
+        .cv-sidebar-menu {
+            width: auto;
+        }
+    }
+
     .cv-sidebar-content-body {
         height: auto !important;
         max-height: calc(100% - 80px);
+    }
+
+    .cv-sidebar-menu {
+        &-item {
+            padding: 1.2rem 1.5rem;
+        }
     }
 
     // #cv-sidebar-wrap {
