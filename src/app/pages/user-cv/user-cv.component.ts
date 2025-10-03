@@ -1,9 +1,11 @@
-import { Component, DestroyRef, inject, OnInit } from '@angular/core';
-import { ICriteriaRequestDto, UserCVOutputDto, UserCVQueryDto, UserCVServiceProxy } from '../../shared/service-proxies/sys-service-proxies';
+import { Component, DestroyRef, inject, OnInit, ViewChild } from '@angular/core';
+import { ICriteriaRequestDto, UserCVOutputDto, UserCVQueryDto, UserCVServiceProxy, ViewDto } from '../../shared/service-proxies/sys-service-proxies';
 import { AppSessionService } from '../../shared/session/app-session.service';
 import { ButtonModule } from 'primeng/button';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { ConfirmPopup, ConfirmPopupModule } from 'primeng/confirmpopup';
 
 @Component({
   selector: 'app-user-cv',
@@ -11,20 +13,23 @@ import { Router } from '@angular/router';
   imports: [
     ButtonModule,
     CommonModule,
+    ConfirmPopupModule
   ],
   templateUrl: './user-cv.component.html',
-  styleUrl: './user-cv.component.scss'
+  styleUrl: './user-cv.component.scss',
+  providers: [ConfirmationService]
 })
 export class UserCvComponent implements OnInit {
 
   //  inject region
-  private destroyRef = inject(DestroyRef);
+  private confirmationService = inject(ConfirmationService);
   private userCvServiceProxy = inject(UserCVServiceProxy);
   private appSessionService = inject(AppSessionService);
   private router = inject(Router);
+  private messageService = inject(MessageService);
 
   // declare region
-
+  @ViewChild('confirmPopupRef') confirmPopup!: ConfirmPopup;
   userCvs: UserCVOutputDto[] = [];
 
   ngOnInit(): void {
@@ -37,6 +42,36 @@ export class UserCvComponent implements OnInit {
 
   goToEditPage(id: string) {
     this.router.navigate([`create-cv/${id}`]);
+  }
+
+  remove(id: string) {
+
+    const input = new ViewDto();
+    input.id = id;
+
+    this.userCvServiceProxy.deleteByTemplaceId(input).subscribe(() => {
+      this.loadCv();
+
+      this.messageService.add({ severity: 'success', summary: 'Thành công', detail: 'Đã xóa thành công', life: 3000 });
+
+    })
+
+
+  }
+
+  confirm(event: Event, templateId: string) {
+    this.confirmationService.confirm({
+      target: event.target as EventTarget,
+      message: 'Bạn mẫu muốn xóa cv này?',
+      acceptLabel: 'Đồng ý',
+      rejectLabel: 'Hủy bỏ',
+      accept: () => {
+        this.remove(templateId);
+      },
+      reject: () => {
+        this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'Đã hủy thao tác', life: 3000 });
+      }
+    });
   }
 
   loadCv() {

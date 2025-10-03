@@ -352,6 +352,7 @@ export class CvService {
               groupLabel: getGroupLabel ? groupLabel?.innerHTML : undefined,
               value: e.innerHTML,
               code: e.getAttribute('data-code'),
+              label: e.getAttribute('data-placeholder'),
             }));
 
           }

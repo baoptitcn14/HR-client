@@ -14,30 +14,26 @@ export class PdfPreviewService {
             const pdfWidth = pdf.internal.pageSize.getWidth();
             const pdfHeight = pdf.internal.pageSize.getHeight();
 
-            // const imgWidth = pdfWidth;
-            // const imgHeight = (canvas.height * imgWidth) / canvas.width;
+            const margin = 1; // lề trái/phải
+            const imgWidth = pdfWidth - margin * 2;
+            const imgHeight = (canvas.height * imgWidth) / canvas.width;
 
-            const margin = 1; // mm - lề trái/phải/trên/dưới
+            let heightLeft = imgHeight;
+            let positionY = 0;
 
-            const usableWidth = pdfWidth - margin * 2;
-            const usableHeight = (canvas.height * usableWidth) / canvas.width;
-
-            let heightLeft = usableHeight;
-
-            // tính vị trí x để căn giữa
-            const centerX = (pdfWidth - usableWidth) / 2;
-            const centerY = (pdfHeight - usableHeight) / 2;
-
-
-            // Trang đầu tiên
-            pdf.addImage(imgData, "PNG", centerX, centerY, usableWidth, usableHeight);
+            // --- Trang đầu tiên ---
+            const centerX = (pdfWidth - imgWidth) / 2; // căn giữa ngang
+            pdf.addImage(imgData, "PNG", centerX, positionY, imgWidth, imgHeight);
             heightLeft -= pdfHeight;
 
-            // Các trang tiếp theo
+            // --- Các trang tiếp theo ---
             while (heightLeft > 0) {
                 pdf.addPage();
-                pdf.addImage(imgData, "PNG", centerX, centerY, usableWidth, usableHeight);
-                heightLeft -= pdfHeight - margin * 2;
+                positionY = heightLeft - imgHeight;
+
+                // Vẫn căn giữa
+                pdf.addImage(imgData, "PNG", centerX, positionY, imgWidth, imgHeight);
+                heightLeft -= pdfHeight;
             }
 
             // Lấy blob thay vì save

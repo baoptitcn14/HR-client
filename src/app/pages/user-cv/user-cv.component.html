@@ -16,8 +16,12 @@
                 <p-button [icon]="'pi pi-pencil'" [label]="'Chỉnh sửa'" [size]="'small'" severity="secondary"
                     raised="true" [outlined]="true" (click)="goToEditPage(cv.id!)"></p-button>
 
-                <p-button [icon]="'pi pi-download'" [label]="'Tải về'" [size]="'small'" severity="secondary"
-                    raised="true" [outlined]="true" (click)="download(cv.id!)"></p-button>
+                <p-button [icon]="'pi pi-download'" [size]="'small'" severity="secondary" raised="true"
+                    [outlined]="true" (click)="download(cv.id!)"></p-button>
+
+                <p-button [icon]="'pi pi-trash'" [size]="'small'" severity="danger" raised="true" [outlined]="true"
+                    (click)="confirm($event, cv.id!)"></p-button>
+
 
             </div>
 
@@ -28,3 +32,6 @@
     </div>
 
 </div>
+
+
+ <p-confirmPopup #confirmPopupRef></p-confirmPopup>

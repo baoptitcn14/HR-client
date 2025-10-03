@@ -1,7 +1,7 @@
 [
     {
         "id": "default_template1",
-        "code": "template_basic",
+        "code": "template_basic_1",
         "name": "template",
         "image": "string",
         "industry": "",

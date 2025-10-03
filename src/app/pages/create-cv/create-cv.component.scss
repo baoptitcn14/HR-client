@@ -51,7 +51,11 @@
     }
 
     &-wrap {
-        width: 405px;
+        width: auto;
+
+        &.show  {
+            width: 405px;
+        }
     }
 }
 

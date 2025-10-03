@@ -133,18 +133,18 @@
      color: var(--bs-dark);
 
      ._row {
-        &:nth-child(1) {
-            background-color: var(--surface-200);
-        }
+         &:nth-child(1) {
+             background-color: var(--surface-200);
+         }
 
-        &:nth-child(2) {
-            background-color: var(--surface-100);
-            padding: 0.5rem 1rem !important;
-        }
+         &:nth-child(2) {
+             background-color: var(--surface-100);
+             padding: 0.5rem 1rem !important;
+         }
 
-        &:nth-child(3) {
-            background-color: #fff;
-        }
+         &:nth-child(3) {
+             background-color: #fff;
+         }
      }
 
      ._col {
@@ -173,6 +173,10 @@
                  text-transform: uppercase;
                  padding-left: 0.3rem;
              }
+         }
+
+         .card_fullname {
+             color: var(--theme-color) !important;
          }
 
 
