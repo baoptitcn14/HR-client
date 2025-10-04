@@ -226,7 +226,7 @@ export class CreateCvComponent implements OnInit {
       id: newTemplateId,
       css: JSON.stringify(this.template?._css),
       name: this.template!.name ?? 'Name Default',
-      inputConfig: JSON.stringify(this.template!.inputConfig),
+      inputConfig: JSON.stringify(this.template!._inputConfigOpenJson),
       templateId: newTemplateId,
     };
 
@@ -268,7 +268,7 @@ export class CreateCvComponent implements OnInit {
         templateId: newTemplateId,
         rowId: c.rowId,
         css: JSON.stringify(c._css),
-        inputConfig: JSON.stringify(c.inputConfig),
+        inputConfig: JSON.stringify(c._inputConfigOpenJson),
         id: isSwapTemplate ? uuidv4() : c.id,
       }))
     ) as ICv[];
@@ -291,7 +291,7 @@ export class CreateCvComponent implements OnInit {
 
     // Lưu data
     // hashCode ( label, fieldIndex, hashCode, layout, templateId, rowId, colId, )
-    // editors, image ( _value: innerHtml, inputType, fieldIndex, cvInputConfig, code, templateId, rowId, colId, icon?, css?  )
+    // editors, image ( _value: innerHtml, inputType, fieldIndex, inputConfig, code, templateId, rowId, colId, icon?, css?  )
     //  gán dữ liệu trên editor hiện tại
     let listEditor: ICv[] = [];
 
@@ -331,12 +331,13 @@ export class CreateCvComponent implements OnInit {
                   templateId: newTemplateId,
                   rowId: c.rowId,
                   columId: c.id,
-                  inputConfig: JSON.stringify(ed.cvInputConfig),
+                  inputConfig: JSON.stringify(ed._inputConfigOpenJson),
                   value:
                     ed.inputType == INPUT_TYPE_CODE.IMAGE
                       ? ed.value?.split(',')[1]
                       : value.find((x: any) => x.code == ed.code)?.value,
                   id: isSwapTemplate ? uuidv4() : (ed.id ?? uuidv4()),
+                  name: ed.icon
                 })),
               ] as ICv[];
             }
@@ -854,7 +855,7 @@ export class CreateCvComponent implements OnInit {
                 fieldIndex: i,
                 defaultValue: '',
                 css: JSON.stringify(ed._css),
-                inputConfig: JSON.stringify(ed.cvInputConfig),
+                inputConfig: JSON.stringify(ed.inputConfig),
                 value:
                   ed.inputType == INPUT_TYPE_CODE.IMAGE
                     ? ed.value?.split(',')[1]
@@ -884,9 +885,10 @@ export class CreateCvComponent implements OnInit {
           e.css != null && e.css != undefined && e.css != ''
             ? JSON.parse(e.css ?? '{}')
             : {},
-        inputConfig: !this.templateId
+        _inputConfigOpenJson: !this.templateId
           ? e.inputConfig
           : JSON.parse(e.inputConfig ?? '{}'),
+        icon: e.name
       };
     }) as ICv[];
 
@@ -1149,10 +1151,10 @@ export interface ICv extends UserCVOutputDto {
   _panelMinSizes?: number[]; // panelMinSizes cua splitter dùng cho row
   _listTypeCode?: ITypeCode[]; // chứa typeCode của các group được thả vào col
   _hashMapTypeCode?: { [typeCode: string]: { [groupId: string]: any[] } }; // chứa các typeCode là duy nhất làm key và value là hashmap groupId -> listThanhPhan
-  cvInputConfig?: ICvInputConfig;
   icon?: string;
   _isBlank?: boolean; // element này có giá trị hay không
   image?: string;
+  _inputConfigOpenJson?: ICvInputConfig;
 }
 
 interface ITypeCode {

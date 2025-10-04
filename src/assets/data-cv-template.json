@@ -10,7 +10,7 @@
                 "code": "others",
                 "defaultValue": "",
                 "icon": "pi pi-info-circle",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -37,7 +37,7 @@
                 "label": "Mục tiêu nghề nghiệp",
                 "code": "career_objective",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -59,7 +59,7 @@
                 "label": "Mục tiêu nghề nghiệp",
                 "code": "career_objective",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -81,7 +81,7 @@
                 "label": "Mục tiêu nghề nghiệp",
                 "code": "career_objective",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -103,7 +103,7 @@
                 "label": "Mục tiêu nghề nghiệp",
                 "code": "career_objective",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -125,7 +125,7 @@
                 "label": "Mục tiêu nghề nghiệp",
                 "code": "career_objective",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -147,7 +147,7 @@
                 "label": "Mục tiêu nghề nghiệp",
                 "code": "career_objective",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -169,7 +169,7 @@
                 "label": "Mục tiêu nghề nghiệp",
                 "code": "career_objective",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -191,7 +191,7 @@
                 "label": "Mục tiêu nghề nghiệp",
                 "code": "career_objective",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -213,7 +213,7 @@
                 "label": "Mục tiêu nghề nghiệp",
                 "code": "career_objective",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -235,7 +235,7 @@
                 "label": "Mục tiêu nghề nghiệp",
                 "code": "career_objective",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -257,7 +257,7 @@
                 "label": "Mục tiêu nghề nghiệp",
                 "code": "career_objective",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -279,7 +279,7 @@
                 "label": "Mục tiêu nghề nghiệp",
                 "code": "career_objective",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -301,7 +301,7 @@
                 "label": "Mục tiêu nghề nghiệp",
                 "code": "career_objective",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -323,7 +323,7 @@
                 "label": "Mục tiêu nghề nghiệp",
                 "code": "career_objective",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -345,7 +345,7 @@
                 "label": "Mục tiêu nghề nghiệp",
                 "code": "career_objective",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -367,7 +367,7 @@
                 "label": "Mục tiêu nghề nghiệp",
                 "code": "career_objective",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -389,7 +389,7 @@
                 "label": "Mục tiêu nghề nghiệp",
                 "code": "career_objective",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -411,7 +411,7 @@
                 "label": "Mục tiêu nghề nghiệp",
                 "code": "career_objective",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -433,7 +433,7 @@
                 "label": "Mục tiêu nghề nghiệp",
                 "code": "career_objective",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -455,7 +455,7 @@
                 "label": "Mục tiêu nghề nghiệp",
                 "code": "career_objective",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -477,7 +477,7 @@
                 "label": "Mục tiêu nghề nghiệp",
                 "code": "career_objective",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -499,7 +499,7 @@
                 "label": "Mục tiêu nghề nghiệp",
                 "code": "career_objective",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -521,7 +521,7 @@
                 "label": "Mục tiêu nghề nghiệp",
                 "code": "career_objective",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -543,7 +543,7 @@
                 "label": "Mục tiêu nghề nghiệp",
                 "code": "career_objective",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -565,7 +565,7 @@
                 "label": "Mục tiêu nghề nghiệp",
                 "code": "career_objective",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -587,7 +587,7 @@
                 "label": "Mục tiêu nghề nghiệp",
                 "code": "career_objective",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -609,7 +609,7 @@
                 "label": "Mục tiêu nghề nghiệp",
                 "code": "career_objective",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -631,7 +631,7 @@
                 "label": "Mục tiêu nghề nghiệp",
                 "code": "career_objective",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -653,7 +653,7 @@
                 "label": "Mục tiêu nghề nghiệp",
                 "code": "career_objective",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -675,7 +675,7 @@
                 "label": "Mục tiêu nghề nghiệp",
                 "code": "career_objective",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -697,7 +697,7 @@
                 "label": "Mục tiêu nghề nghiệp",
                 "code": "career_objective",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -719,7 +719,7 @@
                 "label": "Mục tiêu nghề nghiệp",
                 "code": "career_objective",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -741,7 +741,7 @@
                 "label": "Mục tiêu nghề nghiệp",
                 "code": "career_objective",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -763,7 +763,7 @@
                 "label": "Mục tiêu nghề nghiệp",
                 "code": "career_objective",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -785,7 +785,7 @@
                 "label": "Mục tiêu nghề nghiệp",
                 "code": "career_objective",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -807,7 +807,7 @@
                 "label": "Mục tiêu nghề nghiệp",
                 "code": "career_objective",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -829,7 +829,7 @@
                 "label": "Mục tiêu nghề nghiệp",
                 "code": "career_objective",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -851,7 +851,7 @@
                 "label": "Mục tiêu nghề nghiệp",
                 "code": "career_objective",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -873,7 +873,7 @@
                 "label": "Mục tiêu nghề nghiệp",
                 "code": "career_objective",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -895,7 +895,7 @@
                 "label": "Mục tiêu nghề nghiệp",
                 "code": "career_objective",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -917,7 +917,7 @@
                 "label": "Mục tiêu nghề nghiệp",
                 "code": "career_objective",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -939,7 +939,7 @@
                 "label": "Mục tiêu nghề nghiệp",
                 "code": "career_objective",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -961,7 +961,7 @@
                 "label": "Mục tiêu nghề nghiệp",
                 "code": "career_objective",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -983,7 +983,7 @@
                 "label": "Mục tiêu nghề nghiệp",
                 "code": "career_objective",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -1005,7 +1005,7 @@
                 "label": "Mục tiêu nghề nghiệp",
                 "code": "career_objective",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -1027,7 +1027,7 @@
                 "label": "Mục tiêu nghề nghiệp",
                 "code": "career_objective",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -1049,7 +1049,7 @@
                 "label": "Mục tiêu nghề nghiệp",
                 "code": "career_objective",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -1071,7 +1071,7 @@
                 "label": "Mục tiêu nghề nghiệp",
                 "code": "career_objective",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -1093,7 +1093,7 @@
                 "label": "Mục tiêu nghề nghiệp",
                 "code": "career_objective",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -1115,7 +1115,7 @@
                 "label": "Mục tiêu nghề nghiệp",
                 "code": "career_objective",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -1137,7 +1137,7 @@
                 "label": "Mục tiêu nghề nghiệp",
                 "code": "career_objective",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -1159,7 +1159,7 @@
                 "label": "Mục tiêu nghề nghiệp",
                 "code": "career_objective",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -1181,7 +1181,7 @@
                 "label": "Mục tiêu nghề nghiệp",
                 "code": "career_objective",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -1203,7 +1203,7 @@
                 "label": "Mục tiêu nghề nghiệp",
                 "code": "career_objective",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -1225,7 +1225,7 @@
                 "label": "Mục tiêu nghề nghiệp",
                 "code": "career_objective",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -1247,7 +1247,7 @@
                 "label": "Mục tiêu nghề nghiệp",
                 "code": "career_objective",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -1269,7 +1269,7 @@
                 "label": "Mục tiêu nghề nghiệp",
                 "code": "career_objective",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -1291,7 +1291,7 @@
                 "label": "Mục tiêu nghề nghiệp",
                 "code": "career_objective",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -1313,7 +1313,7 @@
                 "label": "Mục tiêu nghề nghiệp",
                 "code": "career_objective",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -1335,7 +1335,7 @@
                 "label": "Mục tiêu nghề nghiệp",
                 "code": "career_objective",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -1357,7 +1357,7 @@
                 "label": "Mục tiêu nghề nghiệp",
                 "code": "career_objective",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -1379,7 +1379,7 @@
                 "label": "Mục tiêu nghề nghiệp",
                 "code": "career_objective",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -1401,7 +1401,7 @@
                 "label": "Mục tiêu nghề nghiệp",
                 "code": "career_objective",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -1423,7 +1423,7 @@
                 "label": "Mục tiêu nghề nghiệp",
                 "code": "career_objective",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -1445,7 +1445,7 @@
                 "label": "Mục tiêu nghề nghiệp",
                 "code": "career_objective",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -1467,7 +1467,7 @@
                 "label": "Mục tiêu nghề nghiệp",
                 "code": "career_objective",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -1489,7 +1489,7 @@
                 "label": "Mục tiêu nghề nghiệp",
                 "code": "career_objective",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -1518,7 +1518,7 @@
                 "code": "avatar",
                 "defaultValue": "/assets/media/default-avatar.png",
                 "inputType": "image",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": false,
                     "showAction": false,
                     "actionConfig": {
@@ -1545,7 +1545,7 @@
                 "label": "Họ và tên",
                 "code": "card_fullname",
                 "defaultValue": "Ilearn",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -1572,7 +1572,7 @@
                 "label": "Vị trí ứng tuyển",
                 "code": "position_applied",
                 "defaultValue": "Giáo viên",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -1600,7 +1600,7 @@
                 "code": "card_dob",
                 "defaultValue": "01/01/1995",
                 "icon": "pi pi-calendar",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -1628,7 +1628,7 @@
                 "code": "card_gender",
                 "defaultValue": "Nam/Nữ/khác",
                 "icon": "pi pi-user",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -1656,7 +1656,7 @@
                 "code": "card_phone",
                 "defaultValue": "089 639 6969",
                 "icon": "pi pi-phone",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -1684,7 +1684,7 @@
                 "code": "card_email",
                 "defaultValue": "toancoyen@ilearn.net.vn",
                 "icon": "pi pi-envelope",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -1712,7 +1712,7 @@
                 "code": "card_website",
                 "defaultValue": "https://ilearn.vn",
                 "icon": "pi pi-globe",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -1740,7 +1740,7 @@
                 "code": "card_address",
                 "defaultValue": "STH 18.33, Đường 4D+8C, KĐT Hà Quang 2, TP Nha Trang, Khánh Hòa",
                 "icon": "pi pi-map-marker",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -1913,7 +1913,7 @@
                 "label": "Mô tả / thành tựu",
                 "code": "exp_description",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -1935,7 +1935,7 @@
                 "label": "Mô tả / thành tựu",
                 "code": "exp_description",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -1957,7 +1957,7 @@
                 "label": "Mô tả / thành tựu",
                 "code": "exp_description",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -1979,7 +1979,7 @@
                 "label": "Mô tả / thành tựu",
                 "code": "exp_description",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -2001,7 +2001,7 @@
                 "label": "Mô tả / thành tựu",
                 "code": "exp_description",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -2023,7 +2023,7 @@
                 "label": "Mô tả / thành tựu",
                 "code": "exp_description",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -2045,7 +2045,7 @@
                 "label": "Mô tả / thành tựu",
                 "code": "exp_description",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -2067,7 +2067,7 @@
                 "label": "Mô tả / thành tựu",
                 "code": "exp_description",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -2089,7 +2089,7 @@
                 "label": "Mô tả / thành tựu",
                 "code": "exp_description",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -2111,7 +2111,7 @@
                 "label": "Mô tả / thành tựu",
                 "code": "exp_description",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -2133,7 +2133,7 @@
                 "label": "Mô tả / thành tựu",
                 "code": "exp_description",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -2155,7 +2155,7 @@
                 "label": "Mô tả / thành tựu",
                 "code": "exp_description",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -2177,7 +2177,7 @@
                 "label": "Mô tả / thành tựu",
                 "code": "exp_description",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -2199,7 +2199,7 @@
                 "label": "Mô tả / thành tựu",
                 "code": "exp_description",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -2221,7 +2221,7 @@
                 "label": "Mô tả / thành tựu",
                 "code": "exp_description",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -2243,7 +2243,7 @@
                 "label": "Mô tả / thành tựu",
                 "code": "exp_description",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -2265,7 +2265,7 @@
                 "label": "Mô tả / thành tựu",
                 "code": "exp_description",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -2287,7 +2287,7 @@
                 "label": "Mô tả / thành tựu",
                 "code": "exp_description",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -2309,7 +2309,7 @@
                 "label": "Mô tả / thành tựu",
                 "code": "exp_description",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -2331,7 +2331,7 @@
                 "label": "Mô tả / thành tựu",
                 "code": "exp_description",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -2353,7 +2353,7 @@
                 "label": "Mô tả / thành tựu",
                 "code": "exp_description",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -2375,7 +2375,7 @@
                 "label": "Mô tả / thành tựu",
                 "code": "exp_description",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -2397,7 +2397,7 @@
                 "label": "Mô tả / thành tựu",
                 "code": "exp_description",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -2419,7 +2419,7 @@
                 "label": "Mô tả / thành tựu",
                 "code": "exp_description",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -2441,7 +2441,7 @@
                 "label": "Mô tả / thành tựu",
                 "code": "exp_description",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -2463,7 +2463,7 @@
                 "label": "Mô tả / thành tựu",
                 "code": "exp_description",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -2485,7 +2485,7 @@
                 "label": "Mô tả / thành tựu",
                 "code": "exp_description",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -2507,7 +2507,7 @@
                 "label": "Mô tả / thành tựu",
                 "code": "exp_description",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -2529,7 +2529,7 @@
                 "label": "Mô tả / thành tựu",
                 "code": "exp_description",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -2551,7 +2551,7 @@
                 "label": "Mô tả / thành tựu",
                 "code": "exp_description",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -2573,7 +2573,7 @@
                 "label": "Mô tả / thành tựu",
                 "code": "exp_description",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -2595,7 +2595,7 @@
                 "label": "Mô tả / thành tựu",
                 "code": "exp_description",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -2617,7 +2617,7 @@
                 "label": "Mô tả / thành tựu",
                 "code": "exp_description",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -2639,7 +2639,7 @@
                 "label": "Mô tả / thành tựu",
                 "code": "exp_description",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -2661,7 +2661,7 @@
                 "label": "Mô tả / thành tựu",
                 "code": "exp_description",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -2683,7 +2683,7 @@
                 "label": "Mô tả / thành tựu",
                 "code": "exp_description",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -2705,7 +2705,7 @@
                 "label": "Mô tả / thành tựu",
                 "code": "exp_description",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -2727,7 +2727,7 @@
                 "label": "Mô tả / thành tựu",
                 "code": "exp_description",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -2749,7 +2749,7 @@
                 "label": "Mô tả / thành tựu",
                 "code": "exp_description",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -2771,7 +2771,7 @@
                 "label": "Mô tả / thành tựu",
                 "code": "exp_description",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -2793,7 +2793,7 @@
                 "label": "Mô tả / thành tựu",
                 "code": "exp_description",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -2815,7 +2815,7 @@
                 "label": "Mô tả / thành tựu",
                 "code": "exp_description",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -2837,7 +2837,7 @@
                 "label": "Mô tả / thành tựu",
                 "code": "exp_description",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -2859,7 +2859,7 @@
                 "label": "Mô tả / thành tựu",
                 "code": "exp_description",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -2881,7 +2881,7 @@
                 "label": "Mô tả / thành tựu",
                 "code": "exp_description",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -2903,7 +2903,7 @@
                 "label": "Mô tả / thành tựu",
                 "code": "exp_description",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -2925,7 +2925,7 @@
                 "label": "Mô tả / thành tựu",
                 "code": "exp_description",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -2947,7 +2947,7 @@
                 "label": "Mô tả / thành tựu",
                 "code": "exp_description",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -2969,7 +2969,7 @@
                 "label": "Mô tả / thành tựu",
                 "code": "exp_description",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -2991,7 +2991,7 @@
                 "label": "Mô tả / thành tựu",
                 "code": "exp_description",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -3013,7 +3013,7 @@
                 "label": "Mô tả / thành tựu",
                 "code": "exp_description",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -3035,7 +3035,7 @@
                 "label": "Mô tả / thành tựu",
                 "code": "exp_description",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -3057,7 +3057,7 @@
                 "label": "Mô tả / thành tựu",
                 "code": "exp_description",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -3079,7 +3079,7 @@
                 "label": "Mô tả / thành tựu",
                 "code": "exp_description",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -3101,7 +3101,7 @@
                 "label": "Mô tả / thành tựu",
                 "code": "exp_description",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -3186,7 +3186,7 @@
                 "label": "Mô tả",
                 "code": "activity_desc",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -3719,7 +3719,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -3741,7 +3741,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -3763,7 +3763,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -3785,7 +3785,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -3807,7 +3807,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -3829,7 +3829,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -3851,7 +3851,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -3873,7 +3873,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -3895,7 +3895,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -3917,7 +3917,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -3939,7 +3939,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -3961,7 +3961,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -3983,7 +3983,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -4005,7 +4005,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -4027,7 +4027,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -4049,7 +4049,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -4071,7 +4071,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -4093,7 +4093,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -4115,7 +4115,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -4137,7 +4137,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -4159,7 +4159,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -4181,7 +4181,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -4203,7 +4203,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -4225,7 +4225,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -4247,7 +4247,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -4269,7 +4269,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -4291,7 +4291,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -4313,7 +4313,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -4335,7 +4335,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -4357,7 +4357,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -4379,7 +4379,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -4401,7 +4401,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -4423,7 +4423,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -4445,7 +4445,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -4467,7 +4467,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -4489,7 +4489,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -4511,7 +4511,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -4533,7 +4533,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -4555,7 +4555,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -4577,7 +4577,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -4599,7 +4599,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -4621,7 +4621,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -4643,7 +4643,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -4665,7 +4665,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -4687,7 +4687,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -4709,7 +4709,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -4731,7 +4731,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -4753,7 +4753,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -4775,7 +4775,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -4797,7 +4797,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -4819,7 +4819,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -4841,7 +4841,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -4863,7 +4863,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -4885,7 +4885,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -4907,7 +4907,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -4929,7 +4929,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -4951,7 +4951,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -4973,7 +4973,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -4995,7 +4995,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -5017,7 +5017,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -5039,7 +5039,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -5061,7 +5061,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -5083,7 +5083,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -5105,7 +5105,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -5127,7 +5127,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -5149,7 +5149,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -5171,7 +5171,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -5193,7 +5193,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -5215,7 +5215,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -5237,7 +5237,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -5259,7 +5259,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -5281,7 +5281,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -5303,7 +5303,7 @@
                 "label": "Kỹ năng",
                 "code": "skills",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -5360,7 +5360,7 @@
                 "label": "Mô tả",
                 "code": "skill_note",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -5431,7 +5431,7 @@
                 "label": "Mô tả",
                 "code": "award_desc",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -5501,7 +5501,7 @@
                 "industryName": "",
                 "label": "Tên sở thích",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {

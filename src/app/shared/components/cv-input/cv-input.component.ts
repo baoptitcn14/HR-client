@@ -90,7 +90,7 @@ export class CvInputComponent implements OnChanges {
   }
 
   onFocus(event: any) {
-    if (this.element.cvInputConfig?.showToolbar) {
+    if (this.element._inputConfigOpenJson?.showToolbar) {
       this.op.show(event);
     }
   }

@@ -101,7 +101,7 @@
                 "defaultValue": "/assets/media/default-avatar.png",
                 "inputType": "image",
                 "css": "{\"element\": {\"width\": \"200\",\"height\": \"200\"}}",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": false,
                     "showAction": false,
                     "actionConfig": {
@@ -131,7 +131,7 @@
                 "label": "Họ và tên",
                 "code": "card_fullname",
                 "defaultValue": "",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -161,7 +161,7 @@
                 "label": "Vị trí ứng tuyển",
                 "code": "position_applied",
                 "defaultValue": "Giáo viên",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -192,7 +192,7 @@
                 "code": "card_dob",
                 "defaultValue": "01/01/1995",
                 "icon": "pi pi-calendar",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -223,7 +223,7 @@
                 "code": "card_email",
                 "defaultValue": "toancoyen@ilearn.net.vn",
                 "icon": "pi pi-envelope",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -254,7 +254,7 @@
                 "code": "card_gender",
                 "defaultValue": "Nam/Nữ/khác",
                 "icon": "pi pi-user",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -285,7 +285,7 @@
                 "code": "card_address",
                 "defaultValue": "STH 18.33, Đường 4D+8C, KĐT Hà Quang 2, TP Nha Trang, Khánh Hòa",
                 "icon": "pi pi-map-marker",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -316,7 +316,7 @@
                 "code": "card_phone",
                 "defaultValue": "089 639 6969",
                 "icon": "pi pi-phone",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -347,7 +347,7 @@
                 "code": "card_website",
                 "defaultValue": "https://ilearn.vn",
                 "icon": "pi pi-globe",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -379,7 +379,7 @@
                 "code": "edu_school",
                 "fieldIndex": 0,
                 "defaultValue": "Ilearn",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -411,7 +411,7 @@
                 "code": "edu_major",
                 "fieldIndex": 3,
                 "defaultValue": "Lập trình python",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -443,7 +443,7 @@
                 "code": "edu_level",
                 "fieldIndex": 4,
                 "defaultValue": "Đại học",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -475,7 +475,7 @@
                 "code": "edu_start",
                 "fieldIndex": 1,
                 "defaultValue": "2013",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -507,7 +507,7 @@
                 "code": "edu_end",
                 "fieldIndex": 2,
                 "defaultValue": "2017",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -537,7 +537,7 @@
                 "label": "Tên kỹ năng",
                 "code": "skill_name",
                 "defaultValue": "kỹ năng giao tiếp, kỹ năng làm việc nhóm",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -566,7 +566,7 @@
                 "industryName": "",
                 "label": "Tên sở thích",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -598,7 +598,7 @@
                 "label": "Tên người giới thiệu",
                 "code": "reference_name",
                 "defaultValue": "",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -628,7 +628,7 @@
                 "label": "Mục tiêu nghề nghiệp",
                 "code": "career_objective",
                 "inputType": "editor",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -661,7 +661,7 @@
                 "code": "exp_company",
                 "defaultValue": "TRENET",
                 "fieldIndex": 0,
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -693,7 +693,7 @@
                 "code": "exp_position",
                 "defaultValue": "Lập trình viên",
                 "fieldIndex": 3,
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -725,7 +725,7 @@
                 "code": "exp_start",
                 "defaultValue": "1017",
                 "fieldIndex": 1,
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -757,7 +757,7 @@
                 "code": "exp_end",
                 "defaultValue": "1014",
                 "fieldIndex": 2,
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -789,7 +789,7 @@
                 "code": "exp_description",
                 "inputType": "editor",
                 "fieldIndex": 4,
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -820,7 +820,7 @@
                 "label": "Năm",
                 "code": "cert_year",
                 "defaultValue": "2022",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -850,7 +850,7 @@
                 "label": "Tên chứng chỉ",
                 "code": "cert_title",
                 "defaultValue": "lập trình viên",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -882,7 +882,7 @@
                 "code": "activity_title",
                 "defaultValue": "Tham gia CLB HỌC THUẬT",
                 "fieldIndex": 0,
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -914,7 +914,7 @@
                 "code": "activity_role",
                 "fieldIndex": 4,
                 "defaultValue": "Thành viên",
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -946,7 +946,7 @@
                 "code": "activity_date",
                 "defaultValue": "2013",
                 "fieldIndex": 2,
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -978,7 +978,7 @@
                 "code": "activity_date",
                 "defaultValue": "",
                 "fieldIndex": 3,
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {
@@ -1010,7 +1010,7 @@
                 "code": "activity_desc",
                 "inputType": "editor",
                 "fieldIndex": 5,
-                "cvInputConfig": {
+                "_inputConfigOpenJson": {
                     "showToolbar": true,
                     "showAction": true,
                     "actionConfig": {

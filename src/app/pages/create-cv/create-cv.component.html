@@ -1,4 +1,4 @@
-@if(template) {
+@if(template || templateId) {
 <div id="cv">
   <!-- ====== BEGIN TOOLBAR ======= -->
   <div id="cv-toolbar" class="cv-toolbar d-none d-md-flex">
@@ -13,12 +13,12 @@
       </div>
 
       <div class="toolbar-actions d-flex gap-4 align-items-center">
-        <div class="d-flex gap-2">
+        <!-- <div class="d-flex gap-2">
           <p-button icon="pi pi-undo fs-5" class="undo" [disabled] pTooltip="Undo" severity="secondary" [text]="true"
             [size]="'small'" [rounded]="true"></p-button>
           <p-button icon="pi pi-undo fs-5" class="redo" pTooltip="Redo" severity="secondary" [text]="true"
             [size]="'small'" [rounded]="true"></p-button>
-        </div>
+        </div> -->
 
         <div class="d-flex gap-2">
           <p-button icon="pi pi-eye" label="Xem trước" [size]="'small'" severity="secondary" raised="true"
@@ -101,11 +101,11 @@
 
       <!-- ======= BEGIN CV TEMPLATE ======== -->
       <div id="cv-content" class="flex-grow-1 d-flex justify-content-center" style="
-    --theme-color: {{ template._css!['template']['themeColor'] }};
-    --theme-font: {{ template._css!['template']['font'] }};
-    --theme-font-size: {{ template._css!['template']['fontSize'] + 'px' }};
-    --theme-line-height: {{ template._css!['template']['lineHeight'] }};
-    --multiplierFS: {{ template._css!['template']['multiplierFS'] }};
+    --theme-color: {{ template?._css!['template']['themeColor'] }};
+    --theme-font: {{ template?._css!['template']['font'] }};
+    --theme-font-size: {{ template?._css!['template']['fontSize'] + 'px' }};
+    --theme-line-height: {{ template?._css!['template']['lineHeight'] }};
+    --multiplierFS: {{ template?._css!['template']['multiplierFS'] }};
     ">
         <div class="content">
           <ng-container *ngTemplateOutlet="cv1"></ng-container>
@@ -344,5 +344,6 @@
       <!-- end condition: column -->
     </div>
     }
+
   </div>
 </ng-template>

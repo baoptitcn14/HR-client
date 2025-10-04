@@ -65,7 +65,7 @@
   </div>
 
   <!-- order list -->
-  @if(element.cvInputConfig?.toolbarConfig?.showOrderList) {
+  @if(element._inputConfigOpenJson?.toolbarConfig?.showOrderList) {
   <div class="text-decoration cv-input-toolbar-item gap-1">
     <!-- bullet -->
     <p-button
@@ -86,7 +86,7 @@
   }
 
   <!-- text align -->
-  @if(element.cvInputConfig?.toolbarConfig?.showAlign) {
+  @if(element._inputConfigOpenJson?.toolbarConfig?.showAlign) {
   <div class="text-decoration cv-input-toolbar-item gap-1">
     @for(align of textAlignButtons; track align) {
     <p-button

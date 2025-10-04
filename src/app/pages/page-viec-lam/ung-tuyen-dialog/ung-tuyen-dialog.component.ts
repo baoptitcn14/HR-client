@@ -239,7 +239,7 @@ export interface IThanhPhan extends JobFieldOutputDto {
   // acceptFileExtensions?: string; // .jpg,.png,.pdf,.doc,.xlsx
   maxFileSize?: number;
   // multiple?: boolean;
-  cvInputConfig?: ICvInputConfig;
+  inputConfig?: ICvInputConfig;
   icon?: string;
   _isBlank?: boolean; // element này có giá trị hay không
   image?: string;
