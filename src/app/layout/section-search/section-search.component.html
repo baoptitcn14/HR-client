@@ -3,7 +3,7 @@
     <div class="d-flex flex-column gap-2 search-box">
       <p-autoComplete [inputStyleClass]="'w-100 shadow-sm'" [styleClass]="'w-100'" [appendTo]="'body'"
         [(ngModel)]="filter.searchText" [suggestions]="suggestions" [placeholder]="'Nhập tên công việc cần tìm kiếm'"
-        optionValue="id" optionLabel="title" (completeMethod)="searchPost($event)" />
+        optionValue="title" optionLabel="title" (completeMethod)="searchPost($event)" />
 
       <!-- button tim kiem -->
       <p-button label="Tìm kiếm" icon="pi pi-search" [classList]="'button-search'" [size]="'large'" severity="primary"
@@ -19,12 +19,12 @@
 
       <div class="col-6 col-md-3">
         <p-multiSelect [appendTo]="'body'" [styleClass]="'w-100 shadow-sm'" [options]="kyNangs"
-          [(ngModel)]="filter.kyNang" optionValue="id" optionLabel="name" placeholder="Kỹ năng" />
+          [(ngModel)]="filter.kyNangs" optionValue="id" optionLabel="name" placeholder="Kỹ năng" />
       </div>
 
       <div class="col-6 col-md-3">
         <p-multiSelect [appendTo]="'body'" [styleClass]="'w-100 shadow-sm'" [options]="hinhThucLamViecs"
-          [(ngModel)]="filter.hinhThucLamViec" optionValue="id" optionLabel="name" placeholder="Hình thức làm việc" />
+          [(ngModel)]="filter.hinhThucLamViecs" optionValue="id" optionLabel="name" placeholder="Hình thức làm việc" />
       </div>
 
       <!-- button xóa filter -->

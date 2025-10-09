@@ -8,6 +8,7 @@ import { CreateCvComponent } from './pages/create-cv/create-cv.component';
 import { UserCvComponent } from './pages/user-cv/user-cv.component';
 import { JobsComponent } from './pages/jobs/jobs.component';
 import { ListJobComponent } from './pages/jobs/list-job/list-job.component';
+import { FindComponent } from './pages/find/find.component';
 
 export const routes: Routes = [
   {
@@ -26,6 +27,11 @@ export const routes: Routes = [
     children: [
       {
         path: '',
+        component: ListJobComponent,
+        data: { breadcrumb: 'Danh sách' },
+      },
+      {
+        path: 'filters/:filters',
         component: ListJobComponent,
         data: { breadcrumb: 'Danh sách' },
       },
@@ -57,6 +63,12 @@ export const routes: Routes = [
     path: 'create-cv',
     component: CreateCvComponent,
     data: { title: 'Tạo CV', breadcrumb: 'Tạo CV' },
+    canActivate: [authRouteGuard]
+  },
+  {
+    path: 'find',
+    component: FindComponent,
+    data: { title: 'Tìm kiếm công ty / người dùng', breadcrumb: 'Tìm kiếm công ty / người dùng' },
     canActivate: [authRouteGuard]
   },
   {

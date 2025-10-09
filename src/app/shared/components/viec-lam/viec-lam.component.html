@@ -11,7 +11,8 @@
             <div class="d-flex flex-column gap-2">
 
                 <!-- title -->
-                <a class="text-decoration-none"
+                <a class="text-decoration-none" tooltipPosition="bottom" pTooltip="{{ viecLam.title }}"
+                    [href]="'/jobs/job/' + slugify(viecLam.title!) + '_' + viecLam.id"
                     [routerLink]="['/jobs/job', slugify(viecLam.title!) + '_' + viecLam.id]">
                     <h3 class="fw-bold title text-primary text-uppercase m-0">
                         {{ viecLam.title }}
@@ -28,14 +29,26 @@
 
                 <!-- mức lương | khu vực -->
                 <div class="d-flex gap-2 align-items-md-center">
+
+                    @if(viecLam.salaryNote == 'THOATHUAN') {
+                    <span class="fw-bold fs-6">
+                        Thỏa thuận
+                    </span>
+                    }@else {
                     <span class="fw-bold fs-6">{{ viecLam.salaryMin | numberSuffixCurrency }} - {{ viecLam.salaryMax |
                         numberSuffixCurrency }}
                     </span>
-                    <span class="text-muted d-flex gap-2 align-items-center">
-                        | {{ viecLam._khuVucName }}
+                    }
 
-                        <ng-container *ngIf="isLoading && viecLam.location">
-                            <p-skeleton width="10rem" borderRadius="16px" />
+
+                    <span class="text-muted d-flex gap-2 align-items-center" *ngIf="viecLam.location">
+                        |
+                        <a [href]="'/jobs/filters/{{viecLam._khuVucName}}'" class="text-decoration-none"
+                            [routerLink]="['/jobs/filters', viecLam._khuVucName]">
+                            {{ viecLam._khuVucName }}
+                        </a>
+                        <ng-container *ngIf="!viecLam._khuVucName">
+                            <p-skeleton width="4rem" borderRadius="16px" />
                         </ng-container>
                     </span>
                 </div>
@@ -77,18 +90,25 @@
 
         <!-- tags -->
         <div class="d-flex gap-2 align-items-center tags">
-            @for (tag of viecLam._tagsOpenJson; track tag) {
+            <!-- @for (tag of viecLam._tagsOpenJson; track tag) {
             <a href="http://">
                 <p-tag severity="secondary" value="{{ tag }}" [rounded]="true" />
             </a>
+            } -->
+
+            @for (type of viecLam._hinhThucLamViecsOpenJson; track type.id) {
+            <a [href]="'/jobs/filters/{{type.name}}'" [routerLink]="['/jobs/filters', type.name]">
+                <p-tag severity="success" value="{{ type.name }}" [rounded]="true" />
+            </a>
             }
+
             @for (kyNang of viecLam._kyNangsOpenJson; track kyNang.id) {
-            <a href="http://">
+            <a [href]="'/jobs/filters/{{kyNang.name}}'" [routerLink]="['/jobs/filters', kyNang.name]">
                 <p-tag severity="info" value="{{ kyNang.name }}" [rounded]="true" />
             </a>
             }
 
-            <ng-container *ngIf="isLoading && viecLam.tags">
+            <ng-container *ngIf="!viecLam._kyNangsOpenJson && viecLam.tags">
                 <p-skeleton width="10rem" styleClass="mr-2" borderRadius="16px" />
                 <p-skeleton width="10rem" borderRadius="16px" />
             </ng-container>

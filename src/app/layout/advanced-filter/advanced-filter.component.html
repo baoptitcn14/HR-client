@@ -25,14 +25,14 @@
 
         <!-- hinhThucLamViec -->
         <ng-container
-            *ngTemplateOutlet="radio; context: { label: 'Hình thức làm việc', options: hinhThucLamViecs, model: 'hinhThucLamViec', name: 'hinhThucLamViec' }">
+            *ngTemplateOutlet="checkbox; context: { label: 'Hình thức làm việc', options: hinhThucLamViecs, model: 'hinhThucLamViecs', name: 'hinhThucLamViecs' }">
         </ng-container>
 
         <p-divider [type]="'dashed'"></p-divider>
 
         <!-- Kỹ năng -->
         <ng-container
-            *ngTemplateOutlet="radio; context: { label: 'Kỹ năng', options: kyNangs, model: 'kyNang', name: 'kyNang' }">
+            *ngTemplateOutlet="checkbox; context: { label: 'Kỹ năng', options: kyNangs, model: 'kyNangs', name: 'kyNangs' }">
         </ng-container>
 
     </div>
@@ -47,7 +47,7 @@
     <p-buttonGroup>
         <p-button class="flex-grow-1" [styleClass]="'w-100'" severity="secondary" label="Lọc nâng cao"
             (click)="showAdvancedFilter()" icon="pi pi-filter"></p-button>
-        <p-button (click)="onPriviousPage()" severity="secondary" [outlined]="true" icon="pi pi-angle-left" />
+        <p-button (click)="onPreviousPage()" severity="secondary" [outlined]="true" icon="pi pi-angle-left" />
         <p-button (click)="onNextPage()" severity="secondary" [outlined]="true" icon="pi pi-angle-right" />
     </p-buttonGroup>
 
@@ -64,6 +64,16 @@
 
         <div class="options ">
 
+            @if (loading) {
+
+            <p-skeleton height="1rem" width="4rem" styleClass="mb-2"></p-skeleton>
+            <p-skeleton height="1rem" width="4rem" styleClass="mb-2"></p-skeleton>
+            <p-skeleton height="1rem" width="4rem" styleClass="mb-2"></p-skeleton>
+            <p-skeleton height="1rem" width="4rem" styleClass="mb-2"></p-skeleton>
+            <p-skeleton height="1rem" width="4rem" styleClass="mb-2"></p-skeleton>
+            <p-skeleton height="1rem" width="4rem" styleClass="mb-2"></p-skeleton>
+
+            }@else {
             <div class="field-check">
                 <p-radioButton [inputId]="name + '-all'" [name]="name" [value]="'ALL'" [(ngModel)]="filter[model]"
                     (ngModelChange)="onChange()" />
@@ -74,12 +84,13 @@
 
             @for(option of options; track option.value) {
             <div class="field-check">
-                <p-radioButton [inputId]="option.id" [name]="name" [value]="option.id" [(ngModel)]="filter[model]"
+                <p-radioButton [inputId]="option.id" [name]="name" [value]="option.code" [(ngModel)]="filter[model]"
                     (ngModelChange)="onChange()" />
                 <label [for]="option.id" class="ms-2">
                     {{ option.name }}
                 </label>
             </div>
+            }
             }
 
         </div>
@@ -88,7 +99,7 @@
 
 </ng-template>
 
-<!-- <ng-template #checkbox let-label="label" let-options="options" let-model="model" let-name="name">
+<ng-template #checkbox let-label="label" let-options="options" let-model="model" let-name="name">
 
     <div class="d-flex flex-column gap-3">
 
@@ -99,7 +110,8 @@
         <div class="options ">
 
             <div class="field-check">
-                <p-radioButton [inputId]="name + '-all'" [name]="name" [value]="'ALL'" [(ngModel)]="filter[model]" />
+                <p-checkbox [inputId]="name + '-all'" [binary]="true" [(ngModel)]="stateCheckBox[name]"
+                    (onChange)="onCheckBoxAll(name)" />
                 <label [for]="name + '-all'" class="ms-2">
                     Tất cả
                 </label>
@@ -107,7 +119,8 @@
 
             @for(option of options; track option.value) {
             <div class="field-check">
-                <p-radioButton [inputId]="option.id" [name]="name" [value]="option.id" [(ngModel)]="filter[model]" />
+                <p-checkbox [inputId]="option.id" [name]="name" [value]="option.code" [(ngModel)]="filter[model]"
+                    (onChange)="onCheckBox(name)" />
                 <label [for]="option.id" class="ms-2">
                     {{ option.name }}
                 </label>
@@ -117,4 +130,4 @@
         </div>
 
     </div>
-</ng-template> -->
+</ng-template>

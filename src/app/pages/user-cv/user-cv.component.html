@@ -1,6 +1,19 @@
 <div class="container py-5 bg-white">
-    <div class="d-flex gap-3 align-items-center">
+    @if(userCvs.length == 0) {
+    <div class="d-flex flex-column align-items-center gap-3">
 
+        <!-- empty message -->
+        <p-messages class="w-100" [(value)]="messages" [styleClass]="'w-100'" [enableService]="false"
+            [closable]="false" />
+
+        <!-- button router to create cv -->
+
+        <p-button label="Tạo CV" severity="primary" icon="pi pi-plus"  raised="true" [size]="'large'" [styleClass]="'w-100'"
+            (click)="goToCreatePage()"></p-button>
+
+    </div>
+    }@else {
+    <div class=" d-flex gap-3 align-items-center">
         @for(cv of userCvs; track cv.id) {
 
         <div class="cv-item shadow-sm rounded border p-3 d-flex flex-column gap-4">
@@ -30,8 +43,8 @@
 
         }
     </div>
-
+    }
 </div>
 
 
- <p-confirmPopup #confirmPopupRef></p-confirmPopup>
+<p-confirmPopup #confirmPopupRef></p-confirmPopup>

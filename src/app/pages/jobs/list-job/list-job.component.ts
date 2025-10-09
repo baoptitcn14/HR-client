@@ -1,13 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { Component, Host, HostListener, inject, OnInit } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { TrackElementInViewportDirective } from '../../../core/directives/track-element-in-viewport.directive';
 import { AdvancedFilterComponent } from '../../../layout/advanced-filter/advanced-filter.component';
-import { SectionSearchComponent } from '../../../layout/section-search/section-search.component';
+import { ISearchFilter, SectionSearchComponent } from '../../../layout/section-search/section-search.component';
 import { DsViecLamComponent, IPageEvent } from '../../../shared/components/ds-viec-lam/ds-viec-lam.component';
 import { IDsViecLam } from '../../../shared/components/viec-lam/viec-lam.component';
 import { JobPostInfoServiceProxy, JobPostQueryDto, ICriteriaRequestDto } from '../../../shared/service-proxies/sys-service-proxies';
+import { DsViecLamService } from '../../../shared/components/ds-viec-lam/ds-viec-lam.service';
+import { TagModule } from 'primeng/tag';
 
 @Component({
   selector: 'app-list-job',
@@ -19,24 +21,35 @@ import { JobPostInfoServiceProxy, JobPostQueryDto, ICriteriaRequestDto } from '.
     AdvancedFilterComponent,
     TrackElementInViewportDirective,
     ButtonModule,
-    RouterModule
+    RouterModule,
+    TagModule
   ],
+  providers: [DsViecLamService],
   templateUrl: './list-job.component.html',
   styleUrl: './list-job.component.scss'
 })
 export class ListJobComponent implements OnInit {
   // region inject
   jobPostInfoServiceProxy = inject(JobPostInfoServiceProxy);
-  jobPosts: IDsViecLam[] = [];
-  isInViewport = true;
+  activatedRoute = inject(ActivatedRoute);
+  dsViecLamService = inject(DsViecLamService);
+
+  route = inject(Router);
+
+  // endregion
 
   // declare data
-  controlPaginator = {
+  controlPaginator: IControlPaginator = {
     first: 0,
     rows: 5,
     totalRecords: 0,
     showPaginator: true,
   }
+
+  isInViewport = true;
+  jobPosts: IDsViecLam[] = [];
+
+  valueFilterOnRouter = '';
 
   @HostListener('window:scroll', ['$event'])
   onScroll(event: any) {
@@ -52,17 +65,34 @@ export class ListJobComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getJobPosts();
+    this.getFilters();
+    // this.getJobPosts();
   }
-
 
   inViewportChange(isInViewport: any) {
     this.isInViewport = isInViewport;
   }
 
+  //#region get filters on router
+
+  private getFilters() {
+
+    this.activatedRoute.paramMap.subscribe((param) => {
+      this.valueFilterOnRouter = param.get('filters')!;
+
+      this.getJobPosts();
+    })
+  }
+
+  //#endregion
+
   //#region Xử lý các sự kiện user tương tác
 
   onSearch(filter: any) {
+    this.getJobPosts(filter);
+  }
+
+  onChangeFilter(filter: ISearchFilter) {
     this.getJobPosts(filter);
   }
 
@@ -82,71 +112,32 @@ export class ListJobComponent implements OnInit {
     this.getJobPosts();
   }
 
+  removeFilter() {
+    this.valueFilterOnRouter = '';
+
+    //clear params on router
+    this.route.navigate(['/jobs']);
+  }
+
   // endregion
 
   //get data
-  private getJobPosts(filter?: any) {
+  private getJobPosts(filter?: ISearchFilter) {
 
-    const input = new JobPostQueryDto();
-    input.skipCount = this.controlPaginator.first;
-    input.maxResultCount = this.controlPaginator.rows;
+    if (!filter) filter = { hinhThucLamViecs: [] };
 
-    input.criterias = [
-      new ICriteriaRequestDto({
-        propertyName: 'jobStatus',
-        operation: 0,
-        value: 'DEFAULT',
-      })
-    ];
+    if (this.valueFilterOnRouter) filter.hinhThucLamViecs!.push(this.valueFilterOnRouter);
 
-    if (filter) {
-      let filterString = [] as ICriteriaRequestDto[];
-
-      if (filter.khuVuc) {
-        filterString.push(
-          new ICriteriaRequestDto({
-            propertyName: 'location',
-            operation: 0,
-            value: filter.khuVuc,
-          })
-        );
-      }
-
-      if (filter.kyNang && filter.kyNang.length > 0) {
-        filterString.push(
-          new ICriteriaRequestDto({
-            propertyName: 'jobLevel',
-            operation: 6,
-            value: JSON.stringify(filter.kyNang),
-          })
-        );
-      }
-
-      // if (filter.hinhThucLamViec && filter.hinhThucLamViec.length > 0) {
-      //   filterString.push(
-      //     new ICriteriaRequestDto({
-      //       propertyName: 'typeJobPost',
-      //       operation: 6,
-      //       value: JSON.stringify(filter.hinhThucLamViec),
-      //     })
-      //   );
-      // }
-
-      if (filterString.length > 0) {
-        input.criterias.push(
-          new ICriteriaRequestDto({
-            propertyName: 'title',
-            operation: 9,
-            value: JSON.stringify(filterString),
-          })
-        )
-      }
-    }
-
-    this.jobPostInfoServiceProxy.getAll(input).subscribe((res) => {
+    this.dsViecLamService.getJobPosts(this.controlPaginator, filter).subscribe(res => {
       this.jobPosts = res.items as IDsViecLam[];
-
       this.controlPaginator.totalRecords = res.totalCount!;
-    });
+    })
   }
+}
+
+export interface IControlPaginator {
+  first: number;
+  rows: number;
+  totalRecords: number;
+  showPaginator: boolean;
 }

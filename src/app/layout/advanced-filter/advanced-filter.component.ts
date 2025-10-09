@@ -7,6 +7,9 @@ import { FormsModule } from '@angular/forms';
 import { DividerModule } from 'primeng/divider';
 import { ButtonModule } from 'primeng/button';
 import { ButtonGroupModule } from 'primeng/buttongroup';
+import { SkeletonModule } from 'primeng/skeleton';
+import { ISearchFilter } from '../section-search/section-search.component';
+import { CheckboxModule } from 'primeng/checkbox';
 
 @Component({
   selector: 'app-advanced-filter',
@@ -17,7 +20,9 @@ import { ButtonGroupModule } from 'primeng/buttongroup';
     RadioButtonModule,
     DividerModule,
     ButtonModule,
-    ButtonGroupModule
+    ButtonGroupModule,
+    SkeletonModule,
+    CheckboxModule
   ],
   templateUrl: './advanced-filter.component.html',
   styleUrl: './advanced-filter.component.scss'
@@ -30,7 +35,7 @@ export class AdvancedFilterComponent implements OnInit {
   //output region
   @Output() onNextPageEvent = new EventEmitter();
   @Output() onPreviousPageEvent = new EventEmitter();
-  @Output() onChangeFilterEvent = new EventEmitter();
+  @Output() onChangeFilterEvent = new EventEmitter<ISearchFilter>();
 
   //declare region
   khuVucs: CategoryOutputDto[] = [];
@@ -41,14 +46,20 @@ export class AdvancedFilterComponent implements OnInit {
   capBacs: CategoryOutputDto[] = [];
 
   //bộ filter
-  filter: any = {
+  filter: ISearchFilter = {
     khuVuc: 'ALL',
-    kyNang: 'ALL',
-    hinhThucLamViec: 'ALL',
+    kyNangs: ['ALL'],
+    hinhThucLamViecs: ['ALL'],
     mucLuong: 'ALL',
     kinhNghiem: 'ALL',
     capBac: 'ALL',
   }
+
+  stateCheckBox: {
+    [key: string]: boolean
+  } = {}
+
+  loading: boolean = true;
 
   //control show hide
   showFilter: boolean = false;
@@ -74,7 +85,7 @@ export class AdvancedFilterComponent implements OnInit {
 
   //#region Xử lý tương tác 
 
-  onPriviousPage() {
+  onPreviousPage() {
     this.onPreviousPageEvent.emit();
   }
 
@@ -89,19 +100,56 @@ export class AdvancedFilterComponent implements OnInit {
   }
 
   onChange() {
-    this.onNextPageEvent.emit();
+
+    this.filter.khuVuc = this.filter.khuVuc == 'ALL' ? '' : this.filter.khuVuc;
+    this.filter.mucLuong = this.filter.mucLuong == 'ALL' ? '' : this.filter.mucLuong;
+    this.filter.kinhNghiem = this.filter.kinhNghiem == 'ALL' ? '' : this.filter.kinhNghiem;
+    this.filter.capBac = this.filter.capBac == 'ALL' ? '' : this.filter.capBac;
+
+    this.onChangeFilterEvent.emit(this.filter);
+  }
+
+  onCheckBox(name: string) {
+
+    let list = [];
+
+    if (name == 'hinhThucLamViecs') list = this.hinhThucLamViecs;
+    else if (name == 'kyNangs') list = this.kyNangs;
+
+    this.stateCheckBox[name] = this.filter[name]?.length == list.length;
+
+    this.onChange();
+
+  }
+
+  onCheckBoxAll(name: string) {
+    if (name == 'hinhThucLamViecs') this.filter[name] = this.stateCheckBox[name] ? this.hinhThucLamViecs.map((x) => x.code!) : [];
+    else if (name == 'kyNangs') this.filter[name] = this.stateCheckBox[name] ? this.kyNangs.map((x) => x.code!) : [];
+
+    this.onChange();
   }
 
   //#endregion
 
 
   async loadData() {
-    this.khuVucs = await this.categoriesService.getDataCategory('ADDRESS', 1);
+    this.loading = true;
+
     this.kyNangs = await this.categoriesService.getDataCategory('SKILL-LEVEL', 1);
     this.hinhThucLamViecs = await this.categoriesService.getDataCategory('WORKING-TYPE', 1);
     this.mucLuongs = await this.categoriesService.getDataCategory('SALARY', 1);
     this.kinhNghiems = await this.categoriesService.getDataCategory('EXPERIENCE', 1);
     this.capBacs = await this.categoriesService.getDataCategory('VACANCY', 1);
+    this.khuVucs = await this.categoriesService.getDataCategory('ADDRESS', 1);
+
+    //set value for checkboxall
+    this.filter.hinhThucLamViecs = this.hinhThucLamViecs.map((x) => x.code!);
+    this.filter.kyNangs = this.kyNangs.map((x) => x.code!);
+
+    this.stateCheckBox['hinhThucLamViecs'] = this.filter.hinhThucLamViecs?.length == this.hinhThucLamViecs.length;
+    this.stateCheckBox['kyNangs'] = this.filter.kyNangs?.length == this.kyNangs.length;
+
+    this.loading = false;
   }
 
 }

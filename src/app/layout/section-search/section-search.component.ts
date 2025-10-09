@@ -50,7 +50,7 @@ export class SectionSearchComponent implements OnInit {
   // input, output region
   @Input() showfilters = true;
   @Input() fixed = false;
-  @Output() onSearchEvent = new EventEmitter();
+  @Output() onSearchEvent = new EventEmitter<ISearchFilter>();
 
   // declare category region
   khuVucs: CategoryOutputDto[] = [];
@@ -58,7 +58,7 @@ export class SectionSearchComponent implements OnInit {
   hinhThucLamViecs: CategoryOutputDto[] = [];
 
   // declare
-  filter = {
+  filter: ISearchFilter = {
     khuVuc: null,
     kyNang: [],
     hinhThucLamViec: [],
@@ -74,23 +74,38 @@ export class SectionSearchComponent implements OnInit {
     this.getTrinhDos();
   }
 
-  private async getLocations() {
+  private getLocations() {
 
-    this.khuVucs = await this.categoriesService.getDataCategory('ADDRESS', 1);
+    this.categoriesService.getDataCategory('ADDRESS', 1).then((data) => {
+      this.khuVucs = data;
+    });
 
   }
 
-  private async getHinhThucLamViecs() {
-    this.hinhThucLamViecs = await this.categoriesService.getDataCategory('WORKING-TYPE', 1);
+  private getHinhThucLamViecs() {
+    this.categoriesService.getDataCategory('WORKING-TYPE', 1).then((data) => {
+      this.hinhThucLamViecs = data;
+    });
   }
 
 
-  private async getTrinhDos() {
-    this.kyNangs = await this.categoriesService.getDataCategory('SKILL-LEVEL', 1);
+  private getTrinhDos() {
+    this.categoriesService.getDataCategory('SKILL-LEVEL', 1).then((data) => {
+      this.kyNangs = data;
+    });
   }
 
   onSearch() {
-    this.onSearchEvent.emit(this.filter);
+
+    let f: ISearchFilter = {
+      ...this.filter
+    };
+
+    f.khuVuc = this.khuVucs.find((x) => x.id == this.filter.khuVuc)?.name || '';
+    f.kyNangs = this.kyNangs.filter((x) => this.filter.kyNangs?.includes(x.id!)).map((x) => x.name!);
+    f.hinhThucLamViecs = this.hinhThucLamViecs.filter((x) => this.filter.hinhThucLamViecs?.includes(x.id!)).map((x) => x.name!);
+
+    this.onSearchEvent.emit(f);
   }
 
   searchPost(event: AutoCompleteCompleteEvent) {
@@ -130,4 +145,15 @@ export class SectionSearchComponent implements OnInit {
       searchText: null,
     };
   }
+}
+
+export interface ISearchFilter {
+  khuVuc?: string | null;
+  kyNangs?: string[];
+  hinhThucLamViecs?: string[];
+  searchText?: string | null;
+  mucLuong?: string | null;
+  kinhNghiem?: string | null;
+  capBac?: string | null;
+  [key: string]: any;
 }

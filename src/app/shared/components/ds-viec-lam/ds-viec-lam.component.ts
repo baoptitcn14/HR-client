@@ -51,19 +51,33 @@ export class DsViecLamComponent implements OnChanges {
 
     this.listPlaceHolder = Array.from({ length: this.rows }, (_, index) => index)
 
-    const khuVucs = await this.categoriesService.getDataCategory('ADDRESS', 1);
-    const trinhDos = await this.categoriesService.getDataCategory('SKILL-LEVEL', 1);
+    const khuVucs = this.categoriesService.getDataCategory('ADDRESS', 1);
+    const trinhDos = this.categoriesService.getDataCategory('SKILL-LEVEL', 1);
+    const hinhThucLamViecs = this.categoriesService.getDataCategory('WORKING-TYPE', 1);
 
     this.viecLams.forEach((viecLam) => {
-      if (viecLam.jobLevel)
-        viecLam._kyNangsOpenJson = trinhDos.filter((trinhDo) =>
-          viecLam.jobLevel!.includes(trinhDo.id!)
-        );
 
-      viecLam._khuVucName =
-        khuVucs.find((khuVuc) => khuVuc.id == viecLam.location)?.name || '';
+      if (viecLam.jobLevel) {
+        trinhDos.then((trinhDos) => {
+          viecLam._kyNangsOpenJson = trinhDos.filter((trinhDo) =>
+            viecLam.jobLevel!.includes(trinhDo.id!)
+          );
+        })
+      }
 
-      viecLam._tagsOpenJson = viecLam.tags ? JSON.parse(viecLam.tags) : [];
+      khuVucs.then((khuVucs) => {
+        viecLam._khuVucName =
+          khuVucs.find((khuVuc) => khuVuc.id == viecLam.location)?.name || '';
+      })
+
+      // viecLam._tagsOpenJson = viecLam.tags ? JSON.parse(viecLam.tags) : [];
+      if (viecLam.workingType) {
+        hinhThucLamViecs.then((hinhThucLamViecs) => {
+          viecLam._hinhThucLamViecsOpenJson = hinhThucLamViecs.filter((hinhThucLamViec) =>
+            viecLam.workingType!.includes(hinhThucLamViec.id!)
+          );
+        })
+      }
 
     });
 

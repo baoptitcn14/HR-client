@@ -22,23 +22,12 @@ export class MenuHorizontalComponent implements OnInit {
   apiDataService = inject(MenuInfoServiceProxy);
   cookieService = inject(CookieService);
 
-  menus: MenuItem[] = [
-    {
-      label: 'Trang chủ',
-      icon: 'pi pi-home',
-      routerLink: '/home',
-    },
-    {
-      label: 'Việc làm',
-      icon: 'pi pi-briefcase',
-      routerLink: '/jobs',
-    }
-  ];
+  menus: MenuItem[] = [];
 
   menuClass = 'shadow';
 
   ngOnInit(): void {
-    // this.gets();
+    this.gets();
   }
 
   gets() {
@@ -63,23 +52,20 @@ export class MenuHorizontalComponent implements OnInit {
           new ICriteriaRequestDto({
             propertyName: 'GroupCode',
             operation: 6,
-            value: 'hr',
+            value: 'hr-client',
           }),
         ],
       })
     );
   }
   private init(list: any[]): any {
-    const menuTop: any[] = [];
-    const menuRight: any[] = [];
-    const all: any[] = [];
     const map = new Map<number, any>();
 
     // Bước 1: Tạo node gốc với cấu trúc phù hợp menu
     list.forEach((item) => {
       map.set(item.id, {
         label: item.name,
-        icon: item.icon || 'pi pi-copy',
+        icon: item.icon || '',
         routerLink: item.link || null,
         items: [],
         id: item.id,

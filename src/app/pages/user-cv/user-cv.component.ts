@@ -4,8 +4,9 @@ import { AppSessionService } from '../../shared/session/app-session.service';
 import { ButtonModule } from 'primeng/button';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { ConfirmationService, MessageService } from 'primeng/api';
+import { ConfirmationService, Message, MessageService } from 'primeng/api';
 import { ConfirmPopup, ConfirmPopupModule } from 'primeng/confirmpopup';
+import { MessagesModule } from 'primeng/messages';
 
 @Component({
   selector: 'app-user-cv',
@@ -13,7 +14,8 @@ import { ConfirmPopup, ConfirmPopupModule } from 'primeng/confirmpopup';
   imports: [
     ButtonModule,
     CommonModule,
-    ConfirmPopupModule
+    ConfirmPopupModule,
+    MessagesModule
   ],
   templateUrl: './user-cv.component.html',
   styleUrl: './user-cv.component.scss',
@@ -32,6 +34,11 @@ export class UserCvComponent implements OnInit {
   @ViewChild('confirmPopupRef') confirmPopup!: ConfirmPopup;
   userCvs: UserCVOutputDto[] = [];
 
+  //  message empty CV
+  messages: Message[] = [
+    { severity: 'info', detail: 'Bạn chưa có CV nào! Hãy nhanh tạo CV ngay!' }
+  ];
+
   ngOnInit(): void {
     this.loadCv();
   }
@@ -42,6 +49,10 @@ export class UserCvComponent implements OnInit {
 
   goToEditPage(id: string) {
     this.router.navigate([`create-cv/${id}`]);
+  }
+
+  goToCreatePage() {
+    this.router.navigate(['create-cv']);
   }
 
   remove(id: string) {

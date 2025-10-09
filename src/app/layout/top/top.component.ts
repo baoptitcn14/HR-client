@@ -20,6 +20,7 @@ import { AppConst } from '../../shared/app-const';
 import { AppSessionService } from '../../shared/session/app-session.service';
 import { MenuItem } from 'primeng/api';
 import { AppTenantService } from '../../shared/session/app-tenant.service';
+import { ICriteriaRequestDto, MenuInfoServiceProxy, MenuQueryDto } from '../../shared/service-proxies/sys-service-proxies';
 
 @Component({
   selector: 'app-top',
@@ -40,30 +41,12 @@ import { AppTenantService } from '../../shared/session/app-tenant.service';
   styleUrl: './top.component.scss',
 })
 export class TopComponent implements OnInit {
+
+  menuInfoService = inject(MenuInfoServiceProxy);
+
   listTenant: MenuItem[] | undefined;
 
-  listRoute = [
-    {
-      label: 'Thông tin tài khoản',
-      icon: 'pi pi-fw pi-info',
-      routerLink: '/user-profile',
-    },
-    {
-      label: 'Tạo mới CV',
-      icon: 'pi pi-fw pi-info',
-      routerLink: '/create-cv',
-    },
-      {
-      label: 'CV của tôi',
-      icon: 'pi pi-fw pi-info',
-      routerLink: '/user-cv',
-    },
-    {
-      label: 'Thoát',
-      icon: 'pi pi-fw pi-sign-out',
-      command: () => this.onLogout(),
-    },
-  ];
+  listRoute: MenuItem[] = [];
 
   formUyQuyen!: FormGroup;
   logoBrand = AppConst.logoBrand;
@@ -75,10 +58,74 @@ export class TopComponent implements OnInit {
 
   ngOnInit(): void {
     this.mapDataListTenant();
+
+    this.loadMenuHr().subscribe((data) => {
+      this.listRoute = this.init(data);
+
+      this.listRoute.push(
+        {
+          label: 'Thoát',
+          icon: 'pi pi-fw pi-sign-out',
+          command: () => this.onLogout(),
+          styleClass: 'text-danger',
+        }
+      )
+    });
+  }
+
+
+  private loadMenuHr() {
+    return this.menuInfoService.getList(
+      MenuQueryDto.fromJS({
+        language: 'vi',
+        sorting: 'HashCode',
+        tenantId: 1,
+        useCache: false,
+        view: 'LANGUAGE-KEYVALUE',
+        criterias: [
+          new ICriteriaRequestDto({
+            propertyName: 'GroupCode',
+            operation: 6,
+            value: 'user',
+          }),
+        ],
+      })
+    );
+  }
+  private init(list: any[]): any {
+    const map = new Map<number, any>();
+
+    // Bước 1: Tạo node gốc với cấu trúc phù hợp menu
+    list.forEach((item) => {
+      map.set(item.id, {
+        label: item.name,
+        icon: item.icon || 'pi pi-copy',
+        url: item.link || null,
+        items: [],
+        id: item.id,
+        parentId: item.parentId,
+        index: item.index,
+      });
+    });
+
+    let m: any[] = [];
+
+    // Bước 2: Gắn children vào parent
+    list.forEach((item) => {
+      const node = map.get(item.id);
+      if (item.parentId !== null && map.has(item.parentId)) {
+        map.get(item.parentId).items.push(node);
+      } else {
+        m.push(node); // Root node
+      }
+    });
+
+    m.sort((a, b) => a.index - b.index);
+
+    return m;
   }
 
   private mapDataListTenant() {
-
     this.listTenant = this.appTenantService.listTeantUser ? this.appTenantService.listTeantUser.map((x) => ({
       label: x.name,
       icon: 'pi pi-building',

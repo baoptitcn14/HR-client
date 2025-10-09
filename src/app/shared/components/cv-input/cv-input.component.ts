@@ -20,6 +20,7 @@ import { DialogModule } from 'primeng/dialog';
 import { CropImageComponent } from '../crop-image/crop-image.component';
 import { IThanhPhan } from '../../../pages/page-viec-lam/ung-tuyen-dialog/ung-tuyen-dialog.component';
 import { ICv } from '../../../pages/create-cv/create-cv.component';
+import { FileServiceProxy } from '../../service-proxies/sys-service-proxies';
 
 
 @Component({
@@ -41,6 +42,7 @@ export class CvInputComponent implements OnChanges {
 
   // inject region
   cvService = inject(CvService);
+  fileService = inject(FileServiceProxy);
 
   // input region
 
@@ -164,8 +166,12 @@ export class CvInputComponent implements OnChanges {
 
   //save Image
   onSaveImage(event: string) {
+
+    // upload image
+    // this.fileService.uploadFile().subscribe(res => {
     this.element.value = event;
     this.showDialogUploadImage = false;
+    // })
   }
 }
 

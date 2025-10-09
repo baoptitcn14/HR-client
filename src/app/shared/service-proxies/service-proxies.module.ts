@@ -3,6 +3,7 @@ import {
   CategoryInfoServiceProxy,
   CategoryServiceProxy,
   CurrentUserServiceProxy,
+  FileServiceProxy,
   JobApplicationInfoServiceProxy,
   JobApplicationServiceProxy,
   JobFieldServiceProxy,
@@ -38,7 +39,8 @@ import {
     JobApplicationInfoServiceProxy,
     JobApplicationServiceProxy,
     JobPostFieldInfoServiceProxy,
-    UserCVServiceProxy
+    UserCVServiceProxy,
+    FileServiceProxy
   ],
 })
 export class ServiceProxiesModule {}

@@ -22,6 +22,7 @@ import {
 import { ViecLamService } from './viec-lam.service';
 import { ButtonModule } from 'primeng/button';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { TooltipModule } from 'primeng/tooltip';
 
 @Component({
   selector: 'app-viec-lam',
@@ -35,6 +36,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     RouterModule,
     NumberSuffixCurrencyPipe,
     ButtonModule,
+    TooltipModule
   ],
   templateUrl: './viec-lam.component.html',
   styleUrl: './viec-lam.component.scss',
@@ -103,4 +105,5 @@ export interface IDsViecLam extends JobPostOutputDto {
   _tagsOpenJson: string[];
   _benefitsOpenJson: CategoryOutputDto[];
   _quyenLoisOpenJson: CategoryOutputDto[];
+  _hinhThucLamViecsOpenJson: CategoryOutputDto[];
 }

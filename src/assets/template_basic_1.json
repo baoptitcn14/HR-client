@@ -3,7 +3,7 @@
         "id": "default_template1",
         "code": "template_basic_1",
         "name": "template",
-        "image": "string",
+        "image": "/assets/media/template1.webp",
         "industry": "",
         "inputType": "template",
         "css": "{\"template\":{\"font\":\"Roboto\",\"fontSize\":13,\"lineHeight\":1.5,\"themeColor\":\"#4570de\", \"multiplierFS\": 1.1}}"
