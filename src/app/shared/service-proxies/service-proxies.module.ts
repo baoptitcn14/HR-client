@@ -4,6 +4,8 @@ import {
   CategoryServiceProxy,
   CurrentUserServiceProxy,
   FileServiceProxy,
+  HrCompanyInfoServiceProxy,
+  HrCompanyServiceProxy,
   InterestServiceProxy,
   JobApplicationInfoServiceProxy,
   JobApplicationServiceProxy,
@@ -14,6 +16,7 @@ import {
   JobPostServiceProxy,
   MenuInfoServiceProxy,
   PostServiceProxy,
+  RegistrationServiceProxy,
   SettingInfoServiceProxy,
   TenantServiceProxy,
   TokenAuthServiceProxy,
@@ -50,7 +53,10 @@ import {
     UserProfileServiceProxy,
     UserJobSettingInfoServiceProxy,
     UserJobSettingServiceProxy,
-    InterestServiceProxy
+    InterestServiceProxy,
+    HrCompanyInfoServiceProxy,
+    HrCompanyServiceProxy,
+    RegistrationServiceProxy
   ],
 })
 export class ServiceProxiesModule {}

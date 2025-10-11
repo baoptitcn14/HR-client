@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, inject, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
@@ -19,12 +19,16 @@ export class CropImageComponent implements AfterViewInit {
 
   // out in region
   @Input() src = '';
-  @Input() width = 150;
-  @Input() height = 150;
+  @Input() width = 56;
+  @Input() height = 56;
   @Output() onSaveEvent = new EventEmitter<string>();
 
-  multiplier = 2;
+  multiplier = 1;
   cropBox = { x: 50, y: 50, w: this.width * this.multiplier, h: this.height * this.multiplier };
+  img: any;
+  @ViewChild('canvas') canvas?: ElementRef;
+  @ViewChild('upload') upload?: ElementRef;
+  @ViewChild('preview') preview?: ElementRef;
 
   ngAfterViewInit(): void {
     setTimeout(() => {
@@ -33,10 +37,11 @@ export class CropImageComponent implements AfterViewInit {
   }
 
   zoomIn() {
-    if (this.multiplier == 2) return;
+    if (this.multiplier == 3) return;
     this.multiplier += 0.5;
 
     this.initCropBox();
+    this.draw();
   }
 
   zoomOut() {
@@ -44,26 +49,25 @@ export class CropImageComponent implements AfterViewInit {
     this.multiplier -= 0.5;
 
     this.initCropBox();
+    this.draw();
   }
 
   private initCropBox() {
-    this.cropBox = { x: 50, y: 50, w: this.width * this.multiplier, h: this.height * this.multiplier };
+
+    const w = this.width * this.multiplier;
+    const h = this.height * this.multiplier;
+
+    this.cropBox = { x: 50, y: 50, w: w > 300 ? 280 : w, h: h > 300 ? 280 : h };
   }
 
   private cropImage() {
 
-    const canvas = document.getElementById("canvas") as HTMLCanvasElement;
-    const upload = document.getElementById("upload") as HTMLInputElement;
-    const ctx = canvas.getContext("2d")!;
-    const preview = document.getElementById("preview") as HTMLImageElement;
-
-    let img = new Image();
+    this.img = new Image();
     this.initCropBox();
     let isDragging = false;
-    let self = this;
 
     // Load ảnh
-    upload.addEventListener("change", (e: any) => {
+    this.upload?.nativeElement.addEventListener("change", (e: any) => {
       const file = e.target.files[0];
       if (!file) return;
 
@@ -73,7 +77,7 @@ export class CropImageComponent implements AfterViewInit {
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
-          detail: 'File must be an image'
+          detail: 'Không phải hình ảnh'
         })
 
         return;
@@ -84,7 +88,7 @@ export class CropImageComponent implements AfterViewInit {
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
-          detail: 'File size must be less than 5MB'
+          detail: 'Kích thước tối đa 5MB'
         })
         return;
       }
@@ -92,69 +96,20 @@ export class CropImageComponent implements AfterViewInit {
 
       const reader = new FileReader();
       reader.onload = () => {
-        img.src = reader.result as string;
+        this.img.src = reader.result as string;
       };
       reader.readAsDataURL(file);
     });
 
     // Vẽ lại canvas khi ảnh load
-    img.onload = () => {
-      canvas.width = 450;
-      canvas.height = 450;
-      draw();
+    this.img.onload = () => {
+      this.canvas!.nativeElement.width = 300;
+      this.canvas!.nativeElement.height = 300;
+      this.draw();
     };
 
-    function draw() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      // Tính toán scale để ảnh vừa với canvas
-      const scale =
-        (img.width > canvas.width || img.height > canvas.height) ?
-          Math.min(canvas.width / img.width, canvas.height / img.height)
-          : 1;
-      const newWidth = img.width * scale;
-      const newHeight = img.height * scale;
-
-      // Canh giữa ảnh trong canvas
-      const x = (canvas.width - newWidth) / 2;
-      const y = (canvas.height - newHeight) / 2;
-
-      // Vẽ ảnh vào canvas
-      ctx.fillStyle = "transparent";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.drawImage(img, x, y, newWidth, newHeight);
-
-      // Vẽ khung crop
-      ctx.strokeStyle = "#3B82F6";
-      ctx.lineWidth = 2;
-      ctx.strokeRect(self.cropBox.x, self.cropBox.y, self.cropBox.w, self.cropBox.h);
-
-      loadImagePreview();
-    }
-
-    function loadImagePreview() {
-      // Load ảnh preview
-      const { x, y, w, h } = self.cropBox;
-
-      // Tạo canvas tạm để lấy phần crop
-      const tmpCanvas = document.createElement("canvas");
-      const tmpCtx = tmpCanvas.getContext("2d")!;
-      tmpCanvas.width = w;
-      tmpCanvas.height = h;
-
-      tmpCtx.drawImage(canvas, x + 1, y + 1, w - 2, h - 2, 0, 0, w, h);
-
-      // Xuất blob
-      tmpCanvas.toBlob(blob => {
-        if (!blob) return;
-        const url = URL.createObjectURL(blob);
-        preview.src = url; // Gắn blob vào <img>
-      }, "image/png");
-
-    }
-
-
     // Drag crop box
-    canvas.addEventListener("mousedown", e => {
+    this.canvas?.nativeElement.addEventListener("pointerdown", (e: any) => {
       if (
         e.offsetX > this.cropBox.x &&
         e.offsetX < this.cropBox.x + this.cropBox.w &&
@@ -165,26 +120,83 @@ export class CropImageComponent implements AfterViewInit {
       }
     });
 
-    canvas.addEventListener("mousemove", e => {
+    // this.canvas?.nativeElement.addEventListener("mousemove", (e: any) => {
+    //   if (isDragging) {
+    //     this.cropBox.x = e.offsetX - this.cropBox.w / 2;
+    //     this.cropBox.y = e.offsetY - this.cropBox.h / 2;
+    //     this.draw();
+    //   }
+    // });
+
+    this.canvas?.nativeElement.addEventListener("pointermove", (e: any) => {
       if (isDragging) {
         this.cropBox.x = e.offsetX - this.cropBox.w / 2;
         this.cropBox.y = e.offsetY - this.cropBox.h / 2;
-        draw();
+        this.draw();
       }
     });
 
-    canvas.addEventListener("mouseup", () => (isDragging = false));
+    this.canvas?.nativeElement.addEventListener("pointerup", () => (isDragging = false));
+  }
+
+  private loadImagePreview() {
+    // Load ảnh preview
+    const { x, y, w, h } = this.cropBox;
+
+    // Tạo canvas tạm để lấy phần crop
+    const tmpCanvas = document.createElement("canvas");
+    const tmpCtx = tmpCanvas.getContext("2d")!;
+    tmpCanvas.width = w;
+    tmpCanvas.height = h;
+
+    tmpCtx.drawImage(this.canvas?.nativeElement, x + 1, y + 1, w - 2, h - 2, 0, 0, w, h);
+
+    // Xuất blob
+    tmpCanvas.toBlob(blob => {
+      if (!blob) return;
+      const url = URL.createObjectURL(blob);
+      this.preview!.nativeElement.src = url; // Gắn blob vào <img>
+    }, "image/png");
+
+  }
+
+  private draw() {
+
+    const ctx = this.canvas?.nativeElement.getContext("2d");
+
+    ctx.clearRect(0, 0, this.canvas?.nativeElement.width, this.canvas?.nativeElement.height);
+    // Tính toán scale để ảnh vừa với canvas
+    const scale =
+      (this.img.width > this.canvas?.nativeElement.width || this.img.height > this.canvas?.nativeElement.height) ?
+        Math.min(this.canvas?.nativeElement.width / this.img.width, this.canvas?.nativeElement.height / this.img.height)
+        : 1;
+    const newWidth = this.img.width * scale;
+    const newHeight = this.img.height * scale;
+
+    // Canh giữa ảnh trong canvas
+    const x = (this.canvas?.nativeElement.width - newWidth) / 2;
+    const y = (this.canvas?.nativeElement.height - newHeight) / 2;
+
+    // Vẽ ảnh vào canvas
+    ctx.fillStyle = "transparent";
+    ctx.fillRect(0, 0, this.canvas?.nativeElement.width, this.canvas?.nativeElement.height);
+    ctx.drawImage(this.img, x, y, newWidth, newHeight);
+
+    // Vẽ khung crop
+    ctx.strokeStyle = "#3B82F6";
+    ctx.lineWidth = 2;
+    ctx.strokeRect(this.cropBox.x, this.cropBox.y, this.cropBox.w, this.cropBox.h);
+
+    this.loadImagePreview();
   }
 
   onUpload() {
-    document.getElementById("upload")?.click();
+    this.upload?.nativeElement.click();
   }
 
   async onSave() {
-    const preview = document.getElementById("preview") as HTMLImageElement;
-
     // return base64 image
-    const base64 = await this.blobUrlToBase64(preview.src);
+    const base64 = await this.blobUrlToBase64(this.preview?.nativeElement.src);
 
     this.onSaveEvent.emit(base64);
   }

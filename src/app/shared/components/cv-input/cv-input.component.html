@@ -24,9 +24,9 @@
       <i class="pi pi-arrows-h ne" (mousedown)="onMouseDownImageScale($event, 'ne')"></i>
     </div>
 
-    <p-dialog header="Cập nhật ảnh đại diện" [modal]="true" [(visible)]="showDialogUploadImage"
-      [style]="{ width: 'fit-content' }">
-      <app-crop-image *ngIf="showDialogUploadImage" (onSaveEvent)="onSaveImage($event)"></app-crop-image>
+    <p-dialog header="Cập nhật ảnh đại diện" [modal]="true" [breakpoints]="{'1024px': '95vw'}"
+      [(visible)]="showDialogUploadImage" [style]="{ width: 'fit-content' }">
+      <app-crop-image [width]="150" [height]="150" *ngIf="showDialogUploadImage" (onSaveEvent)="onSaveImage($event)"></app-crop-image>
     </p-dialog>
   </div>
   }@else if(element.inputType === 'editor') {

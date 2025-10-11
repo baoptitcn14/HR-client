@@ -1,28 +1,31 @@
 <div class="container py-3">
-
     <p-card [style]="{ width: '100%' }">
 
         <ng-template pTemplate="header">
-            <!-- userProfile?.bannerImage -->
-            <img alt="Card" src="https://primefaces.org/cdn/primeng/images/card-ng.jpg" height="200"
-                style="object-fit: cover;" />
+
+            <div class="position-relative banner">
+                <img alt="Card" [src]="urlBanner" height="200" style="object-fit: cover;" />
+
+                <p-button class="position-absolute" (click)="onOpenEditAvatarDialog('banner')" icon="pi pi-image"
+                    severity="info" [size]="'small'" [rounded]="true"></p-button>
+            </div>
+
         </ng-template>
 
         <ng-template pTemplate="title">
-            <div class="p-card-title d-flex gap-2 align-items-center">
+            <div class="p-card-title d-flex gap-3 align-items-center">
 
                 <div class="position-relative avatar">
-                    <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
-                        styleClass="mr-2" size="xlarge" shape="circle" />
+                    <p-avatar [image]="urlAvatar" size="xlarge" shape="circle" />
 
-                    <p-button pTooltip="Sửa" class="position-absolute" (click)="onOpenEditAvatarDialog()"
-                        icon="pi pi-pencil" severity="info" [size]="'small'" [rounded]="true"></p-button>
+                    <p-button class="position-absolute" (click)="onOpenEditAvatarDialog('avatar')" icon="pi pi-image"
+                        severity="info" [size]="'small'" [rounded]="true"></p-button>
 
                 </div>
 
-                {{ userProfile?.surname ?? 'Unknown' }}
+                {{ userProfile?.surname ?? companyProfile?.name ?? 'Unknown' }}
 
-                @if(appSessionService.userId == userIdOnRouter) {
+                @if(appSessionService.userId == idOnRouter) {
                 <p-button icon="pi pi-pencil" (click)="onOpenEditDialog()" pTooltip="Sửa" [text]="true" severity="info"
                     [size]="'small'" [outlined]="true" [rounded]="true" />
                 }
@@ -30,10 +33,14 @@
             <div class="p-card-subtitle fs-6"> {{ userProfile?.description }}</div>
         </ng-template>
 
+        @if(typeView == TYPE_VIEW_CODE.COMPANY) {
+        <ng-container *ngTemplateOutlet="companyProfileTemplate"></ng-container>
+        }@else {
         <ng-container *ngTemplateOutlet="userProfile ? userProfileTemplate : userProfileEmptyTemplate"></ng-container>
+        }
 
         <ng-template pTemplate="footer">
-            @if(appSessionService.userId && appSessionService.userId != userIdOnRouter) {
+            @if(appSessionService.userId && appSessionService.userId != idOnRouter) {
 
             <div class="d-flex gap-3 mt-1">
 
@@ -44,7 +51,8 @@
                 <p-button (click)="onInvite()" label="Mời ứng viên" icon="pi pi pi-user-plus" [raised]="true" />
                 }
 
-                <p-button (click)="onFollow()" label="Quan tâm" icon="pi pi-heart" severity="danger" [text]="true"
+                <p-button (click)="onFollow()" [label]="interest ? 'Hủy theo dõi' : 'Theo dõi'"
+                    icon="pi {{ interest ? 'pi-heart-fill' : 'pi-heart'}}" severity="danger" [text]="true"
                     [outlined]="true" [raised]="true" />
             </div>
             }
@@ -52,6 +60,7 @@
         </ng-template>
 
     </p-card>
+
 </div>
 
 <ng-template #userProfileTemplate>
@@ -158,6 +167,8 @@
         </div>
 
     </div>
+
+
 </ng-template>
 
 <ng-template #userProfileEmptyTemplate>
@@ -181,6 +192,69 @@
 
         <div class="d-flex gap-2">
             Chưa có thông tin về công việc
+        </div>
+
+    </div>
+</ng-template>
+
+
+<ng-template #companyProfileTemplate>
+    <div class="info d-flex flex-column">
+
+        <div class="title border-left-title ps-2">
+            <h4>Thông tin</h4>
+        </div>
+
+        <!-- DOB -->
+        <div class="d-flex gap-2">
+            <label>Ngày thành lập</label>
+            <span>{{ companyProfile?.dob | date: 'dd/MM/yyyy' }}</span>
+        </div>
+
+        <!-- address -->
+        <div class="d-flex gap-2">
+            <label>Địa chỉ</label>
+            <span>{{ companyProfile?.address }}</span>
+        </div>
+
+        <!-- phone -->
+        <div class="d-flex gap-2">
+            <label>Số điện thoại</label>
+            <span>
+                <a href="tel:+{{ companyProfile?.phone }}" target="_blank">
+                    {{ companyProfile?.phone }}
+                </a>
+            </span>
+        </div>
+
+        <!-- Email -->
+        <div class="d-flex gap-2">
+            <label>Email</label>
+            <span>
+                <a href="mailto:{{ companyProfile?.email }}" target="_blank">
+                    {{ companyProfile?.email }}
+                </a>
+            </span>
+        </div>
+
+        <!-- size -->
+        <div class="d-flex gap-2">
+            <label>Quy mô</label>
+            <span>{{ companyProfile?.size }} người</span>
+        </div>
+
+        <!-- ds ngành nghề -->
+        <div class="d-flex gap-2">
+            <label>Ngành nghề</label>
+            <span>{{ companyProfile?._listIndustryDisplay }}</span>
+        </div>
+
+        <!-- Website -->
+        <div class="d-flex gap-2">
+            <label>Website</label>
+            <span>
+                <a [href]="companyProfile?.website" target="_blank">{{ companyProfile?.website }}</a>
+            </span>
         </div>
 
     </div>
