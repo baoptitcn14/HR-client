@@ -30,6 +30,19 @@ import { LoadingService } from './layout/loading/loading.component';
 import { TokenInitService } from './core/services/token-init.service';
 import { AppConst } from './shared/app-const';
 
+import { DefaultUrlSerializer, UrlTree, UrlSerializer } from '@angular/router';
+
+export class CustomUrlSerializer extends DefaultUrlSerializer {
+  override serialize(tree: UrlTree): string {
+    // Giữ nguyên query string không bị encode
+    return super.serialize(tree)
+      .replace(/%3F/g, '?')
+      .replace(/%3D/g, '=')
+      .replace(/%26/g, '&')
+      .replace(/%3A/g, ':');
+  }
+}
+
 export const appConfig: ApplicationConfig = {
   providers: [
     importProvidersFrom([ServiceProxiesModule, LibServiceModule]),
@@ -46,6 +59,7 @@ export const appConfig: ApplicationConfig = {
     },
     { provide: HTTP_INTERCEPTORS, useClass: MHttpInterceptor, multi: true },
     MessageService,
+    { provide: UrlSerializer, useClass: CustomUrlSerializer }
   ],
 };
 
@@ -100,4 +114,6 @@ export function appSesionInitializerFactory(
     }, 1000)
   }
 }
+
+
 

@@ -1,0 +1,12 @@
+.result {
+    .result-list {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+
+    &-title {
+        padding: 10px;
+        font-size: 1.2rem;
+    }
+}

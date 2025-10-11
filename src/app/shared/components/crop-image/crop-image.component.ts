@@ -1,6 +1,7 @@
-import { AfterViewInit, Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
+import { DynamicDialogConfig } from 'primeng/dynamicdialog';
 
 @Component({
   selector: 'app-crop-image',
@@ -17,14 +18,36 @@ export class CropImageComponent implements AfterViewInit {
   private messageService = inject(MessageService);
 
   // out in region
+  @Input() src = '';
+  @Input() width = 150;
+  @Input() height = 150;
   @Output() onSaveEvent = new EventEmitter<string>();
 
+  multiplier = 2;
+  cropBox = { x: 50, y: 50, w: this.width * this.multiplier, h: this.height * this.multiplier };
 
   ngAfterViewInit(): void {
     setTimeout(() => {
       this.cropImage();
-
     }, 300)
+  }
+
+  zoomIn() {
+    if (this.multiplier == 2) return;
+    this.multiplier += 0.5;
+
+    this.initCropBox();
+  }
+
+  zoomOut() {
+    if (this.multiplier == 1) return;
+    this.multiplier -= 0.5;
+
+    this.initCropBox();
+  }
+
+  private initCropBox() {
+    this.cropBox = { x: 50, y: 50, w: this.width * this.multiplier, h: this.height * this.multiplier };
   }
 
   private cropImage() {
@@ -34,20 +57,17 @@ export class CropImageComponent implements AfterViewInit {
     const ctx = canvas.getContext("2d")!;
     const preview = document.getElementById("preview") as HTMLImageElement;
 
-    const previewImageWidth = 150;
-    const previewImageHeight = 150;
-
     let img = new Image();
-    let cropBox = { x: 50, y: 50, w: previewImageWidth, h: previewImageHeight };
+    this.initCropBox();
     let isDragging = false;
-
+    let self = this;
 
     // Load ảnh
     upload.addEventListener("change", (e: any) => {
       const file = e.target.files[0];
       if (!file) return;
 
-      // nếu không phải hình ảnh thì khong cho upload
+      // nếu không phải hình ảnh thì không cho upload
       if (!file.type.startsWith("image/")) {
 
         this.messageService.add({
@@ -59,7 +79,7 @@ export class CropImageComponent implements AfterViewInit {
         return;
       }
 
-      // nếu kích thước file lớn hơn 5mb thì khong cho upload
+      // nếu kích thước file lớn hơn 5mb thì không cho upload
       if (file.size > 5 * 1024 * 1024) {
         this.messageService.add({
           severity: 'error',
@@ -79,8 +99,8 @@ export class CropImageComponent implements AfterViewInit {
 
     // Vẽ lại canvas khi ảnh load
     img.onload = () => {
-      canvas.width = 300;
-      canvas.height = 300;
+      canvas.width = 450;
+      canvas.height = 450;
       draw();
     };
 
@@ -106,14 +126,14 @@ export class CropImageComponent implements AfterViewInit {
       // Vẽ khung crop
       ctx.strokeStyle = "#3B82F6";
       ctx.lineWidth = 2;
-      ctx.strokeRect(cropBox.x, cropBox.y, cropBox.w, cropBox.h);
+      ctx.strokeRect(self.cropBox.x, self.cropBox.y, self.cropBox.w, self.cropBox.h);
 
       loadImagePreview();
     }
 
     function loadImagePreview() {
       // Load ảnh preview
-      const { x, y, w, h } = cropBox;
+      const { x, y, w, h } = self.cropBox;
 
       // Tạo canvas tạm để lấy phần crop
       const tmpCanvas = document.createElement("canvas");
@@ -136,10 +156,10 @@ export class CropImageComponent implements AfterViewInit {
     // Drag crop box
     canvas.addEventListener("mousedown", e => {
       if (
-        e.offsetX > cropBox.x &&
-        e.offsetX < cropBox.x + cropBox.w &&
-        e.offsetY > cropBox.y &&
-        e.offsetY < cropBox.y + cropBox.h
+        e.offsetX > this.cropBox.x &&
+        e.offsetX < this.cropBox.x + this.cropBox.w &&
+        e.offsetY > this.cropBox.y &&
+        e.offsetY < this.cropBox.y + this.cropBox.h
       ) {
         isDragging = true;
       }
@@ -147,8 +167,8 @@ export class CropImageComponent implements AfterViewInit {
 
     canvas.addEventListener("mousemove", e => {
       if (isDragging) {
-        cropBox.x = e.offsetX - cropBox.w / 2;
-        cropBox.y = e.offsetY - cropBox.h / 2;
+        this.cropBox.x = e.offsetX - this.cropBox.w / 2;
+        this.cropBox.y = e.offsetY - this.cropBox.h / 2;
         draw();
       }
     });
@@ -164,7 +184,6 @@ export class CropImageComponent implements AfterViewInit {
     const preview = document.getElementById("preview") as HTMLImageElement;
 
     // return base64 image
-
     const base64 = await this.blobUrlToBase64(preview.src);
 
     this.onSaveEvent.emit(base64);

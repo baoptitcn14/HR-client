@@ -65,7 +65,7 @@
 }@else {
 <section class="ds-viec-lam row row-gap-2" style="--multiplierFS: {{ multiplierFS }}">
   @for (viecLam of viecLams; track viecLam.id; let last = $last) {
-  <div class="{{  layout == 'grid' ? 'col-12 col-md-6 col-xl-4' : 'col-12'}}" *ngIf="!isLoading">
+  <div class="{{  layout == 'grid' ? 'col-12 col-md-6 col-xl-4' : 'col-12'}}">
     <app-viec-lam [viecLam]="viecLam" [last]="last" [isLoading]="isLoading"
       [showButtonApply]="showButtonApply"></app-viec-lam>
   </div>

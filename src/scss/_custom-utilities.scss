@@ -23,6 +23,25 @@ $utilities: (
 // font size px
 @for $i from 10 through 48 {
   .font-size-#{$i} {
-    font-size: #{$i} + 'px' !important;
+    font-size: #{$i}+'px' !important;
+  }
+}
+
+
+// border left custom for Title
+.border-left-title {
+  position: relative;
+
+  &::before {
+    content: '';
+    display: block;
+    width: 3px;
+    height: var(--height-border, 24px);
+    border-radius: 6px;
+    background-color: var(--bg-border, var(--primary-color));
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
   }
 }

@@ -4,6 +4,7 @@ import {
   CategoryServiceProxy,
   CurrentUserServiceProxy,
   FileServiceProxy,
+  InterestServiceProxy,
   JobApplicationInfoServiceProxy,
   JobApplicationServiceProxy,
   JobFieldServiceProxy,
@@ -17,6 +18,10 @@ import {
   TenantServiceProxy,
   TokenAuthServiceProxy,
   UserCVServiceProxy,
+  UserJobSettingInfoServiceProxy,
+  UserJobSettingServiceProxy,
+  UserProfileInfoServiceProxy,
+  UserProfileServiceProxy,
 } from './sys-service-proxies';
 
 @NgModule({
@@ -40,7 +45,12 @@ import {
     JobApplicationServiceProxy,
     JobPostFieldInfoServiceProxy,
     UserCVServiceProxy,
-    FileServiceProxy
+    FileServiceProxy,
+    UserProfileInfoServiceProxy,
+    UserProfileServiceProxy,
+    UserJobSettingInfoServiceProxy,
+    UserJobSettingServiceProxy,
+    InterestServiceProxy
   ],
 })
 export class ServiceProxiesModule {}

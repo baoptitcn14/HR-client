@@ -9,6 +9,7 @@ import { UserCvComponent } from './pages/user-cv/user-cv.component';
 import { JobsComponent } from './pages/jobs/jobs.component';
 import { ListJobComponent } from './pages/jobs/list-job/list-job.component';
 import { FindComponent } from './pages/find/find.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 export const routes: Routes = [
   {
@@ -68,8 +69,12 @@ export const routes: Routes = [
   {
     path: 'find',
     component: FindComponent,
-    data: { title: 'Tìm kiếm công ty / người dùng', breadcrumb: 'Tìm kiếm công ty / người dùng' },
-    canActivate: [authRouteGuard]
+    data: { breadcrumb: 'Tìm kiếm công ty / người dùng' },
+  },
+  {
+    path: 'profile/:id',
+    component: ProfileComponent,
+    data: { breadcrumb: 'Thông tin' },
   },
   {
     path: '**',

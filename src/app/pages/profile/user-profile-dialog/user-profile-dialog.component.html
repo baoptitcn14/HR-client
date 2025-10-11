@@ -1,0 +1,264 @@
+<div class="p-dialog-_content mx-auto">
+    <p-tabView styleClass="tabview-custom">
+
+        <p-tabPanel>
+            <ng-template pTemplate="header">
+                <div class="d-flex align-items-center gap-2">
+                    <i class="pi pi-info-circle"></i>
+                    <span class="font-bold">
+                        Thông tin cá nhân
+                    </span>
+                </div>
+            </ng-template>
+
+            <ng-container *ngTemplateOutlet="userFormTemplate"></ng-container>
+
+        </p-tabPanel>
+
+        <p-tabPanel>
+            <ng-template pTemplate="header">
+                <div class="d-flex align-items-center gap-2">
+                    <i class="pi pi-briefcase"></i>
+                    <span class="font-bold">
+                        Thông tin về công việc
+                    </span>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="content">
+                <ng-container *ngTemplateOutlet="userJobFormTemplate"></ng-container>
+            </ng-template>
+        </p-tabPanel>
+        <p-tabPanel header="Header III">
+            <ng-template pTemplate="header">
+                <div class="d-flex align-items-center gap-2">
+                    <i class="pi pi-cog"></i>
+                    <span class="font-bold">
+                        Cài đặt hiển thị
+                    </span>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="content">
+                <ng-container *ngTemplateOutlet="userSettingFormTemplate"></ng-container>
+            </ng-template>
+        </p-tabPanel>
+    </p-tabView>
+</div>
+
+<dialog-footer (onSaveEvent)="onSave()" (onCloseEvent)="onClose()" dialogFooter [classDialog]="'user-profile-dialog'"
+    [isNew]="true" [isValid]="
+        userForm.valid &&
+        userJobForm.valid &&
+        userSettingForm.valid
+    "></dialog-footer>
+
+
+<ng-template #userFormTemplate>
+    <form [formGroup]="userForm">
+        <div class="row row-gap-3">
+
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="d-flex flex-column gap-2">
+                    <label for="surname">Họ và tên</label>
+                    <input readonly pInputText id="surname" formControlName="surname" type="text"
+                        placeholder="Họ và tên" />
+                </div>
+            </div>
+
+            <!-- dob -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="d-flex flex-column gap-2">
+                    <label for="dob">Ngày sinh</label>
+                    <p-calendar id="dob" formControlName="dob" [styleClass]="'w-100'" [appendTo]="'body'"
+                        [iconDisplay]="'input'" [showIcon]="true" [showTime]="false"></p-calendar>
+                </div>
+            </div>
+
+            <!-- gender -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="d-flex flex-column gap-2">
+                    <label for="gender">Giới tính</label>
+                    <p-dropdown id="gender" [appendTo]="'body'" [styleClass]="'w-100'" [options]="genderOptions"
+                        formControlName="gender"></p-dropdown>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6">
+                <div class="d-flex flex-column gap-2">
+                    <label for="emailAddress">Email</label>
+                    <input pInputText id="emailAddress" formControlName="emailAddress" type="text"
+                        placeholder="Email" />
+                </div>
+            </div>
+
+            <div class="col-12 col-md-12 col-lg-6">
+                <div class="d-flex flex-column gap-2">
+                    <label for="phoneNumber">Số điện thoại</label>
+                    <input pInputText id="phoneNumber" formControlName="phoneNumber" type="text"
+                        placeholder="Số điện thoại" />
+                </div>
+            </div>
+
+            <div class="col-12 col-md-12">
+                <div class="d-flex flex-column gap-2">
+                    <label for="location">Địa chỉ</label>
+                    <input pInputText id="location" formControlName="location" type="text" placeholder="Địa chỉ" />
+                </div>
+            </div>
+
+            <!-- description -->
+            <div class="col-12 col-md-12">
+                <div class="d-flex flex-column gap-2">
+                    <label for="description">Mô tả</label>
+                    <textarea rows="5" style="min-height: 99px;" cols="30" pInputTextarea formControlName="description"
+                        [autoResize]="true"></textarea>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</ng-template>
+
+<ng-template #userJobFormTemplate>
+
+    <form [formGroup]="userJobForm">
+        <div class="row row-gap-3 p-fluid">
+
+            <div class="col-12 col-md-8">
+                <div class="d-flex flex-column gap-2">
+                    <label for="min">Mức lương</label>
+
+                    <div class="d-flex gap-3">
+                        <p-inputNumber placeholder="Từ" formControlName="salaryMin" inputId="min" mode="currency"
+                            currency="VND" locale="vi-VN" />
+                        <p-inputNumber placeholder="Đến" formControlName="salaryMax" inputId="mã" mode="currency"
+                            currency="VND" locale="vi-VN" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-4">
+                <div class="d-flex flex-column gap-2">
+                    <label for="workingHours">Thời gian làm việc</label>
+                    <p-inputMask id="workingHours" mask="99:99 - 99:99" formControlName="workingHours" />
+                </div>
+            </div>
+
+            <div class="col-12">
+                <div class="d-flex flex-column gap-2">
+                    <label for="location">Khu vực</label>
+                    <p-chips placeholder="Hà Nội, Hồ Chí Minh, Nha Trang, Đà Nẵng"
+                        formControlName="_listLocationOpenJson" separator="," />
+                </div>
+            </div>
+
+            <div class="col-12">
+                <div class="d-flex flex-column gap-2">
+                    <label for="jobTitle">Chức vụ</label>
+                    <p-chips [allowDuplicate]="false" placeholder="Giám đốc, Trưởng phòng, Nhân viên"
+                        formControlName="_listTitleOpenJson" separator="," />
+                </div>
+            </div>
+
+            <div class="col-12">
+                <div class="d-flex flex-column gap-2">
+                    <label for="jobTitle">Chức vụ hiện tại</label>
+                    <input type="text" pInputText formControlName="jobLevel">
+                </div>
+            </div>
+
+            <div class="col-12">
+                <div class="d-flex flex-column gap-2">
+                    <label for="WorkingType">Hình thức</label>
+                    <p-chips [allowDuplicate]="false" placeholder="Onsite, Remote, Hybrid, Fulltime, Parttime"
+                        formControlName="_workingTypeOpenJson" separator="," />
+                </div>
+            </div>
+
+            <div class="col-12">
+                <div class="d-flex flex-column gap-2">
+                    <label for="experience">Kinh nghiệm</label>
+                    <p-dropdown id="experience" [appendTo]="'body'" [options]="experienceOptions"
+                        formControlName="experience" [optionLabel]="'name'" [placeholder]="'Chọn kinh nghiệm'"
+                        [optionValue]="'name'">
+                        ></p-dropdown>
+                </div>
+            </div>
+
+            <div class="col-12">
+                <div class="d-flex flex-column gap-2">
+                    <label for="industry">Ngành nghề</label>
+                    <p-multiSelect appendTo="body" lazy="true" [lazy]="true" [options]="industryOptions" [filter]="true"
+                        display="chip" formControlName="_listIndustryOpenJson" optionLabel="name" [optionValue]="'code'"
+                        [selectionLimit]="3" [virtualScrollItemSize]="28" [virtualScroll]="true"
+                        placeholder="Chọn ngành nghề" />
+                </div>
+            </div>
+
+
+
+        </div>
+    </form>
+
+</ng-template>
+
+<ng-template #userSettingFormTemplate>
+    <form [formGroup]="userSettingForm">
+        <div class="row row-gap-3">
+
+            <div class="col-12 col-md-6">
+                <div class="d-flex flex-column gap-2">
+                    <label for="can-change-work-place">Có thay đổi điểm làm việc</label>
+                    <p-inputSwitch id="can-change-work-place" formControlName="canChangeWorkplace" />
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6">
+                <div class="d-flex flex-column gap-2">
+                    <label for="is-looking-for-job">Bật tìm việc</label>
+                    <p-inputSwitch id="is-looking-for-job" formControlName="isLookingForJob" />
+                </div>
+            </div>
+
+            <!-- isSearchByEmployerAllowed -->
+            <div class="col-12 col-md-6">
+                <div class="d-flex flex-column gap-2">
+                    <label for="is-search-by-employer-allowed">Cho phép nhà tuyển dụng tìm hồ sơ</label>
+                    <p-inputSwitch id="is-search-by-employer-allowed" formControlName="isSearchByEmployerAllowed" />
+                </div>
+            </div>
+
+            <!-- receiveSuggestions -->
+            <div class="col-12 col-md-6">
+                <div class="d-flex flex-column gap-2">
+                    <label for="receive-suggestions">Nhận đề xuất</label>
+                    <p-inputSwitch id="receive-suggestions" formControlName="receiveSuggestions" />
+                </div>
+            </div>
+
+            <!-- allowContact -->
+            <div class="col-12 col-md-6">
+                <div class="d-flex flex-column gap-2">
+                    <label for="allow-contact">Cho phép liên hệ</label>
+                    <p-inputSwitch id="allow-contact" formControlName="allowContact" />
+                </div>
+            </div>
+
+            <!-- showEmail -->
+            <div class="col-12 col-md-6">
+                <div class="d-flex flex-column gap-2">
+                    <label for="show-email">Hiển thị email</label>
+                    <p-inputSwitch id="show-email" formControlName="showEmail" />
+                </div>
+            </div>
+
+            <!-- showPhone -->
+            <div class="col-12 col-md-6">
+                <div class="d-flex flex-column gap-2">
+                    <label for="show-phone">Hiển thị số diện thoại</label>
+                    <p-inputSwitch id="show-phone" formControlName="showPhone" />
+                </div>
+            </div>
+
+        </div>
+    </form>
+</ng-template>

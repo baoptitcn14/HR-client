@@ -1,20 +1,13 @@
 <div class="container py-3">
 
     <div class="row">
-        <div class="d-none d-md-flex col-md-4 col-lg-3">
-            <!-- sidebar -->
 
-            <!-- list recommend company  -->
-            <app-recommend-componies></app-recommend-componies>
-
-        </div>
-
-        <div class="col-md-8 col-lg-9">
-            <div class="d-flex flex-column gap-3">
+        <div class="col-md-7 col-lg-8">
+            <div class="d-flex flex-column gap-3 shadow-sm rounded p-3 bg-white">
 
                 <!-- input search -->
                 <div class="d-flex gap-3 align-items-center flex-wrap">
-                    <div style="flex-basis: 80%">
+                    <div class="flex-grow-1">
                         <p-inputGroup>
                             <p-inputGroupAddon>
                                 <i class="pi pi-search"></i>
@@ -27,15 +20,71 @@
 
 
                     </div>
-                    <p-button (onClick)="op.toggle($event)" icon="pi pi-cog" severity="secondary" [text]="true" />
+                    <p-button (onClick)="op.toggle($event)" icon="pi pi-cog" severity="secondary" [size]="'small'"
+                        raised="true" [text]="true" />
 
                 </div>
+
                 <!-- list result -->
+                <section class="result">
+                    <!-- companies -->
+                    <div class="result-wrap-list">
 
-                <!-- companies -->
+                        <div class="d-flex gap-2 mb-3 result-title border-left-title" style="--height-border: 30px;">
+                            <i class="pi pi-building fw-bold fs-5"></i>
+                            <h4 class="fw-bold m-0">Công ty</h4>
+                        </div>
 
-                <!-- users -->
+                        <div class="result-list mb-3">
+                            <app-company-user-card [typeView]="TYPE_VIEW_CODE.COMPANY"></app-company-user-card>
+                            <app-company-user-card></app-company-user-card>
+                            <app-company-user-card></app-company-user-card>
+                            <app-company-user-card></app-company-user-card>
+                            <app-company-user-card></app-company-user-card>
+                            <app-company-user-card></app-company-user-card>
+                        </div>
+
+                        <p-paginator [rows]="6" [pageLinkSize]="3" [totalRecords]="100"></p-paginator>
+
+                    </div>
+
+                    <p-divider></p-divider>
+
+                    <!-- users -->
+                    <div class="result-wrap-list users">
+
+                        <div class="d-flex gap-2 mb-3 result-title border-left-title"
+                            style="--bg-border: var(--red-400);--height-border: 28px;">
+                            <i class="pi pi-users fw-bold fs-5"></i>
+                            <h4 class="fw-bold m-0">Ứng viên</h4>
+                        </div>
+
+                        <div class="result-list mb-3">
+                            <app-company-user-card [typeView]="TYPE_VIEW_CODE.USER"></app-company-user-card>
+                            <app-company-user-card></app-company-user-card>
+                            <app-company-user-card></app-company-user-card>
+                            <app-company-user-card></app-company-user-card>
+                            <app-company-user-card></app-company-user-card>
+                            <app-company-user-card></app-company-user-card>
+                        </div>
+
+                        <p-paginator [rows]="6" [pageLinkSize]="3" [totalRecords]="100"></p-paginator>
+                    </div>
+                </section>
             </div>
+        </div>
+
+        <div class="d-none d-md-flex flex-column gap-3 col-md-5 col-lg-4">
+            <!-- sidebar -->
+
+            <!-- list recommend company  -->
+            <app-recommend-list [title]="'Công ty được đề xuất'"
+                [typeView]="TYPE_VIEW_CODE.COMPANY"></app-recommend-list>
+
+            <!-- list recommend user  -->
+            <app-recommend-list [title]="'Ứng viên được đề xuất'" [typeView]="TYPE_VIEW_CODE.USER"
+                [borderLeftTitleColor]="'var(--red-400)'"></app-recommend-list>
+
         </div>
     </div>
 </div>
@@ -43,6 +92,6 @@
 <p-overlayPanel #op>
     <div class=" d-flex flex-column gap-2 align-items-start">
         <p-checkbox [(ngModel)]="stateCheck.company" [binary]="true" label="Công ty"></p-checkbox>
-        <p-checkbox [(ngModel)]="stateCheck.userCv" [binary]="true" label="Tài khoản"></p-checkbox>
+        <p-checkbox [(ngModel)]="stateCheck.userCv" [binary]="true" label="Ứng viên"></p-checkbox>
     </div>
 </p-overlayPanel>

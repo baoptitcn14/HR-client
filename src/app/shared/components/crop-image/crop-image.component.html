@@ -1,11 +1,19 @@
 <div class="d-flex gap-3 p-4" style="width: fit-content; margin: auto; background-color: #fff;">
 
+    <div class="toolbar d-flex gap-2">
+
+        <p-button label="Phóng to" icon="pi pi-plus" severity="success" (click)="zoomIn()"></p-button>
+
+        <p-button label="Thu nhỏ" icon="pi pi-minus" severity="info" (click)="zoomOut()"></p-button>
+
+    </div>
+
     <div class="image-upload">
-        <canvas id="canvas" ></canvas>
+        <canvas id="canvas"></canvas>
     </div>
 
     <div class="image-preview d-flex flex-column gap-3 align-items-center">
-        <img id="preview" style="width: 150px; height: 150px;" />
+        <img id="preview" [width]="width" [height]="height" />
 
 
         <p-button label="Đổi ảnh" icon="pi pi-upload" severity="info" (click)="onUpload()"></p-button>

@@ -1,0 +1,193 @@
+<div class="container py-3">
+
+    <p-card [style]="{ width: '100%' }">
+
+        <ng-template pTemplate="header">
+            <!-- userProfile?.bannerImage -->
+            <img alt="Card" src="https://primefaces.org/cdn/primeng/images/card-ng.jpg" height="200"
+                style="object-fit: cover;" />
+        </ng-template>
+
+        <ng-template pTemplate="title">
+            <div class="p-card-title d-flex gap-2 align-items-center">
+
+                <div class="position-relative avatar">
+                    <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
+                        styleClass="mr-2" size="xlarge" shape="circle" />
+
+                    <p-button pTooltip="Sửa" class="position-absolute" (click)="onOpenEditAvatarDialog()"
+                        icon="pi pi-pencil" severity="info" [size]="'small'" [rounded]="true"></p-button>
+
+                </div>
+
+                {{ userProfile?.surname ?? 'Unknown' }}
+
+                @if(appSessionService.userId == userIdOnRouter) {
+                <p-button icon="pi pi-pencil" (click)="onOpenEditDialog()" pTooltip="Sửa" [text]="true" severity="info"
+                    [size]="'small'" [outlined]="true" [rounded]="true" />
+                }
+            </div>
+            <div class="p-card-subtitle fs-6"> {{ userProfile?.description }}</div>
+        </ng-template>
+
+        <ng-container *ngTemplateOutlet="userProfile ? userProfileTemplate : userProfileEmptyTemplate"></ng-container>
+
+        <ng-template pTemplate="footer">
+            @if(appSessionService.userId && appSessionService.userId != userIdOnRouter) {
+
+            <div class="d-flex gap-3 mt-1">
+
+                @if(typeView == TYPE_VIEW_CODE.COMPANY) {
+                <p-button (click)="onApply()" label="Xin gia nhập" icon="pi pi pi-envelope" [raised]="true" />
+                }@else{
+
+                <p-button (click)="onInvite()" label="Mời ứng viên" icon="pi pi pi-user-plus" [raised]="true" />
+                }
+
+                <p-button (click)="onFollow()" label="Quan tâm" icon="pi pi-heart" severity="danger" [text]="true"
+                    [outlined]="true" [raised]="true" />
+            </div>
+            }
+
+        </ng-template>
+
+    </p-card>
+</div>
+
+<ng-template #userProfileTemplate>
+    <div class="info d-flex flex-column">
+
+        <div class="title border-left-title ps-2" style="--bg-border: var(--red-400)">
+            <h4>Thông tin cá nhân</h4>
+        </div>
+
+        <!-- gender -->
+        <div class="d-flex gap-2">
+            <label>Giới tính</label>
+            <span>{{ userProfile?.gender }}</span>
+        </div>
+
+        <!-- Ages -->
+        <div class="d-flex gap-2">
+            <label>Ngày sinh</label>
+            <span>{{ userProfile?.dob | date: 'dd/MM/yyyy' }}</span>
+        </div>
+
+        <!-- location -->
+        <div class="d-flex gap-2">
+            <label>Địa chỉ</label>
+            <span>{{ userProfile?.location }}</span>
+        </div>
+
+        @if(userJobSetting?.showPhone) {
+        <!-- phone -->
+        <div class="d-flex gap-2">
+            <label>Số điện thoại</label>
+            <span class="user-select-all">
+                <a href="tel:+{{ userProfile?.phoneNumber }}" target="_blank">
+                    {{ userProfile?.phoneNumber }}
+                </a>
+            </span>
+        </div>
+        }
+
+        @if(userJobSetting?.showEmail) {
+        <!-- email -->
+        <div class="d-flex gap-2">
+            <label>Email</label>
+            <span class="user-select-all">
+                <a href="mailto:{{ userProfile?.emailAddress }}" target="_blank">
+                    {{ userProfile?.emailAddress }}
+                </a>
+            </span>
+        </div>
+        }
+
+    </div>
+
+    <p-divider></p-divider>
+
+    <div class="info d-flex flex-column">
+
+        <div class="title border-left-title ps-2">
+            <h4>Thông tin về công việc</h4>
+        </div>
+
+        <!-- ListLocation -->
+        <div class="d-flex gap-2">
+            <label>Khu vực</label>
+            <span>{{ userJobSetting?._listLocationDisplay }}</span>
+        </div>
+
+        <!-- WorkingType -->
+        <div class="d-flex gap-2">
+            <label>Hình thức</label>
+            <span>{{ userJobSetting?._workingTypeDisplay }}</span>
+        </div>
+
+        <!-- Experience -->
+        <div class="d-flex gap-2">
+            <label>Kinh nghiệm</label>
+            <span>{{ userJobSetting?.experience }}</span>
+        </div>
+
+        <!-- ListIndustry -->
+        <div class="d-flex gap-2">
+            <label>Nghề nghiệp</label>
+            <span>{{ userJobSetting?._listIndustryDisplay }}</span>
+        </div>
+
+        <!-- JobTitle -->
+        <div class="d-flex gap-2">
+            <label>Cấp bậc</label>
+            <span>{{ userJobSetting?._listTitleDisplay }}</span>
+        </div>
+
+        <!-- JobLevel -->
+        <div class="d-flex gap-2">
+            <label>Cấp bậc hiện tại</label>
+            <span>{{ userJobSetting?.jobLevel }}</span>
+        </div>
+
+        <!-- Link CV -->
+        <div class="d-flex gap-2">
+            <label>Link CV</label>
+            <span>
+                <a href="/" target="_blank">Xem</a>
+            </span>
+        </div>
+
+    </div>
+</ng-template>
+
+<ng-template #userProfileEmptyTemplate>
+    <div class="info d-flex flex-column">
+        <div class="title border-left-title ps-2" style="--bg-border: var(--red-400)">
+            <h4>Thông tin cá nhân</h4>
+        </div>
+        <div class="d-flex gap-2">
+            Chưa có thông tin cá nhân
+        </div>
+
+    </div>
+
+    <p-divider></p-divider>
+
+    <div class="info d-flex flex-column">
+
+        <div class="title border-left-title ps-2">
+            <h4>Thông tin về công việc</h4>
+        </div>
+
+        <div class="d-flex gap-2">
+            Chưa có thông tin về công việc
+        </div>
+
+    </div>
+</ng-template>
+
+<p-dialog header="Cập nhật ảnh đại diện" [modal]="true" [(visible)]="showDialogUploadImage"
+    [style]="{ width: 'fit-content' }">
+    <app-crop-image *ngIf="showDialogUploadImage" [width]="56" [height]="56"
+        (onSaveEvent)="onSaveImage($event)"></app-crop-image>
+</p-dialog>

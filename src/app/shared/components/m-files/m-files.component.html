@@ -1,0 +1,44 @@
+<div
+  class="input-group mb-3"
+  [ngClass]="{ 'is-invalid': errors, 'is-valid': !errors }"
+>
+  <div class="fileinput fileinput-exists">
+    <span class="p-ripple p-element p-button p-component p-fileupload-choose btn-file">
+      <i class="pi pi-upload me-2"></i>
+      <span class="fileinput-new" hidden></span>
+      <span class="fileinput-exists">
+        {{ isNew ? "Chọn file" : multiple ? "Thêm" : "Thay đổi" }}
+      </span>
+      <input type="hidden" value="" name="" />
+      <input
+        type="file"
+        [multiple]="multiple"
+        (change)="onChangeValue($event)"
+        accept="accept"
+        [disabled]="disabled"
+        id="{{ inputId }}"
+      />
+    </span>
+
+    <span class="list-file d-flex" *ngIf="!hiddenListFile && value?.length > 0">
+      <a
+        [href]="f.fileUrl ? f.fileUrl : f._url"
+        target="_blank"
+        rel="noopener noreferrer"
+        *ngFor="let f of value; let index = index"
+      >
+        <div class="file">
+          <img
+            class="img-thumbnail"
+            [src]="f.fileUrl ? f.fileUrl : f.data"
+            alt="{{ f.name }}"
+          />
+          <div class="info">
+            <span class="file-name">{{ f.name }}</span>
+            <i class="pi pi-times" (click)="onRemoveFile(index, $event)"></i>
+          </div>
+        </div>
+      </a>
+    </span>
+  </div>
+</div>
