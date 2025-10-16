@@ -24,6 +24,7 @@ import {
 import { MultiSelectModule } from 'primeng/multiselect';
 import { AppConst } from '../../shared/app-const';
 import { CategoriesService } from '../../core/services/categories.service';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-section-search',
@@ -38,6 +39,7 @@ import { CategoriesService } from '../../core/services/categories.service';
     IconFieldModule,
     AutoCompleteModule,
     MultiSelectModule,
+    TranslatePipe
   ],
   templateUrl: './section-search.component.html',
   styleUrl: './section-search.component.scss',

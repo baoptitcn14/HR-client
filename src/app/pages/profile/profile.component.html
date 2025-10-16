@@ -4,7 +4,7 @@
         <ng-template pTemplate="header">
 
             <div class="position-relative banner">
-                <img alt="Card" [src]="urlBanner" height="200" style="object-fit: cover;" />
+                <img alt="Card" [src]="urlBanner" height="400" style="object-fit: cover;" />
 
                 <p-button class="position-absolute" (click)="onOpenEditAvatarDialog('banner')" icon="pi pi-image"
                     severity="info" [size]="'small'" [rounded]="true"></p-button>
@@ -13,7 +13,7 @@
         </ng-template>
 
         <ng-template pTemplate="title">
-            <div class="p-card-title d-flex gap-3 align-items-center">
+            <div class="d-flex gap-3 align-items-center">
 
                 <div class="position-relative avatar">
                     <p-avatar [image]="urlAvatar" size="xlarge" shape="circle" />
@@ -30,7 +30,7 @@
                     [size]="'small'" [outlined]="true" [rounded]="true" />
                 }
             </div>
-            <div class="p-card-subtitle fs-6"> {{ userProfile?.description }}</div>
+            <div class="p-card-subtitle fs-6 mt-2"> {{ userProfile?.description }}</div>
         </ng-template>
 
         @if(typeView == TYPE_VIEW_CODE.COMPANY) {
@@ -262,6 +262,6 @@
 
 <p-dialog header="Cập nhật ảnh đại diện" [modal]="true" [(visible)]="showDialogUploadImage"
     [style]="{ width: 'fit-content' }">
-    <app-crop-image *ngIf="showDialogUploadImage" [width]="56" [height]="56"
+    <app-crop-image *ngIf="showDialogUploadImage" [width]="widthDialog" [height]="heightDialog"
         (onSaveEvent)="onSaveImage($event)"></app-crop-image>
 </p-dialog>

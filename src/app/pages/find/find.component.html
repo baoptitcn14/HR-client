@@ -14,7 +14,7 @@
                             </p-inputGroupAddon>
                             <p-autoComplete [inputStyleClass]="'w-100 rounded-start-0 '" [styleClass]="'w-100'"
                                 [appendTo]="'body'" [(ngModel)]="searchText" [suggestions]="suggestions"
-                                [placeholder]="'Tìm kiếm'" optionValue="title" optionLabel="title"
+                                [placeholder]="'common.actions.search' | translate" optionValue="title" optionLabel="title"
                                 (completeMethod)="search($event)" />
                         </p-inputGroup>
 
@@ -32,7 +32,7 @@
 
                         <div class="d-flex gap-2 mb-3 result-title border-left-title" style="--height-border: 30px;">
                             <i class="pi pi-building fw-bold fs-5"></i>
-                            <h4 class="fw-bold m-0">Công ty</h4>
+                            <h4 class="fw-bold m-0">{{ 'common.business.company' | translate }}</h4>
                         </div>
 
                         <div class="result-list mb-3">
@@ -56,7 +56,7 @@
                         <div class="d-flex gap-2 mb-3 result-title border-left-title"
                             style="--bg-border: var(--red-400);--height-border: 28px;">
                             <i class="pi pi-users fw-bold fs-5"></i>
-                            <h4 class="fw-bold m-0">Ứng viên</h4>
+                            <h4 class="fw-bold m-0">{{ 'common.business.candidate' | translate }}</h4>
                         </div>
 
                         <div class="result-list mb-3">
@@ -78,12 +78,12 @@
             <!-- sidebar -->
 
             <!-- list recommend company  -->
-            <app-recommend-list [title]="'Công ty được đề xuất'"
+            <app-recommend-list [title]="'common.job.recommended_companies' | translate"
                 [typeView]="TYPE_VIEW_CODE.COMPANY"></app-recommend-list>
 
             <!-- list recommend user  -->
-            <app-recommend-list [title]="'Ứng viên được đề xuất'" [typeView]="TYPE_VIEW_CODE.USER"
-                [borderLeftTitleColor]="'var(--red-400)'"></app-recommend-list>
+            <app-recommend-list [title]="'common.job.recommended_candidates' | translate"
+                [typeView]="TYPE_VIEW_CODE.USER" [borderLeftTitleColor]="'var(--red-400)'"></app-recommend-list>
 
         </div>
     </div>
@@ -91,7 +91,9 @@
 
 <p-overlayPanel #op>
     <div class=" d-flex flex-column gap-2 align-items-start">
-        <p-checkbox [(ngModel)]="stateCheck.company" [binary]="true" label="Công ty"></p-checkbox>
-        <p-checkbox [(ngModel)]="stateCheck.userProfile" [binary]="true" label="Ứng viên"></p-checkbox>
+        <p-checkbox [(ngModel)]="stateCheck.company" [binary]="true"
+            label="{{  'common.business.company' | translate }}"></p-checkbox>
+        <p-checkbox [(ngModel)]="stateCheck.userProfile" [binary]="true"
+            label="{{  'common.business.candidate' | translate }}"></p-checkbox>
     </div>
 </p-overlayPanel>

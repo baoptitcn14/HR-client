@@ -1,0 +1,204 @@
+{
+  "languages": {
+    "en": "English",
+    "vi": "Vietnamese"
+  },
+  "common": {
+    "language": {
+      "english": "English",
+      "vietnamese": "Vietnamese"
+    },
+    "time": {
+      "day": "Day",
+      "days": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ],
+      "month": [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+      ],
+      "year": "Năm",
+      "hour": "Hour",
+      "minute": "Minute",
+      "second": "Second",
+      "today": "Today",
+      "yesterday": "Yesterday",
+      "tomorrow": "Tomorrow"
+    },
+    "actions": {
+      "add": "Add",
+      "edit": "Edit",
+      "delete": "Delete",
+      "update": "Update",
+      "view": "View",
+      "approve": "Approve",
+      "reject": "Reject",
+      "submit": "Send",
+      "cancel": "Cancel",
+      "search": "Search",
+      "filter": "Filter",
+      "upload": "Upload",
+      "download": "Download",
+      "send": "Send",
+      "save": "Save",
+      "reset": "Reset",
+      "close": "Close",
+      "open": "Open",
+      "refresh": "Refresh",
+      "confirm": "Confirm",
+      "back": "Back",
+      "next": "Next",
+      "follow": "Follow"
+    },
+    "status": {
+      "pending": "Pending",
+      "approved": "Approved",
+      "rejected": "Rejected",
+      "active": "Active",
+      "inactive": "Inactive",
+      "draft": "Draft",
+      "archived": "Archived"
+    },
+    "user": {
+      "login": "Login",
+      "logout": "Logout",
+      "register": "Register",
+      "profile": "Profile",
+      "username": "Username",
+      "password": "Password",
+      "email": "Email",
+      "phone": "Phone",
+      "address": "Address",
+      "role": "Role",
+      "permission": "Permission",
+      "full_name": "Full name",
+      "first_name": "First name",
+      "last_name": "Last name",
+      "avatar": "Avatar",
+      "date_of_birth": "Date of birth",
+      "gender": "Gender",
+      "male": "Male",
+      "female": "Female",
+      "other": "Other",
+      "change_password": "Change password",
+      "description": "Description"
+    },
+    "business": {
+      "employee": "Employee",
+      "employer": "Employer",
+      "candidate": "Candidate",
+      "job": "Job",
+      "application": "Application",
+      "resume": "Resume",
+      "department": "Department",
+      "position": "Position",
+      "customer": "Customer",
+      "client": "Client",
+      "company": "Company",
+      "project": "Project",
+      "contract": "Contract",
+      "invoice": "Invoice",
+      "payment": "Payment",
+      "dashboard": "Dashboard",
+      "report": "Report",
+      "task": "Task",
+      "meeting": "Meeting"
+    },
+    "job": {
+      "profile": "Career profile",
+      "recommended_candidates": "Recommended Candidates",
+      "recommended_companies": "Recommended Companies",
+      "salary": "Salary",
+      "working_form": "Working models",
+      "location": "Location",
+      "apply_now": "Apply Now",
+      "salary_requirement": "Desired salary",
+      "working_form_requirement": "Demand work models",
+      "location_requirement": "Demand location",
+      "industry_requirement": "Demand industry",
+      "job_title_requirement": "Demand job position",
+      "job_title": "Current job position",
+      "experience": "Experience",
+      "working_hours": "Working hours",
+      "skill": "Skills",
+      "search_placeholder": {
+        "job": "Enter job title to search",
+        "company": "Enter company name to search",
+        "candidate": "Enter candidate name to search"
+      }
+    },
+    "breadcrumb": {
+      "home": "Home",
+      "job": "Jobs",
+      "find": "Find company / user",
+      "user_cv": "My CV",
+      "create_cv": "Create CV",
+      "edit_cv": "Edit CV",
+      "list": "List",
+      "profile": "Profile"
+    },
+    "message": {
+      "update_success": "Update success",
+      "delete_success": "Delete success",
+      "create_success": "Create success",
+      "error": "Action failed!",
+      "no_cv": "You don't have any CV yet! Create one now!"
+    },
+    "setting": {
+      "display": "Display settings"
+    },
+    "dropdown": {
+      "all": "All"
+    }
+  },
+  "component": {
+    "cv_input_toolbar": {
+      "font_size": "Font size",
+      "font": "Font",
+      "color": "Text color"
+    },
+    "cv_input_action": {
+      "move_up": "Move up",
+      "move_down": "Move down"
+    },
+    "user_setting_form": {
+      "can_change_location": "Can change working location",
+      "allowed_looking_for_job": "Enable job search",
+      "alowwed_search_by_employer": "Allow employers to search profiles",
+      "receive_suggestion": "Receive job suggestions",
+      "allowed_contact": "Allow contact",
+      "allowed_display_email": "Allow email display",
+      "allowed_display_phone": "Allow phone display"
+    },
+    "m_files": {
+      "change": "Change",
+      "select": "Select file"
+    },
+    "crop_image": {
+      "zoom_in": "Zoom in",
+      "zoom_out": "Zoom out",
+      "change_image": "Change image",
+      "save": "Save"
+    },
+    "top": {
+      "user_register": "Member",
+      "company_register": "Company"
+    }
+  }
+}

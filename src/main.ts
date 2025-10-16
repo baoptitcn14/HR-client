@@ -14,6 +14,8 @@ fetch('assets/appsettings.json')
     AppConst.registerAccount = config.registerAccount;
     AppConst.logoBrand = config.logoBrand;
     AppConst.loginUrl = config.loginUrl;
+    AppConst.languages = config.languages;
+    AppConst.registerCompany = config.registerCompany;
 
     bootstrapApplication(AppComponent, appConfig)
       .catch((err) => console.error(err));

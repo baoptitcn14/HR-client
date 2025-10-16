@@ -26,9 +26,14 @@ export class CropImageComponent implements AfterViewInit {
   multiplier = 1;
   cropBox = { x: 50, y: 50, w: this.width * this.multiplier, h: this.height * this.multiplier };
   img: any;
+
   @ViewChild('canvas') canvas?: ElementRef;
   @ViewChild('upload') upload?: ElementRef;
   @ViewChild('preview') preview?: ElementRef;
+
+  // canvas width, height
+  canvasWidth = document.body.offsetWidth / 2;
+  canvasHeight = (document.body.offsetWidth / 2) * (this.height / this.width);
 
   ngAfterViewInit(): void {
     setTimeout(() => {
@@ -37,7 +42,7 @@ export class CropImageComponent implements AfterViewInit {
   }
 
   zoomIn() {
-    if (this.multiplier == 3) return;
+    if (this.multiplier == 4) return;
     this.multiplier += 0.5;
 
     this.initCropBox();
@@ -54,10 +59,10 @@ export class CropImageComponent implements AfterViewInit {
 
   private initCropBox() {
 
-    const w = this.width * this.multiplier;
-    const h = this.height * this.multiplier;
+    const w = this.width * this.multiplier > this.canvasWidth ? this.canvasWidth : this.width * this.multiplier;
+    const h = w * (this.height / this.width);
 
-    this.cropBox = { x: 50, y: 50, w: w > 300 ? 280 : w, h: h > 300 ? 280 : h };
+    this.cropBox = { x: this.cropBox.x ? this.cropBox.x : 50, y: this.cropBox.y ? this.cropBox.y : 50, w: w - 2, h: h };
   }
 
   private cropImage() {
@@ -103,8 +108,8 @@ export class CropImageComponent implements AfterViewInit {
 
     // Vẽ lại canvas khi ảnh load
     this.img.onload = () => {
-      this.canvas!.nativeElement.width = 300;
-      this.canvas!.nativeElement.height = 300;
+      this.canvas!.nativeElement.width = this.canvasWidth;
+      this.canvas!.nativeElement.height = this.canvasHeight;
       this.draw();
     };
 
@@ -119,14 +124,6 @@ export class CropImageComponent implements AfterViewInit {
         isDragging = true;
       }
     });
-
-    // this.canvas?.nativeElement.addEventListener("mousemove", (e: any) => {
-    //   if (isDragging) {
-    //     this.cropBox.x = e.offsetX - this.cropBox.w / 2;
-    //     this.cropBox.y = e.offsetY - this.cropBox.h / 2;
-    //     this.draw();
-    //   }
-    // });
 
     this.canvas?.nativeElement.addEventListener("pointermove", (e: any) => {
       if (isDragging) {
@@ -146,17 +143,17 @@ export class CropImageComponent implements AfterViewInit {
     // Tạo canvas tạm để lấy phần crop
     const tmpCanvas = document.createElement("canvas");
     const tmpCtx = tmpCanvas.getContext("2d")!;
-    tmpCanvas.width = w;
-    tmpCanvas.height = h;
+    tmpCanvas.width = w * 4;
+    tmpCanvas.height = h * 4;
 
-    tmpCtx.drawImage(this.canvas?.nativeElement, x + 1, y + 1, w - 2, h - 2, 0, 0, w, h);
+    tmpCtx.drawImage(this.canvas?.nativeElement, x + 1, y + 1, w - 2, h - 2, 0, 0, w * 4, h * 4);
 
     // Xuất blob
     tmpCanvas.toBlob(blob => {
       if (!blob) return;
       const url = URL.createObjectURL(blob);
       this.preview!.nativeElement.src = url; // Gắn blob vào <img>
-    }, "image/png");
+    }, "image/webp");
 
   }
 
@@ -170,6 +167,7 @@ export class CropImageComponent implements AfterViewInit {
       (this.img.width > this.canvas?.nativeElement.width || this.img.height > this.canvas?.nativeElement.height) ?
         Math.min(this.canvas?.nativeElement.width / this.img.width, this.canvas?.nativeElement.height / this.img.height)
         : 1;
+
     const newWidth = this.img.width * scale;
     const newHeight = this.img.height * scale;
 
@@ -196,9 +194,49 @@ export class CropImageComponent implements AfterViewInit {
 
   async onSave() {
     // return base64 image
-    const base64 = await this.blobUrlToBase64(this.preview?.nativeElement.src);
 
+    // Clone 1 hình chính từ hình preview với tỷ lệ đúng chính xác, tỷ lệ preview / hình chính = 1 / 4
+    // nâng cao chất lượng hình chính
+
+    // Tạo canvas để clone ảnh preview với tỷ lệ cao hơn
+    // Clone hình ảnh từ <img> preview
+    // const canvas = document.createElement('canvas');
+    // const img = this.preview?.nativeElement as HTMLImageElement;
+
+    // // Dùng kích thước gốc (natural) để đảm bảo độ nét
+    // canvas.width = img.naturalWidth;
+    // canvas.height = img.naturalHeight;
+
+    // const ctx = canvas.getContext('2d')!;
+    // ctx.imageSmoothingEnabled = true;
+    // ctx.imageSmoothingQuality = 'high';
+
+    // // Vẽ ảnh vào canvas
+    // ctx.drawImage(img, 0, 0, img.naturalWidth, img.naturalHeight);
+
+    // // Xuất ra WebP (hoặc AVIF nếu browser hỗ trợ)
+    // const format = supportsAvif() ? 'image/avif' : 'image/webp';
+    // const quality = 0.9; // 0.8–0.9 cho cân bằng giữa dung lượng & chất lượng
+
+    // const blob = await new Promise<Blob | null>(resolve =>
+    //   canvas.toBlob(resolve, format, quality)
+    // );
+
+    // if (!blob) return;
+
+    // // Tạo URL tạm và convert sang base64
+    // const url = URL.createObjectURL(blob);
+    const base64 = await this.blobUrlToBase64(this.preview?.nativeElement.src!);
+    URL.revokeObjectURL(this.preview?.nativeElement.src!);
+
+    // Gửi event ra ngoài
     this.onSaveEvent.emit(base64);
+
+
+    function supportsAvif(): boolean {
+      const canvas = document.createElement('canvas');
+      return canvas.toDataURL('image/avif').startsWith('data:image/avif');
+    }
   }
 
 

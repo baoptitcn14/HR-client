@@ -13,6 +13,22 @@
 }
 
 ::ng-deep {
+    app-profile {
+        .p-card.p-component {
+            position: relative;
+
+            .p-card-title {
+                position: absolute;
+                background: #fff;
+                top: 316px;
+                left: 6px;
+                padding: 10px 20px;
+                border-radius: 12px;
+                box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.2);
+                z-index: 1;
+            }
+        }
+    }
 
     .avatar,
     .banner {
@@ -34,4 +50,6 @@
             right: 10px;
         }
     }
+
+
 }

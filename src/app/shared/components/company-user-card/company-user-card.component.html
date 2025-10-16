@@ -16,13 +16,13 @@
         <div class="d-flex gap-3 align-items-center">
 
             <!-- button xem thông tin -->
-            <p-button [label]="'Thông tin'" [routerLink]="['/profile', 'e767e543-e7c0-4010-aabc-14d7b4f9079a']"
-                [queryParams]="{type: typeView }" [icon]="'pi pi-info-circle'" severity="info" [size]="'small'"
-                raised="true"></p-button>
+            <p-button [label]="'common.actions.view' | translate"
+                [routerLink]="['/profile', 'e767e543-e7c0-4010-aabc-14d7b4f9079a']" [queryParams]="{type: typeView }"
+                [icon]="'pi pi-info-circle'" severity="info" [size]="'small'" raised="true"></p-button>
 
             <!-- button Quan tâm -->
-            <p-button pTooltip="Quan tâm" (click)="onFollow()" [icon]="'pi pi-heart fs-6'" [size]="'small'" severity="danger" [text]="true"
-                raised="true"></p-button>
+            <p-button pTooltip="{{ 'common.user.follow' | translate }}" (click)="onFollow()"
+                [icon]="'pi pi-heart fs-6'" [size]="'small'" severity="danger" [text]="true" raised="true"></p-button>
 
         </div>
     </div>

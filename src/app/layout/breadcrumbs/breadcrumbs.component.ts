@@ -12,6 +12,7 @@ import { MenuItem } from 'primeng/api';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { BehaviorSubject, filter } from 'rxjs';
 import { BreadcrumbsService } from './breadcrumbs.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-breadcrumbs',
@@ -23,6 +24,7 @@ import { BreadcrumbsService } from './breadcrumbs.service';
 export class BreadcrumbsComponent implements OnInit {
 
   breadcrumbService = inject(BreadcrumbsService);
+  
 
   breadcrumbs = signal<MenuItem[]>([]);
 
@@ -37,34 +39,4 @@ export class BreadcrumbsComponent implements OnInit {
     })
   }
 
-  private addBreadcrumb(
-    route: ActivatedRouteSnapshot,
-    parentUrl: string[],
-    breadcrumbs: MenuItem[]
-  ) {
-    if (route) {
-      // Construct the route URL
-      const routeUrl = parentUrl.concat(route.url.map((url) => url.path));
-
-      // Add an element for the current route part
-
-      if (route.data['breadcrumb']) {
-        const breadcrumb = {
-          label: this.getLabel(route.data),
-          routerLink: '/' + routeUrl.join('/'),
-        };
-        breadcrumbs.push(breadcrumb);
-      }
-
-      // Add another element for the next route part
-      this.addBreadcrumb(route.firstChild!, routeUrl, breadcrumbs);
-    }
-  }
-
-  private getLabel(data: Data) {
-    // The breadcrumb can be defined as a static string or as a function to construct the breadcrumb element out of the route data
-    return typeof data['breadcrumb'] === 'function'
-      ? data['breadcrumb']()
-      : data['breadcrumb'];
-  }
 }

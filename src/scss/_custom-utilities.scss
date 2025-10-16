@@ -45,3 +45,20 @@ $utilities: (
     transform: translateY(-50%);
   }
 }
+
+// flag 
+.flag {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: inline-block;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  opacity: 0.5;
+
+  &.active {
+    opacity: 1;
+  }
+}

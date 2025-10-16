@@ -1,0 +1,204 @@
+{
+    "languages": {
+        "en": "English",
+        "vi": "Tiếng Việt"
+    },
+    "common": {
+        "language": {
+            "english": "Tiếng Anh",
+            "vietnamese": "Tiếng Việt"
+        },
+        "time": {
+            "day": "Ngày",
+            "days": [
+                "Thứ Hai",
+                "Thứ Ba",
+                "Thứ Tư",
+                "Thứ Năm",
+                "Thứ Sáu",
+                "Thứ Bảy",
+                "Chủ Nhật"
+            ],
+            "month": [
+                "Tháng Một",
+                "Tháng Hai",
+                "Tháng Ba",
+                "Tháng Tư",
+                "Tháng Năm",
+                "Tháng Sáu",
+                "Tháng Bảy",
+                "Tháng Tám",
+                "Tháng Chín",
+                "Tháng Mười",
+                "Tháng Mười Một",
+                "Tháng Mười Hai"
+            ],
+            "year": "Năm",
+            "hour": "Giờ",
+            "minute": "Phút",
+            "second": "Giây",
+            "today": "Hôm nay",
+            "yesterday": "Hôm qua",
+            "tomorrow": "Ngày mai"
+        },
+        "actions": {
+            "add": "Thêm",
+            "edit": "Sửa",
+            "delete": "Xóa",
+            "update": "Cập nhật",
+            "view": "Xem",
+            "approve": "Chấp nhận",
+            "reject": "Từ chối",
+            "submit": "Gửi",
+            "cancel": "Hủy",
+            "search": "Tìm kiếm",
+            "filter": "Lọc",
+            "upload": "Tải lên",
+            "download": "Tải xuống",
+            "send": "Gửi",
+            "save": "Lưu",
+            "reset": "Đặt lại",
+            "close": "Đóng",
+            "open": "Mở",
+            "refresh": "Làm mới",
+            "confirm": "Xác nhận",
+            "back": "Quay lại",
+            "next": "Tiếp theo",
+            "follow": "Theo dõi"
+        },
+        "status": {
+            "pending": "Đang chờ",
+            "approved": "Đã duyệt",
+            "rejected": "Đã từ chối",
+            "active": "Hoạt động",
+            "inactive": "Không hoạt động",
+            "draft": "Bản nháp",
+            "archived": "Lưu trữ"
+        },
+        "user": {
+            "login": "Đăng nhập",
+            "logout": "Đăng xuất",
+            "register": "Đăng ký",
+            "profile": "Thông tin cá nhân",
+            "username": "Tên đăng nhập",
+            "password": "Mật khẩu",
+            "email": "Email",
+            "phone": "Số điện thoại",
+            "address": "Địa chỉ",
+            "role": "Vai trò",
+            "permission": "Quyền hạn",
+            "full_name": "Họ và tên",
+            "first_name": "Tên",
+            "last_name": "Họ",
+            "avatar": "Anh đại diện",
+            "date_of_birth": "Ngày sinh",
+            "gender": "Giới tính",
+            "male": "Nam",
+            "female": "Nữ",
+            "other": "Khác",
+            "change_password": "Đổi mật khẩu",
+            "description": "Mô tả"
+        },
+        "business": {
+            "employee": "Nhân viên",
+            "employer": "Nhà tuyển dụng",
+            "candidate": "Ứng viên",
+            "job": "Công việc",
+            "application": "Đơn ứng tuyển",
+            "resume": "Sơ yếu lý lịch",
+            "department": "Phòng ban",
+            "position": "Chức vụ",
+            "customer": "Khách hàng",
+            "client": "Đối tác",
+            "company": "Công ty",
+            "project": "Dự án",
+            "contract": "Hợp đồng",
+            "invoice": "Hóa đơn",
+            "payment": "Thanh toán",
+            "dashboard": "Bảng điều khiển",
+            "report": "Báo cáo",
+            "task": "Nhiệm vụ",
+            "meeting": "Cuộc họp"
+        },
+        "job": {
+            "profile": "Thông tin về công việc",
+            "recommended_candidates": "Ứng viên được đề xuất",
+            "recommended_companies": "Công ty được đề xuất",
+            "salary": "Mức lương",
+            "working_form": "Hình thức làm việc",
+            "location": "Khu vực",
+            "apply_now": "Ứng tuyển ngay",
+            "salary_requirement": "Mức lương mong muốn",
+            "working_form_requirement": "Hình thức làm việc mong muốn",
+            "location_requirement": "Vị trí mong muốn",
+            "industry_requirement": "Ngành nghề mong muốn",
+            "job_title_requirement": "Chức vụ mong muốn",
+            "job_title": "Chức vụ hiện tại",
+            "experience": "Kinh nghiệm",
+            "working_hours": "Giờ làm việc",
+            "skill": "Kỹ năng",
+            "search_placeholder": {
+                "job": "Nhập tên công việc cần tìm kiếm",
+                "company": "Nhập tên công ty cần tìm kiếm",
+                "candidate": "Nhập tên ứng viên cần tìm kiếm"
+            }
+        },
+        "breadcrumb": {
+            "home": "Trang chủ",
+            "job": "Việc làm",
+            "find": "Tìm kiếm công ty / người dùng",
+            "user_cv": "CV của tôi",
+            "create_cv": "Tạo CV",
+            "edit_cv": "Chỉnh sửa CV",
+            "list": "Danh sách",
+            "profile": "Hồ sơ"
+        },
+        "message": {
+            "update_success": "Cập nhật thành công",
+            "delete_success": "Xóa thành công",
+            "create_success": "Tạo thành công",
+            "error": "Thao tác thất bại!",
+            "no_cv": "Bạn chưa có CV nào! Hãy nhanh tạo CV ngay!"
+        },
+        "setting": {
+            "display": "Cài đặt hiển thị"
+        },
+        "dropdown": {
+            "all": "Tất cả"
+        }
+    },
+    "component": {
+        "cv_input_toolbar": {
+            "font_size": "Cỡ chữ",
+            "font": "Kiểu chữ",
+            "color": "Màu chữ"
+        },
+        "cv_input_action": {
+            "move_up": "Di chuyển lên trên",
+            "move_down": "Di chuyển xuống dưới"
+        },
+        "user_setting_form": {
+            "can_change_location": "Có thể thay đổi điểm làm việc",
+            "allowed_looking_for_job": "Bật tìm kiếm việc làm",
+            "alowwed_search_by_employer": "Cho phép nhà tuyển dụng tìm hồ sơ",
+            "receive_suggestion": "Nhận đề xuất tuyển dụng",
+            "allowed_contact": "Cho phép liên hệ",
+            "allowed_display_email": "Cho phép hiển thị email",
+            "allowed_display_phone": "Cho phép hiển thị số điện thoại"
+        },
+        "m_files": {
+            "change": "Thay đổi",
+            "select": "Chọn file"
+        },
+        "crop_image": {
+            "zoom_in": "Phóng to",
+            "zoom_out": "Thu nhỏ",
+            "change_image": "Thay đổi ảnh",
+            "save": "Hoàn tất"
+        },
+        "top": {
+            "user_register": "Thành viên",
+            "company_register": "Công ty"
+        }
+    }
+}

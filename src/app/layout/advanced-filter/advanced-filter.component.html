@@ -4,35 +4,35 @@
 
         <!-- mucLuong -->
         <ng-container
-            *ngTemplateOutlet="radio; context: { label: 'Mức lương', options: mucLuongs, model: 'mucLuong', name: 'mucLuong' }">
+            *ngTemplateOutlet="radio; context: { label: 'common.job.salary' | translate, options: mucLuongs, model: 'mucLuong', name: 'mucLuong' }">
         </ng-container>
 
         <p-divider [type]="'dashed'"></p-divider>
 
         <!-- capBac -->
         <ng-container
-            *ngTemplateOutlet="radio; context: { label: 'Cấp bậc', options: capBacs, model: 'capBac', name: 'capBac' }">
+            *ngTemplateOutlet="radio; context: { label: 'common.business.position' | translate, options: capBacs, model: 'capBac', name: 'capBac' }">
         </ng-container>
 
         <p-divider [type]="'dashed'"></p-divider>
 
         <!-- kinhNghiem -->
         <ng-container
-            *ngTemplateOutlet="radio; context: { label: 'Kinh nghiệm', options: kinhNghiems, model: 'kinhNghiem', name: 'kinhNghiem' }">
+            *ngTemplateOutlet="radio; context: { label: 'common.job.experience' | translate, options: kinhNghiems, model: 'kinhNghiem', name: 'kinhNghiem' }">
         </ng-container>
 
         <p-divider [type]="'dashed'"></p-divider>
 
         <!-- hinhThucLamViec -->
         <ng-container
-            *ngTemplateOutlet="checkbox; context: { label: 'Hình thức làm việc', options: hinhThucLamViecs, model: 'hinhThucLamViecs', name: 'hinhThucLamViecs' }">
+            *ngTemplateOutlet="checkbox; context: { label: 'common.job.working_form' | translate, options: hinhThucLamViecs, model: 'hinhThucLamViecs', name: 'hinhThucLamViecs' }">
         </ng-container>
 
         <p-divider [type]="'dashed'"></p-divider>
 
         <!-- Kỹ năng -->
         <ng-container
-            *ngTemplateOutlet="checkbox; context: { label: 'Kỹ năng', options: kyNangs, model: 'kyNangs', name: 'kyNangs' }">
+            *ngTemplateOutlet="checkbox; context: { label: 'common.job.skill' | translate, options: kyNangs, model: 'kyNangs', name: 'kyNangs' }">
         </ng-container>
 
     </div>
@@ -78,7 +78,7 @@
                 <p-radioButton [inputId]="name + '-all'" [name]="name" [value]="'ALL'" [(ngModel)]="filter[model]"
                     (ngModelChange)="onChange()" />
                 <label [for]="name + '-all'" class="ms-2">
-                    Tất cả
+                    {{ 'common.dropdown.all' | translate }}
                 </label>
             </div>
 
@@ -113,7 +113,7 @@
                 <p-checkbox [inputId]="name + '-all'" [binary]="true" [(ngModel)]="stateCheckBox[name]"
                     (onChange)="onCheckBoxAll(name)" />
                 <label [for]="name + '-all'" class="ms-2">
-                    Tất cả
+                    {{ 'common.dropdown.all' | translate }}
                 </label>
             </div>
 

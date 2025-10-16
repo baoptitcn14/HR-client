@@ -68,6 +68,10 @@ export class ProfileComponent implements OnInit {
   idOnRouter: string = '';
   typeView: string = '';
 
+  // dialog width height
+  widthDialog: number = 56;
+  heightDialog: number = 56;
+
   //url avatar
   get urlAvatar() {
     return this.userProfile?.profilePicture && this.userProfile?.profilePicture != ""
@@ -154,7 +158,10 @@ export class ProfileComponent implements OnInit {
 
     if (this.typeView == TYPE_VIEW_CODE.COMPANY) {
 
+
     } else {
+
+
       dialogRef = this.dialogService.open(UserProfileDialogComponent, {
         header: 'Thay đổi cài đặt cơ bản',
         width: '50vw',
@@ -217,10 +224,17 @@ export class ProfileComponent implements OnInit {
       this.messageService.add({ severity: 'success', detail: 'Cập nhật thành công', life: 3000 });
 
       this.loadDataUser();
+
+      this.showDialogUploadImage = false;
+
     });
   }
 
   onOpenEditAvatarDialog(actionName: 'avatar' | 'banner') {
+
+    this.widthDialog = actionName == 'avatar' ? 56 : 325;
+    this.heightDialog = actionName == 'avatar' ? 56 : 100;
+
     this.dialogActionName = actionName;
     this.showDialogUploadImage = true;
 

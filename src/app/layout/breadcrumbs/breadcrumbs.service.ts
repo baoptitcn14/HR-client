@@ -1,5 +1,7 @@
-import { Injectable } from '@angular/core';
+import { DestroyRef, inject, Injectable } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NavigationEnd, ActivatedRouteSnapshot, Data, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
 import { BehaviorSubject, filter } from 'rxjs';
 
@@ -7,8 +9,11 @@ import { BehaviorSubject, filter } from 'rxjs';
   providedIn: 'root'
 })
 export class BreadcrumbsService {
+  private translateService = inject(TranslateService);
+  destroyRef = inject(DestroyRef);
 
   breadcrumbs = new BehaviorSubject<MenuItem[]>([]);
+  router?: Router;
 
   constructor() { }
 
@@ -16,18 +21,36 @@ export class BreadcrumbsService {
     router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe((event) => {
-        // Construct the breadcrumb hierarchy
-        const root = router.routerState.snapshot.root;
-
-        const breadcrumbs: MenuItem[] = [
-          { routerLink: '/', label: 'Trang chủ', icon: 'pi pi-home me-2' },
-        ];
-
-        this.addBreadcrumb(root, [], breadcrumbs);
-
-        // Emit the new hierarchy
-        this.breadcrumbs.next(breadcrumbs);
+        this.router = router;
+        this.loadBreadcrumb(router);
       });
+
+    this.subscribeLangChange();
+  }
+
+  private loadBreadcrumb(router: Router) {
+
+    // Construct the breadcrumb hierarchy
+    const root = router.routerState.snapshot.root;
+
+    const breadcrumbs: MenuItem[] = [
+      { routerLink: '/', label: this.translateService.instant('common.breadcrumb.home'), icon: 'pi pi-home me-2' },
+    ];
+
+    this.addBreadcrumb(root, [], breadcrumbs);
+
+    // Emit the new hierarchy
+    this.breadcrumbs.next(breadcrumbs);
+  }
+
+  private subscribeLangChange() {
+    this.translateService.onLangChange
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => {
+        if (this.router) {
+          this.loadBreadcrumb(this.router!);
+        }
+      })
   }
 
   private addBreadcrumb(
@@ -56,8 +79,9 @@ export class BreadcrumbsService {
 
   private getLabel(data: Data) {
     // The breadcrumb can be defined as a static string or as a function to construct the breadcrumb element out of the route data
+
     return typeof data['breadcrumb'] === 'function'
       ? data['breadcrumb']()
-      : data['breadcrumb'];
+      : this.translateService.instant(data['breadcrumb']);
   }
 }

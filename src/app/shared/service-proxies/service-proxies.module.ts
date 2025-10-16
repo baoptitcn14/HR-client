@@ -56,7 +56,7 @@ import {
     InterestServiceProxy,
     HrCompanyInfoServiceProxy,
     HrCompanyServiceProxy,
-    RegistrationServiceProxy
+    RegistrationServiceProxy,
   ],
 })
 export class ServiceProxiesModule {}

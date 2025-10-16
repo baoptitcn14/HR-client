@@ -27,13 +27,13 @@
   <!-- end button tenant -->
 
   <!-- begin button trò chuyện -->
-  <p-button class="d-none d-md-block" label="Trò chuyện" icon="pi pi-comments" badge="2" badgeClass="p-badge-contrast"
-    outlined="true" size="small" raised />
+  <!-- <p-button class="d-none d-md-block" label="Trò chuyện" icon="pi pi-comments" badge="2" badgeClass="p-badge-contrast"
+    outlined="true" size="small" raised /> -->
   <!-- end button trò chuyện -->
 
   <!-- begin button thông báo -->
-  <p-button class="d-none d-md-block" label="Thông báo" icon="pi pi-bell" badge="2" badgeClass="p-badge-contrast"
-    outlined="true" size="small" raised />
+  <!-- <p-button class="d-none d-md-block" label="Thông báo" icon="pi pi-bell" badge="2" badgeClass="p-badge-contrast"
+    outlined="true" size="small" raised /> -->
 
   <!-- end button thông báo -->
 
@@ -72,10 +72,13 @@
 </ng-template>
 
 <ng-template #notLogin>
-  {{ appSessionService.userId }}
+
+  <p-splitButton icon="pi pi-user-plus" severity="success" [label]="'common.user.register' | translate" size="small"
+    [model]="registerButtonItems" />
+
   <!-- begin button đăng ký tài khoản -->
-  <p-button label="Đăng ký tài khoản" icon="pi pi-user-plus" size="small" severity="success" raised
-    (click)="onRegister()" />
+  <!-- <p-button label="Đăng ký tài khoản" icon="pi pi-user-plus" size="small" severity="success" raised
+    (click)="onRegister()" /> -->
   <!-- end button đăng ký tài khoản -->
   <!-- begin button đăng nhập -->
   <p-button label="Đăng nhập" icon="pi pi-sign-in" size="small" raised (click)="onLogin()" />

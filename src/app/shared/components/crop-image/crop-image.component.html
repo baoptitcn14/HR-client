@@ -13,8 +13,9 @@
     </div>
 
     <div class="image-preview d-flex flex-column gap-3 align-items-center">
-        <img #preview id="preview" [width]="width" [height]="height" />
-
+        <div [style]="{width: width + 'px', height: height + 'px'}">
+            <img #preview id="preview" style="max-width: 100%;" />
+        </div>
 
         <p-button label="Đổi ảnh" icon="pi pi-upload" severity="info" (click)="onUpload()"></p-button>
 

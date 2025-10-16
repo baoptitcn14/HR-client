@@ -18,17 +18,16 @@ export class AppTenantService {
   }
 
   init() {
-    return new Promise<void>((resolve, reject) => {
-
+    return new Promise<boolean>((resolve, reject) => {
       const userId = this.cookieService.get(AppConst.authorization.userId);
-      if (!userId) resolve();
+      if (!userId) resolve(false);
 
       this.tenantServiceProxy.getList(new ViewDto({
         id: userId,
         useCache: true
       })).subscribe((res) => {
         this.listTeantUser = res;
-        resolve();
+        resolve(true);
       }, (error) => {
         this.cookieService.deleteAll('/', AppConst.domain);
         location.href = AppConst.loginUrl;
@@ -40,6 +39,7 @@ export class AppTenantService {
 
   onChangeTenant(tenant: TenantDto) {
     // call api change tenant
-    console.log('call api change tenant')
+    console.log('call api change tenant');
+    // this.tenantServiceProxy.
   }
 }

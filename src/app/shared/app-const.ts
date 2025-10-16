@@ -9,8 +9,10 @@ export class AppConst {
   static homeUrl: string;
   static appTitle: string;
   static registerAccount: string;
+  static registerCompany: string;
   static logoBrand: string;
   static loginUrl: string;
+  static languages: { code: string, flag: string }[];
 
   //#endregion
 

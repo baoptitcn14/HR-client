@@ -27,7 +27,7 @@
       <!-- button Ứng tuyển -->
       <div class="d-flex flex-row flex-md-column justify-content-center gap-2" trackElementInViewport
         (inViewportChange)="onInViewportChange($event)" [rootMargin]="'-100px 0px'">
-        <p-button label="Ứng tuyển ngay" severity="primary" raised="true" [size]="'large'" [styleClass]="'w-100'"
+        <p-button [label]="'common.job.apply_now' | translate" severity="primary" raised="true" [size]="'large'" [styleClass]="'w-100'"
           (click)="onApply()"></p-button>
 
         <p-button label="Tạo CV để ứng tuyển" severity="primary" [size]="'large'" [outlined]="true"
@@ -89,13 +89,13 @@
 
       <div class="title fw-bold bg-light p-2">Mô tả công việc</div>
 
-      <div [innerHTML]="tinTuyenDung.jobDescription"></div>
+      <ng-container *ngTemplateOutlet="displayHtml; context: { html: tinTuyenDung.jobDescription }"></ng-container>
 
       <!-- Yêu cầu -->
 
       <div class="title fw-bold bg-light p-2">Yêu cầu công việc</div>
 
-      <div [innerHTML]="tinTuyenDung.jobRequirements"></div>
+      <ng-container *ngTemplateOutlet="displayHtml; context: { html: tinTuyenDung.jobRequirements }"></ng-container>
 
       <!-- Quyền lợi -->
 
@@ -120,3 +120,11 @@
     }
   </div>
 </section>
+
+<ng-template #displayHtml let-html="html">
+  @if(html) {
+  <div [innerHTML]="html"></div>
+  }@else {
+  <div class="text-muted ps-2">Chưa có mô tả</div>
+  }
+</ng-template>

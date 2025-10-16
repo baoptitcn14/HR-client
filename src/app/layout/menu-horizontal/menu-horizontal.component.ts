@@ -9,6 +9,8 @@ import {
   MenuQueryDto,
 } from '../../shared/service-proxies/sys-service-proxies';
 import { TrackElementInViewportDirective } from '../../core/directives/track-element-in-viewport.directive';
+import { AppConst } from '../../shared/app-const';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-menu-horizontal',
@@ -19,15 +21,20 @@ import { TrackElementInViewportDirective } from '../../core/directives/track-ele
 })
 export class MenuHorizontalComponent implements OnInit {
 
+  private translateService = inject(TranslateService);
   apiDataService = inject(MenuInfoServiceProxy);
   cookieService = inject(CookieService);
 
   menus: MenuItem[] = [];
-
   menuClass = 'shadow';
+  languages = AppConst.languages;
+  currentLang = this.translateService.getCurrentLang();
 
   ngOnInit(): void {
+
+    this.subcribeLang();
     this.gets();
+
   }
 
   gets() {
@@ -38,6 +45,18 @@ export class MenuHorizontalComponent implements OnInit {
 
   inViewportChange(isInViewport: any) {
     this.menuClass = isInViewport ? 'shadow' : 'shadow fixed';
+  }
+
+  changeLang(lang: string) {
+    this.translateService.use(lang);
+  }
+
+  private subcribeLang() {
+    // set lang to local storage
+    this.translateService.onLangChange.subscribe((event) => {
+      this.currentLang = event.lang;
+      localStorage.setItem('lang', event.lang);
+    });
   }
 
   private loadMenuHr() {

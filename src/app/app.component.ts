@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MenuHorizontalComponent } from './layout/menu-horizontal/menu-horizontal.component';
 import { ToastModule } from 'primeng/toast';
@@ -8,6 +8,7 @@ import { PrimeNGConfig } from 'primeng/api';
 import { Title } from '@angular/platform-browser';
 import { BreadcrumbsComponent } from './layout/breadcrumbs/breadcrumbs.component';
 import { FooterComponent } from './layout/footer/footer.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -26,10 +27,20 @@ import { FooterComponent } from './layout/footer/footer.component';
 })
 export class AppComponent implements OnInit {
 
+  translateService = inject(TranslateService);
+
   constructor(private primengConfig: PrimeNGConfig, private title: Title) {
     title.setTitle('Việc làm');
   }
   ngOnInit(): void {
+
+    this.initConfigPrimeNG();
+
+    this.initLanguage();
+
+  }
+
+  private initConfigPrimeNG() {
     this.primengConfig.setTranslation({
       cancel: 'Hủy',
       accept: 'Đồng ý',
@@ -132,5 +143,19 @@ export class AppComponent implements OnInit {
       weekHeader: 'Tuần',
       upload: 'Tải lên',
     });
+
+    this.primengConfig.ripple = true;
+  }
+
+  private initLanguage() {
+
+    // Ngôn ngữ mặc định
+    this.translateService.addLangs(['en', 'vi']);
+    this.translateService.use('en');
+
+    // get lang from local storage
+    const lang = localStorage.getItem('lang');
+    if (lang) this.translateService.use(lang);
+
   }
 }

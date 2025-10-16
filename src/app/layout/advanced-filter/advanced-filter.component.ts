@@ -10,6 +10,7 @@ import { ButtonGroupModule } from 'primeng/buttongroup';
 import { SkeletonModule } from 'primeng/skeleton';
 import { ISearchFilter } from '../section-search/section-search.component';
 import { CheckboxModule } from 'primeng/checkbox';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-advanced-filter',
@@ -22,7 +23,8 @@ import { CheckboxModule } from 'primeng/checkbox';
     ButtonModule,
     ButtonGroupModule,
     SkeletonModule,
-    CheckboxModule
+    CheckboxModule,
+    TranslatePipe
   ],
   templateUrl: './advanced-filter.component.html',
   styleUrl: './advanced-filter.component.scss'

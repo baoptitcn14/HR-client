@@ -27,11 +27,12 @@ import { CategoriesService } from '../../core/services/categories.service';
 import { IDsViecLam } from '../../shared/components/viec-lam/viec-lam.component';
 import { Title } from '@angular/platform-browser';
 import { BreadcrumbsService } from '../../layout/breadcrumbs/breadcrumbs.service';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-page-viec-lam',
   standalone: true,
-  imports: [CommonModule, ButtonModule, DatePipe, TagModule, TrackElementInViewportDirective],
+  imports: [CommonModule, ButtonModule, DatePipe, TagModule, TrackElementInViewportDirective, TranslatePipe],
   templateUrl: './page-viec-lam.component.html',
   styleUrl: './page-viec-lam.component.scss',
 })
@@ -45,6 +46,7 @@ export class PageViecLamComponent implements OnInit {
   private title = inject(Title);
   private destroyRef = inject(DestroyRef);
   private breadcrumbsService = inject(BreadcrumbsService);
+  private translateService = inject(TranslateService);
 
   //declare region
   tinTuyenDung?: IDsViecLam;
@@ -57,6 +59,7 @@ export class PageViecLamComponent implements OnInit {
       // Tách slug & id
       const id = this.activatedRoute.snapshot.params['slugId'].split('_').pop();
 
+
       forkJoin([this.getViecLam(id)])
         .pipe(takeUntilDestroyed(this.destroyRef))
         .subscribe(([viecLam]) => {
@@ -65,14 +68,28 @@ export class PageViecLamComponent implements OnInit {
           this.title.setTitle(this.tinTuyenDung.title!);
 
           this.breadcrumbsService.breadcrumbs.next([
-            { label: 'Trang chủ', routerLink: '/' },
-            { label: 'Việc làm', routerLink: '/jobs' },
-            { label: this.tinTuyenDung.title!, routerLink: '/jobs/job/' + this.tinTuyenDung.id, disabled: true,  },
-          ]);
+            ...this.breadcrumbsService.breadcrumbs.value,
+            { label: this.tinTuyenDung.title!, routerLink: '/jobs/job/' + this.tinTuyenDung.id, disabled: true, },
+          ])
 
           this.xuLyDuLieuViecLam();
+
+          this.subscribeLangChange();
+
         });
     }
+  }
+
+  private subscribeLangChange() {
+    this.translateService.onLangChange
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => {
+        this.breadcrumbsService.breadcrumbs.next([
+          { label: this.translateService.instant('common.breadcrumb.home'), routerLink: '/' },
+          { label: this.translateService.instant('common.breadcrumb.job'), routerLink: '/jobs' },
+          { label: this.tinTuyenDung!.title!, routerLink: '/jobs/job/' + this.tinTuyenDung!.id, disabled: true, },
+        ]);
+      });
   }
 
   onInViewportChange(event: boolean) {
@@ -138,7 +155,7 @@ export class PageViecLamComponent implements OnInit {
         ? JSON.parse(this.tinTuyenDung.tags)
         : [],
       _benefitsOpenJson: trinhDos.filter((trinhDo) =>
-        this.tinTuyenDung!.benefits!.includes(trinhDo.id!)
+        this.tinTuyenDung!.benefits?.includes(trinhDo.id!)
       ),
     } as IDsViecLam;
   }

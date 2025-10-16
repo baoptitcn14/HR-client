@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { SplitButtonModule } from 'primeng/splitbutton';
 import { ToolbarModule } from 'primeng/toolbar';
@@ -8,11 +8,9 @@ import { InputTextModule } from 'primeng/inputtext';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import {
-  FormControl,
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
-  Validators,
 } from '@angular/forms';
 
 import { CookieService } from 'ngx-cookie-service';
@@ -21,6 +19,9 @@ import { AppSessionService } from '../../shared/session/app-session.service';
 import { MenuItem } from 'primeng/api';
 import { AppTenantService } from '../../shared/session/app-tenant.service';
 import { ICriteriaRequestDto, MenuInfoServiceProxy, MenuQueryDto } from '../../shared/service-proxies/sys-service-proxies';
+import { TranslatePipe, TranslateService, _ } from "@ngx-translate/core";
+import { forkJoin } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-top',
@@ -36,13 +37,15 @@ import { ICriteriaRequestDto, MenuInfoServiceProxy, MenuQueryDto } from '../../s
     InputIconModule,
     FormsModule,
     ReactiveFormsModule,
+    TranslatePipe,
   ],
   templateUrl: './top.component.html',
   styleUrl: './top.component.scss',
 })
 export class TopComponent implements OnInit {
-
+  private translate = inject(TranslateService);
   menuInfoService = inject(MenuInfoServiceProxy);
+  destroyRef = inject(DestroyRef);
 
   listTenant: MenuItem[] | undefined;
 
@@ -56,21 +59,54 @@ export class TopComponent implements OnInit {
   cookieSerivce = inject(CookieService);
   appSessionService = inject(AppSessionService);
 
+  logoutItem = {
+    label: this.translate.instant(_('common.user.logout')),
+    icon: 'pi pi-fw pi-sign-out',
+    command: () => this.onLogout(),
+  }
+
+  registerButtonItems = this.loadRegisterButtonItems();
+
   ngOnInit(): void {
     this.mapDataListTenant();
 
-    this.loadMenuHr().subscribe((data) => {
-      this.listRoute = this.init(data);
+    this.subcribeLang();
 
-      this.listRoute.push(
-        {
-          label: 'Thoát',
-          icon: 'pi pi-fw pi-sign-out',
-          command: () => this.onLogout(),
-          styleClass: 'text-danger',
-        }
-      )
+    this.loadMenuHr().subscribe(
+      (listRoute) => {
+        this.listRoute = this.init(listRoute);
+        this.listRoute.push(this.logoutItem);
+      }
+    );
+
+  }
+
+
+
+  private subcribeLang() {
+    // set lang to local storage
+    this.translate.onLangChange.subscribe((event) => {
+
+      this.logoutItem.label = this.translate.instant(_('common.user.logout'));
+
+      this.registerButtonItems = this.loadRegisterButtonItems();
+
     });
+  }
+
+  private loadRegisterButtonItems() {
+    return [
+      {
+        label: this.translate.instant(_('component.top.user_register')),
+        icon: 'pi pi-user-plus',
+        command: () => this.goToRegisterUser(),
+      },
+      {
+        label: this.translate.instant(_('component.top.company_register')),
+        icon: 'pi pi-building',
+        command: () => this.goToRegisterCompany(),
+      }
+    ]
   }
 
 
@@ -141,8 +177,12 @@ export class TopComponent implements OnInit {
     window.location.href = AppConst.loginUrl;
   }
 
-  onRegister() {
+  goToRegisterUser() {
     window.location.href = AppConst.registerAccount;
+  }
+
+  goToRegisterCompany() {
+    window.location.href = AppConst.registerCompany;
   }
 
 }

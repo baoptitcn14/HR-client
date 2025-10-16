@@ -2,29 +2,32 @@
   <div class="search-section-content container d-flex flex-column gap-2 gap-md-3">
     <div class="d-flex flex-column gap-2 search-box">
       <p-autoComplete [inputStyleClass]="'w-100 shadow-sm'" [styleClass]="'w-100'" [appendTo]="'body'"
-        [(ngModel)]="filter.searchText" [suggestions]="suggestions" [placeholder]="'Nhập tên công việc cần tìm kiếm'"
-        optionValue="title" optionLabel="title" (completeMethod)="searchPost($event)" />
+        [(ngModel)]="filter.searchText" [suggestions]="suggestions"
+        [placeholder]="'common.job.search_placeholder.job' | translate" optionValue="title" optionLabel="title"
+        (completeMethod)="searchPost($event)" />
 
       <!-- button tim kiem -->
-      <p-button label="Tìm kiếm" icon="pi pi-search" [classList]="'button-search'" [size]="'large'" severity="primary"
-        (click)="onSearch()"></p-button>
+      <p-button label="{{ 'common.actions.search' | translate }}" icon="pi pi-search" [classList]="'button-search'"
+        [size]="'large'" severity="primary" (click)="onSearch()"></p-button>
     </div>
 
     <div class="row row-gap-2 align-items-center" *ngIf="showfilters">
       <div class="col-6 col-md-4">
         <p-dropdown [virtualScroll]="true" [virtualScrollItemSize]="5" [appendTo]="'body'"
           [styleClass]="'w-100 shadow-sm'" [options]="khuVucs" [filter]="true" [(ngModel)]="filter.khuVuc"
-          optionValue="id" optionLabel="name" placeholder="Khu vực" [showClear]="true" />
+          optionValue="id" optionLabel="name" [placeholder]="'common.job.location' | translate" [showClear]="true" />
       </div>
 
       <div class="col-6 col-md-3">
         <p-multiSelect [appendTo]="'body'" [styleClass]="'w-100 shadow-sm'" [options]="kyNangs"
-          [(ngModel)]="filter.kyNangs" optionValue="id" optionLabel="name" placeholder="Kỹ năng" />
+          [(ngModel)]="filter.kyNangs" optionValue="id" optionLabel="name"
+          [placeholder]="'common.job.skill' | translate" />
       </div>
 
       <div class="col-6 col-md-3">
         <p-multiSelect [appendTo]="'body'" [styleClass]="'w-100 shadow-sm'" [options]="hinhThucLamViecs"
-          [(ngModel)]="filter.hinhThucLamViecs" optionValue="id" optionLabel="name" placeholder="Hình thức làm việc" />
+          [(ngModel)]="filter.hinhThucLamViecs" optionValue="id" optionLabel="name"
+          [placeholder]="'common.job.working_form' | translate" />
       </div>
 
       <!-- button xóa filter -->

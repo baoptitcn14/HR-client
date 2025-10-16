@@ -24,22 +24,21 @@ export const routes: Routes = [
   {
     path: 'jobs',
     component: JobsComponent,
-    data: { breadcrumb: 'Việc làm' },
+    data: { breadcrumb: 'common.breadcrumb.job' },
     children: [
       {
         path: '',
         component: ListJobComponent,
-        data: { breadcrumb: 'Danh sách' },
+        data: { breadcrumb: 'common.breadcrumb.list' },
       },
       {
         path: 'filters/:filters',
         component: ListJobComponent,
-        data: { breadcrumb: 'Danh sách' },
+        data: { breadcrumb: 'common.breadcrumb.list' },
       },
       {
         path: 'job/:slugId',
         component: PageViecLamComponent,
-        data: { breadcrumb: 'Chi tiết công việc' },
       }
     ]
   },
@@ -51,30 +50,30 @@ export const routes: Routes = [
   {
     path: 'user-cv',
     component: UserCvComponent,
-    data: { title: 'CV của tôi', breadcrumb: 'CV của tôi' },
+    data: { title: 'CV của tôi', breadcrumb: 'common.breadcrumb.user_cv' },
     canActivate: [authRouteGuard]
   },
   {
     path: 'create-cv/:id',
     component: CreateCvComponent,
-    data: { title: 'Chỉnh sửa CV', breadcrumb: 'Chỉnh sửa CV' },
+    data: { title: 'Chỉnh sửa CV', breadcrumb: 'common.breadcrumb.edit_cv' },
     canActivate: [authRouteGuard]
   },
   {
     path: 'create-cv',
     component: CreateCvComponent,
-    data: { title: 'Tạo CV', breadcrumb: 'Tạo CV' },
+    data: { title: 'Tạo CV', breadcrumb: 'common.breadcrumb.create_cv' },
     canActivate: [authRouteGuard]
   },
   {
     path: 'find',
     component: FindComponent,
-    data: { breadcrumb: 'Tìm kiếm công ty / người dùng' },
+    data: { breadcrumb: 'common.breadcrumb.find' },
   },
   {
     path: 'profile/:id',
     component: ProfileComponent,
-    data: { breadcrumb: 'Thông tin' },
+    data: { breadcrumb: 'common.breadcrumb.profile' },
   },
   {
     path: '**',

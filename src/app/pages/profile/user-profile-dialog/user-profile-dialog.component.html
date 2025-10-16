@@ -125,7 +125,7 @@
 
             <div class="col-12 col-md-8">
                 <div class="d-flex flex-column gap-2">
-                    <label for="min">Mức lương</label>
+                    <label for="min">Mức lương mong muốn</label>
 
                     <div class="d-flex gap-3">
                         <p-inputNumber placeholder="Từ" formControlName="salaryMin" inputId="min" mode="currency"
@@ -145,7 +145,7 @@
 
             <div class="col-12">
                 <div class="d-flex flex-column gap-2">
-                    <label for="location">Khu vực</label>
+                    <label for="location">Khu vực mong muốn</label>
                     <p-chips placeholder="Hà Nội, Hồ Chí Minh, Nha Trang, Đà Nẵng"
                         formControlName="_listLocationOpenJson" separator="," />
                 </div>
@@ -153,7 +153,25 @@
 
             <div class="col-12">
                 <div class="d-flex flex-column gap-2">
-                    <label for="jobTitle">Chức vụ</label>
+                    <label for="WorkingType">Hình thức mong muốn</label>
+                    <p-chips [allowDuplicate]="false" placeholder="Onsite, Remote, Hybrid, Fulltime, Parttime"
+                        formControlName="_workingTypeOpenJson" separator="," />
+                </div>
+            </div>
+
+            <div class="col-12">
+                <div class="d-flex flex-column gap-2">
+                    <label for="industry">Ngành nghề mong muốn</label>
+                    <p-multiSelect appendTo="body" lazy="true" [lazy]="true" [options]="industryOptions" [filter]="true"
+                        display="chip" formControlName="_listIndustryOpenJson" optionLabel="name" [optionValue]="'code'"
+                        [selectionLimit]="3" [virtualScrollItemSize]="28" [virtualScroll]="true"
+                        placeholder="Chọn ngành nghề" />
+                </div>
+            </div>
+
+            <div class="col-12">
+                <div class="d-flex flex-column gap-2">
+                    <label for="jobTitle">Chức vụ mong muốn</label>
                     <p-chips [allowDuplicate]="false" placeholder="Giám đốc, Trưởng phòng, Nhân viên"
                         formControlName="_listTitleOpenJson" separator="," />
                 </div>
@@ -168,14 +186,6 @@
 
             <div class="col-12">
                 <div class="d-flex flex-column gap-2">
-                    <label for="WorkingType">Hình thức</label>
-                    <p-chips [allowDuplicate]="false" placeholder="Onsite, Remote, Hybrid, Fulltime, Parttime"
-                        formControlName="_workingTypeOpenJson" separator="," />
-                </div>
-            </div>
-
-            <div class="col-12">
-                <div class="d-flex flex-column gap-2">
                     <label for="experience">Kinh nghiệm</label>
                     <p-dropdown id="experience" [appendTo]="'body'" [options]="experienceOptions"
                         formControlName="experience" [optionLabel]="'name'" [placeholder]="'Chọn kinh nghiệm'"
@@ -183,18 +193,6 @@
                         ></p-dropdown>
                 </div>
             </div>
-
-            <div class="col-12">
-                <div class="d-flex flex-column gap-2">
-                    <label for="industry">Ngành nghề</label>
-                    <p-multiSelect appendTo="body" lazy="true" [lazy]="true" [options]="industryOptions" [filter]="true"
-                        display="chip" formControlName="_listIndustryOpenJson" optionLabel="name" [optionValue]="'code'"
-                        [selectionLimit]="3" [virtualScrollItemSize]="28" [virtualScroll]="true"
-                        placeholder="Chọn ngành nghề" />
-                </div>
-            </div>
-
-
 
         </div>
     </form>

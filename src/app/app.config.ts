@@ -29,7 +29,8 @@ import { AppTenantService } from './shared/session/app-tenant.service';
 import { LoadingService } from './layout/loading/loading.component';
 import { TokenInitService } from './core/services/token-init.service';
 import { AppConst } from './shared/app-const';
-
+import { provideTranslateService, provideTranslateLoader } from "@ngx-translate/core";
+import { provideTranslateHttpLoader } from "@ngx-translate/http-loader";
 import { DefaultUrlSerializer, UrlTree, UrlSerializer } from '@angular/router';
 
 export class CustomUrlSerializer extends DefaultUrlSerializer {
@@ -59,7 +60,15 @@ export const appConfig: ApplicationConfig = {
     },
     { provide: HTTP_INTERCEPTORS, useClass: MHttpInterceptor, multi: true },
     MessageService,
-    { provide: UrlSerializer, useClass: CustomUrlSerializer }
+    { provide: UrlSerializer, useClass: CustomUrlSerializer },
+    provideTranslateService({
+      loader: provideTranslateHttpLoader({
+        prefix: '/i18n/',
+        suffix: '.json'
+      }),
+      fallbackLang: 'en',
+      lang: 'en'
+    })
   ],
 };
 
@@ -94,9 +103,8 @@ export function appSesionInitializerFactory(
 
       if (isLogin) {
         //  lấy tenants của user đang đăng nhập
-        await appTenantService.init();
+        isLogin = await appTenantService.init();
         isLogin = await appSessionService.init();
-
       }
 
       firstLogin = isLogin;

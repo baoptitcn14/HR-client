@@ -1,15 +1,15 @@
 import { Component, DestroyRef, inject, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { AvatarModule } from 'primeng/avatar';
 import { ButtonModule } from 'primeng/button';
-import { DialogService } from 'primeng/dynamicdialog';
 import { TooltipModule } from 'primeng/tooltip';
 import { TYPE_VIEW_CODE, TYPE_INTEREST, TYPE_ENTITY } from '../../../pages/profile/profile.component';
-import { UserProfileInfoServiceProxy, UserProfileServiceProxy, UserJobSettingInfoServiceProxy, HrCompanyServiceProxy, HrCompanyInfoServiceProxy, InterestServiceProxy, InterestInputDto } from '../../service-proxies/sys-service-proxies';
+import { InterestServiceProxy, InterestInputDto } from '../../service-proxies/sys-service-proxies';
 import { AppSessionService } from '../../session/app-session.service';
 import { AppTenantService } from '../../session/app-tenant.service';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-company-user-card',
@@ -19,7 +19,8 @@ import { AppTenantService } from '../../session/app-tenant.service';
     AvatarModule,
     ButtonModule,
     RouterModule,
-    TooltipModule
+    TooltipModule,
+    TranslatePipe
   ],
   templateUrl: './company-user-card.component.html',
   styleUrl: './company-user-card.component.scss'

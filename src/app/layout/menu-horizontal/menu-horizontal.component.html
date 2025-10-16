@@ -1,3 +1,14 @@
-<p-menubar [model]="menus" [id]="'menu-horizontal'" trackElementInViewport
-  (inViewportChange)="inViewportChange($event)" [classList]="menuClass" [style]="{ color: 'var(--surface-700-text)'}">
+<p-menubar [model]="menus" [id]="'menu-horizontal'" trackElementInViewport (inViewportChange)="inViewportChange($event)"
+  [classList]="menuClass" [style]="{ color: 'var(--surface-700-text)'}">
+
+  <ng-template pTemplate="end">
+    <div class="d-flex align-items-center gap-2">
+      @for (item of languages; track item.code) {
+      <div class="flag {{item.code === currentLang ? 'active' : ''}}" (click)="changeLang(item.code)">
+        <img [src]="item.flag" [alt]="item.code">
+      </div>
+      }
+    </div>
+  </ng-template>
+
 </p-menubar>

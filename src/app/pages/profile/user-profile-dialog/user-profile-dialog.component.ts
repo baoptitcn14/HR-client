@@ -21,6 +21,7 @@ import { forkJoin } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MessageService } from 'primeng/api';
 import { CategoriesService } from '../../../core/services/categories.service';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-user-profile-dialog',
@@ -41,7 +42,8 @@ import { CategoriesService } from '../../../core/services/categories.service';
     ChipsModule,
     InputNumberModule,
     InputMaskModule,
-    InputSwitchModule
+    InputSwitchModule,
+    TranslatePipe
   ],
   templateUrl: './user-profile-dialog.component.html',
   styleUrl: './user-profile-dialog.component.scss'
@@ -56,6 +58,7 @@ export class UserProfileDialogComponent implements OnInit {
   destroyRef = inject(DestroyRef);
   messageService = inject(MessageService);
   categoriesService = inject(CategoriesService);
+  private translateService = inject(TranslateService);
 
   // declare form region
   userForm: FormGroup = new FormGroup({});
@@ -91,7 +94,7 @@ export class UserProfileDialogComponent implements OnInit {
   private initData() {
     this.userProfile = this.dynamicDialogConfig.data.userProfile;
     this.userJobSetting = this.dynamicDialogConfig.data.userJobSetting;
-    
+
     // get data category
     this.categoriesService.getDataCategory('EXPERIENCE', 1).then(x => this.experienceOptions = x);
     this.categoriesService.getDataCategory('INDUSTRY', 1).then(x => this.industryOptions = x);
@@ -105,6 +108,7 @@ export class UserProfileDialogComponent implements OnInit {
       this.userJobSettingService[this.userJobSetting?.id ? 'update' : 'create'](
         UserJobSettingInputDto.fromJS(
           {
+            ...this.userJobSetting,
             ...{
               ...this.userJobForm.value,
               gender: this.userForm.get('gender')?.value,
@@ -120,7 +124,7 @@ export class UserProfileDialogComponent implements OnInit {
         )
       ),
       this.userProfileService[this.userProfile?.id ? 'update' : 'create'](
-        UserProfileInputDto.fromJS({ ...this.userForm.value, tenantId: this.userProfile?.tenantId })
+        UserProfileInputDto.fromJS({ ...this.userProfile, ...this.userForm.value, tenantId: this.userProfile?.tenantId })
       )
     ]).pipe(takeUntilDestroyed(this.destroyRef)).subscribe(([userJobSetting, userProfile]) => {
 

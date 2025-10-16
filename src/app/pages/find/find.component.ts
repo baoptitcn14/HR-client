@@ -18,6 +18,7 @@ import { RecommendListComponent } from '../../shared/components/recommend-list/r
 import { TYPE_VIEW_CODE } from '../profile/profile.component';
 import { HrCompanyInfoServiceProxy, HrCompanyQueryDto, ICriteriaRequestDto, UserProfileInfoServiceProxy, UserProfileQueryDto } from '../../shared/service-proxies/sys-service-proxies';
 import { concatMap } from 'rxjs';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-find',
@@ -37,7 +38,8 @@ import { concatMap } from 'rxjs';
     AvatarModule,
     CompanyUserCardComponent,
     DividerModule,
-    PaginatorModule
+    PaginatorModule,
+    TranslatePipe
   ],
   templateUrl: './find.component.html',
   styleUrl: './find.component.scss'
